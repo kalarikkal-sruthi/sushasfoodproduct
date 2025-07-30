@@ -2,8 +2,11 @@ import Row from "react-bootstrap/Row";
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
 
 function Categories() {
+  const navigate = useNavigate();
+
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   return (
@@ -36,10 +39,13 @@ function Categories() {
             </Col>
             <Col xs={6} md={6} className="view-all-buttom-main">
               {" "}
-              <div className="view-all-button">
+              {/* <div className="view-all-button">
                 <a href="">
                   <button>View All</button>
                 </a>
+              </div> */}
+              <div className="view-all-button">
+                <button onClick={() => navigate("/whatwedo")}>View All  whatwedousing usenavigaate</button>
               </div>
             </Col>
           </Row>
