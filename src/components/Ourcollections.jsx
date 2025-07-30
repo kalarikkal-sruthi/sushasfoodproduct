@@ -2,6 +2,7 @@ import Row from "react-bootstrap/Row";
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
 
 export default function Ourcollections() {
   const [open, setOpen] = useState(false);
@@ -42,11 +43,11 @@ export default function Ourcollections() {
             </Col>
             <Col xs={6} md={6} className="view-all-buttom-main">
               {" "}
-              <div className="view-all-button">
-                <a href="">
-                  <button>View All</button>
-                </a>
-              </div>
+           <div className="view-all-button">
+              <Link to="/products">
+                <button>View All procuts using scrollup utility</button>
+              </Link>
+            </div>
             </Col>
           </Row>
         </section>
