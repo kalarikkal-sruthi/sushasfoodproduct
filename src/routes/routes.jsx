@@ -20,7 +20,6 @@ const AppRoutes = () => {
 
         <Route path="/products" element={<ProductList />} />
         <Route path="/whatwedo" element={<WhatWeDo />} />
-
       </Route>
     </Routes>
   );
