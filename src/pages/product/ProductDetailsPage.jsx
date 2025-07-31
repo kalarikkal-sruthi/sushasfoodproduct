@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import SizeSelector from "../../components/SizeSelector";
 import AddToCartButton from "../../components/buttons/AddToCartButton";
 
 const ProductDetailsPage = () => {
