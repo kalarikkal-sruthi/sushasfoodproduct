@@ -3,8 +3,6 @@ import MainLayouts from "../layout/MainLayouts";
 import Home from "../pages/Home";
 import ProductList from "../pages/ProductList";
 import WhatWeDo from "../pages/WhatWeDo";
-import TestPage from "../pages/TestPage";
-import ProductDetailsPage from "../pages/product/ProductDetailsPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import LoginPage from "../pages/auth/Login";
 
@@ -19,9 +17,8 @@ const AppRoutes = () => {
         
         <Route path="/products" element={<ProductList />} />
         <Route path="/whatwedo" element={<WhatWeDo />} />
-        <Route path="/testpage" element={<TestPage />} />
-        <Route path="/productdetail" element={<ProductDetailsPage />} />
-    
+
+
       </Route>
     </Routes>
   );

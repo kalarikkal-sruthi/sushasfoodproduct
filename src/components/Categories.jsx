@@ -3,8 +3,9 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
+import { imgURL } from "../utils/api";
 
-function Categories() {
+function Categories({ data }) {
   const navigate = useNavigate();
 
   const ref = useRef(null);
@@ -39,187 +40,39 @@ function Categories() {
             </Col>
             <Col xs={6} md={6} className="view-all-buttom-main">
               {" "}
-              {/* <div className="view-all-button">
-                <a href="">
-                  <button>View All</button>
-                </a>
-              </div> */}
               <div className="view-all-button">
-                <button onClick={() => navigate("/whatwedo")}>View All  whatwedousing usenavigaate</button>
+                <button onClick={() => navigate("/whatwedo")}>
+                  View All whatwedousing usenavigaate
+                </button>
               </div>
             </Col>
           </Row>
         </section>
         <Row>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/7.png" alt="" />
+          {data.map((category, index) => (
+            <Col xs={6} md={3} key={index}>
+              <div className="card-main">
+                <img src={`${imgURL}${category.image}`} alt={category.name} />
 
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/2.png" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
+                <div className="card-overlay">
+                  <div className="card-overlay-main">
+                    <div className="card-overlay-head">
+                      <h1>{category.name}</h1>
+                    </div>
+                    <div className="card-overlay-icon">
+                      <img
+                        src="/public/icons/Arrow up-right-white.png"
+                        alt={name}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/3.png" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
+              <div className="card-name">
+                <h1>{category.name}</h1>
               </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/4.png" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/5.jpeg" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/1.png" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/6.png" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
-          <Col xs={6} md={3}>
-            <div className="card-main">
-              <img src="/public/whatwedo/8.png" alt="" />
-              <div className="card-overlay">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h1>Virgin Coconut Oil</h1>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/public/icons/Arrow up-right-white.png"
-                      alt={name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-name">
-              <h1>Virigin Coconut Oil </h1>
-            </div>
-          </Col>
+            </Col>
+          ))}
         </Row>
       </section>
     </div>
