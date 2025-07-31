@@ -1,5 +1,4 @@
 import Row from "react-bootstrap/Row";
-
 import Col from "react-bootstrap/Col";
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
