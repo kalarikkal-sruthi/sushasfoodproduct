@@ -1,8 +1,3 @@
-
-
-
-
-
 ////working left and right side commented fo r seperate left and right pages
 // import React, { useEffect } from "react";
 // import { useParams } from "react-router-dom";
@@ -31,7 +26,7 @@
 //   return (
 //     <>
 //     <div className="padding-top"></div>
-    
+
 //     <Container className="my-5">
 //       <Row className="align-items-start">
 //         {/* Left Column – Image */}
@@ -88,8 +83,6 @@
 
 // export default ProductDetail;
 
-
-
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -107,9 +100,11 @@ function ProductDetail() {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
 
-  if (loading) return <Spinner animation="border" variant="primary" className="m-4" />;
+  if (loading)
+    return <Spinner animation="border" variant="primary" className="m-4" />;
   if (error) return <Alert variant="danger">Error: {error}</Alert>;
-  if (!data || !data.product) return <Alert variant="warning">No product data available.</Alert>;
+  if (!data || !data.product)
+    return <Alert variant="warning">No product data available.</Alert>;
 
   const product = data.product;
 

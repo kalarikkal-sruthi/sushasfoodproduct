@@ -3,18 +3,19 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+
 export default function Header() {
   return (
     <div>
       <div>
         <Navbar expand="lg" className=" nav-bar">
           <Navbar.Brand href="#home">
-            <img className="logo-img" src="/public/banner/log.png" alt="" />
+           <Nav.Link href="/"><img className="logo-img" src="/public/banner/log.png" alt="" /></Nav.Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Categories" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">
                   Categories
@@ -30,8 +31,10 @@ export default function Header() {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="#link">Blog</Nav.Link>
-              <Nav.Link href="#link">Privacy Policy</Nav.Link>
+              <Nav.Link href="">Blog</Nav.Link>
+             <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link href="/myaccount">My Account</Nav.Link>
+              <Nav.Link href="/checkout">Checkout</Nav.Link>
               <Nav.Link className="icon-img">
                 <img src="/public/icons/location_on.png" alt="" />
               </Nav.Link>

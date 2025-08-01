@@ -12,7 +12,9 @@ const ProductDetailSummary = ({ product }) => {
       <div className="my-3">
         {product.baseprices?.[0] && (
           <>
-            <h4 className="text-success">₹ {product.baseprices[0].offer_price}</h4>
+            <h4 className="text-success">
+              ₹ {product.baseprices[0].offer_price}
+            </h4>
             <del>₹ {product.baseprices[0].original_price}</del>
           </>
         )}

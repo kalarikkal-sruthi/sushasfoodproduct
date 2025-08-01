@@ -2,8 +2,9 @@
   position: absolute !important;
   z-index: 999;
   width: 100%;
-  background: #ffffff8c;
-
+  /* background: #ffffff8c;
+   */
+background-color: #294085;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -17,7 +18,7 @@
 
 .navbar a {
   margin: 0 0 0 0px;
-  color: #000;
+  color: #fff;
   text-decoration: none;
 
 }
@@ -25,6 +26,10 @@
 .logo-img {
   width: 100px;
   margin: 0 0 0 60px;
+  width: 100px;
+    border: 1px solid white;
+    background: white;
+    border-radius: 50%;
 }
 
 .navbar-collapse {
@@ -412,7 +417,7 @@ img.youtube-img {
 
 
 .footer-main {
-  background-color: #294085;
+  background-color: #000;
 }
 
 .footer-img {
@@ -433,8 +438,9 @@ img.youtube-img {
 }
 
 .bottom-footer {
-  background: #1f326b;
-  padding: 50px 0px;
+  border-top: 1px solid grey;
+  background: #000;
+  padding: 25px 0px;
   text-align: center;
 }
 

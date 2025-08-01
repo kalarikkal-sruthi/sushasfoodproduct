@@ -44,8 +44,8 @@ export default function Ourcollections() {
             <Col xs={6} md={6} className="view-all-buttom-main">
               {" "}
            <div className="view-all-button">
-              <Link to="/products">
-                <button>View All procuts using scrollup utility</button>
+              <Link to="/productlist">
+                <button>View All </button>
               </Link>
             </div>
             </Col>

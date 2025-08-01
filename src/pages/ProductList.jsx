@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProductCard from "../components/cards/ProductCard";
-
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -43,6 +43,7 @@ export default function ProductList() {
   return (
     <div>
       <div className="padding-top"></div>
+      <div className="padding-top"></div>
       <section className="padding-horizontal">
         <section className="header-bar">
           <Row>
@@ -62,16 +63,63 @@ export default function ProductList() {
                     margin: 0,
                   }}
                 >
-                 Our Products
+                  Oil Products
                 </motion.h1>
               </div>
             </Col>
             <Col xs={6} md={6} className="view-all-buttom-main">
-          
+              {" "}
+              <div className="view-all-button">
+                <Link to="/products">
+                  <button>View All </button>
+                </Link>
+              </div>
             </Col>
           </Row>
         </section>
 
+        <section>
+          <Row>
+            {products.map((product) => (
+              <Col xs={6} md={3} key={product.id}>
+                <ProductCard product={product} />
+              </Col>
+            ))}
+          </Row>
+        </section>
+
+        <section className="header-bar">
+          <Row>
+            <Col xs={6} md={6} className="heading-main-div mt-4">
+              <div className="heading-main mt-4">
+                <motion.h1
+                  ref={ref}
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7 }}
+                  className="scroll-section"
+                  style={{
+                    position: "sticky",
+                    top: "30vh",
+                    textAlign: "center",
+                    zIndex: 2,
+                    margin: 0,
+                  }}
+                >
+                  Masala Products
+                </motion.h1>
+              </div>
+            </Col>
+            <Col xs={6} md={6} className="view-all-buttom-main">
+              {" "}
+              <div className="view-all-button">
+                <Link to="/products">
+                  <button>View All </button>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+        </section>
         <section>
           <Row>
             {products.map((product) => (

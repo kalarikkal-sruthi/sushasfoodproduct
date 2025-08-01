@@ -12,7 +12,7 @@ function Organicproductimage() {
   });
   return (
     <div>
-      <Row className="padding-horizontal" style={{ position: "relative" }}>
+      <Row className="padding-horizontal w-100" style={{ position: "relative" }}>
         <main ref={container}>
           <Section1 scrollYProgress={scrollYProgress} />
           <Section2 scrollYProgress={scrollYProgress} />
@@ -24,7 +24,7 @@ function Organicproductimage() {
 
 const Section1 = ({ scrollYProgress }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, -10]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
     <motion.div
@@ -39,7 +39,7 @@ const Section1 = ({ scrollYProgress }) => {
 const Section2 = ({ scrollYProgress }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
   return (
     <motion.div style={{ scale, rotate, position: "sticky" }}>
       <img src="/public/whatwedo/m-2.png" alt="" className="w-100" />

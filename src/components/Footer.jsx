@@ -40,8 +40,7 @@ function Footer() {
           <div className="padding-top"></div>
           <div className="bottom-footer">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. @BSL
-              Solutions
+              @ 2025 SUSHAS PRAKASH FARM
             </p>
           </div>
         </div>
