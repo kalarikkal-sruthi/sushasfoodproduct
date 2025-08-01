@@ -11,6 +11,9 @@ import Products from "../pages/product/Products";
 import MyAccount from "../pages/auth/MyAccount";
 import Checkout from "../pages/checkout/Checkout";
 
+import CartPage from "../pages/CartPage";
+
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -21,11 +24,16 @@ const AppRoutes = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/whatwedo" element={<WhatWeDo />} />
+
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/myaccount" element={<MyAccount />} />
           <Route path="/checkout" element={<Checkout />} />
 
+
+        <Route path="/cart" element={<CartPage />} />
+
+      
       </Route>
     </Routes>
   );
