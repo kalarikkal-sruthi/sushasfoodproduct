@@ -42,7 +42,7 @@ function Categories({ data }) {
               {" "}
               <div className="view-all-button">
                 <button onClick={() => navigate("/whatwedo")}>
-                  View All whatwedousing usenavigaate
+                  View All 
                 </button>
               </div>
             </Col>

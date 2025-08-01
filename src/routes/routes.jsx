@@ -8,30 +8,35 @@ import RegisterPage from "../pages/auth/RegisterPage";
 import LoginPage from "../pages/auth/Login";
 import ProductDetail from "../pages/product/ProductDetail";
 import Products from "../pages/product/Products";
+import MyAccount from "../pages/auth/MyAccount";
+import Checkout from "../pages/checkout/Checkout";
+
 import CartPage from "../pages/CartPage";
+
 
 const AppRoutes = () => {
   return (
     <Routes>
-   <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-        
-       
       <Route element={<MainLayouts />}>
-       
         <Route path="/" element={<Home />} />
 
-        {/* <Route path="/products" element={<ProductList />} /> */}
+        <Route path="/productlist" element={<ProductList />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/product/:id" element={<ProductDetail/>} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/whatwedo" element={<WhatWeDo />} />
+
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/myaccount" element={<MyAccount />} />
+          <Route path="/checkout" element={<Checkout />} />
+
+
         <Route path="/cart" element={<CartPage />} />
 
-        
+      
       </Route>
     </Routes>
   );
 };
 
 export default AppRoutes;
- 

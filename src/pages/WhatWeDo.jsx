@@ -4,16 +4,39 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import WhatWeDoCard from "../components/cards/WhatWeDoCard";
 
-
 const categories = [
   { image: "/public/images/categories/sweet.jpg", title: "Oils", slug: "oils" },
-  { image: "/public/images/categories/sweet.jpg", title: "Pickles", slug: "pickles" },
-  { image: "/public/images/categories/sweet.jpg", title: "Masalas", slug: "masalas" },
-  { image: "/public/images/categories/sweet.jpg", title: "Grains", slug: "grains" },
+  {
+    image: "/public/images/categories/sweet.jpg",
+    title: "Pickles",
+    slug: "pickles",
+  },
+  {
+    image: "/public/images/categories/sweet.jpg",
+    title: "Masalas",
+    slug: "masalas",
+  },
+  {
+    image: "/public/images/categories/sweet.jpg",
+    title: "Grains",
+    slug: "grains",
+  },
   { image: "/public/images/categories/sweet.jpg", title: "Rice", slug: "rice" },
-  { image: "/public/images/categories/sweet.jpg", title: "Flours", slug: "flours" },
-  { image: "/public/images/categories/sweet.jpg", title: "Sweets", slug: "sweets" },
-  { image: "/public/images/categories/sweet.jpg", title: "Health Mixes", slug: "health-mixes" },
+  {
+    image: "/public/images/categories/sweet.jpg",
+    title: "Flours",
+    slug: "flours",
+  },
+  {
+    image: "/public/images/categories/sweet.jpg",
+    title: "Sweets",
+    slug: "sweets",
+  },
+  {
+    image: "/public/images/categories/sweet.jpg",
+    title: "Health Mixes",
+    slug: "health-mixes",
+  },
 ];
 
 function WhatWeDo() {
@@ -23,12 +46,13 @@ function WhatWeDo() {
   return (
     <div>
       <div className="padding-top"></div>
+      <div className="padding-top"></div>
 
       <section className="padding-horizontal">
         <section className="header-bar">
           <Row>
             <Col xs={6} md={6} className="heading-main-div mt-4">
-            {" "}
+              {" "}
               <div className="heading-main mt-4">
                 <motion.h1
                   ref={ref}
@@ -49,8 +73,7 @@ function WhatWeDo() {
               </div>
             </Col>
             <Col xs={6} md={6} className="view-all-buttom-main">
-             {" "}
-          
+              {" "}
             </Col>
           </Row>
         </section>
