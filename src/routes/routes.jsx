@@ -13,7 +13,8 @@ import Checkout from "../pages/checkout/Checkout";
 
 import CartPage from "../pages/CartPage";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
-import Profile from "../pages/profile/Profile";
+import ProductsByCategory from "../pages/categories/ProductsByCategory";
+import WhatInFarm from "../pages/WhatInFarm";
 
 
 const AppRoutes = () => {
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/whatwedo" element={<WhatWeDo />} />
+        <Route path="/whatinfarm" element={<WhatInFarm />} />
 
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -34,8 +36,9 @@ const AppRoutes = () => {
 
 
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/catproducts" element={<CategoryProductList />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/productsbycategory" element={<CategoryProductList />} />
+        <Route path="/productsbycategory/:id" element={<ProductsByCategory />} />
+
 
       
       </Route>

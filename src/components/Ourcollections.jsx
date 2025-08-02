@@ -23,6 +23,7 @@ export default function Ourcollections() {
             <Col xs={6} md={6} className="heading-main-div">
               {" "}
               <div className="heading-main">
+                 <Link to="/productsbycategory" style={{ textDecoration: "none", color: "inherit" }}>
                 <motion.h1
                   ref={ref}
                   initial={{ opacity: 0, y: 100 }}
@@ -39,12 +40,13 @@ export default function Ourcollections() {
                 >
                   What will you Provide From Us
                 </motion.h1>
+                </Link>
               </div>
             </Col>
             <Col xs={6} md={6} className="view-all-buttom-main">
               {" "}
            <div className="view-all-button">
-              <Link to="/productlist">
+              <Link to="/productsbycategory">
                 <button>View All </button>
               </Link>
             </div>
