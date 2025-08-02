@@ -12,6 +12,8 @@ import MyAccount from "../pages/auth/MyAccount";
 import Checkout from "../pages/checkout/Checkout";
 
 import CartPage from "../pages/CartPage";
+import CategoryProductList from "../pages/categories/CategoryProdcutList";
+import Profile from "../pages/profile/Profile";
 
 
 const AppRoutes = () => {
@@ -32,6 +34,8 @@ const AppRoutes = () => {
 
 
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/catproducts" element={<CategoryProductList />} />
+        <Route path="/profile" element={<Profile />} />
 
       
       </Route>
