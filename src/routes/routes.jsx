@@ -15,6 +15,8 @@ import CartPage from "../pages/CartPage";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
 import ProductsByCategory from "../pages/categories/ProductsByCategory";
 import WhatInFarm from "../pages/WhatInFarm";
+import WhatInFarmList from "../pages/WhatInFarmList";
+import WhatInFarmDetail from "../pages/WhatInFarmDetail";
 
 
 const AppRoutes = () => {
@@ -27,7 +29,8 @@ const AppRoutes = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/whatwedo" element={<WhatWeDo />} />
-        <Route path="/whatinfarm" element={<WhatInFarm />} />
+        <Route path="/whatinfarm" element={<WhatInFarmList />} />
+        <Route path="/whatinfarm/:id" element={<WhatInFarmDetail />} />
 
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
