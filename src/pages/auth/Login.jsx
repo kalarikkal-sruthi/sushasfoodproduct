@@ -54,7 +54,9 @@ const LoginPage = () => {
 
           {/* Right Side Form */}
           <div className="auth-right fade-in-right ">
-            <section className="header-bar fade-in-right">
+           
+            <form onSubmit={handlelogin} className="auth-form">
+               <section className="header-bar fade-in-right">
               <Row>
                 <Col xs={12} md={12} className="heading-main-div mt-4">
                   <div className="heading-main mt-4">
@@ -63,7 +65,6 @@ const LoginPage = () => {
                 </Col>
               </Row>
             </section>
-            <form onSubmit={handlelogin} className="auth-form">
               <input
                 name="email"
                 type="email"
@@ -79,7 +80,7 @@ const LoginPage = () => {
               <button type="submit">Login</button>
 
               <button
-                className="me-auto mt-5"
+                className=" register-button"
                 onClick={() => navigate("/register")}
               >
                 Create An Account

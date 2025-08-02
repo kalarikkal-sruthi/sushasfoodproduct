@@ -1,31 +1,53 @@
-
 import { createSlice } from "@reduxjs/toolkit";
+
+
+const loadCartFromStorage = () => {
+  try {
+    const stored = localStorage.getItem("cartItems");
+    return stored ? JSON.parse(stored) : [];
+  } catch (err) {
+    console.error("Failed to load cart from localStorage:", err);
+    return [];
+  }
+};
+
+
+const saveCartToStorage = (items) => {
+  try {
+    localStorage.setItem("cartItems", JSON.stringify(items));
+  } catch (err) {
+    console.error("Failed to save cart to localStorage:", err);
+  }
+};
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: [], // each item: { id, name, price, quantity, ... }
+    items: loadCartFromStorage(), 
   },
   reducers: {
     addToCart: (state, action) => {
-     console.log("👉 ADDING TO CART: from slice", action.payload); 
       const newItem = action.payload;
-      const existingItem = state.items.find(item => item.id === 
-        newItem.id);
-      
+      const existingItem = state.items.find((item) => item.id === newItem.id);
+
       if (existingItem) {
-        existingItem.quantity += 1; // increase quantity
+        existingItem.quantity += 1;
       } else {
-        state.items.push({ ...newItem, quantity: 1 }); // add new item
+        state.items.push({ ...newItem, quantity: 1 });
       }
-       console.log("🛒 CART ITEMS AFTER ADD: from cartslice", state.items); 
+
+      saveCartToStorage(state.items); 
     },
+
     removeFromCart: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
+      state.items = state.items.filter((item) => item.id !== action.payload);
+      saveCartToStorage(state.items);
     },
+
     clearCart: (state) => {
       state.items = [];
-    }
+      localStorage.removeItem("cartItems");
+    },
   },
 });
 

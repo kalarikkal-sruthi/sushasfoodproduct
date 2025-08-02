@@ -1,7 +1,7 @@
 import "../../styles/AuthPage.css";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/authService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";import { Row, Col } from "react-bootstrap";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -39,8 +39,18 @@ const RegisterPage = () => {
           </div>
 
           <div className="auth-right fade-in-right">
-            <h2>Create Account</h2>
+           
             <form onSubmit={handleRegister} className="auth-form">
+
+               <section className="header-bar fade-in-right">
+              <Row>
+                <Col xs={12} md={12} className="heading-main-div mt-4">
+                  <div className="heading-main mt-4">
+                    <h1>Create An Account</h1>
+                  </div>
+                </Col>
+              </Row>
+            </section>
               <input name="name" type="text" placeholder="Full Name" required />
 
               <input

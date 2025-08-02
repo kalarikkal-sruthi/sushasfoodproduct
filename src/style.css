@@ -265,7 +265,7 @@ background-color: #294085;
 }
 
 .header-bar {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .card-overlay-main {
@@ -412,7 +412,7 @@ img.youtube-img {
 }
 
 .icon-img img {
-  width: 30px;
+  width: 24px;
 }
 
 
@@ -421,14 +421,15 @@ img.youtube-img {
 }
 
 .footer-img {
-  text-align: center;
+  text-align: start;
 }
 
 .footer-img img {
-  width: 100px;
+  width: 80px;
   border: 1px solid white;
   background: white;
   border-radius: 50%;
+  margin-bottom: 8px;
 }
 
 .footer-para p {
@@ -448,6 +449,24 @@ img.youtube-img {
   margin-bottom: 0px;
   color: white;
   font-size: 12px;
+}
+
+.footer-div ul{
+  padding-left: 0px;
+}
+
+.footer-div ul li{
+  list-style-type: none;
+  color: #fff;
+  font-size: 12px;
+  
+}
+.footer-div ul li img{
+  margin-right: 10px;
+  width: 24px;margin-bottom: 6px;
+}
+.footer-div h4 {
+ color: #2b57dc; font-size: 16px;
 }
 
 
@@ -511,4 +530,9 @@ img.youtube-img {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+}
+
+button.register-button{
+  background-color: transparent !important;
+  color: black !important;
 }

@@ -25,6 +25,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         localStorage.setItem("access", action.payload.token);
       })
+
       .addCase(registerUser.fulfilled, (state, action) => {
         state.token = action.payload.token;
         localStorage.setItem("access", action.payload.token);
