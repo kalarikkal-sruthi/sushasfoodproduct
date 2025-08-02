@@ -6,21 +6,22 @@ import AddToCartButton from "../../components/buttons/AddToCartButton";
 const ProductDetailSummary = ({ product }) => {
   const dispatch = useDispatch();
 
-  // 🔁 Called when Add to Cart button is clicked
+  
   const handleAddToCart = () => {
-    alert("Add to Cart Clicked!"); // ✅ add this
-    console.log("DISPATCHING PRODUCT:", product); // ✅ log this
+    alert("Add to Cart Clicked!"); 
+    console.log("DISPATCHING PRODUCT:", product); 
+    //  dispatch(addToCart(product)); 
     dispatch(
       addToCart({
         id: product.id,
         product_name: product.product_name,
         price: product.baseprices?.[0]?.offer_price || 0,
         image: product.image,
-        size: product.sizes?.[0]?.size || "Default", // 🧠 You can update this to be dynamic later
+        size: product.sizes?.[0]?.size || "Default", 
         quantity: 1,
       })
     );
-     console.log("After dispatch from add to cart button clicked"); // Verify dispatch was called
+    
   };
 
   return (

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start":"npm run dev",
+    "start": "npm run dev",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -15,6 +15,7 @@
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
     "framer-motion": "^12.23.9",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^18.3.1",

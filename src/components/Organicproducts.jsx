@@ -33,7 +33,7 @@ export default function Organicproducts() {
                     margin: 0,
                   }}
                 >
-                  About Sushas Prakash Organic Farm
+                  About Susha’s Prakash Farm
                 </motion.h1>
               </div>
               <p>
