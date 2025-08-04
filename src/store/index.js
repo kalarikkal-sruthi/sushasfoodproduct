@@ -2,11 +2,12 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import authReducer from "../store/authSlice";
-import homeDataReducer from "../store/homeDataSlice";
-import productReducer from "../store/ProductSlice";
-import cartReducer from "../store/cartSlice";
-import categoryProductReducer from "../store/categoryProductSlice";
+import authReducer from "./authSlice";
+import homeDataReducer from "./homeDataSlice";
+import productReducer from "./ProductSlice";
+import cartReducer from "./cartSlice";
+import categoryProductReducer from "./categoryProductSlice";
+import whatwillDataReducer from "./whatwillDataSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,12 +15,13 @@ const rootReducer = combineReducers({
   product: productReducer,
   cart: cartReducer,
   categoryProducts: categoryProductReducer,
+  whatwillData: whatwillDataReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"], 
+  whitelist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,44 +1,92 @@
-import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-
-const dummyItems = [
-  { id: 2, title: "Farm Activity 2", image: "dummy1.jpg" },
-  { id: 3, title: "Farm Activity 3", image: "dummy2.jpg" },
-  { id: 4, title: "Farm Activity 4", image: "dummy3.jpg" },
-  { id: 5, title: "Farm Activity 5", image: "dummy4.jpg" },
-  { id: 6, title: "Farm Activity 6", image: "dummy5.jpg" },
-];
-
-const imgURL = "https://ms.my.com/uploads/"; // change if needed
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWhatWillData } from "../store/whatwillDataSlice";
+import { Row, Col } from "react-bootstrap";
+import productimg from "../assets/whatwedo/1.png";
 
 const WhatInFarmList = () => {
+  const dispatch = useDispatch();
+
+  const { data, loading, error } = useSelector((state) => state.whatwillData);
+
+  useEffect(() => {
+    dispatch(fetchWhatWillData());
+  }, [dispatch]);
+
+  if (loading) return <p>Loading content...</p>;
+  if (error) return <p>Error loading farm activities: {error}</p>;
+
   return (
-    <>
+    <section
+      id="farm-categories"
+      className="categories padding-horizontal"
+      aria-labelledby="categories-heading"
+    >
       <div className="padding-top"></div>
-      <div className="container">
-        <h2 className="mb-4">🧑‍🌾 What We Do In Farms</h2>
-        <div className="row">
-          {dummyItems.map((item) => (
-            <div key={item.id} className="col-md-6 mb-4">
-              <Link to={`/whatinfarm/${item.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                <div className="card shadow-lg h-100">
-                  <img
-                    src={imgURL + item.image}
-                    className="card-img-top"
-                    alt={item.title}
-                    style={{ height: "300px", objectFit: "cover" }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{item.title}</h5>
-                    <p className="card-text text-muted">Click to read more →</p>
+      <header className="header-bar">
+        <Row className="align-items-center">
+          <Col xs={12} md={12} className="heading-main-div heading-main">
+            <Link
+              to="/whatwedo"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <h1 className="scroll-section text-start">
+                What We Do on the Farm
+              </h1>
+            </Link>
+          </Col>
+        </Row>
+      </header>
+
+      <Row as="section" aria-label="Farm categories">
+        {Array.isArray(data) && data.length > 0 ? (
+          data.map((item, index) => (
+            <Col xs={6} md={3} key={item.id || index}>
+              <article
+                className="card-main"
+                aria-label={`Category: ${item.name}`}
+              >
+                <img
+                  src={productimg}
+                  alt={item.name || "Farm activity"}
+                  className="w-100"
+                  loading="lazy"
+                />
+
+                <div className="card-overlay" aria-hidden="true">
+                  <div className="card-overlay-main">
+                    <div className="card-overlay-head">
+                      <h2>{item.name}</h2>
+                    </div>
+                    <div className="card-overlay-icon">
+                      <img
+                        src="/icons/Arrow up-right-white.png"
+                        alt="Arrow indicating link"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
+              </article>
+
+              <div className="card-name mt-2">
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+                <Link
+                  to={`/whatinfarm/${item.id}`}
+                  aria-label={`Read more about ${item.name}`}
+                >
+                  Read More
+                </Link>
+              </div>
+            </Col>
+          ))
+        ) : (
+          <p>No farm activities found.</p>
+        )}
+      </Row>
+    </section>
   );
 };
 

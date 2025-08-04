@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../utils/api";
 
-
 export const fetchProductById = createAsyncThunk(
   "product/fetchById",
   async (id) => {
@@ -24,11 +23,11 @@ const productSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-     .addCase(fetchProductById.fulfilled, (state, action) => {
+      .addCase(fetchProductById.fulfilled, (state, action) => {
         console.log("✅ Product loaded");
         state.loading = false;
         state.data = action.payload;
-        })
+      })
       .addCase(fetchProductById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;

@@ -1,197 +1,94 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
+import { Helmet } from "react-helmet-async";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-function Testimonial() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
-  return (
-    <div>
-      <div className="padding-top"></div>
-      <section className="padding-horizontal">
-        <section className="header-bar">
-          <Row>
-            <Col xs={6} md={6} className="heading-main-div">
-              {" "}
-              <div className="heading-main">
-                <motion.h1
-                  ref={ref}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7 }}
-                  className="scroll-section"
-                  style={{
-                    position: "sticky",
-                    top: "30vh",
-                    textAlign: "center",
-                    // fontSize: "clamp(2rem, 10vw, 2rem)",
+const testimonials = [
+  {
+    name: "Prem Ravi",
+    message:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic odit corporis unde maxime provident enim eius molestias ad.",
+    image: "/testimonial/1.webp",
+  },
+  {
+    name: "Anjali Mehra",
+    message: "Excellent quality and timely delivery. Highly recommended!",
+    image: "/testimonial/2.webp",
+  },
+  {
+    name: "Rohit Sharma",
+    message:
+      "Great customer support and smooth shopping experience. Thank you!",
+    image: "/testimonial/3.webp",
+  },
+];
 
-                    zIndex: 2,
-                    // y: yTitle,
-                    // opacity: opacityTitle,
-                    margin: 0,
-                  }}
-                >
-                  Check what people say about
-                </motion.h1>
+function Testimonial() {
+  return (
+    <section>
+      <section className="padding-horizontal" aria-label="Testimonials">
+        <header className="header-bar">
+          <Row>
+            <Col xs={12} md={6} className="heading-main-div">
+              <div className="heading-main">
+                {" "}
+                <h1> What Our Customers Say</h1>
               </div>
             </Col>
-            <Col xs={6} md={6} className="view-all-buttom-main">
-              {" "}
+
+            <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">
               <div className="view-all-button">
-                <a href="">
-                  <button>View All</button>
-                </a>
+                <button aria-label="View all farm categories">View All</button>
               </div>
             </Col>
           </Row>
-        </section>
-        <Swiper
-          pagination={{
-            type: "fraction",
-          }}
-          spaceBetween={20}
-          slidesPerView={4.5}
-          navigation={true}
-          //  autoplay={{ delay: 3000 }}
-          modules={[Pagination, Navigation, Autoplay]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <div className="testimonial-main-div">
-              <div className="testimonial-sub-head">
-                <div className="testimonial-head-img">
-                  <img src="" alt="" />
-                </div>
-                <div className="testimonial-head">
-                  <h4>Prem Ravi</h4>
-                </div>
-              </div>
-              <div className="testimonial-para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  odit corporis unde maxime provident enim eius molestias ad, ea
-                  quidem blanditiis deleniti iusto mollitia quia dicta harum?
-                  Reprehenderit, vel a.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            {" "}
-            <div className="testimonial-main-div">
-              <div className="testimonial-sub-head">
-                <div className="testimonial-head-img">
-                  <img src="" alt="" />
-                </div>
-                <div className="testimonial-head">
-                  <h4>Prem Ravi</h4>
-                </div>
-              </div>
-              <div className="testimonial-para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  odit corporis unde maxime provident enim eius molestias ad, ea
-                  quidem blanditiis deleniti iusto mollitia quia dicta harum?
-                  Reprehenderit, vel a.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            {" "}
-            <div className="testimonial-main-div">
-              <div className="testimonial-sub-head">
-                <div className="testimonial-head-img">
-                  <img src="" alt="" />
-                </div>
-                <div className="testimonial-head">
-                  <h4>Prem Ravi</h4>
-                </div>
-              </div>
-              <div className="testimonial-para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  odit corporis unde maxime provident enim eius molestias ad, ea
-                  quidem blanditiis deleniti iusto mollitia quia dicta harum?
-                  Reprehenderit, vel a.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            {" "}
-            <div className="testimonial-main-div">
-              <div className="testimonial-sub-head">
-                <div className="testimonial-head-img">
-                  <img src="" alt="" />
-                </div>
-                <div className="testimonial-head">
-                  <h4>Prem Ravi</h4>
-                </div>
-              </div>
-              <div className="testimonial-para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  odit corporis unde maxime provident enim eius molestias ad, ea
-                  quidem blanditiis deleniti iusto mollitia quia dicta harum?
-                  Reprehenderit, vel a.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            {" "}
-            <div className="testimonial-main-div">
-              <div className="testimonial-sub-head">
-                <div className="testimonial-head-img">
-                  <img src="" alt="" />
-                </div>
-                <div className="testimonial-head">
-                  <h4>Prem Ravi</h4>
-                </div>
-              </div>
-              <div className="testimonial-para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  odit corporis unde maxime provident enim eius molestias ad, ea
-                  quidem blanditiis deleniti iusto mollitia quia dicta harum?
-                  Reprehenderit, vel a.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
+        </header>
 
-          <SwiperSlide>
-            {" "}
-            <div className="testimonial-main-div">
-              <div className="testimonial-sub-head">
-                <div className="testimonial-head-img">
-                  <img src="" alt="" />
-                </div>
-                <div className="testimonial-head">
-                  <h4>Prem Ravi</h4>
-                </div>
-              </div>
-              <div className="testimonial-para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  odit corporis unde maxime provident enim eius molestias ad, ea
-                  quidem blanditiis deleniti iusto mollitia quia dicta harum?
-                  Reprehenderit, vel a.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
+        <Swiper
+          pagination={{ type: "fraction" }}
+          spaceBetween={20}
+          slidesPerView={3}
+          navigation={true}
+          autoplay={{ delay: 4000 }}
+          modules={[Pagination, Navigation, Autoplay, A11y]}
+          className="mySwiper mt-4"
+          aria-label="Customer testimonials carousel"
+        >
+          {testimonials.map((item, index) => (
+            <SwiperSlide key={index}>
+              <figure className="testimonial-main-div">
+                <figcaption className="testimonial-sub-head d-flex align-items-center gap-2">
+                  <div className="testimonial-head-img">
+                    <img
+                      src={item.image}
+                      alt={`${item.name}'s testimonial`}
+                      loading="lazy"
+                      width={48}
+                      height={48}
+                      style={{ borderRadius: "50%", objectFit: "cover" }}
+                    />
+                  </div>
+                  <div className="testimonial-head">
+                    <h5 className="mb-0">{item.name}</h5>
+                  </div>
+                </figcaption>
+                <blockquote className="testimonial-para mt-3">
+                  <p className="mb-0" style={{ fontStyle: "italic" }}>
+                    “{item.message}”
+                  </p>
+                </blockquote>
+              </figure>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </section>
-    </div>
+    </section>
   );
 }
 

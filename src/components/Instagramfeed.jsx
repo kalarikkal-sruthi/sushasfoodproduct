@@ -1,83 +1,68 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
-function Instagramfeed() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const Instagramfeed = () => {
+  const images = [
+    { src: "/insta/1.png", alt: "Instagram Post 1" },
+    { src: "/insta/2.png", alt: "Instagram Post 2" },
+    { src: "/insta/3.png", alt: "Instagram Post 3" },
+    { src: "/insta/4.png", alt: "Instagram Post 4" },
+    { src: "/insta/5.png", alt: "Instagram Post 5" },
+  ];
+
   return (
-    <div>
-      <div className="padding-top"></div>
+    <main>
       <section className="padding-horizontal">
-        <section className="header-bar">
+        <header className="header-bar" aria-label="Instagram Feed Section">
           <Row>
-            <Col xs={6} md={6} className="heading-main-div">
-              {" "}
+            <Col xs={12} md={6} className="heading-main-div">
               <div className="heading-main">
-                <motion.h1
-                  ref={ref}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7 }}
-                  className="scroll-section"
-                  style={{
-                    position: "sticky",
-                    top: "30vh",
-                    textAlign: "center",
-                    zIndex: 2,
-                    margin: 0,
-                  }}
-                >
-                  Check Our Instagram Feed
-                </motion.h1>
+                <h1> Check Our Instagram Feed</h1>
               </div>
             </Col>
-            <Col xs={6} md={6} className="view-all-buttom-main">
-              {" "}
+
+            <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">
               <div className="view-all-button">
-                <a href="">
-                  <button>View All</button>
-                </a>
+                <button aria-label="View all farm categories">View All</button>
               </div>
             </Col>
           </Row>
+        </header>
+        <section aria-label="Instagram Image Carousel" className="mt-4">
+          <Swiper
+            pagination={{ type: "fraction" }}
+            spaceBetween={20}
+            slidesPerView={4}
+            navigation={true}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            modules={[Pagination, Navigation, Autoplay]}
+            className="mySwiper"
+          >
+            {images.map((img, idx) => (
+              <SwiperSlide key={idx}>
+                <figure>
+                  <img
+                    className="insta-img"
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    style={{ width: "100%", borderRadius: "8px" }}
+                  />
+                </figure>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </section>
-
-        <Swiper
-          pagination={{
-            type: "fraction",
-          }}
-          spaceBetween={20}
-          slidesPerView={4.4}
-          navigation={true}
-          modules={[Pagination, Navigation, Autoplay]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <img className="insta-img" src="/public/insta/1.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="insta-img" src="/public/insta/2.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="insta-img" src="/public/insta/3.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="insta-img" src="/public/insta/4.png" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="insta-img" src="/public/insta/5.png" alt="" />
-          </SwiperSlide>
-        </Swiper>
       </section>
-    </div>
+    </main>
   );
-}
+};
 
 export default Instagramfeed;

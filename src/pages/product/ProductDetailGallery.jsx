@@ -1,126 +1,67 @@
-import React, { useState } from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
-
-
-
-// import required modules
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { imgURL } from "../../utils/api";
 
 const ProductDetailGallery = ({ product }) => {
-   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  // const imageUrl = product.image ? imgURL + product.image : "/collections/2.png";
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const productImage = product?.product_image
+    ? `${imgURL}${product.product_image}`
+    : "/collections/2.png";
 
   return (
-    <>
-
-       <Swiper
+    <section aria-label="Product Image Gallery">
+      <Swiper
         style={{
-          '--swiper-navigation-color': '#fff',
-          '--swiper-pagination-color': '#fff',
+          "--swiper-navigation-color": "#000",
+          "--swiper-pagination-color": "#000",
         }}
         spaceBetween={10}
-        navigation={true}
+        navigation
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2"
+        className="mySwiper2 mb-3"
       >
         <SwiperSlide>
-          <img   src={`${imgURL}${product.product_image}`} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+          <figure>
+            <img
+              src={productImage}
+              alt={product.product_name || "Product image"}
+              loading="lazy"
+              style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
+              onError={(e) => (e.target.src = "/collections/2.png")}
+            />
+            <figcaption className="visually-hidden">
+              {product.product_name}
+            </figcaption>
+          </figure>
         </SwiperSlide>
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
         slidesPerView={4}
-        freeMode={true}
-        watchSlidesProgress={true}
+        freeMode
+        watchSlidesProgress
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
+        aria-label="Product Thumbnails"
       >
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+          <img
+            src={productImage}
+            alt={`Thumbnail of ${product.product_name}`}
+            loading="lazy"
+            style={{ borderRadius: "6px", objectFit: "cover", width: "100%" }}
+          />
         </SwiperSlide>
       </Swiper>
-    
-      {/* <div className="text-center mb-4">
-       
-        <img
-          src={`${imgURL}${product.product_image}`}
-          alt={product.product_name}
-          onError={(e) => (e.target.src = "/collections/2.png")}
-          style={{
-            width: "100%",
-            maxWidth: "400px",
-            height: "auto",
-            borderRadius: "8px",
-            objectFit: "cover",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-          }}
-        />
-      </div> */}
-    </>
+    </section>
   );
 };
 

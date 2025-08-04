@@ -1,73 +1,61 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWhatWillDataById } from "../store/whatwillDataSlice";
 import { useParams } from "react-router-dom";
-import { api } from "../utils/api";
-// import { api } from "../../utils/api";
-
-const imgURL = "https://ms.my.com/uploads/";
 
 const WhatInFarmDetail = () => {
   const { id } = useParams();
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
-useEffect(() => {
-  api.get(`/whatInFarms?id=${id}`)
-    .then((res) => {
-      console.log("✅ API Response:", res.data);
+  const { selectedItem, loading, error } = useSelector(
+    (state) => state.whatwillData
+  );
 
-      if (res.data?.data) {
-        setItem(res.data.data);
-      } else {
-        console.warn("⚠️ No data found for this ID");
-      }
-    })
-    .catch((err) => {
-      console.error("❌ Failed to fetch detail:", err);
-    })
-    .finally(() => setLoading(false));
-}, [id]);
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchWhatWillDataById(id));
+    }
+  }, [dispatch, id]);
 
-
-  if (loading) return <p className="text-center my-5">Loading...</p>;
-
-  if (!item) return <p className="text-center my-5 text-danger">No details found for this item.</p>;
+  if (loading) return <p>Loading content...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!selectedItem) return <p>No farm activity found.</p>;
 
   return (
-    <>
+    <main
+      className="farm-detail padding-horizontal"
+      aria-labelledby="farm-detail-heading"
+    >
       <div className="padding-top"></div>
-      <div className="container my-5">
-        <h2 className="mb-4">{item.name}</h2>
+      <article>
+        <header>
+          <h1 id="farm-detail-heading">{selectedItem.name}</h1>
+        </header>
 
-        {/* 🔹 Image */}
-        {item.image && (
+        <section className="farm-image" aria-label="Farm activity image">
           <img
-            src={imgURL + item.image}
-            alt={item.name}
-            className="img-fluid mb-4"
-            style={{ borderRadius: "10px", maxHeight: "400px", objectFit: "cover" }}
+            src={`https://yourcdn.com/images/${selectedItem.image}`}
+            alt={selectedItem.name}
+            className="img-fluid"
+            loading="lazy"
           />
-        )}
+        </section>
 
-        {/* 🔸 Description — You can adjust if it's a link or rich text */}
-        {item.description?.includes("http") ? (
-          <div>
-            <p className="text-muted">Linked content:</p>
-            <a
-              href={item.description}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline-primary"
-            >
-              Open External Link
-            </a>
-          </div>
-        ) : (
-          <p>{item.description}</p>
-        )}
-      </div>
-      <pre>{JSON.stringify(item.description, null, 2)}</pre>
+        <section className="farm-description" aria-label="Activity description">
+          <h2>Description</h2>
+          <p>{selectedItem.description}</p>
+        </section>
 
-    </>
+        <footer>
+          <p>
+            Created on:{" "}
+            <time dateTime={selectedItem.created_at}>
+              {new Date(selectedItem.created_at).toLocaleDateString()}
+            </time>
+          </p>
+        </footer>
+      </article>
+    </main>
   );
 };
 

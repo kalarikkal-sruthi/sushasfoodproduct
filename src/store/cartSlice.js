@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const loadCartFromStorage = () => {
   try {
     const stored = localStorage.getItem("cartItems");
@@ -10,7 +9,6 @@ const loadCartFromStorage = () => {
     return [];
   }
 };
-
 
 const saveCartToStorage = (items) => {
   try {
@@ -23,7 +21,7 @@ const saveCartToStorage = (items) => {
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: loadCartFromStorage(), 
+    items: loadCartFromStorage(),
   },
   reducers: {
     addToCart: (state, action) => {
@@ -36,7 +34,7 @@ const cartSlice = createSlice({
         state.items.push({ ...newItem, quantity: 1 });
       }
 
-      saveCartToStorage(state.items); 
+      saveCartToStorage(state.items);
     },
 
     removeFromCart: (state, action) => {

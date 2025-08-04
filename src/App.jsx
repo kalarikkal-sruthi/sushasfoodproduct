@@ -4,9 +4,7 @@ import MainLayouts from "./layout/MainLayouts";
 import AppRoutes from "./routes/routes";
 import ScrollToTop from "./utils/ScrollToTop";
 
-
 function App() {
- 
   return (
     <div>
       <Router>

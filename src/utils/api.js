@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const imgURL = "https://ms.myfezto.com/uploads/";
+const imgURL = "https://ms.myfezto.com/uploads/products/";
+const videoURL = "https://ms.myfezto.com/uploads/banner-video/";
 const api = axios.create({
   baseURL: "https://ms.myfezto.com/api",
 
@@ -17,4 +18,4 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export { api, imgURL };
+export { api, imgURL, videoURL };

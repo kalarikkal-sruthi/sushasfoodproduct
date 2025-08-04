@@ -1,66 +1,74 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice"; // 🧠 Import action
+import { addToCart } from "../../store/cartSlice";
 import AddToCartButton from "../../components/buttons/AddToCartButton";
 
 const ProductDetailSummary = ({ product }) => {
   const dispatch = useDispatch();
 
-  
   const handleAddToCart = () => {
-    alert("Add to Cart Clicked!"); 
-    console.log("DISPATCHING PRODUCT:", product); 
-    //  dispatch(addToCart(product)); 
     dispatch(
       addToCart({
         id: product.id,
         product_name: product.product_name,
         price: product.baseprices?.[0]?.offer_price || 0,
         image: product.image,
-        size: product.sizes?.[0]?.size || "Default", 
+        size: product.sizes?.[0]?.size || "Default",
         quantity: 1,
       })
     );
-    
   };
 
   return (
-    <div>
-      {/* 🧾 Product Name */}
-      <h2 style={{ marginBottom: "1rem" }}>{product.product_name}</h2>
+    <section aria-label="Product Details">
+      <header>
+        <h1 className="mb-3" style={{ fontSize: "2rem" }}>
+          {product.product_name}
+        </h1>
+      </header>
 
-      {/* 📝 Product Description */}
-      <p style={{ fontSize: "1.1rem", color: "#555", marginBottom: "1.5rem" }}>
-        {product.description}
-      </p>
+      {product.description && (
+        <p
+          style={{ fontSize: "1.1rem", color: "#555" }}
+          aria-label="Product description"
+        >
+          {product.description}
+        </p>
+      )}
 
-      {/* 💰 Pricing Section */}
-      <div className="my-3">
-        {product.baseprices?.[0] && (
-          <>
-            <h4 className="text-success">
-              ₹ {product.baseprices[0].offer_price}
-            </h4>
+      {product.baseprices?.[0] && (
+        <div className="my-4" aria-label="Product price">
+          <strong className="text-success fs-4">
+            ₹ {product.baseprices[0].offer_price}
+          </strong>
+          <span className="text-muted ms-2">
             <del>₹ {product.baseprices[0].original_price}</del>
-          </>
-        )}
-      </div>
-
-      {/* 📏 Available Sizes */}
-      <div className="my-3">
-        <strong>Available Sizes:</strong>
-        <div className="d-flex gap-2 mt-2 flex-wrap">
-          {product.sizes?.map((size) => (
-            <button key={size.id} className="btn btn-outline-success btn-sm">
-              {size.size}
-            </button>
-          ))}
+          </span>
         </div>
-      </div>
+      )}
 
-      {/* 🛒 Add to Cart Button with click logic */}
-      <AddToCartButton onClick={handleAddToCart} />
-    </div>
+      {product.sizes?.length > 0 && (
+        <div className="my-4" aria-label="Available Sizes">
+          <strong>Available Sizes:</strong>
+          <div className="d-flex gap-2 mt-2 flex-wrap">
+            {product.sizes.map((size) => (
+              <button
+                key={size.id}
+                className="btn btn-outline-success btn-sm"
+                type="button"
+                aria-label={`Size ${size.size}`}
+              >
+                {size.size}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="mt-4">
+        <AddToCartButton onClick={handleAddToCart} aria-label="Add to cart" />
+      </div>
+    </section>
   );
 };
 

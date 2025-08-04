@@ -1,10 +1,8 @@
 .nav-bar {
-  position: absolute !important;
+
   z-index: 999;
   width: 100%;
-  /* background: #ffffff8c;
-   */
-background-color: #294085;
+  background-color: #294085;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -23,13 +21,20 @@ background-color: #294085;
 
 }
 
+.navbar a:hover {
+  margin: 0 0 0 0px;
+  color: #6fb449;
+  text-decoration: none;
+
+}
+
 .logo-img {
-  width: 100px;
+  width: 80px;
   margin: 0 0 0 60px;
-  width: 100px;
-    border: 1px solid white;
-    background: white;
-    border-radius: 50%;
+
+  border: 1px solid white;
+  background: white;
+  border-radius: 50%;
 }
 
 .navbar-collapse {
@@ -44,9 +49,7 @@ background-color: #294085;
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  /* background: #444; */
 
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +59,6 @@ background-color: #294085;
   display: block;
   width: 100%;
   max-height: 100vh;
-  /* height: 100%; */
   object-fit: cover;
 }
 
@@ -116,18 +118,15 @@ background-color: #294085;
 
 
 .padding-top {
-  padding-top: 90px;
+  padding-top: 80px;
 }
 
 .padding-horizontal {
-  padding: 0px 80px;
+  padding: 80px 80px 0px 80px;
 }
 
 .card-main {
-  /* background-color: #2a3992; */
   margin-bottom: 20px;
-  /* background-color: #3f69e2; */
-  /* padding: 20px; */
   cursor: pointer;
   position: relative;
 
@@ -159,14 +158,18 @@ background-color: #294085;
   font-size: 18px;
 }
 
-/* Show the overlay on hover */
 .card-main:hover .card-overlay {
   opacity: 1;
 }
 
-.card-name h1 {
+.card-name h3 {
   font-size: 18px;
-  margin: 20px 0px 40px 0px;
+
+}
+
+.card-name p {
+  font-size: 14px;
+
 }
 
 .heading-main-div {
@@ -175,12 +178,10 @@ background-color: #294085;
 
 .heading-main h1 {
   text-align: start;
-  margin-bottom: 0px;
+  margin-bottom: 20px !important;
   text-transform: capitalize;
   font-size: 34px;
   color: #3f69e2;
-  /* color: #1E1E1E; */
-  /* border-bottom: 2px solid #1E1E1E; */
   width: fit-content;
 }
 
@@ -189,7 +190,6 @@ background-color: #294085;
   border-radius: 13px;
   height: 100vh;
   object-fit: cover;
-  /* padding-right: 100px; */
 }
 
 .organic-product-main {
@@ -198,16 +198,12 @@ background-color: #294085;
 
 .organic-product {
   height: 100%;
-  /* margin-right: 100px; */
-
 }
 
 .card-main-contents {
   position: absolute;
   width: 70%;
   display: flex;
-  /* background: white; */
-  /* bottom: 0; */
   right: 0;
   height: 300px;
   gap: 20px;
@@ -231,10 +227,9 @@ background-color: #294085;
 .organic-product-contents {}
 
 .organic-product-contents p {
-  font-size: 16px;
-  margin-bottom: 40px;
+  font-size: 14px;
+  margin-bottom: 0px;
   text-align: justify;
-  margin-top: 50px;
 }
 
 .card-main-contents-box h1 {
@@ -254,9 +249,6 @@ background-color: #294085;
   background: transparent;
   border-radius: 6px;
   padding: 6px 16px;
-  /* margin-bottom: 50px; */
-  /* color: #3f69e2;
-    border-color: #3f69e2; */
   box-shadow: none;
 }
 
@@ -272,6 +264,10 @@ background-color: #294085;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.card-overlay-main h2 {
+  font-size: 16px;
 }
 
 .card-overlay-icon img {
@@ -328,7 +324,7 @@ background-color: #294085;
 }
 
 .product-collection-image {
-  margin-bottom: 50px;
+
   cursor: pointer;
 }
 
@@ -359,7 +355,7 @@ background-color: #294085;
 }
 
 .product-collection-image h2 {
-  font-size: 20px;
+  font-size: 16px;
   margin: 0px 0px 10px 0px;
   color: #3f69e2;
 }
@@ -367,7 +363,6 @@ background-color: #294085;
 .product-collection-image img {
   width: 100%;
   border-radius: 13px;
-  /* margin-bottom: 50px; */
   background: #6fb449;
   padding: 26px;
   height: 330px;
@@ -400,7 +395,6 @@ img.youtube-img {
 
 .testimonial-main-div {
   border: 1px solid #000;
-  /* background: #6eb26c8c; */
   padding: 20px;
   border-radius: 13px;
 }
@@ -448,25 +442,29 @@ img.youtube-img {
 .bottom-footer p {
   margin-bottom: 0px;
   color: white;
-  font-size: 12px;
+  font-size: 10px;
 }
 
-.footer-div ul{
+.footer-div ul {
   padding-left: 0px;
 }
 
-.footer-div ul li{
+.footer-div ul li {
   list-style-type: none;
   color: #fff;
   font-size: 12px;
-  
+
 }
-.footer-div ul li img{
+
+.footer-div ul li img {
   margin-right: 10px;
-  width: 24px;margin-bottom: 6px;
+  width: 24px;
+  margin-bottom: 6px;
 }
+
 .footer-div h4 {
- color: #2b57dc; font-size: 16px;
+  color: #2b57dc;
+  font-size: 16px;
 }
 
 
@@ -532,7 +530,58 @@ img.youtube-img {
   }
 }
 
-button.register-button{
+button.register-button {
   background-color: transparent !important;
   color: black !important;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-main {
+  background-color: transparent;
+
+  color: white;
+
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-main:hover {}
+
+.dropdown-sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dropdown-sub-menu .nav-link {
+  display: block;
+  padding: 10px;
+  color: #333 !important;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-sub-menu .nav-link:hover {
+  background-color: #294085;
+  font-size: 14px;
+  color: #fff !important;
+  border-bottom: 1px solid #fff;
+}
+
+.dropdown-sub-menu a:hover {}
+
+.dropdown:hover .dropdown-sub-menu {
+  display: block;
 }

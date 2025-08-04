@@ -1,8 +1,6 @@
-// store/categoryProductSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../utils/api";
 
-// Async thunk to fetch all categories with their products
 export const fetchCategoriesWithProducts = createAsyncThunk(
   "categoryProducts/fetchAllWithProducts",
   async () => {
@@ -12,7 +10,7 @@ export const fetchCategoriesWithProducts = createAsyncThunk(
 );
 
 const categoryProductSlice = createSlice({
-  name: "categoryProducts", // This is the state key in Redux
+  name: "categoryProducts",
   initialState: {
     data: [],
     loading: false,

@@ -44,8 +44,6 @@ export default function ProductCard({ product }) {
             {/* <button  style={{ background: "#6eb449", color: "#fff" }}>
               Add To Cart
             </button> */}
-        
-            
           </div>
         </>
       )}

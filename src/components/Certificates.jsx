@@ -1,112 +1,66 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import Image from "react-bootstrap/Image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
 import "swiper/css";
-import "swiper/css/pagination";
-import Image from 'react-bootstrap/Image';
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-function Certificates() {
-const ref = useRef(null);
-      const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+const Certificates = () => {
   return (
-       <div>
-      <div className="padding-top"></div>
+    <main>
       <section className="padding-horizontal">
-        <section className="header-bar">
+        <header
+          className="header-bar"
+          aria-label="Certificates Section Heading"
+        >
           <Row>
-            <Col xs={6} md={6} className="heading-main-div">
-              {" "}
+            <Col xs={12} md={6} className="heading-main-div">
               <div className="heading-main">
-                <motion.h1
-                  ref={ref}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7 }}
-                  className="scroll-section"
-                  style={{
-                    position: "sticky",
-                    top: "30vh",
-                    textAlign: "center",
-                    // fontSize: "clamp(2rem, 10vw, 2rem)",
-
-                    zIndex: 2,
-                    // y: yTitle,
-                    // opacity: opacityTitle,
-                    margin: 0,
-                  }}
-                >
-                  Check Our Certificates
-                </motion.h1>
+                <h1>Check Our Certificates</h1>
               </div>
             </Col>
-            <Col xs={6} md={6} className="view-all-buttom-main">
-              {" "}
+
+            <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">
               <div className="view-all-button">
-                <a href="">
-                  <button>View All</button>
-                </a>
+                <button aria-label="View all farm categories">View All</button>
               </div>
             </Col>
           </Row>
+        </header>
+        <section aria-label="Certificate Gallery">
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={6}
+            navigation
+            pagination={{ type: "fraction" }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            modules={[Pagination, Navigation, Autoplay]}
+            className="mySwiper mt-4"
+            aria-label="Certificates carousel"
+          >
+            <SwiperSlide>
+              <figure>
+                <Image src="" alt="ccc" rounded loading="lazy" width="100%" />
+              </figure>
+            </SwiperSlide>
+            <SwiperSlide>
+              <figure>
+                <Image src="" alt="ccc" rounded loading="lazy" width="100%" />
+              </figure>
+            </SwiperSlide>{" "}
+            <SwiperSlide>
+              <figure>
+                <Image src="" alt="ccc" rounded loading="lazy" width="100%" />
+              </figure>
+            </SwiperSlide>
+          </Swiper>
         </section>
-        <Swiper
-          pagination={{
-            type: "fraction",
-          }}
-          spaceBetween={20}
-          slidesPerView={8}
-          navigation={true}
-          //  autoplay={{ delay: 3000 }}
-          modules={[Pagination, Navigation, Autoplay]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-             <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-              <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-             <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-               <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-
-          <SwiperSlide>
-              <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-             <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-              <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-             <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-          <SwiperSlide>
-               <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-
-          <SwiperSlide>
-              <Image src="/public/certificates/1.webp" rounded />
-          </SwiperSlide>
-        </Swiper>
       </section>
-    </div>
+    </main>
   );
-}
+};
 
 export default Certificates;
