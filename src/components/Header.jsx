@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const token = useSelector((state) => state.auth.token);
+  console.log(token);
+  
   return (
     <div>
       <div>
@@ -47,12 +49,12 @@ export default function Header() {
               </Nav.Link>{" "}
               <Nav.Link href="">|</Nav.Link>
               {token ? (
-                <Nav.Link href="/login" className="icon-img">
-                  Login <img src={accountcircle} alt="susha's food product" />
+                <Nav.Link href="/myaccount" className="icon-img">
+                 My Account <img src={accountcircle} alt="susha's food product" />
                 </Nav.Link>
               ) : (
                 <Nav.Link href="/login" className="icon-img">
-                  Myacccount <img src={accountcircle} alt="susha's food product" />
+                Login <img src={accountcircle} alt="susha's food product" />
                 </Nav.Link>
               )}
             </Nav>

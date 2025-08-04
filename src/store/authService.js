@@ -5,7 +5,11 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (crendentials) => {
     const res = await api.post("/login", crendentials);
-    return res.data;
+    console.log("Login API response.data:", res);
+    return {
+      token: res.data,
+      // user: res.data.user,
+    };
   }
 );
 
@@ -17,8 +21,8 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const fetchUser = createAsyncThunk("auth/fetchUser", async () => {
-  const res = await api.post("/customer.details");
+export const fetchUser = createAsyncThunk("auth/fetchUser", async (userId) => {
+  const res = await api.post("/customer.details", { user_id: userId });
   return res.data;
 });
 
@@ -27,5 +31,22 @@ export const updateUser = createAsyncThunk(
   async (updateData) => {
     const res = await api.post("/customer.update", updateData);
     return res.data;
+  }
+);
+
+export const getUser = createAsyncThunk(
+  "auth/getUser",
+
+  async (_, {getState}) => {
+    const state = getState();
+    const token = state.auth.token || localStorage.getItem("access");
+    const response = await api.get("/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("user", response.data);
+
+    return response.data;
   }
 );

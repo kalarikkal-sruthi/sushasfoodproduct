@@ -2,8 +2,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import { useNavigate } from "react-router-dom";
-import productimg from "../assets/whatwedo/1.png";
+
 import { Link } from "react-router-dom";
+import { whatinfarmsURL } from "../utils/api";
 
 function Categories({ data }) {
   const navigate = useNavigate();
@@ -46,8 +47,8 @@ function Categories({ data }) {
               aria-label={`Category: ${item.name}`}
             >
               <img
-                src={productimg}
-                // src={`${imgURL}${item.image}`}
+              
+                src={item?.image ? `${whatinfarmsURL}${item.image}` : "/images/fallback.jpg"}
                 alt={`Image of ${item.name}`}
                 className="w-100"
                 loading="lazy"

@@ -7,6 +7,7 @@ import ProductDetailGallery from "./ProductDetailGallery";
 import ProductDetailSummary from "./ProductDetailSummary";
 import { fetchProductById } from "../../store/ProductSlice";
 
+
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const ProductDetail = () => {
   return (
     <main>
       <Helmet>
-        <title>{product.product_name} | MyFezto</title>
+        <title>{product.product_name} | Susha's Food Product </title>
         <meta name="description" content={product.description?.slice(0, 150) || "Product detail page"} />
         <link rel="canonical" href={`https://myfezto.com/product/${product.id}`} />
       </Helmet>

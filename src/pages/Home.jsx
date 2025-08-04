@@ -26,6 +26,8 @@ export default function Home() {
   const homeVideoInGallary = data?.homeVideoInGallary || [];
   const whatInFarms = data?.whatInFarms || [];
   const products = data?.products || [];
+  const testimonials = data?.testimonial || [];
+  const certificates = data?.certificates || [];
   // const categories = data?.categories || [];
   // const categories = data?.categories || [];
   // if (loading) return <p>Loading.........</p>;
@@ -49,8 +51,9 @@ export default function Home() {
 
       <Instagramfeed />
       <Youtubefeed />
-      <Certificates />
-      <Testimonial />
+      <Certificates data={certificates} />
+      {/* <Testimonial /> */}
+      <Testimonial data={testimonials} />
     </div>
   );
 }
