@@ -23,6 +23,7 @@ const CategoryProductList = () => {
   return (
     <main className="padding-horizontal" aria-labelledby="category-products-heading">
       <div className="padding-top"></div>
+       <div className="padding-top"></div>
       <h1 id="category-products-heading" className="visually-hidden">
         Browse Products by Category
       </h1>
@@ -37,7 +38,7 @@ const CategoryProductList = () => {
           <header className="header-bar">
             <Row>
               <Col xs={12} md={6} className="heading-main-div heading-main">
-                <div className="heading-main mt-4">
+                <div className="heading-main ">
                   <Link
                     to={`/productsbycategory/${category.id}`}
                     style={{ textDecoration: "none", color: "inherit" }}

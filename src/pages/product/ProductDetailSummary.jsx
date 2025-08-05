@@ -11,7 +11,7 @@ const ProductDetailSummary = ({ product }) => {
       addToCart({
         id: product.id,
         product_name: product.product_name,
-        price: product.baseprices?.[0]?.offer_price || 0,
+        price: product.baseprices?.[0]?.original_price || 0,
         image: product.image,
         size: product.sizes?.[0]?.size || "Default",
         quantity: 1,
@@ -22,9 +22,10 @@ const ProductDetailSummary = ({ product }) => {
   return (
     <section aria-label="Product Details">
       <header>
-        <h1 className="mb-3" style={{ fontSize: "2rem" }}>
+        <div className="heading-main">  <h1 className="mb-3 " style={{ fontSize: "2rem" }}>
           {product.product_name}
-        </h1>
+        </h1></div>
+      
       </header>
 
       {product.description && (
@@ -38,12 +39,15 @@ const ProductDetailSummary = ({ product }) => {
 
       {product.baseprices?.[0] && (
         <div className="my-4" aria-label="Product price">
-          <strong className="text-success fs-4">
+          {/* <strong className="text-success fs-4">
             ₹ {product.baseprices[0].offer_price}
-          </strong>
-          <span className="text-muted ms-2">
+          </strong> */}
+       <strong> <span className="text-muted ms-2">
+           ₹ {product.baseprices[0].original_price}
+          </span></strong>    
+          {/* <span className="text-muted ms-2">
             <del>₹ {product.baseprices[0].original_price}</del>
-          </span>
+          </span> */}
         </div>
       )}
 

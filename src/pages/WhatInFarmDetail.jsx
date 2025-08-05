@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWhatWillDataById } from "../store/whatwillDataSlice";
 import { useParams } from "react-router-dom";
+import { whatinfarmsURL } from "../utils/api";
 
 const WhatInFarmDetail = () => {
   const { id } = useParams();
@@ -27,14 +28,18 @@ const WhatInFarmDetail = () => {
       aria-labelledby="farm-detail-heading"
     >
       <div className="padding-top"></div>
+      <div className="padding-top"></div>
       <article>
         <header>
-          <h1 id="farm-detail-heading">{selectedItem.name}</h1>
+          <div className="what-in-full-detail-head">
+            {" "}
+            <h1 id="farm-detail-heading">{selectedItem.name}</h1>
+          </div>
         </header>
 
         <section className="farm-image" aria-label="Farm activity image">
           <img
-            src={`https://yourcdn.com/images/${selectedItem.image}`}
+            src={`${whatinfarmsURL}${selectedItem.image}`}
             alt={selectedItem.name}
             className="img-fluid"
             loading="lazy"

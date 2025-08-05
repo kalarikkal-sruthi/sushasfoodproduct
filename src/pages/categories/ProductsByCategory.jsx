@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { api } from "../../utils/api";
 
-const imgURL = "https://ms.my.com/uploads/";
+import { productURL } from "../../utils/api";
 
 const ProductByCategory = () => {
   const { id } = useParams();
@@ -13,7 +13,8 @@ const ProductByCategory = () => {
 
   useEffect(() => {
     // Fetch category name
-    api.get("/categories-with-products")
+    api
+      .get("/categories-with-products")
       .then((res) => {
         const matched = res.data.find((cat) => cat.id === parseInt(id));
         if (matched) {
@@ -25,7 +26,8 @@ const ProductByCategory = () => {
       });
 
     // Fetch products by category
-    api.get(`/categories/${id}/products`)
+    api
+      .get(`/categories/${id}/products`)
       .then((res) => {
         setProducts(res.data || []);
         setLoading(false);
@@ -41,18 +43,20 @@ const ProductByCategory = () => {
   }
 
   return (
-    <main className="container my-5" aria-labelledby="category-heading">
+    <main className="padding-horizontal" aria-labelledby="category-heading">
       <div className="padding-top"></div>
-      <h1 id="category-heading" className="mb-4">
-        {categoryName}
-      </h1>
+      <div className="padding-top"></div>
+      <div className="heading-main">
+        {" "}
+        <h1>{categoryName}</h1>
+      </div>
 
       {products.length > 0 ? (
         <section className="row" aria-label={`Products in ${categoryName}`}>
           {products.map((product) => (
             <article
               key={product.id}
-              className="col-12 col-md-4 mb-4"
+              className="col-12 col-md-3 mb-4"
               aria-labelledby={`product-${product.id}-title`}
             >
               <Link
@@ -60,13 +64,32 @@ const ProductByCategory = () => {
                 style={{ textDecoration: "none", color: "inherit" }}
                 aria-label={`View details of ${product.product_name}`}
               >
-                <div className="card h-100 shadow-sm">
+                <article
+                  className="product-collection-image"
+                  aria-labelledby={`product-${product.id}-name`}
+                >
                   <img
-                    src={`${imgURL}${product.image}`}
+                    src={`${productURL}${product.image}`}
+                    alt={product.product_name}
+                    className="img-fluid"
+                    loading="lazy"
+                  />
+                  <h2 id={`product-${product.id}-name`}>
+                    {product.product_name}
+                  </h2>
+                  <p>
+                    <strong>Price:</strong> ₹
+                    {product.baseprices[0]?.original_price}
+                  </p>
+                  <button className="btn">Shop Now</button>
+                </article>
+                {/* <div className="card h-100 shadow-sm">
+                  <img
+                    src={`${productURL}${product.image}`}
                     alt={product.product_name}
                     className="card-img-top"
                     loading="lazy"
-                    style={{ height: "200px", objectFit: "cover" }}
+                    style={{ height: "250px", objectFit: "cover" }}
                   />
                   <div className="card-body">
                     <h2
@@ -75,11 +98,9 @@ const ProductByCategory = () => {
                     >
                       {product.product_name}
                     </h2>
-                    <p className="card-text">
-                      ₹{product.price ?? product.selling_price ?? "N/A"}
-                    </p>
+                  
                   </div>
-                </div>
+                </div> */}
               </Link>
             </article>
           ))}

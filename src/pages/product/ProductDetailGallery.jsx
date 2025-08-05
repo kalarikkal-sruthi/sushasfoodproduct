@@ -5,14 +5,16 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import { imgURL } from "../../utils/api";
+import { productURL } from "../../utils/api";
 
 const ProductDetailGallery = ({ product }) => {
+  console.log(product);
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const productImage = product?.product_image
-    ? `${imgURL}${product.product_image}`
-    : "/collections/2.png";
+  // const productImage = product?.product_image
+  //   ? `${imgURL}${product.product_image}`
+  //   : "/collections/2.png";
 
   return (
     <section aria-label="Product Image Gallery">
@@ -27,13 +29,18 @@ const ProductDetailGallery = ({ product }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2 mb-3"
       >
-        <SwiperSlide>
-          <figure>
-            <img
-              src={productImage}
+        <SwiperSlide style={{
+                width: "70%",
+                objectFit: "cover",
+                borderRadius: "13px",
+                backgroundColor: " #6fb449",
+              }}>
+          <figure >
+            <img style={{ width: "60%",margin:'auto'}}
+              src={`${productURL}${product.image}`}
               alt={product.product_name || "Product image"}
               loading="lazy"
-              style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
+              
               onError={(e) => (e.target.src = "/collections/2.png")}
             />
             <figcaption className="visually-hidden">
@@ -52,12 +59,17 @@ const ProductDetailGallery = ({ product }) => {
         className="mySwiper"
         aria-label="Product Thumbnails"
       >
-        <SwiperSlide>
-          <img
-            src={productImage}
+        <SwiperSlide style={{
+                width: "70%",
+                objectFit: "cover",
+                borderRadius: "13px",
+                backgroundColor: " #6fb449",
+              }}>
+          <img 
+            src={`${productURL}${product.image}`}
             alt={`Thumbnail of ${product.product_name}`}
             loading="lazy"
-            style={{ borderRadius: "6px", objectFit: "cover", width: "100%" }}
+            style={{ width: "60%",margin:'auto' , objectFit: "cover" }}
           />
         </SwiperSlide>
       </Swiper>

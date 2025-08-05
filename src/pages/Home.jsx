@@ -12,7 +12,8 @@ import Bannerslider from "../components/Bannerslider";
 import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomeData } from "../store/homeDataSlice";
-
+import Banner from "../components/Banner";
+ 
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ export default function Home() {
   const products = data?.products || [];
   const testimonials = data?.testimonial || [];
   const certificates = data?.certificates || [];
+   const videoInstagram = data?.videoInstagram || [];
+  const videoYoutube = data?.videoYoutube || []; 
+    
+  const aboutusImage = data?.aboutusImage || []; 
   // const categories = data?.categories || [];
   // const categories = data?.categories || [];
   // if (loading) return <p>Loading.........</p>;
@@ -37,7 +42,7 @@ export default function Home() {
   return (
     <div>
       <Helmet>
-        <title>Susha's Food Product</title>
+        <title>Susha's Food Products</title>
         <meta
           name="description"
           content="Explore our organic products and collections."
@@ -45,12 +50,13 @@ export default function Home() {
       </Helmet>
       <Bannerslider data={homeVideoInGallary}/>
       <Organicproducts />
-      <Organicproductimage />
+      {/* <Banner data={aboutusImage}/> */}
+      <Organicproductimage data={aboutusImage}/>
       <Categories data={whatInFarms} />
       <Ourcollections data={products}/>
 
-      <Instagramfeed />
-      <Youtubefeed />
+      <Instagramfeed data={videoInstagram} />
+      <Youtubefeed data={videoYoutube} />
       <Certificates data={certificates} />
       {/* <Testimonial /> */}
       <Testimonial data={testimonials} />

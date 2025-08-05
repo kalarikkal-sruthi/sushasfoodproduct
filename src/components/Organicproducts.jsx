@@ -52,6 +52,12 @@ export default function Organicproducts() {
                 between people and the planet. Visit us to learn more about
                 eco-friendly farming!
               </p>
+                <p>
+                Whether it's our lush crop fields, free-roaming animals, or
+                natural fertilizers, every aspect of our farm promotes harmony
+                between people and the planet. Visit us to learn more about
+                eco-friendly farming!
+              </p>
             </article>
           </div>
         </Col>

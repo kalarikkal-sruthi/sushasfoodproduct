@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Spinner, Alert } from "react-bootstrap";
-import { Helmet } from "react-helmet-async"; 
+import { Helmet } from "react-helmet-async";
 import ProductDetailGallery from "./ProductDetailGallery";
 import ProductDetailSummary from "./ProductDetailSummary";
 import { fetchProductById } from "../../store/ProductSlice";
-
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -43,24 +42,30 @@ const ProductDetail = () => {
   return (
     <main>
       <Helmet>
-        <title>{product.product_name} | Susha's Food Product </title>
-        <meta name="description" content={product.description?.slice(0, 150) || "Product detail page"} />
-        <link rel="canonical" href={`https://myfezto.com/product/${product.id}`} />
+        <title>{product.product_name} | Susha's Food Products </title>
+        <meta
+          name="description"
+          content={product.description?.slice(0, 150) || "Product detail page"}
+        />
+        <link
+          rel="canonical"
+          href={`https://myfezto.com/product/${product.id}`}
+        />
       </Helmet>
 
       <div className="padding-top" />
-
-      <Container className="my-5" as="section" aria-label="Product Details Section">
+      <div className="padding-top" />
+      <div className="padding-horizontal" as="section" aria-label="Product Details Section">
         <Row className="align-items-start">
-          <Col md={6} as="section" aria-label="Product Gallery">
+          <Col md={5} as="section" aria-label="Product Gallery">
             <ProductDetailGallery product={product} />
           </Col>
 
-          <Col md={6} as="section" aria-label="Product Summary">
+          <Col md={7} as="section" aria-label="Product Summary">
             <ProductDetailSummary product={product} />
           </Col>
         </Row>
-      </Container>
+      </div>
     </main>
   );
 };

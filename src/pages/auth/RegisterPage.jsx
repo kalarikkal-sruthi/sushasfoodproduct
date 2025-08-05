@@ -38,7 +38,7 @@ const RegisterPage = () => {
           content="Create a new account to access your personalized dashboard, orders, and settings."
         />
       </Helmet>
-
+      <div className="padding-top"></div>
       <div className="padding-top"></div>
       <section
         className="padding-horizontal"
@@ -69,56 +69,69 @@ const RegisterPage = () => {
                   </Col>
                 </Row>
               </section>
-
-              <label htmlFor="name">Full Name</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Full Name"
-                required
-                autoComplete="name"
-              />
-
-              <label htmlFor="email">Email Address</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                required
-                autoComplete="email"
-              />
-
-              <label htmlFor="mobile">Mobile Number</label>
-              <input
-                id="mobile"
-                name="mobile"
-                type="tel"
-                placeholder="Enter Number"
-                required
-                autoComplete="tel"
-              />
-
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-                autoComplete="new-password"
-              />
-
-              <label htmlFor="gender">Gender</label>
-              <input
-                id="gender"
-                name="gender"
-                type="text"
-                placeholder="Enter Gender"
-                required
-                autoComplete="sex"
-              />
+              <Row>
+                <Col xs={12} md={12}>
+                  <label htmlFor="name">Full Name</label>
+                  <br></br>
+                  <input
+                  className="w-100"
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Full Name"
+                    required
+                    autoComplete="name"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6} md={6}>
+                  <label htmlFor="email">Email Address</label>
+                  <input   className="w-100"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    required
+                    autoComplete="email"
+                  />
+                </Col>
+                <Col xs={6} md={6}>
+                  <label htmlFor="mobile">Mobile Number</label>
+                  <input   className="w-100"
+                    id="mobile"
+                    name="mobile"
+                    type="tel"
+                    placeholder="Enter Number"
+                    required
+                    autoComplete="tel"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6} md={6}>
+                  <label htmlFor="password">Password</label>
+                  <input   className="w-100"
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    required
+                    autoComplete="new-password"
+                  />
+                </Col>
+                <Col xs={6} md={6}>
+                  <label htmlFor="gender">Gender</label>
+                  <input   className="w-100"
+                    id="gender"
+                    name="gender"
+                    type="text"
+                    placeholder="Enter Gender"
+                    required
+                    autoComplete="sex"
+                  />
+                </Col>
+              </Row>
 
               <button type="submit" aria-label="Register your account">
                 Register

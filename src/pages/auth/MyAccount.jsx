@@ -32,6 +32,8 @@ const Profile = () => {
           content="Manage your profile, view order history, and edit your account details."
         />
       </Helmet>
+
+       <div className="padding-top"></div>
       <div className="padding-top"></div>
       <section
         className="padding-horizontal"
@@ -40,7 +42,7 @@ const Profile = () => {
         <header className="header-bar">
           <Row>
             <Col xs={12} className="heading-main-div ">
-              <div className="heading-main mt-4">
+              <div className="heading-main">
                 <h1>My Account</h1>
               </div>
             </Col>
@@ -56,8 +58,8 @@ const Profile = () => {
               className="mb-0"
               role="tablist"
             >
-              <Tab eventKey="profile" title="My Profile" tabClassName="px-3" />
-              <Tab eventKey="orders" title="My Orders" tabClassName="px-3" />
+              <Tab   variant="outline-danger"  eventKey="profile" title="My Profile" tabClassName="px-3" />
+              <Tab   variant="outline-danger" eventKey="orders" title="My Orders" tabClassName="px-3" />
             </Tabs>
             <Button
               variant="outline-danger"

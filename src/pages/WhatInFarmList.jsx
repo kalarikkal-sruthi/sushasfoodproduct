@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWhatWillData } from "../store/whatwillDataSlice";
-import { Row, Col } from "react-bootstrap";
-import productimg from "../assets/whatwedo/1.png";
+import { Row, Col,Button } from "react-bootstrap";
+
+import { whatinfarmsURL } from "../utils/api";
 
 const WhatInFarmList = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const WhatInFarmList = () => {
       className="categories padding-horizontal"
       aria-labelledby="categories-heading"
     >
+       <div className="padding-top"></div>
       <div className="padding-top"></div>
       <header className="header-bar">
         <Row className="align-items-center">
@@ -48,7 +50,7 @@ const WhatInFarmList = () => {
                 aria-label={`Category: ${item.name}`}
               >
                 <img
-                  src={productimg}
+                  src={`${whatinfarmsURL}${item.image}`}
                   alt={item.name || "Farm activity"}
                   className="w-100"
                   loading="lazy"
@@ -72,13 +74,15 @@ const WhatInFarmList = () => {
 
               <div className="card-name mt-2">
                 <h3>{item.name}</h3>
-                <p>{item.description}</p>
+                <p>{item.description?.slice(0, 100)}...</p>
+              
+                <div class="view-all-button" style={{textAlign:'start'}}>
                 <Link
                   to={`/whatinfarm/${item.id}`}
                   aria-label={`Read more about ${item.name}`}
                 >
-                  Read More
-                </Link>
+               <button>View All</button>
+                </Link></div>
               </div>
             </Col>
           ))

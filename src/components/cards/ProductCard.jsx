@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AddToCartButton from "../buttons/AddToCartButton";
+import { productURL } from "../../utils/api";
+
 
 export default function ProductCard({ product }) {
+  console.log(product);
+  
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -13,13 +17,13 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="product-collection-image">
-      <img src={product.image} alt={product.title} />
-      <h1>{product.title}</h1>
-      <h2>Price : {product.price}</h2>
-      {/* <button className="btn" onClick={() => setOpen(true)}>
+      <img   src={`${productURL}${product.image}`} alt={product.title} />
+      <h1>{product.product_name}</h1>
+      <h2>Price :₹{product.baseprices[0]?.original_price}</h2>
+      <button className="btn" onClick={() => setOpen(true)}>
         Shop Now
-      </button> */}
-      <AddToCartButton onClick={() => console.log("Added to cart")} />
+      </button>
+      {/* <AddToCartButton onClick={() => console.log("Added to cart")} /> */}
 
       {open && (
         <>

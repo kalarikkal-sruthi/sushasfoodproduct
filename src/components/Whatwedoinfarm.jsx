@@ -72,8 +72,8 @@ function Categories({ data }) {
 
             <div className="card-name  mt-2">
               <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <Link>Read More</Link>
+              <p>{item.description?.slice(0, 100)}...</p>
+              {/* <Link>Read More</Link> */}
             </div>
           </Col>
         ))}

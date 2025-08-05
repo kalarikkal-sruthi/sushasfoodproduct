@@ -58,7 +58,7 @@ function Testimonial({ data }) {
                 </figcaption>
                 <blockquote className="testimonial-para mt-3">
                   <p className="mb-0" style={{ fontStyle: "italic" }}>
-                    “{item.description}”
+                    “{item.description?.slice(0, 100)}”
                   </p>
                 </blockquote>
               </figure>

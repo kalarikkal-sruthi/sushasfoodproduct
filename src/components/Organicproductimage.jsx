@@ -3,7 +3,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { motion, useTransform, useScroll } from "framer-motion";
 
-function Organicproductimage() {
+function Organicproductimage({data}) {
+  console.log(data);
+  
   const container = useRef();
   const { scrollYProgress } = useScroll({
     target: container,
@@ -22,23 +24,23 @@ function Organicproductimage() {
       >
         <main ref={container} className="w-100">
           <Section1 scrollYProgress={scrollYProgress} />
-          <Section2 scrollYProgress={scrollYProgress} />
+          {/* <Section2 scrollYProgress={scrollYProgress} /> */}
         </main>
       </Row>
     </section>
   );
 }
 
-const Section1 = ({ scrollYProgress }) => {
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+const Section1 = () => {
+  // const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
   return (
     <motion.div
-      style={{ scale, position: "sticky", top: 0 }}
+      style={{  position: "sticky", top: 0 }}
       className="sticky top-0 w-100"
     >
       <img
-        src="/whatwedo/o-one.png"
+        src="/whatwedo/q-big.png"
         alt="Fresh organic produce display"
         className="w-100"
       />
@@ -55,7 +57,7 @@ const Section2 = ({ scrollYProgress }) => {
       className="sticky top-0 w-100"
     >
       <img
-        src="/whatwedo/m-2.png"
+        src="/whatwedo/w.png"
         alt="Farmers harvesting organic crops"
         className="w-100"
       />

@@ -2,8 +2,11 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
+import { productURL } from "../utils/api";
 
 export default function OurCollections({ data }) {
+  console.log(data);
+  
   return (
     <main
       className="padding-horizontal"
@@ -43,14 +46,14 @@ export default function OurCollections({ data }) {
                 aria-labelledby={`product-${item.id}-name`}
               >
                 <img
-                  src={item.image}
+                  src={`${productURL}${item.image}` }
                   alt={item.product_name}
                   className="img-fluid"
                   loading="lazy"
                 />
                 <h2 id={`product-${item.id}-name`}>{item.product_name}</h2>
                 <p>
-                  <strong>Price:</strong> ₹{item.price}
+                  <strong>Price:</strong> ₹{item.baseprices[0]?.original_price}
                 </p>
                 <button className="btn">Shop Now</button>
               </article>

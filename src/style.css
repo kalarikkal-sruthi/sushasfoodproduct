@@ -118,11 +118,11 @@
 
 
 .padding-top {
-  padding-top: 80px;
+  padding-top: 50px;
 }
 
 .padding-horizontal {
-  padding: 80px 80px 0px 80px;
+  padding: 50px 80px 0px 80px;
 }
 
 .card-main {
@@ -180,7 +180,7 @@
   text-align: start;
   margin-bottom: 20px !important;
   text-transform: capitalize;
-  font-size: 34px;
+  font-size: 28px;
   color: #3f69e2;
   width: fit-content;
 }
@@ -250,6 +250,7 @@
   border-radius: 6px;
   padding: 6px 16px;
   box-shadow: none;
+  font-size: 14px;
 }
 
 .view-all-buttom-main {
@@ -584,4 +585,34 @@ button.register-button {
 
 .dropdown:hover .dropdown-sub-menu {
   display: block;
+}
+
+
+
+
+
+
+
+
+.what-in-full-detail-head h1{
+      text-align: start;
+    margin-bottom: 20px !important;
+    text-transform: capitalize;
+    font-size: 28px;
+    color: #3f69e2;
+    width: fit-content;
+        font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+.farm-image{
+  margin-bottom: 50px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active
+.myaccountbuttom{
+  background: transparent;
+    border-radius: 6px;
+    padding: 6px 16px;
+    box-shadow: none;
+    font-size: 14px;
 }

@@ -33,7 +33,8 @@ function Certificate({ data }) {
         <Swiper
           pagination={{ type: "fraction" }}
           spaceBetween={20}
-          slidesPerView={4}
+          slidesPerView={8}
+          loop={true}
           navigation={true}
           autoplay={{ delay: 4000 }}
           modules={[Pagination, Navigation, Autoplay, A11y]}
@@ -42,19 +43,19 @@ function Certificate({ data }) {
         >
           {data.map((item, index) => (
             <SwiperSlide key={index}>
-              <figure className="certificate-main-div text-center">
+              <figure className="certificate-main-div text-center"     style={{ width:'60%',
+                 
+                  objectFit: "contain", 
+                
+                  margin: "0 auto",
+                  display: "block",border:'1px solid #333'
+                }}>
              <img
                 src={`${imgURLCertificate}${item.image}`}
                 alt={`Certificate ${item.id}`}
                 loading="lazy"
-                width="80%" 
-                style={{
-                  maxHeight: "200px",
-                  objectFit: "contain", 
-                  borderRadius: "10px",
-                  margin: "0 auto",
-                  display: "block",
-                }}
+               
+              
               />
 
               </figure>
