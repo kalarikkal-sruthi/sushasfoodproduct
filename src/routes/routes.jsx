@@ -11,6 +11,7 @@ import CartPage from "../pages/CartPage";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
 import ProductsByCategory from "../pages/categories/ProductsByCategory";
 import WhatInFarmDetail from "../pages/WhatInFarmDetail";
+import OrderPage from "../pages/orders/OrderPage";
 
 const AppRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const AppRoutes = () => {
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/order" element={<OrderPage />} />
        
       </Route>
     </Routes>
