@@ -45,7 +45,7 @@ function Bannerslider({ data }) {
                 <h1>Welcome to</h1>
 
                 <motion.h1
-                  style={{ color: "#3f69e2" }}
+                  style={{ color: "#294085" }}
                   initial={{ opacity: 0, y: 80 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}

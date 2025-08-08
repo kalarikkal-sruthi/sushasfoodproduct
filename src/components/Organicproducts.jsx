@@ -8,14 +8,14 @@ export default function Organicproducts() {
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <section 
+    <section
       id="about-susha-prakash-farm"
       className="organic-products-section padding-horizontal"
       aria-labelledby="about-heading"
-      style={{ position: "relative" }} 
+      style={{ position: "relative" }}
     >
       <Row>
-        <Col xs={12}>
+        <Col xs={12} md={6}>
           <div className="organic-product-contents">
             <header className="heading-main">
               <motion.h1
@@ -29,7 +29,7 @@ export default function Organicproducts() {
                   position: "sticky",
                   top: "30vh",
                   textAlign: "center",
-                  fontSize: "clamp(2rem, 6vw, 3.5rem)",
+                  fontSize: "clamp(2rem, 6vw, 5rem)",
                   zIndex: 2,
                   margin: 0,
                 }}
@@ -52,15 +52,10 @@ export default function Organicproducts() {
                 between people and the planet. Visit us to learn more about
                 eco-friendly farming!
               </p>
-                <p>
-                Whether it's our lush crop fields, free-roaming animals, or
-                natural fertilizers, every aspect of our farm promotes harmony
-                between people and the planet. Visit us to learn more about
-                eco-friendly farming!
-              </p>
             </article>
           </div>
         </Col>
+        <Col xs={12} md={6}></Col>
       </Row>
     </section>
   );

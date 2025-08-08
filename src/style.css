@@ -616,3 +616,32 @@ button.register-button {
     box-shadow: none;
     font-size: 14px;
 }
+
+
+.five-col {
+  width: 20%;
+  max-width: 20%;
+  flex: 0 0 auto;
+}
+@media (max-width: 768px) {
+  .five-col {
+    width: 50%;
+    max-width: 50%;
+  }
+}
+@media (max-width: 576px) {
+  .five-col {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.other-farm-activities{
+  border: 1px solid #294085;
+    padding: 30px;
+}
+.other-farm-activities-title{
+text-align: center;
+ font-size: 16px;
+ color: #294085;
+}

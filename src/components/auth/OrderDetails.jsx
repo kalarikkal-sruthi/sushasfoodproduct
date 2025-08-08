@@ -2,19 +2,19 @@ import React from "react";
 
 function OrderDetails() {
   const orders = [
-      {
-        id: "ORD123",
-        date: "2025-07-25",
-        total: "₹999",
-        status: "Delivered",
-      },
-      {
-        id: "ORD124",
-        date: "2025-07-28",
-        total: "₹499",
-        status: "Shipped",
-      },
-    ];
+    {
+      id: "ORD123",
+      date: "2025-07-25",
+      total: "₹999",
+      status: "Delivered",
+    },
+    {
+      id: "ORD124",
+      date: "2025-07-28",
+      total: "₹499",
+      status: "Shipped",
+    },
+  ];
   return (
     <div>
       {" "}

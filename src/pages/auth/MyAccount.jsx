@@ -5,8 +5,9 @@ import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import UserDetail from "../../components/auth/UserDetail";
+
 import OrderDetails from "../../components/auth/OrderDetails";
+import Address from "../../components/auth/Address";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,6 @@ const Profile = () => {
   console.log(token);
 
   const [key, setKey] = useState("profile");
-
-  
 
   const handleLogout = () => {
     dispatch(logout());
@@ -33,7 +32,7 @@ const Profile = () => {
         />
       </Helmet>
 
-       <div className="padding-top"></div>
+      <div className="padding-top"></div>
       <div className="padding-top"></div>
       <section
         className="padding-horizontal"
@@ -58,8 +57,19 @@ const Profile = () => {
               className="mb-0"
               role="tablist"
             >
-              <Tab   variant="outline-danger"  eventKey="profile" title="My Profile" tabClassName="px-3" />
-              <Tab   variant="outline-danger" eventKey="orders" title="My Orders" tabClassName="px-3" />
+              <Tab
+                variant="outline-danger"
+                eventKey="orders"
+                title="My Orders"
+                tabClassName="px-3"
+              />
+              <Tab
+                variant="outline-danger"
+                eventKey="Address"
+                title="My Address"
+                tabClassName="px-3"
+              />
+              
             </Tabs>
             <Button
               variant="outline-danger"
@@ -69,10 +79,10 @@ const Profile = () => {
               Logout
             </Button>
           </div>
+  {key === "orders" && <OrderDetails />}
+          {key === "Address" && <Address />}
 
-          {key === "profile" && <UserDetail />}
-
-          {key === "orders" && <OrderDetails />}
+        
         </div>
       </section>
     </main>

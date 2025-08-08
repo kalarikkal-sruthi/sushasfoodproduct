@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import { loginUser, registerUser, fetchUser, updateUser, getUser } from "./authService";
 
 const initialState = {
@@ -14,7 +13,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      // state.user = null;
+      state.user = null;
       state.token = null;
       localStorage.removeItem("access");
     },
@@ -23,18 +22,18 @@ const authSlice = createSlice({
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log("action.payload:", action.payload);
-        state.token = action.payload.token;
-        // state.user = action.payload.user;
-        localStorage.setItem("access", action.payload.token);
+        const token = action.payload.token || action.payload; // handles both string and object
+        state.token = token;
+        state.user = action.payload.user || null;
+        localStorage.setItem("access", token);
       })
-
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.error.message;
       })
-
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.token = action.payload.token;
-        localStorage.setItem("access", action.payload.token);
+        const token = action.payload.token || action.payload;
+        state.token = token;
+        localStorage.setItem("access", token);
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -42,11 +41,11 @@ const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload;
       })
-
-      .addCase(getUser.fulfilled,(state,action)=>{
-         state.user = action.payload;
-      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload.user || action.payload;
+      });
   },
 });
+
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -29,7 +29,7 @@ function Categories({ data }) {
           </Col>
           <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">
             <div className="view-all-button">
-              <button
+          <button
                 onClick={() => navigate("/whatinfarm")}
                 aria-label="View all farm categories"
               >
@@ -42,7 +42,7 @@ function Categories({ data }) {
       <Row as="section" aria-label="Farm categories">
         {data.map((item, index) => (
           <Col xs={6} md={3} key={index}>
-            <article
+        <Link to={`/whatinfarm/${item.id}`}> <article
               className="card-main"
               aria-label={`Category: ${item.name}`}
             >
@@ -69,6 +69,7 @@ function Categories({ data }) {
                 </div>
               </div>
             </article>
+            </Link>   
 
             <div className="card-name  mt-2">
               <h3>{item.name}</h3>

@@ -33,20 +33,25 @@ export const updateUser = createAsyncThunk(
     return res.data;
   }
 );
-
 export const getUser = createAsyncThunk(
   "auth/getUser",
-
-  async (_, {getState}) => {
+  async (_, { getState }) => {
     const state = getState();
-    const token = state.auth.token || localStorage.getItem("access");
+    const storedToken = state.auth.token || localStorage.getItem("access");
+
+    // Extract only the part after "|"
+    const token = storedToken?.includes("|")
+      ? storedToken.split("|")[1]
+      : storedToken;
+
     const response = await api.get("/user", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("user", response.data);
 
-    return response.data;
+    return response.data; // { id, name, email, ... }
   }
 );
+
+

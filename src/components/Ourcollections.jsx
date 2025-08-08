@@ -44,13 +44,13 @@ export default function OurCollections({ data }) {
               <article
                 className="product-collection-image"
                 aria-labelledby={`product-${item.id}-name`}
-              >
+              > <Link to={`/product/${item.id}`}>
                 <img
                   src={`${productURL}${item.image}` }
                   alt={item.product_name}
                   className="img-fluid"
                   loading="lazy"
-                />
+                /></Link>
                 <h2 id={`product-${item.id}-name`}>{item.product_name}</h2>
                 <p>
                   <strong>Price:</strong> ₹{item.baseprices[0]?.original_price}

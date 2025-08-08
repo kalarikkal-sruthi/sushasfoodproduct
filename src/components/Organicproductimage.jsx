@@ -40,7 +40,7 @@ const Section1 = () => {
       className="sticky top-0 w-100"
     >
       <img
-        src="/whatwedo/q-big.png"
+        src="/whatwedo/w-big.png"
         alt="Fresh organic produce display"
         className="w-100"
       />

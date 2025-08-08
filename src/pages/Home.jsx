@@ -13,7 +13,10 @@ import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomeData } from "../store/homeDataSlice";
 import Banner from "../components/Banner";
- 
+import TestAbout from "../components/TestAbout";
+import WhatWeDo from "../components/WhatWeDo";
+import TestWhatWeDo from "../components/WhatWeDo";
+import ValueAddedProducts from "../components/ValueAddedProducts";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -25,14 +28,14 @@ export default function Home() {
 
   console.log(data);
   const homeVideoInGallary = data?.homeVideoInGallary || [];
-  const whatInFarms = data?.whatInFarms || [];
-  const products = data?.products || [];
+  // const whatInFarms = data?.whatInFarms || [];
+  // const products = data?.products || [];
   const testimonials = data?.testimonial || [];
   const certificates = data?.certificates || [];
-   const videoInstagram = data?.videoInstagram || [];
-  const videoYoutube = data?.videoYoutube || []; 
-    
-  const aboutusImage = data?.aboutusImage || []; 
+  const videoInstagram = data?.videoInstagram || [];
+  const videoYoutube = data?.videoYoutube || [];
+
+  // const aboutusImage = data?.aboutusImage || [];
   // const categories = data?.categories || [];
   // const categories = data?.categories || [];
   // if (loading) return <p>Loading.........</p>;
@@ -48,16 +51,22 @@ export default function Home() {
           content="Explore our organic products and collections."
         />
       </Helmet>
-      <Bannerslider data={homeVideoInGallary}/>
-      <Organicproducts />
-      {/* <Banner data={aboutusImage}/> */}
-      <Organicproductimage data={aboutusImage}/>
-      <Categories data={whatInFarms} />
-      <Ourcollections data={products}/>
+      <Bannerslider data={homeVideoInGallary} />
+      <TestAbout />
+        <Certificates data={certificates} />
+      <WhatWeDo />
+      <ValueAddedProducts />
 
+      {/* <Organicproducts /> */}
+      {/* <Banner data={aboutusImage}/> */}
+      {/* <Organicproductimage data={aboutusImage} /> */}
+      {/* <Categories data={whatInFarms} /> */}
+      {/* <Ourcollections data={products} /> */}
+      {/* <Organicproductimage data={aboutusImage} />
+      <TestAbout /> */}
       <Instagramfeed data={videoInstagram} />
       <Youtubefeed data={videoYoutube} />
-      <Certificates data={certificates} />
+    
       {/* <Testimonial /> */}
       <Testimonial data={testimonials} />
     </div>
