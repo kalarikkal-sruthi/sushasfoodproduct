@@ -31,9 +31,9 @@ const LoginPage = () => {
           content="Login to your MySite account to access your dashboard, orders, and profile."
         />
       </Helmet>
-  <div className="padding-top"></div>
       <div className="padding-top"></div>
-     
+      <div className="padding-top"></div>
+
       <section className="padding-horizontal" aria-labelledby="login-title">
         <div className="auth-container">
           <div className="auth-left fade-in-left">

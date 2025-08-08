@@ -1,49 +1,70 @@
 import React from "react";
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Row, Col, Card, Container } from "react-bootstrap";
+import drip from "../assets/otherfarmactivities/drip.webp";
+import pot from "../assets/otherfarmactivities/pot.jpg";
+import soil from "../assets/otherfarmactivities/soilwater.jpeg";
+import organic from "../assets/otherfarmactivities/oraganicfarming.jpeg";
+import organicfertilizer from "../assets/otherfarmactivities/oragnic.jpeg";
+import automated from "../assets/otherfarmactivities/automated.jpeg";
+import valueadded from "../assets/otherfarmactivities/value-added-product.jpeg";
+// import nursery from "../assets/otherfarmactivities/Nursery.jpeg"
 
 function OtherFarmActivities() {
   const services = [
-    // {
-    //   title: "Drip Irrigation System",
-    //   image: "/whatwedo/1.png",
-    //   description:
-    //     "We use drip irrigation systems to optimize water usage for our crops, ensuring sustainability and efficiency.",
-    // },
+    {
+      title: "Drip Irrigation System",
+      image: drip,
+      description:
+        "We use drip irrigation systems to optimize water usage for our crops, ensuring sustainability and efficiency.",
+    },
     {
       title: "Pot Irrigation System",
-      image: "/whatwedo/2.png",
+      image: pot,
       description:
         "This traditional method of pot irrigation helps conserve water and support plant growth in specific areas.",
     },
     {
       title: "Soil Water Conservation",
-      image: "/whatwedo/3.png",
+      image: soil,
       description:
         "We implement soil water conservation techniques to improve moisture retention and enhance soil health.",
     },
     {
       title: "Organic Farming",
-      image: "/whatwedo/3.png",
+      image: organic,
       description:
         "All farming activities are carried out organically, avoiding chemical fertilizers and pesticides.",
     },
     {
       title: "Organic Fertilizer Production",
-      image: "/whatwedo/4.png",
+      image: organicfertilizer,
       description:
         "We produce compost and other organic fertilizers in-house to nourish crops naturally.",
     },
     {
       title: "Automated Water Harvesting",
-      image: "/whatwedo/4.png",
+      image: automated,
       description:
         "Automated systems help collect and store rainwater, supporting sustainable farm practices.",
     },
     {
       title: "Value-Added Products",
-      image: "/whatwedo/4.png",
+      image: valueadded,
+      description:
+        "We transform raw produce into high-quality, value-added products to ensure zero waste and added income.",
+    },
+    {
+      title: "Nursery",
+      image: valueadded,
+      description:
+        "We transform raw produce into high-quality, value-added products to ensure zero waste and added income.",
+    },
+    {
+      title: "Susha's Prakash Outlet ",
+      image: valueadded,
       description:
         "We transform raw produce into high-quality, value-added products to ensure zero waste and added income.",
     },
@@ -88,7 +109,7 @@ function OtherFarmActivities() {
               variants={scrollVariants}
               id="crops-heading"
               className="fw-bold"
-              style={{ color: "#294085" }}
+              style={{ color: "#5caf47" }}
             >
               Other Farm Activities
             </motion.h2>
@@ -113,13 +134,17 @@ function OtherFarmActivities() {
                   <Card.Img
                     src={service.image}
                     alt={service.title}
-                    className="h-100 w-100 object-fit-cover"
-                    style={{ borderRadius: "12px " }}
+                    className=" object-fit-cover"
+                    style={{
+                      borderRadius: "12px ",
+                      width: "343px",
+                      height: "193px",
+                    }}
                   />
                   <div className="other-farm-activities-title mt-3">
                     {service.title}
                   </div>
-                  <motion.a
+             <Link to="/dripirrigationsystem">   <motion.a
                     whileHover={{
                       x: 5,
                       transition: { duration: 0.2 },
@@ -136,7 +161,7 @@ function OtherFarmActivities() {
                     }}
                   >
                     Learn More →
-                  </motion.a>
+                  </motion.a></Link>  
                 </div>
                 {/* <Card
                     className="h-100 border-0 overflow-hidden"

@@ -42,26 +42,6 @@ const WhatWeDo = () => {
             <OtherCrops />
             <OtherFarmActivities />
           </Row>
-          <Row>
-            <motion.a to="/"
-              whileHover={{
-                x: 5,
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="btn btn-outline text-center mt-5 w-auto m-auto"
-              style={{
-                borderWidth: "2px",
-                borderRadius: "50px",
-                fontWeight: "500",
-                border: "1px solid #294085",
-                backgroundColor: "#294085",
-                color: "#fff",
-              }}
-            >
-              View All Farm Activities →
-            </motion.a>
-          </Row>
         </section>
       </Container>
     </main>

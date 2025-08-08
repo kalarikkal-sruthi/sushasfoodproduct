@@ -8,7 +8,8 @@ export const imgURLTestimonial = "https://ms.myfezto.com/uploads/testimonial/";
 export const imgURLCertificate = "https://ms.myfezto.com/uploads/certificates/";
 export const imgURLVideo = "https://ms.myfezto.com/uploads/video/";
 export const productURL ="https://ms.myfezto.com/uploads/products/";
-export const aboutURL ="https://ms.myfezto.com/uploads/about-us-images/"
+export const aboutURL ="https://ms.myfezto.com/uploads/about-us-images/";
+export  const categoryUrl ="https://ms.myfezto.com/uploads/Categories/"
 
 const api = axios.create({
   baseURL: "https://ms.myfezto.com/api",

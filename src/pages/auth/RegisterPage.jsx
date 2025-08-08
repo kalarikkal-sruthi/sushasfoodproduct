@@ -74,7 +74,7 @@ const RegisterPage = () => {
                   <label htmlFor="name">Full Name</label>
                   <br></br>
                   <input
-                  className="w-100"
+                    className="w-100"
                     id="name"
                     name="name"
                     type="text"
@@ -87,7 +87,8 @@ const RegisterPage = () => {
               <Row>
                 <Col xs={6} md={6}>
                   <label htmlFor="email">Email Address</label>
-                  <input   className="w-100"
+                  <input
+                    className="w-100"
                     id="email"
                     name="email"
                     type="email"
@@ -98,7 +99,8 @@ const RegisterPage = () => {
                 </Col>
                 <Col xs={6} md={6}>
                   <label htmlFor="mobile">Mobile Number</label>
-                  <input   className="w-100"
+                  <input
+                    className="w-100"
                     id="mobile"
                     name="mobile"
                     type="tel"
@@ -111,7 +113,8 @@ const RegisterPage = () => {
               <Row>
                 <Col xs={6} md={6}>
                   <label htmlFor="password">Password</label>
-                  <input   className="w-100"
+                  <input
+                    className="w-100"
                     id="password"
                     name="password"
                     type="password"
@@ -122,7 +125,8 @@ const RegisterPage = () => {
                 </Col>
                 <Col xs={6} md={6}>
                   <label htmlFor="gender">Gender</label>
-                  <input   className="w-100"
+                  <input
+                    className="w-100"
                     id="gender"
                     name="gender"
                     type="text"

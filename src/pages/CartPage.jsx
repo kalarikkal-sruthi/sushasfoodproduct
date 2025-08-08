@@ -80,26 +80,23 @@ function CartPage() {
                     </h4>
                   </div>
                   <Button
-                   className="btn-sm"
+                    className="btn-sm"
                     aria-label={`Remove ${item.product_name} from cart`}
-              variant="outline-danger"
-              onClick={() => dispatch(removeFromCart(item.id))}
-             
-            >
-               Remove
-            </Button>
-                  
+                    variant="outline-danger"
+                    onClick={() => dispatch(removeFromCart(item.id))}
+                  >
+                    Remove
+                  </Button>
                 </li>
               ))}
             </ul>
           )}
-          <div className="view-all-button mt-5">  <Link
-                to="/login"
-                aria-label="View all product categories"
-              >
-                <button>Proceed To Buy</button>
-              </Link></div>
-          
+          <div className="view-all-button mt-5">
+            {" "}
+            <Link to="/login" aria-label="View all product categories">
+              <button>Proceed To Buy</button>
+            </Link>
+          </div>
         </section>
       </section>
     </main>

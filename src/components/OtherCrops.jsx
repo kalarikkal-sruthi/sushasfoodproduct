@@ -2,44 +2,50 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import root from "../assets/otherfarmcrops/root.webp";
+import spices from "../assets/otherfarmcrops/spices.png";
+import fruits from "../assets/otherfarmcrops/fruits.webp";
+import herbs from "../assets/otherfarmcrops/herbs.jpeg";
+import veg from "../assets/otherfarmcrops/vegetables.jpg";
+import ornamental from "../assets/otherfarmcrops/ornamentalplants.webp";
 
 function OtherCrops() {
   const services = [
     {
-      title: "Root Vegetables and Spices",
-      image: "/whatwedo/1.png",
+      title: "Root Vegetables",
+      image: root,
+      description:
+        "We cultivate root vegetables and traditional spices organically using sustainable practices.",
+    },
+    {
+      title: "Spices",
+      image: spices,
       description:
         "We cultivate root vegetables and traditional spices organically using sustainable practices.",
     },
     {
       title: "Fruits",
-      image: "/whatwedo/2.png",
+      image: fruits,
       description:
         "Our fruit cultivation includes mangoes, bananas, papayas, and other seasonal produce.",
     },
     {
       title: "Herbs",
-      image: "/whatwedo/3.png",
+      image: herbs,
       description:
         "We grow herbs like tulsi, mint, and lemongrass, known for their medicinal properties.",
     },
     {
       title: "Vegetables",
-      image: "/whatwedo/3.png",
+      image: veg,
       description:
         "Our vegetable garden features seasonal greens and organically grown produce.",
     },
     {
       title: "Ornamental Plants",
-      image: "/whatwedo/4.png",
+      image: ornamental,
       description:
         "We nurture ornamental plants that beautify spaces and support biodiversity.",
-    },
-    {
-      title: "Garden Plants",
-      image: "/whatwedo/4.png",
-      description:
-        "Our garden includes a range of flowering and decorative plants ideal for landscaping.",
     },
   ];
 
@@ -58,7 +64,7 @@ function OtherCrops() {
     transition: { duration: 0.3, ease: "easeOut" },
   };
 
-   const scrollVariants = {
+  const scrollVariants = {
     offscreen: { y: 50, opacity: 0 },
     onscreen: {
       y: 0,
@@ -67,9 +73,12 @@ function OtherCrops() {
     },
   };
 
-
   return (
-    <Container as="section" className="mt-5 " aria-labelledby="other-crops-heading">
+    <Container
+      as="section"
+      className="mt-5 "
+      aria-labelledby="other-crops-heading"
+    >
       <Row className="mb-5">
         <Col className="">
           <motion.section
@@ -81,17 +90,15 @@ function OtherCrops() {
               variants={scrollVariants}
               id="crops-heading"
               className="fw-bold"
-              style={{ color: "#294085" }}
+              style={{ color: "#5caf47" }}
             >
-               Other Crops in Our Farm
+              More from Our Fields
             </motion.h2>
           </motion.section>
-         
-         
         </Col>
       </Row>
 
-     <Row className="g-5">
+      <Row className="g-5">
         {services.map((service, index) => (
           <Col lg={6} key={index}>
             <motion.div
@@ -136,7 +143,7 @@ function OtherCrops() {
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
-                        <motion.a
+               <Link to="/rootcultivation">      <motion.a
                           whileHover={{
                             x: 5,
                             transition: { duration: 0.2 },
@@ -147,13 +154,13 @@ function OtherCrops() {
                             borderWidth: "2px",
                             borderRadius: "50px",
                             fontWeight: "500",
-                              border: "1px solid #294085",
-                            backgroundColor:"#294085",
+                            border: "1px solid #294085",
+                            backgroundColor: "#294085",
                             color: "#fff",
                           }}
                         >
                           Learn More →
-                        </motion.a>
+                        </motion.a></Link>   
                       </Card.Body>
                     </Col>
                   </Row>
@@ -162,6 +169,30 @@ function OtherCrops() {
             </motion.div>
           </Col>
         ))}
+      </Row>
+      <Row>
+        <Link to="/morefromharvest">
+          {" "}
+          <motion.a
+            to="/"
+            whileHover={{
+              x: 5,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline text-center mt-5 w-auto m-auto"
+            style={{
+              borderWidth: "2px",
+              borderRadius: "50px",
+              fontWeight: "500",
+              border: "1px solid #294085",
+              backgroundColor: "#294085",
+              color: "#fff",
+            }}
+          >
+            View All →
+          </motion.a>
+        </Link>
       </Row>
     </Container>
   );

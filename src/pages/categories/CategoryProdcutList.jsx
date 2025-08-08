@@ -9,9 +9,11 @@ import ProductCard from "../../components/cards/ProductCard";
 const CategoryProductList = () => {
   const dispatch = useDispatch();
 
-  const { data: categories, loading, error } = useSelector(
-    (state) => state.categoryProducts
-  );
+  const {
+    data: categories,
+    loading,
+    error,
+  } = useSelector((state) => state.categoryProducts);
 
   useEffect(() => {
     dispatch(fetchCategoriesWithProducts());
@@ -21,9 +23,12 @@ const CategoryProductList = () => {
   if (error) return <p className="text-danger text-center">Error: {error}</p>;
 
   return (
-    <main className="padding-horizontal" aria-labelledby="category-products-heading">
+    <main
+      className="padding-horizontal"
+      aria-labelledby="category-products-heading"
+    >
       <div className="padding-top"></div>
-       <div className="padding-top"></div>
+      <div className="padding-top"></div>
       <h1 id="category-products-heading" className="visually-hidden">
         Browse Products by Category
       </h1>

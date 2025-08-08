@@ -29,7 +29,7 @@ function Categories({ data }) {
           </Col>
           <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">
             <div className="view-all-button">
-          <button
+              <button
                 onClick={() => navigate("/whatinfarm")}
                 aria-label="View all farm categories"
               >
@@ -42,34 +42,39 @@ function Categories({ data }) {
       <Row as="section" aria-label="Farm categories">
         {data.map((item, index) => (
           <Col xs={6} md={3} key={index}>
-        <Link to={`/whatinfarm/${item.id}`}> <article
-              className="card-main"
-              aria-label={`Category: ${item.name}`}
-            >
-              <img
-              
-                src={item?.image ? `${whatinfarmsURL}${item.image}` : "/images/fallback.jpg"}
-                alt={`Image of ${item.name}`}
-                className="w-100"
-                loading="lazy"
-              />
+            <Link to={`/whatinfarm/${item.id}`}>
+              {" "}
+              <article
+                className="card-main"
+                aria-label={`Category: ${item.name}`}
+              >
+                <img
+                  src={
+                    item?.image
+                      ? `${whatinfarmsURL}${item.image}`
+                      : "/images/fallback.jpg"
+                  }
+                  alt={`Image of ${item.name}`}
+                  className="w-100"
+                  loading="lazy"
+                />
 
-              <div className="card-overlay" aria-hidden="true">
-                <div className="card-overlay-main">
-                  <div className="card-overlay-head">
-                    <h2>{item.name}</h2>
-                  </div>
-                  <div className="card-overlay-icon">
-                    <img
-                      src="/icons/Arrow up-right-white.png"
-                      alt="View category details"
-                      loading="lazy"
-                    />
+                <div className="card-overlay" aria-hidden="true">
+                  <div className="card-overlay-main">
+                    <div className="card-overlay-head">
+                      <h2>{item.name}</h2>
+                    </div>
+                    <div className="card-overlay-icon">
+                      <img
+                        src="/icons/Arrow up-right-white.png"
+                        alt="View category details"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
-            </Link>   
+              </article>
+            </Link>
 
             <div className="card-name  mt-2">
               <h3>{item.name}</h3>

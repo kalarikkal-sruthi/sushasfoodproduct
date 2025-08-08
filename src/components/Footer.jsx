@@ -1,14 +1,15 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import logo from "../assets/header/log.png";
+
 import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
 import location from "../assets/header/location_on.png";
+import logonew from "../assets/header/logo-new.png";
 
 function Footer() {
   return (
     <div>
-      {" "}
+     
       <div className="padding-top"></div>
       <footer>
         <div className="footer-main">
@@ -18,9 +19,8 @@ function Footer() {
               <Row>
                 <Col xs={6} md={3} className="footer-div">
                   <div className="footer-img">
-                    {" "}
-                    <img src={logo} alt="" />
-
+                   
+                    <img src={logonew} alt="" />
                   </div>
                   <ul>
                     <li>
@@ -29,17 +29,14 @@ function Footer() {
                     </li>
                     <li>
                       <img src={phone} alt="" />
-                     9074 624 607
+                      9074 624 607
                     </li>
- <li>
+                    <li>
                       <img src={phone} alt="" />
-                    sushasfoodproducts.com
+                      sushasfoodproducts.com
                     </li>
-                     <br></br>
-                   <h4>Follow Us</h4>
-                  
-
-
+                    <br></br>
+                    <h4>Follow Us</h4>
                   </ul>
                 </Col>
                 <Col xs={6} md={3} className="footer-div">
@@ -61,26 +58,25 @@ function Footer() {
                 </Col>
                 <Col xs={6} md={3} className="footer-div">
                   <h4>Services</h4>
-                   <ul>
+                  <ul>
                     <li>Shopping Cart</li>
                     <li>Return Policy</li>
                     <li>About Us</li>
                     <br></br>
-                      <h4>Farm Loacation</h4>
+                    <h4>Farm Loacation</h4>
                     <li>
                       <img src={location} alt="" />
                       Nr. Ayyappankavu Vattathani,
-                      
                       <br></br> Pattaruparambu Road K. Puram, <br></br>
                       Tanalur,Pin: 676 307
-                    </li> <br></br>
-                     <h4> Retail Outlet:</h4>
-                     <li>
+                    </li>{" "}
+                    <br></br>
+                    <h4> Retail Outlet:</h4>
+                    <li>
                       <img src={location} alt="" />
-                     Prakash Gas Agency Building
-                      
+                      Prakash Gas Agency Building
                       <br></br> Thazhepalam, Tirur <br></br>
-                      Malappuram Dt., Pin: 676 101 
+                      Malappuram Dt., Pin: 676 101
                     </li>
                   </ul>
                 </Col>

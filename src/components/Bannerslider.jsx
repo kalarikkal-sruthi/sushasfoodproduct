@@ -29,15 +29,11 @@ function Bannerslider({ data }) {
                 className="video"
                 loop
                 muted
-                autoPlay
                 playsInline
                 preload="metadata"
                 aria-label={`Promotional video ${index + 1}`}
               >
-                <source
-                  src={`${videoURL}${item.video}`}
-                  type="video/mp4"
-                />
+                <source src={`${videoURL}${item.video}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
@@ -54,8 +50,8 @@ function Bannerslider({ data }) {
                 </motion.h1>
 
                 <p>
-                  Our work on the farm involves planting, harvesting, and
-                  taking care of animals.
+                  Our work on the farm involves planting, harvesting, and taking
+                  care of animals.
                 </p>
               </div>
             </div>

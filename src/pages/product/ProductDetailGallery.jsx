@@ -29,18 +29,20 @@ const ProductDetailGallery = ({ product }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2 mb-3"
       >
-        <SwiperSlide style={{
-                width: "70%",
-                objectFit: "cover",
-                borderRadius: "13px",
-                backgroundColor: " #6fb449",
-              }}>
-          <figure >
-            <img style={{ width: "60%",margin:'auto'}}
+        <SwiperSlide
+          style={{
+            width: "70%",
+            objectFit: "cover",
+            borderRadius: "13px",
+            backgroundColor: " #6fb449",
+          }}
+        >
+          <figure>
+            <img
+              style={{ width: "60%", margin: "auto" }}
               src={`${productURL}${product.image}`}
               alt={product.product_name || "Product image"}
               loading="lazy"
-              
               onError={(e) => (e.target.src = "/collections/2.png")}
             />
             <figcaption className="visually-hidden">
@@ -59,17 +61,19 @@ const ProductDetailGallery = ({ product }) => {
         className="mySwiper"
         aria-label="Product Thumbnails"
       >
-        <SwiperSlide style={{
-                width: "70%",
-                objectFit: "cover",
-                borderRadius: "13px",
-                backgroundColor: " #6fb449",
-              }}>
-          <img 
+        <SwiperSlide
+          style={{
+            width: "70%",
+            objectFit: "cover",
+            borderRadius: "13px",
+            backgroundColor: " #6fb449",
+          }}
+        >
+          <img
             src={`${productURL}${product.image}`}
             alt={`Thumbnail of ${product.product_name}`}
             loading="lazy"
-            style={{ width: "60%",margin:'auto' , objectFit: "cover" }}
+            style={{ width: "60%", margin: "auto", objectFit: "cover" }}
           />
         </SwiperSlide>
       </Swiper>

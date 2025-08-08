@@ -34,9 +34,7 @@ function UserDetail() {
         className="p-4 border rounded"
         aria-labelledby="profile-section-heading"
       >
-        <h3 id="profile-section-heading" >
-          Profile Details
-        </h3>
+        <h3 id="profile-section-heading">Profile Details</h3>
         <p>
           <strong>Name:</strong> {userdetails.name}
         </p>
@@ -48,7 +46,7 @@ function UserDetail() {
         </p>
 
         <Button
-         variant="outline-dark"
+          variant="outline-dark"
           onClick={() => setShowEditModal(true)}
           aria-label="Edit Profile"
         >
@@ -91,14 +89,9 @@ function UserDetail() {
               />
             </Form.Group>
 
-             <Button
-         variant="outline-dark"
-        
-          aria-label="Login to your account"
-        >
-          Submit
-        </Button>
-         
+            <Button variant="outline-dark" aria-label="Login to your account">
+              Submit
+            </Button>
           </Form>
         </Modal.Body>
         {/* <Modal.Footer>

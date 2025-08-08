@@ -17,6 +17,7 @@ import TestAbout from "../components/TestAbout";
 import WhatWeDo from "../components/WhatWeDo";
 import TestWhatWeDo from "../components/WhatWeDo";
 import ValueAddedProducts from "../components/ValueAddedProducts";
+import Ourstory from "../components/Ourstory";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export default function Home() {
   console.log(data);
   const homeVideoInGallary = data?.homeVideoInGallary || [];
   // const whatInFarms = data?.whatInFarms || [];
-  // const products = data?.products || [];
+  const products = data?.products || [];
   const testimonials = data?.testimonial || [];
   const certificates = data?.certificates || [];
   const videoInstagram = data?.videoInstagram || [];
@@ -53,9 +54,10 @@ export default function Home() {
       </Helmet>
       <Bannerslider data={homeVideoInGallary} />
       <TestAbout />
-        <Certificates data={certificates} />
+      <Ourstory />
+      <Certificates data={certificates} />
       <WhatWeDo />
-      <ValueAddedProducts />
+      <ValueAddedProducts data={products} />
 
       {/* <Organicproducts /> */}
       {/* <Banner data={aboutusImage}/> */}
@@ -66,7 +68,7 @@ export default function Home() {
       <TestAbout /> */}
       <Instagramfeed data={videoInstagram} />
       <Youtubefeed data={videoYoutube} />
-    
+
       {/* <Testimonial /> */}
       <Testimonial data={testimonials} />
     </div>

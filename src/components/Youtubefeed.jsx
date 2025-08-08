@@ -28,7 +28,10 @@ const Youtubefeed = ({ data }) => {
           </Row>
         </header>
 
-        <section aria-label="YouTube video thumbnails carousel" className="mt-4">
+        <section
+          aria-label="YouTube video thumbnails carousel"
+          className="mt-4"
+        >
           <Swiper
             pagination={{ type: "fraction" }}
             spaceBetween={20}

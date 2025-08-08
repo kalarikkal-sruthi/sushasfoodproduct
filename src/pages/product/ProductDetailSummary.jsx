@@ -22,10 +22,12 @@ const ProductDetailSummary = ({ product }) => {
   return (
     <section aria-label="Product Details">
       <header>
-        <div className="heading-main">  <h1 className="mb-3 " style={{ fontSize: "2rem" }}>
-          {product.product_name}
-        </h1></div>
-      
+        <div className="heading-main">
+          {" "}
+          <h1 className="mb-3 " style={{ fontSize: "2rem" }}>
+            {product.product_name}
+          </h1>
+        </div>
       </header>
 
       {product.description && (
@@ -42,9 +44,12 @@ const ProductDetailSummary = ({ product }) => {
           {/* <strong className="text-success fs-4">
             ₹ {product.baseprices[0].offer_price}
           </strong> */}
-       <strong> <span className="text-muted ms-2">
-           ₹ {product.baseprices[0].original_price}
-          </span></strong>    
+          <strong>
+            {" "}
+            <span className="text-muted ms-2">
+              ₹ {product.baseprices[0].original_price}
+            </span>
+          </strong>
           {/* <span className="text-muted ms-2">
             <del>₹ {product.baseprices[0].original_price}</del>
           </span> */}

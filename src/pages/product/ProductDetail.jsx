@@ -55,7 +55,11 @@ const ProductDetail = () => {
 
       <div className="padding-top" />
       <div className="padding-top" />
-      <div className="padding-horizontal" as="section" aria-label="Product Details Section">
+      <div
+        className="padding-horizontal"
+        as="section"
+        aria-label="Product Details Section"
+      >
         <Row className="align-items-start">
           <Col md={5} as="section" aria-label="Product Gallery">
             <ProductDetailGallery product={product} />

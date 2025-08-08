@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWhatWillData } from "../store/whatwillDataSlice";
-import { Row, Col,Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 import { whatinfarmsURL } from "../utils/api";
 
@@ -24,7 +24,7 @@ const WhatInFarmList = () => {
       className="categories padding-horizontal"
       aria-labelledby="categories-heading"
     >
-       <div className="padding-top"></div>
+      <div className="padding-top"></div>
       <div className="padding-top"></div>
       <header className="header-bar">
         <Row className="align-items-center">
@@ -75,14 +75,15 @@ const WhatInFarmList = () => {
               <div className="card-name mt-2">
                 <h3>{item.name}</h3>
                 <p>{item.description?.slice(0, 100)}...</p>
-              
-                <div class="view-all-button" style={{textAlign:'start'}}>
-                <Link
-                  to={`/whatinfarm/${item.id}`}
-                  aria-label={`Read more about ${item.name}`}
-                >
-               <button>View All</button>
-                </Link></div>
+
+                <div class="view-all-button" style={{ textAlign: "start" }}>
+                  <Link
+                    to={`/whatinfarm/${item.id}`}
+                    aria-label={`Read more about ${item.name}`}
+                  >
+                    <button>View All</button>
+                  </Link>
+                </div>
               </div>
             </Col>
           ))

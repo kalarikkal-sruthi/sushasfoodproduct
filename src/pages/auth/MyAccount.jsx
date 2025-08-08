@@ -69,7 +69,6 @@ const Profile = () => {
                 title="My Address"
                 tabClassName="px-3"
               />
-              
             </Tabs>
             <Button
               variant="outline-danger"
@@ -79,10 +78,8 @@ const Profile = () => {
               Logout
             </Button>
           </div>
-  {key === "orders" && <OrderDetails />}
+          {key === "orders" && <OrderDetails />}
           {key === "Address" && <Address />}
-
-        
         </div>
       </section>
     </main>

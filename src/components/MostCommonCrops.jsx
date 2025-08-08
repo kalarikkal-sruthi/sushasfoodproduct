@@ -1,42 +1,48 @@
 import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import coconutimage from "../assets/whatwedo/coconut.jpg";
+import rice from "../assets/whatwedo/ric.webp";
+import jathi from "../assets/whatwedo/jathi.jpg";
+import pepper from "../assets/whatwedo/pepper.jpeg";
+import kuttymulla from "../assets/whatwedo/kuttimulla.jpeg";
+import curryleaves from "../assets/whatwedo/curryleaves.jpg";
 import { Link } from "react-router-dom";
 
 function MostCommonCrops() {
   const services = [
     {
       title: "Rice cultivation",
-      image: "/mostcommon/rice.png",
+      image: rice,
       description:
         "What we do here is Ponmani rice cultivation. We cultivate Ponmani rice here in a completely organic way.",
     },
     {
       title: "Coconut cultivation",
-      image: "/mostcommon/thenge.png",
+      image: coconutimage,
       description:
         "Our family has about 750 coconut trees, and we make value-added products from the coconuts we get from them.",
     },
     {
       title: "Jathi",
-      image: "/public/mostcommon/jathi.jpeg",
+      image: jathi,
       description:
         "We grow Jathi and produce high-quality spices in a sustainable way.",
     },
     {
       title: "Pepper cultivation",
-      image: "/mostcommon/kurumulake.png",
+      image: pepper,
       description:
         "Our pepper cultivation uses organic methods for maximum quality.",
     },
     {
       title: "Kutty Mulla",
-      image: "/whatwedo/4.png",
+      image: kuttymulla,
       description:
         "Kutty Mulla is cultivated for its aromatic and medicinal value.",
     },
     {
       title: "Curry leaves",
-      image: "/whatwedo/4.png",
+      image: curryleaves,
       description: "Fresh curry leaves grown organically for culinary use.",
     },
     // {
@@ -96,9 +102,9 @@ function MostCommonCrops() {
               variants={scrollVariants}
               id="crops-heading"
               className="fw-bold"
-              style={{ color: "#294085" }}
+              style={{ color: "#5caf47" }}
             >
-              Most Common Crops in Our Farm
+              Main Harvests from Our Farm
             </motion.h2>
           </motion.section>
         </Col>
@@ -150,7 +156,7 @@ function MostCommonCrops() {
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
-                        <motion.a
+                  <Link to="/ricecultivation">     <motion.a
                           whileHover={{
                             x: 5,
                             transition: { duration: 0.2 },
@@ -162,12 +168,12 @@ function MostCommonCrops() {
                             borderRadius: "50px",
                             fontWeight: "500",
                             border: "1px solid #294085",
-                            backgroundColor:"#294085",
+                            backgroundColor: "#294085",
                             color: "#fff",
                           }}
                         >
                           Learn More →
-                        </motion.a>
+                        </motion.a></Link> 
                       </Card.Body>
                     </Col>
                   </Row>
@@ -176,6 +182,30 @@ function MostCommonCrops() {
             </motion.div>
           </Col>
         ))}
+      </Row>
+      <Row>
+        <Link to="/mainharvestfromfarm">
+          {" "}
+          <motion.a
+            to=""
+            whileHover={{
+              x: 5,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline text-center mt-5 w-auto m-auto"
+            style={{
+              borderWidth: "2px",
+              borderRadius: "50px",
+              fontWeight: "500",
+              border: "1px solid #294085",
+              backgroundColor: "#294085",
+              color: "#fff",
+            }}
+          >
+            View All →
+          </motion.a>
+        </Link>
       </Row>
 
       {/* <Row className="mt-5">
