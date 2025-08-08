@@ -1,66 +1,212 @@
-// components/OrderCard.jsx
+
+
+// src/components/order/OrderCard.jsx
 import React from "react";
-import { Card, Dropdown, Button } from "react-bootstrap";
+import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
 
 const OrderCard = ({ order }) => {
-  if (!order) {
-    return null; // could also be a skeleton loader
-  }
+  // Dummy data for now
+  const products = [
+    {
+      id: 1,
+      name: "Hair Care Oil",
+      variant: "250 ml",
+      qty: 1,
+      price: 509,
+      oldPrice: 509,
+      image: "orders/oil-1.png", // public/orders/oil-1.png
+    },
+    {
+      id: 2,
+      name: "Skin Care Oil",
+      variant: "250 ml",
+      qty: 1,
+      price: 509,
+      oldPrice: 509,
+      image: "orders/oil-2.png", // public/orders/oil-2.png
+    },
+  ];
 
   return (
-    <Card className="mb-3 shadow-sm">
+    <Card className="mb-4">
+      {/* Header */}
       <Card.Header
-        style={{
-          backgroundColor: "#fde7c1",
-          padding: "0.5rem 0.75rem"
-        }}
+        style={{ backgroundColor: "#fde7c1", fontWeight: "bold" }}
+        className="text-uppercase"
       >
-        <div className="d-flex align-items-center" style={{ gap: "0.8rem", width: "100%" }}>
-          <div style={{ minWidth: 160 }} className="text-nowrap">
-            <small className="text-uppercase fw-bold d-block">Order placed at</small>
-            <div className="fw-bold">{order?.date}</div>
-          </div>
-
-          <div style={{ minWidth: 110 }} className="text-nowrap">
-            <small className="text-uppercase fw-bold d-block">Total</small>
-            <div className="fw-bold">{order?.total}</div>
-          </div>
-
-          <div style={{ minWidth: 170 }} className="text-nowrap">
-            <small className="text-uppercase fw-bold d-block">Ship to</small>
+        <Row className="align-items-center">
+          <Col>
+            <small>ORDER PLACED</small>
+            <div>{order?.date || "20 October 2024"}</div>
+          </Col>
+          <Col>
+            <small>TOTAL</small>
+            <div>₹{order?.total || "519.00"}</div>
+          </Col>
+          <Col>
+            <small>SHIP TO</small>
             <Dropdown>
-              <Dropdown.Toggle variant="light" size="sm" className="py-0 px-2">
-                {order?.shipTo}
+              <Dropdown.Toggle
+                variant="link"
+                className="p-0"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {order?.shipTo || "Customer Name"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                {order?.addresses?.map((a, i) => (
-                  <Dropdown.Item key={i}>{a}</Dropdown.Item>
-                ))}
+                <Dropdown.Item>Address 1</Dropdown.Item>
+                <Dropdown.Item>Address 2</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </div>
+          </Col>
 
-          <div className="ms-auto text-end" style={{ minWidth: 180 }}>
-            <div className="fw-bold text-uppercase">Order #{order?.id}</div>
-            <div className="mt-1 d-flex justify-content-end" style={{ gap: "0.5rem" }}>
-              <Button variant="outline-primary" size="sm">View order details</Button>
-              <Button variant="outline-secondary" size="sm">Invoice</Button>
+          {/* Rightmost section */}
+          <Col className="text-end">
+            <small>ORDER #</small>
+            <div>{order?.id || "4545"}</div>
+            <div className="mt-1">
+              <Button
+                variant="outline-secondary"
+                size="sm"
+                className="me-2"
+                style={{ fontSize: "0.75rem" }}
+              >
+                View Order Details
+              </Button>
+              <Button
+                variant="outline-secondary"
+                size="sm"
+                style={{ fontSize: "0.75rem" }}
+              >
+                Invoice
+              </Button>
             </div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Card.Header>
 
-      <Card.Body style={{ padding: "0.75rem" }}>
-        {order?.items?.length ? (
-          order.items.map((it, idx) => (
-            <div key={idx} className="mb-2">{it}</div>
-          ))
-        ) : (
-          <div>No items</div>
-        )}
+      {/* Body */}
+      <Card.Body>
+        {/* Delivered date */}
+        <Row className="mb-3">
+          <Col>
+            <strong>Delivered On Date …/…/….</strong>
+          </Col>
+        </Row>
+
+        {/* Product List */}
+        <Row>
+          <Col md={8}>
+            {products.map((prod) => (
+              <Row key={prod.id} className="align-items-center mb-3">
+                <Col xs={2}>
+                  <img
+                    src={prod.image}
+                    alt={prod.name}
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </Col>
+                <Col>
+                  <div>{prod.name}</div>
+                  <small className="text-muted">{prod.variant}</small>{" "}
+                  <span>{prod.qty} Piece</span>
+                  <div>₹{prod.price}</div>
+                  {prod.oldPrice && prod.oldPrice !== prod.price && (
+                    <small className="text-muted text-decoration-line-through">
+                      ₹{prod.oldPrice}
+                    </small>
+                  )}
+                </Col>
+              </Row>
+            ))}
+          </Col>
+
+          {/* Buttons for all products */}
+          <Col
+            md={4}
+            className="d-flex flex-column align-items-end justify-content-start gap-2"
+          >
+           <Button
+             style={{
+                    backgroundColor: "#fde7c1",
+                    border: "none",
+                    color: "#fff",
+                    borderRadius: "20px",
+                    padding: "6px 20px",
+                    fontWeight: "bold",
+                    color:"#525252ff"
+                }}
+                >
+                Return Item
+                </Button>   
+
+                 <Button
+             style={{
+                    backgroundColor: "#fde7c1",
+                    border: "none",
+                    color: "#fff",
+                    borderRadius: "20px",
+                    padding: "6px 20px",
+                    fontWeight: "bold",
+                    color:"#525252ff"
+                }}
+                >
+                 Write Product Review
+                </Button>   
+
+               
+
+                     <Button
+             style={{
+                    backgroundColor: "#0c8320ff",
+                    border: "none",
+                    color: "#fff",
+                    borderRadius: "20px",
+                    padding: "6px 20px",
+                    fontWeight: "bold",
+                    color:"#ffffffff"
+                }}
+                >
+               
+                Reorder
+                </Button>  
+
+
+          </Col>
+        </Row>
+
+   {/* Separation line above Cancel Order */}
+<hr className="mt-3 mb-3" style={{ borderColor: "#929292ff" }} />
+
+{/* Cancel Order row with return eligible text */}
+<Row className="align-items-center">
+  <Col className="text-start">
+    <small className="text-danger">
+      Return eligible only before shipping
+    </small>
+  </Col>
+  <Col className="text-end">
+    <Button
+      style={{
+        backgroundColor: "#fc7e44ff",
+        border: "none",
+        color: "#222222ff",
+        borderRadius: "20px",
+        padding: "6px 20px",
+        fontWeight: "bold",
+      }}
+    >
+      Cancel Order
+    </Button>
+  </Col>
+</Row>
+
       </Card.Body>
     </Card>
   );
 };
 
 export default OrderCard;
+
+
+
