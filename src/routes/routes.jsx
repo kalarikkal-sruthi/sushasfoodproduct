@@ -11,15 +11,15 @@ import CartPage from "../pages/CartPage";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
 import ProductsByCategory from "../pages/categories/ProductsByCategory";
 import WhatInFarmDetail from "../pages/WhatInFarmDetail";
-<<<<<<< HEAD
+
 import OrderPage from "../pages/orders/OrderPage";
-=======
+
 import Mainharvest from "../components/Mainharvest";
 import Morefromharvest from "../components/Morefromharvest";
 import RiceCulivation from "../components/RiceCulivation";
 import RooteCultivation from "../components/RooteCultivation";
 import Dripiriggationsystem from "../components/Dripiriggationsystem";
->>>>>>> a21350b (what we do completed)
+
 
 const AppRoutes = () => {
   return (
@@ -44,11 +44,6 @@ const AppRoutes = () => {
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<CartPage />} />
-<<<<<<< HEAD
-        <Route path="/order" element={<OrderPage />} />
-       
-=======
->>>>>>> a21350b (what we do completed)
       </Route>
     </Routes>
   );

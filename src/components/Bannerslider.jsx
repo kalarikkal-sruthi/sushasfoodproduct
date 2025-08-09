@@ -30,6 +30,7 @@ function Bannerslider({ data }) {
                 loop
                 muted
                 playsInline
+                Autoplay
                 preload="metadata"
                 aria-label={`Promotional video ${index + 1}`}
               >
