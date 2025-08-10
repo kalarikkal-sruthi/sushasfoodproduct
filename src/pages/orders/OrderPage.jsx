@@ -1,143 +1,15 @@
-
-
-// // pages/order/OrderPage.jsx
-// import React, { useState } from "react";
-// import { Container, Row, Col, Button } from "react-bootstrap";
-// import OrderCard from "../../components/order/OrderCard";
-// import AddressForm from "../../components/order/AddressForm";
-
-// const OrderPage = () => {
-//   const [activeTab, setActiveTab] = useState("orders");
-
-//   // Dummy data
-//   const orders = [
-//     {
-//       id: 4545,
-//       date: "Aug 5, 2025",
-//       total: "$120",
-//       shipTo: "John Doe",
-//       addresses: ["John Doe - Home", "John Doe - Office"],
-//       items: ["Product A", "Product B"]
-//     },
-//     {
-//       id: 4546,
-//       date: "Aug 6, 2025",
-//       total: "$250",
-//       shipTo: "Jane Smith",
-//       addresses: ["Jane Smith - Home"],
-//       items: ["Product X"]
-//     }
-//   ];
-
-//   return (
-//     <Container className="p-3 my-5">
-//       <div className="padding-top"></div>
-//       {/* Top Row */}
-//       <Row className="align-items-center mb-3">
-//         <Col>
-//           <h4>Hello, Username</h4>
-//         </Col>
-//         <Col className="text-end">
-//          <Button
-//   style={{
-//     backgroundColor: "#fff",
-//     color: "#527e3e",
-//     border: "none",
-//     boxShadow: "none"
-//   }}
-// >
-//   Logout
-// </Button>
-
-//         </Col>
-//       </Row>
-
-//       {/* Second Row */}
-//       <Row className="g-4">
-//         {/* Sidebar */}
-//         <Col xs={2} className="d-flex flex-column gap-2 p-0">
-//         <Button
-//   className={activeTab === "orders" ? "custom-active" : ""}
-//   onClick={() => setActiveTab("orders")}
-//   style={{
-//     backgroundColor: activeTab === "orders" ? "#86b86ff6" : "#fff",
-//     color: activeTab === "orders" ? "#fff" : "#736e6e",
-//     fontWeight: "bold",
-//     border: "none",
-//     textAlign: "left"
-//   }}
-// >
-//   Orders
-//   <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
-//     View your orders
-//   </div>
-// </Button>
-
-// <Button
-//   className={activeTab === "address" ? "custom-active" : ""}
-//   onClick={() => setActiveTab("address")}
-//   style={{
-//     backgroundColor: activeTab === "address" ? "#86b86ff6" : "#fff",
-//     color: activeTab === "address" ? "#fff" : "#736e6e",
-//     fontWeight: "bold",
-//     border: "none",
-//     textAlign: "left"
-//   }}
-// >
-//   Address
-//   <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
-//     Manage address
-//   </div>
-// </Button>
-
-//         </Col>
-
-//         {/* Main content */}
-//         <Col xs={8}>
-//           {activeTab === "orders" &&
-//             orders.map((order) => (
-//               <OrderCard key={order.id} order={order} />
-//             ))}
-
-//           {activeTab === "address" && <AddressForm />}
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default OrderPage;
-
-
-// src/pages/order/OrderPage.jsx
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
 import OrderCard from "../../components/order/OrderCard";
+import AddressForm from "../../components/order/AddressForm"; // Adjust import path
 
 const OrderPage = () => {
   const [activeTab, setActiveTab] = useState("orders");
+  const [addressMode, setAddressMode] = useState("list"); // list | add | edit
+  const [editData, setEditData] = useState(null);
 
-  // Dummy order data
-  const orders = [
-    {
-      id: 4545,
-      date: "Aug 5, 2025",
-      total: "$120",
-      shipTo: "John Doe",
-      items: ["Product A", "Product B"]
-    },
-    {
-      id: 4546,
-      date: "Aug 6, 2025",
-      total: "$250",
-      shipTo: "Jane Smith",
-      items: ["Product X"]
-    }
-  ];
-
-  // Dummy address data
-  const addresses = [
+  const [addresses, setAddresses] = useState([
     {
       id: 1,
       name: "John Doe",
@@ -160,7 +32,22 @@ const OrderPage = () => {
       country: "USA",
       isDefault: false
     }
+  ]);
+
+  const orders = [
+    { id: 4545, date: "Aug 5, 2025", total: "$120", shipTo: "John Doe" },
+    { id: 4546, date: "Aug 6, 2025", total: "$250", shipTo: "Jane Smith" }
   ];
+
+  const handleSaveAddress = (form) => {
+    if (addressMode === "add") {
+      setAddresses([...addresses, { id: Date.now(), ...form }]);
+    } else if (addressMode === "edit") {
+      setAddresses(addresses.map(addr => addr.id === editData.id ? { ...addr, ...form } : addr));
+    }
+    setAddressMode("list");
+    setEditData(null);
+  };
 
   const renderAddressCard = (address) => (
     <Card className="p-3 h-100">
@@ -172,7 +59,10 @@ const OrderPage = () => {
       </p>
       <p className="mb-2">{address.country}</p>
       <div className="d-flex justify-content-between">
-        <Button variant="link" size="sm" className="p-0">
+        <Button variant="link" size="sm" className="p-0" onClick={() => {
+          setEditData(address);
+          setAddressMode("edit");
+        }}>
           Edit
         </Button>
         <Button variant="link" size="sm" className="p-0 text-danger">
@@ -186,6 +76,7 @@ const OrderPage = () => {
     <Card
       className="p-3 h-100 d-flex align-items-center justify-content-center text-center border-2 border-dashed"
       style={{ cursor: "pointer", minHeight: "150px" }}
+      onClick={() => setAddressMode("add")}
     >
       <Plus size={40} className="mb-2 text-success" />
       <span className="fw-bold">Add New Address</span>
@@ -194,12 +85,9 @@ const OrderPage = () => {
 
   const renderAddressGrid = () => {
     const rows = [];
-
     for (let i = 0; i < addresses.length; i++) {
       const address = addresses[i];
-
       if (i % 2 === 0) {
-        // Row starts with Add card if first address
         if (i === 0) {
           rows.push(
             <Row key={`row-${i}`} className="mb-4 g-3">
@@ -217,30 +105,16 @@ const OrderPage = () => {
         }
       }
     }
-
     return rows;
   };
 
   return (
     <Container className="p-3 my-5">
-      <div className="padding-top"></div>
-
       {/* Top Row */}
       <Row className="align-items-center mb-3">
-        <Col>
-          <h4>Hello, Username</h4>
-        </Col>
+        <Col><h4>Hello, Username</h4></Col>
         <Col className="text-end">
-          <Button
-            style={{
-              backgroundColor: "#fff",
-              color: "#527e3e",
-              border: "none",
-              boxShadow: "none"
-            }}
-          >
-            Logout
-          </Button>
+          <Button style={{ backgroundColor: "#fff", color: "#527e3e", border: "none" }}>Logout</Button>
         </Col>
       </Row>
 
@@ -249,10 +123,9 @@ const OrderPage = () => {
         {/* Sidebar */}
         <Col xs={2} className="d-flex flex-column gap-2 p-0">
           <Button
-            className={activeTab === "orders" ? "custom-active" : ""}
-            onClick={() => setActiveTab("orders")}
+            onClick={() => { setActiveTab("orders"); setAddressMode("list"); }}
             style={{
-              backgroundColor: activeTab === "orders" ? "#86b86ff6" : "#fff",
+              backgroundColor: activeTab === "orders" ? "#294085" : "#fff",
               color: activeTab === "orders" ? "#fff" : "#736e6e",
               fontWeight: "bold",
               border: "none",
@@ -260,16 +133,13 @@ const OrderPage = () => {
             }}
           >
             Orders
-            <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
-              View your orders
-            </div>
+            <div style={{ fontSize: "0.8rem" }}>View your orders</div>
           </Button>
 
           <Button
-            className={activeTab === "address" ? "custom-active" : ""}
-            onClick={() => setActiveTab("address")}
+            onClick={() => { setActiveTab("address"); setAddressMode("list"); }}
             style={{
-              backgroundColor: activeTab === "address" ? "#86b86ff6" : "#fff",
+              backgroundColor: activeTab === "address" ? "#294085" : "#fff",
               color: activeTab === "address" ? "#fff" : "#736e6e",
               fontWeight: "bold",
               border: "none",
@@ -277,20 +147,28 @@ const OrderPage = () => {
             }}
           >
             Address
-            <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
-              Manage address
-            </div>
+            <div style={{ fontSize: "0.8rem" }}>Manage address</div>
           </Button>
         </Col>
 
         {/* Main content */}
         <Col xs={8}>
           {activeTab === "orders" &&
-            orders.map((order) => (
-              <OrderCard key={order.id} order={order} />
-            ))}
+            orders.map(order => <OrderCard key={order.id} order={order} />)
+          }
 
-          {activeTab === "address" && renderAddressGrid()}
+          {activeTab === "address" && (
+            addressMode === "list"
+              ? renderAddressGrid()
+              : <AddressForm
+                  initialData={addressMode === "edit" ? editData : {}}
+                  onSubmit={handleSaveAddress}
+                  onCancel={() => {
+                    setAddressMode("list");
+                    setEditData(null);
+                  }}
+                />
+          )}
         </Col>
       </Row>
     </Container>
