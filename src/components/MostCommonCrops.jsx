@@ -11,40 +11,65 @@ import { Link } from "react-router-dom";
 function MostCommonCrops() {
   const services = [
     {
-      title: "Rice cultivation",
-      image: rice,
-      description:
-        "What we do here is Ponmani rice cultivation. We cultivate Ponmani rice here in a completely organic way.",
-    },
-    {
-      title: "Coconut cultivation",
+      title: "Coconut cultivation(തെങ്ങ് കൃഷി)",
       image: coconutimage,
       description:
         "Our family has about 750 coconut trees, and we make value-added products from the coconuts we get from them.",
     },
     {
-      title: "Jathi",
+      title: "Rice cultivation(നെൽകൃഷി)",
+      image: rice,
+      description:
+        "What we do here is Ponmani rice cultivation. We cultivate Ponmani rice here in a completely organic way.",
+    },
+    
+    {
+      title: "Nutmeg cultivation(ജാതിക്ക കൃഷി)",
       image: jathi,
       description:
         "We grow Jathi and produce high-quality spices in a sustainable way.",
     },
     {
-      title: "Pepper cultivation",
+      title: "Pepper cultivation(കുരുമുളക് കൃഷി)",
       image: pepper,
       description:
         "Our pepper cultivation uses organic methods for maximum quality.",
     },
     {
-      title: "Kutty Mulla",
+      title: "Kutty Mulla(കുട്ടി മുല്ല)",
       image: kuttymulla,
       description:
         "Kutty Mulla is cultivated for its aromatic and medicinal value.",
     },
     {
-      title: "Curry leaves",
+      title: "Curry leaves(കറിവേപ്പില)",
       image: curryleaves,
       description: "Fresh curry leaves grown organically for culinary use.",
     },
+    {
+      title: "Cultivation of gourd(കൂവ കൃഷി)",
+      image: curryleaves,
+      description: "Fresh curry leaves grown organically for culinary use.",
+    },
+     {
+      title: "Sesame cultivation(എള്ള് കൃഷി)",
+      image: jathi,
+      description:
+        "We grow Jathi and produce high-quality spices in a sustainable way.",
+    },
+    {
+      title: "Lemon cultivation(ചെറുനാരങ്ങ കൃഷി)",
+      image: pepper,
+      description:
+        "Our pepper cultivation uses organic methods for maximum quality.",
+    },
+    {
+      title: "Cultivation of chillies(മുളക് കൃഷി)",
+      image: kuttymulla,
+      description:
+        "Kutty Mulla is cultivated for its aromatic and medicinal value.",
+    },
+    
     // {
     //   title: "Pepper cultivation",
     //   image: "/whatwedo/3.png",

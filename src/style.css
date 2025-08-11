@@ -327,6 +327,9 @@
 .product-collection-image {
 
   cursor: pointer;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
 }
 
 .product-collection-image img:hover {
@@ -356,19 +359,22 @@
 }
 
 .product-collection-image h2 {
-  font-size: 16px;
+  font-size: 24px;
   margin: 0px 0px 10px 0px;
-  color: #3f69e2;
+  color: #000;
 }
-
+.product-collection-image p{
+  font-size: 16px;
+}
 .product-collection-image img {
-  width: 100%;
-  border-radius: 13px;
-  background: #6fb449;
-  padding: 26px;
-  height: 330px;
+  width: 50%;
+  border-radius: 12px;
+  /* background: #6fb449; */
+  /* padding: 26px; */
+  /* height: 330px; */
   object-fit: contain;
-  margin-bottom: 20px;
+  margin: auto;
+  /* margin-bottom: 20px; */
 }
 
 

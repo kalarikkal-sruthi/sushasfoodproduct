@@ -40,7 +40,7 @@ const WhatWeDo = () => {
           <Row>
             <MostCommonCrops />
             <OtherCrops />
-            <OtherFarmActivities />
+            {/* <OtherFarmActivities /> */}
           </Row>
         </section>
       </Container>

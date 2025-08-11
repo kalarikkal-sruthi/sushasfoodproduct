@@ -1,6 +1,13 @@
-import React, { useState } from "react";
-
-import { Row, Col, Tabs, Tab, Button, Modal, Form } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Tabs,
+  Tab,
+  Button,
+  Modal,
+  Form,
+  Container,
+} from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authSlice";
@@ -8,14 +15,13 @@ import { useNavigate } from "react-router-dom";
 
 import OrderDetails from "../../components/auth/OrderDetails";
 import Address from "../../components/auth/Address";
+import OrderPage from "../orders/OrderPage";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
-
-  const [key, setKey] = useState("profile");
 
   const handleLogout = () => {
     dispatch(logout());
@@ -32,56 +38,46 @@ const Profile = () => {
         />
       </Helmet>
 
-      <div className="padding-top"></div>
-      <div className="padding-top"></div>
-      <section
-        className="padding-horizontal"
-        aria-labelledby="profile-page-heading"
-      >
-        <header className="header-bar">
+      <Container className="mt-5 pt-5">
+        <section
+          aria-labelledby="myaccount-userdetail-profiledetails"
+          className="mt-5 mb-5"
+        >
+          <header>
+            <Row>
+              <Col>
+                <h2 className="fw-bold" style={{ color: "#294085" }}>
+                  My Account
+                </h2>
+              </Col>
+            </Row>
+          </header>
+
           <Row>
-            <Col xs={12} className="heading-main-div ">
-              <div className="heading-main">
-                <h1>My Account</h1>
+            <div className=" ">
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <Col>
+                  <h4>Hello, Username</h4>
+                </Col>
+                <Col className="text-end">
+                  <Button
+                    variant="outline-danger"
+                    onClick={handleLogout}
+                    aria-label="Logout"
+                  >
+                    Logout
+                  </Button>
+                </Col>
               </div>
+            </div>
+          </Row>
+          <Row>
+            <Col>
+              <OrderPage />
             </Col>
           </Row>
-        </header>
-
-        <div className=" ">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <Tabs
-              id="account-tabs"
-              activeKey={key}
-              onSelect={(k) => setKey(k)}
-              className="mb-0"
-              role="tablist"
-            >
-              <Tab
-                variant="outline-danger"
-                eventKey="orders"
-                title="My Orders"
-                tabClassName="px-3"
-              />
-              <Tab
-                variant="outline-danger"
-                eventKey="Address"
-                title="My Address"
-                tabClassName="px-3"
-              />
-            </Tabs>
-            <Button
-              variant="outline-danger"
-              onClick={handleLogout}
-              aria-label="Logout"
-            >
-              Logout
-            </Button>
-          </div>
-          {key === "orders" && <OrderDetails />}
-          {key === "Address" && <Address />}
-        </div>
-      </section>
+        </section>
+      </Container>
     </main>
   );
 };

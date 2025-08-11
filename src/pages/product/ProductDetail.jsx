@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
@@ -7,8 +7,10 @@ import ProductDetailGallery from "./ProductDetailGallery";
 import ProductDetailSummary from "./ProductDetailSummary";
 import { fetchProductById } from "../../store/ProductSlice";
 
+
 const ProductDetail = () => {
   const { id } = useParams();
+ 
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
 

@@ -51,7 +51,7 @@ const TestAbout = () => {
                       variants={itemVariants}
                       style={{ color: "#294085" }}
                     >
-                      About Susha's Prakash
+                      About Susha's Prakash Farm
                     </motion.h1>
                     <motion.p
                       className="lead text-muted"

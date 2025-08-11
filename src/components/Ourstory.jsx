@@ -72,7 +72,7 @@ const Ourstory = () => {
                     <p>
                      This organic was created in 2010. Organi Farm is located on a 11-acre inherited land. Active in farming for the past 15 years.During this period, Susha Organic Farm has received a lot of attention and recognition.We have also faced many adverse situations.
                  
-                 With all that in overcome, the farm is now moving forward well. 750 coconut trees are being scientifically cultivated on 11 acres of land. In addition, pumpkin, ginger, yam, yam, cocoyam, and black pepper are being cultivated as intercrops.In addition, 35 Indian breeds of cows are raised. Increasing income through fish farming, beekeeping, and poultry farming .A large biogas plant has been set up using farm waste.
+                 With all that in overcome, the farm is now moving forward well. 750 coconut trees are being scientifically cultivated on 11 acres of land. In addition, pumpkin, ginger,  yam, cocoyam, and black pepper(മത്തങ്ങ, ഇഞ്ചി, ചേന, കുരുമുളക്) are being cultivated as intercrops.In addition, 35 Indian breeds of cows are raised. Increasing income through fish farming, beekeeping, and poultry farming .A large biogas plant has been set up using farm waste.
                Additionally, the waste is composted and the elements needed by plants are recycled.Value added products are made using the produce from the farms.  Sushars Food was established to provide more value to value-added products.All licenses such as FSSAI (State & Center License), Udayam Registration, Export and Packing Certificate, etc. are in good standing.   </p> </article>
                 </motion.div>
               </motion.div>

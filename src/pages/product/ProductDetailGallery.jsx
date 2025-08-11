@@ -4,12 +4,14 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { useLocation } from "react-router-dom";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { productURL } from "../../utils/api";
 
 const ProductDetailGallery = ({ product }) => {
+   const location =useLocation()
   console.log(product);
-
+  const bgColor = location.state?.bgColor || "#ffffff";
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   // const productImage = product?.product_image
@@ -34,11 +36,11 @@ const ProductDetailGallery = ({ product }) => {
             width: "70%",
             objectFit: "cover",
             borderRadius: "13px",
-            backgroundColor: " #6fb449",
-          }}
+          background: bgColor }}
         >
           <figure>
             <img
+              
               style={{ width: "60%", margin: "auto" }}
               src={`${productURL}${product.image}`}
               alt={product.product_name || "Product image"}
@@ -66,7 +68,7 @@ const ProductDetailGallery = ({ product }) => {
             width: "70%",
             objectFit: "cover",
             borderRadius: "13px",
-            backgroundColor: " #6fb449",
+            background: bgColor 
           }}
         >
           <img

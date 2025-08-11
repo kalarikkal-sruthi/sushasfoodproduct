@@ -12,41 +12,83 @@ import ornamental from "../assets/otherfarmcrops/ornamentalplants.webp";
 function OtherCrops() {
   const services = [
     {
-      title: "Root Vegetables",
+      title: "Tubers(കിഴങ്ങു വർഗ്ഗങ്ങൾ)",
       image: root,
       description:
         "We cultivate root vegetables and traditional spices organically using sustainable practices.",
     },
     {
-      title: "Spices",
+      title: "Spices(സുഗന്ധവ്യഞ്ജനങ്ങൾ)",
       image: spices,
       description:
         "We cultivate root vegetables and traditional spices organically using sustainable practices.",
     },
     {
-      title: "Fruits",
+      title: "Fruits(പഴവർഗ്ഗങ്ങൾ)",
       image: fruits,
       description:
         "Our fruit cultivation includes mangoes, bananas, papayas, and other seasonal produce.",
     },
     {
-      title: "Herbs",
+      title: "Herbs(ഔഷധസസ്യങ്ങൾ)",
       image: herbs,
       description:
         "We grow herbs like tulsi, mint, and lemongrass, known for their medicinal properties.",
     },
     {
-      title: "Vegetables",
+      title: "Vegetables(പച്ചക്കറികൾ)",
       image: veg,
       description:
         "Our vegetable garden features seasonal greens and organically grown produce.",
     },
     {
-      title: "Ornamental Plants",
+      title: "Ornamental Plants(അലങ്കാര സസ്യങ്ങൾ)",
       image: ornamental,
       description:
         "We nurture ornamental plants that beautify spaces and support biodiversity.",
     },
+     {
+      title: "Garden plants(പൂന്തോട്ട ചെടികൾ)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    },
+
+     {
+      title: "Aquatic plants(ജലസസ്യങ്ങൾ)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    },  {
+      title: "Nursery(നഴ്സറി)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    },
+       {
+      title: " Dairy farm(ഡയറി ഫാം)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    },
+
+     {
+      title: "Poultry Farm(കോഴി ഫാം)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    }, {
+      title: "Bee keeping(തേനീച്ച വളർത്തൽ)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    }, {
+      title: "Fish Farming(മത്സ്യകൃഷി)",
+      image: ornamental,
+      description:
+        "We nurture ornamental plants that beautify spaces and support biodiversity.",
+    },
+  
   ];
 
   const cardVariants = {

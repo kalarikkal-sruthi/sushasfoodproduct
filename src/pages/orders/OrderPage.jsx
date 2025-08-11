@@ -19,7 +19,7 @@ const OrderPage = () => {
       state: "NY",
       zip: "10001",
       country: "USA",
-      isDefault: true
+      isDefault: true,
     },
     {
       id: 2,
@@ -30,20 +30,24 @@ const OrderPage = () => {
       state: "CA",
       zip: "94105",
       country: "USA",
-      isDefault: false
-    }
+      isDefault: false,
+    },
   ]);
 
   const orders = [
     { id: 4545, date: "Aug 5, 2025", total: "$120", shipTo: "John Doe" },
-    { id: 4546, date: "Aug 6, 2025", total: "$250", shipTo: "Jane Smith" }
+    { id: 4546, date: "Aug 6, 2025", total: "$250", shipTo: "Jane Smith" },
   ];
 
   const handleSaveAddress = (form) => {
     if (addressMode === "add") {
       setAddresses([...addresses, { id: Date.now(), ...form }]);
     } else if (addressMode === "edit") {
-      setAddresses(addresses.map(addr => addr.id === editData.id ? { ...addr, ...form } : addr));
+      setAddresses(
+        addresses.map((addr) =>
+          addr.id === editData.id ? { ...addr, ...form } : addr
+        )
+      );
     }
     setAddressMode("list");
     setEditData(null);
@@ -59,10 +63,15 @@ const OrderPage = () => {
       </p>
       <p className="mb-2">{address.country}</p>
       <div className="d-flex justify-content-between">
-        <Button variant="link" size="sm" className="p-0" onClick={() => {
-          setEditData(address);
-          setAddressMode("edit");
-        }}>
+        <Button
+          variant="link"
+          size="sm"
+          className="p-0"
+          onClick={() => {
+            setEditData(address);
+            setAddressMode("edit");
+          }}
+        >
           Edit
         </Button>
         <Button variant="link" size="sm" className="p-0 text-danger">
@@ -109,27 +118,40 @@ const OrderPage = () => {
   };
 
   return (
-    <Container className="p-3 my-5">
+    <Container>
       {/* Top Row */}
-      <Row className="align-items-center mb-3">
-        <Col><h4>Hello, Username</h4></Col>
-        <Col className="text-end">
-          <Button style={{ backgroundColor: "#fff", color: "#527e3e", border: "none" }}>Logout</Button>
+      {/* <Row className="align-items-center mb-3">
+        <Col>
+          <h4>Hello, Username</h4>
         </Col>
-      </Row>
+        <Col className="text-end">
+          <Button
+            style={{
+              backgroundColor: "#fff",
+              color: "#527e3e",
+              border: "none",
+            }}
+          >
+            Logout
+          </Button>
+        </Col>
+      </Row> */}
 
       {/* Second Row */}
       <Row className="g-4">
         {/* Sidebar */}
         <Col xs={2} className="d-flex flex-column gap-2 p-0">
           <Button
-            onClick={() => { setActiveTab("orders"); setAddressMode("list"); }}
+            onClick={() => {
+              setActiveTab("orders");
+              setAddressMode("list");
+            }}
             style={{
               backgroundColor: activeTab === "orders" ? "#294085" : "#fff",
               color: activeTab === "orders" ? "#fff" : "#736e6e",
               fontWeight: "bold",
               border: "none",
-              textAlign: "left"
+              textAlign: "left",
             }}
           >
             Orders
@@ -137,13 +159,16 @@ const OrderPage = () => {
           </Button>
 
           <Button
-            onClick={() => { setActiveTab("address"); setAddressMode("list"); }}
+            onClick={() => {
+              setActiveTab("address");
+              setAddressMode("list");
+            }}
             style={{
               backgroundColor: activeTab === "address" ? "#294085" : "#fff",
               color: activeTab === "address" ? "#fff" : "#736e6e",
               fontWeight: "bold",
               border: "none",
-              textAlign: "left"
+              textAlign: "left",
             }}
           >
             Address
@@ -154,21 +179,21 @@ const OrderPage = () => {
         {/* Main content */}
         <Col xs={8}>
           {activeTab === "orders" &&
-            orders.map(order => <OrderCard key={order.id} order={order} />)
-          }
+            orders.map((order) => <OrderCard key={order.id} order={order} />)}
 
-          {activeTab === "address" && (
-            addressMode === "list"
-              ? renderAddressGrid()
-              : <AddressForm
-                  initialData={addressMode === "edit" ? editData : {}}
-                  onSubmit={handleSaveAddress}
-                  onCancel={() => {
-                    setAddressMode("list");
-                    setEditData(null);
-                  }}
-                />
-          )}
+          {activeTab === "address" &&
+            (addressMode === "list" ? (
+              renderAddressGrid()
+            ) : (
+              <AddressForm
+                initialData={addressMode === "edit" ? editData : {}}
+                onSubmit={handleSaveAddress}
+                onCancel={() => {
+                  setAddressMode("list");
+                  setEditData(null);
+                }}
+              />
+            ))}
         </Col>
       </Row>
     </Container>
