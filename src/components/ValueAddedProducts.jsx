@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
-import { categoryUrl } from "../utils/api";
+// import { categoryUrl } from "../utils/api";
+import essential from "../assets/essential/1.png"
 
 // const services = [
 //   {
@@ -102,7 +103,7 @@ const ValueAddedProducts = () => {
         <Link
           to={`/productsbycategory/${category.id}`}
          style={{
-              background: bgColors[index % bgColors.length] // rotate colors
+              background: bgColors[index % bgColors.length], textDecoration:'none'// rotate colors
             }}
         >
           <Card
@@ -112,8 +113,9 @@ const ValueAddedProducts = () => {
             }}
           >
             <Card.Img
+            className="w-50 m-auto"
               variant="top"
-              src={`${categoryUrl}${category.image}`}
+              src={essential}
               alt={category.title}
               loading="lazy"
             />

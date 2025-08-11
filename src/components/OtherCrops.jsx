@@ -143,24 +143,33 @@ function OtherCrops() {
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
-               <Link to="/rootcultivation">      <motion.a
-                          whileHover={{
-                            x: 5,
-                            transition: { duration: 0.2 },
-                          }}
-                          whileTap={{ scale: 0.98 }}
-                          className="btn btn-outline align-self-start mt-auto"
-                          style={{
-                            borderWidth: "2px",
-                            borderRadius: "50px",
-                            fontWeight: "500",
-                            border: "1px solid #294085",
-                            backgroundColor: "#294085",
-                            color: "#fff",
-                          }}
-                        >
-                          Learn More →
-                        </motion.a></Link>   
+                        <ul>
+                          <li>Chemical-Free Cultivation</li>
+                          <li>Nutrient-Dense & Fresh </li>
+                          <li>Soil-Enriching Practices</li>
+                          <li>Eco-Friendly ApproachNatural Pest Management </li>
+                        </ul>
+                        <Link to="/rootcultivation">
+                          {" "}
+                          <motion.a
+                            whileHover={{
+                              x: 5,
+                              transition: { duration: 0.2 },
+                            }}
+                            whileTap={{ scale: 0.98 }}
+                            className="btn btn-outline align-self-start mt-auto"
+                            style={{
+                              borderWidth: "2px",
+                              borderRadius: "50px",
+                              fontWeight: "500",
+                              border: "1px solid #294085",
+                              backgroundColor: "#294085",
+                              color: "#fff",
+                            }}
+                          >
+                            Learn More →
+                          </motion.a>
+                        </Link>
                       </Card.Body>
                     </Col>
                   </Row>

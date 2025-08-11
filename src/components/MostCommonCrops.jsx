@@ -156,6 +156,13 @@ function MostCommonCrops() {
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
+<h6>Key Features</h6>
+                      <ul>
+                        <li>Traditional Cultivation Techniques</li>
+                        <li>100% Organic Methods </li>
+                        <li>Nutrient-Rich Variety</li>
+                        <li>Eco-Friendly Approach</li>
+                      </ul>
                   <Link to="/ricecultivation">     <motion.a
                           whileHover={{
                             x: 5,

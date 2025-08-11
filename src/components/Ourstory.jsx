@@ -70,18 +70,10 @@ const Ourstory = () => {
 
                   <article>
                     <p>
-                      Founded in 1996 on once barren land, our farm now spans 25
-                      acres of lush countryside in the heart of Kerala, just 11
-                      kilometers east of Palakkad. Our regenerative approach
-                      allows us to cultivate over 50 varieties of fruits and
-                      vegetables while also raising cows, goats, chickens, and
-                      ducks with utmost care and respect, all in harmony with
-                      our ecosystem. Bhuvaneswari's commitment to sustainable
-                      farming has earned her many awards, including the
-                      prestigious Kerala's Best Farmer of the Year award
-                      (Karshakasree) in 2022.
-                    </p>
-                  </article>
+                     This organic was created in 2010. Organi Farm is located on a 11-acre inherited land. Active in farming for the past 15 years.During this period, Susha Organic Farm has received a lot of attention and recognition.We have also faced many adverse situations.
+                 
+                 With all that in overcome, the farm is now moving forward well. 750 coconut trees are being scientifically cultivated on 11 acres of land. In addition, pumpkin, ginger, yam, yam, cocoyam, and black pepper are being cultivated as intercrops.In addition, 35 Indian breeds of cows are raised. Increasing income through fish farming, beekeeping, and poultry farming .A large biogas plant has been set up using farm waste.
+               Additionally, the waste is composted and the elements needed by plants are recycled.Value added products are made using the produce from the farms.  Sushars Food was established to provide more value to value-added products.All licenses such as FSSAI (State & Center License), Udayam Registration, Export and Packing Certificate, etc. are in good standing.   </p> </article>
                 </motion.div>
               </motion.div>
             </Col>

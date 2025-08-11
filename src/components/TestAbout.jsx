@@ -62,15 +62,15 @@ const TestAbout = () => {
                   </header>
 
                   <article>
-                    Meet P Bhuvaneswari (Ammachi), the founder of Ammachi’s
-                    Organic Farms! Our family farm is inspired by the mutual
+                    Meet P T Sushama, the founder of Susha' Prakash 
+                    Organic Farms! My husband Prakash has been a role model for my dedication to agriculture. Our  farm is inspired by the mutual
                     flourishing of people and nature. Our mission is to foster a
                     healthy community by providing affordable organic produce
                     while upholding sustainable farming practices that
                     rejuvenate nature. Our regenerative farming methods support
                     healthy communities and healthy ecosystems by building soil
                     health, promoting biodiversity, and cultivating the most
-                    nutrient-dense food possible.
+                    nutrient-dense food possible. We have received many recognitions for this work. We make value added products using produce from the farm.The value-added products produced in this way are marketed at our outlet.
                   </article>
                 </motion.div>
               </motion.div>

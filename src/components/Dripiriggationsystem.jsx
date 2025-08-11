@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
-
+import drip from "../assets/otherfarmactivities/drip.webp";
 
 const RooteCultivation = () => {
   return (
@@ -26,8 +26,25 @@ const RooteCultivation = () => {
                 transition={{ delay: 0.3 }}
                 className="lead text-muted mb-0"
               >
-                What we do here is Ponmani rice cultivation. We cultivate Ponmani rice here in a completely organic way.
+                We use a drip irrigation system to ensure every plant receives the exact amount of water it needs, directly at its roots. This method conserves water by reducing evaporation and runoff, making it one of the most sustainable irrigation techniques for organic farming. By delivering water slowly and evenly, drip irrigation supports healthy root development, improves nutrient absorption, and minimizes weed growth. It also allows us to integrate organic liquid fertilizers directly into the system, nourishing crops in a targeted, efficient way. This approach not only saves precious resources but also helps us maintain consistent crop quality throughout the growing season.
               </motion.p>
+
+              <img src={drip} alt="" className="w-100  h-50 mt-5" />
+                            <h2 className="mt-5">Key Features</h2>
+                                    <ul>
+                                      <li>Water Efficiency</li>
+                                      <li>Targeted Nutrient Delivery </li>
+                                      <li>Reduced Weed Growth </li>
+                                      <li>Healthy Root Development</li>
+                                    </ul>
+                                     <motion.p
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.3 }}
+                              className="lead text-muted mb-0"
+                            >
+                                We use a drip irrigation system to ensure every plant receives the exact amount of water it needs, directly at its roots. This method conserves water by reducing evaporation and runoff, making it one of the most sustainable irrigation techniques for organic farming. By delivering water slowly and evenly, drip irrigation supports healthy root development, improves nutrient absorption, and minimizes weed growth. It also allows us to integrate organic liquid fertilizers directly into the system, nourishing crops in a targeted, efficient way. This approach not only saves precious resources but also helps us maintain consistent crop quality throughout the growing season.
+            </motion.p>
             </Col>
           </Row>
          

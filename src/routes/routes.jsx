@@ -20,7 +20,6 @@ import RiceCulivation from "../components/RiceCulivation";
 import RooteCultivation from "../components/RooteCultivation";
 import Dripiriggationsystem from "../components/Dripiriggationsystem";
 
-
 const AppRoutes = () => {
   return (
     <Routes>
@@ -31,7 +30,11 @@ const AppRoutes = () => {
           path="/productsbycategory/:id"
           element={<ProductsByCategory />}
         />
-        <Route path="/dripirrigationsystem" element={<Dripiriggationsystem />} />
+        <Route path="/orders" element={<OrderPage />} />
+        <Route
+          path="/dripirrigationsystem"
+          element={<Dripiriggationsystem />}
+        />
         <Route path="/rootcultivation" element={<RooteCultivation />} />
         <Route path="/ricecultivation" element={<RiceCulivation />} />
         <Route path="/morefromharvest" element={<Morefromharvest />} />
