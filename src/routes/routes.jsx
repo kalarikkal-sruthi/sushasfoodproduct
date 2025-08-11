@@ -20,6 +20,7 @@ import RiceCulivation from "../components/RiceCulivation";
 import RooteCultivation from "../components/RooteCultivation";
 import Dripiriggationsystem from "../components/Dripiriggationsystem";
 
+
 const AppRoutes = () => {
   return (
     <Routes>
