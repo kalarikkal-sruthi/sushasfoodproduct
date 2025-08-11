@@ -31,7 +31,7 @@ const OrderCard = ({ order }) => {
     <Card className="mb-4">
       {/* Header */}
       <Card.Header
-        style={{ backgroundColor: "#fde7c1", fontWeight: "bold" }}
+        style={{ backgroundColor: "#5caf4780", fontWeight: "bold" }}
         className="text-uppercase"
       >
         <Row className="align-items-center">

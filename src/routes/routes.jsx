@@ -44,7 +44,8 @@ const AppRoutes = () => {
         <Route path="/whatinfarm/:id" element={<WhatInFarmDetail />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/myaccount" element={<MyAccount />} />
+        {/* <Route path="/myaccount" element={<MyAccount />} /> */}
+        <Route path="/myaccount" element={<OrderPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<CartPage />} />
       </Route>
