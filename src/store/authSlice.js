@@ -6,8 +6,9 @@ import {
     updateUser, 
     getUser,
     getAddresses,
-    createAddress, // ⬅ SID CHANGE 1
-    updateAddress  // ⬅ SID CHANGE 2
+    createAddress, 
+    updateAddress,  
+    deleteAddress
      } from "./authService";
 
 const initialState = {
@@ -70,6 +71,11 @@ const authSlice = createSlice({
           addr.id === updated.id ? updated : addr
         );
       })
+      .addCase(deleteAddress.fulfilled, (state, action) => {
+        const deletedId = action.payload;
+        state.addresses = state.addresses.filter(addr => addr.id !== deletedId);
+      });
+
 
 
   

@@ -410,6 +410,7 @@ import {
   getAddresses,
   createAddress,
   updateAddress,
+  deleteAddress,
 } from "../../store/authService";
 
 import OrderCard from "../../components/order/OrderCard";
@@ -501,9 +502,19 @@ const handleLogout = () => {
         >
           Edit
         </Button>
-        <Button variant="link" size="sm" className="p-0 text-danger">
+        <Button
+          variant="link"
+          size="sm"
+          className="p-0 text-danger"
+          onClick={() => {
+            if (window.confirm("Are you sure you want to delete this address?")) {
+              dispatch(deleteAddress(address.id));
+            }
+          }}
+        >
           Remove
         </Button>
+
       </div>
     </Card>
   );
