@@ -57,3 +57,63 @@ console.log("response",response.data)
 );
 
 
+
+export const getAddresses = createAsyncThunk(
+  "auth/getAddresses",
+  async (_, { getState }) => {
+    const state = getState();
+    const storedToken = state.auth.token || localStorage.getItem("access");
+
+    const token = storedToken?.includes("|")
+      ? storedToken.split("|")[1]
+      : storedToken;
+
+    const response = await api.get("/addresses", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data.data; // array of addresses
+  }
+)
+
+
+// ⬇⬇⬇ SID CHANGE 1: Create a new address
+export const createAddress = createAsyncThunk(
+  "auth/createAddress",
+  async (addressData, { getState }) => {
+    const state = getState();
+    const storedToken = state.auth.token || localStorage.getItem("access");
+
+    const token = storedToken?.includes("|")
+      ? storedToken.split("|")[1]
+      : storedToken;
+
+    const response = await api.post("/addresses", addressData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data; // return created address object
+  }
+);
+
+// 🆕 sid change: updateAddress uses flat payload with id + fields
+export const updateAddress = createAsyncThunk(
+  "auth/updateAddress",
+  async (addressData, { getState }) => {
+    const state = getState();
+    const storedToken = state.auth.token || localStorage.getItem("access");
+
+    const token = storedToken?.includes("|")
+      ? storedToken.split("|")[1]
+      : storedToken;
+
+    const response = await api.put(`/addresses/${addressData.id}`, addressData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    // ✅ Only return the updated address object
+    return response.data.data;
+  }
+);
+
+
