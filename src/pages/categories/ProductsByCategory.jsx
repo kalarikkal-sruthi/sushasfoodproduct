@@ -100,7 +100,13 @@ const ProductByCategory = () => {
                             <strong>Price:</strong> ₹
                             {product.baseprices[0]?.original_price}
                           </p>
-
+                           <h5>Key Features</h5>
+                           <ul className="product-display-category">
+                            <li>Boost immunity and overall health</li>
+                            <li>Nourish skin and hair naturally</li>
+                            <li>Enhance flavor in cooking</li>
+                            <li>Promote relaxation and stress relief</li>
+                           </ul>
                           <motion.button
                             whileHover={{
                               x: 5,

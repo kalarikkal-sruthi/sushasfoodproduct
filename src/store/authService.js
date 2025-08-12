@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (crendentials) => {
     const res = await api.post("/login", crendentials);
-    console.log("Login API response.data:", res);
+    // console.log("Login API response.data:", res);
     return {
       token: res.data,
       // user: res.data.user,
@@ -49,8 +49,10 @@ export const getUser = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       },
     });
-
+console.log("response",response.data)
     return response.data; // { id, name, email, ... }
+    
+    
   }
 );
 

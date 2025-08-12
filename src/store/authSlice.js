@@ -43,6 +43,7 @@ const authSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload.user || action.payload;
+        console.log("user:", action.payload);
       });
   },
 });

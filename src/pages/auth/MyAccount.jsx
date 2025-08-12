@@ -23,6 +23,9 @@ const Profile = () => {
   const token = useSelector((state) => state.auth.token);
   console.log(token);
 
+const userDetails = useSelector((state) => state.auth.user);
+  console.log(userDetails);
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
