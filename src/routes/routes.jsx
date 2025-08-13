@@ -1,55 +1,63 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Layout
 import MainLayouts from "../layout/MainLayouts";
+
+// Pages
 import Home from "../pages/Home";
-import WhatInFarmList from "../pages/WhatInFarmList";
 import RegisterPage from "../pages/auth/RegisterPage";
 import LoginPage from "../pages/auth/Login";
-import ProductDetail from "../pages/product/ProductDetail";
 import MyAccount from "../pages/auth/MyAccount";
 import Checkout from "../pages/checkout/Checkout";
-import CartPage from "../pages/CartPage";
-import CategoryProductList from "../pages/categories/CategoryProdcutList";
-import ProductsByCategory from "../pages/categories/ProductsByCategory";
-import WhatInFarmDetail from "../pages/WhatInFarmDetail";
-
+import CartPage from "../pages/auth/CartPage";
 import OrderPage from "../pages/orders/OrderPage";
 
-import Mainharvest from "../components/Mainharvest";
-import Morefromharvest from "../components/Morefromharvest";
-import RiceCulivation from "../components/RiceCulivation";
-import RooteCultivation from "../components/RooteCultivation";
-import Dripiriggationsystem from "../components/Dripiriggationsystem";
+// Product & Category Pages
+import ProductDetail from "../pages/product/ProductDetail";
+import CategoryProductList from "../pages/categories/CategoryProdcutList";
+import ProductsByCategory from "../pages/categories/ProductsByCategory";
 
+// What We Do Pages
+import Extraharvestdetail from "../pages/whatwedo/extraharvestcrops/Extraharvestdetail";
+import Mostcultivateddetail from "../pages/whatwedo/mostcultivatedcrops/Mostcultivateddetail";
+import Extraharvestfull from "../pages/whatwedo/extraharvestcrops/Extraharvestfull";
+import Mostcultivatedfull from "../pages/whatwedo/mostcultivatedcrops/Mostcultivatedfull";
+import Extraharvestsubcategory from "../pages/whatwedo/extraharvestcrops/Extraharvestsubcategory";
 
 const AppRoutes = () => {
   return (
     <Routes>
+      
       <Route element={<MainLayouts />}>
+        {/* Home */}
         <Route path="/" element={<Home />} />
+
+        {/* Categories & Products */}
         <Route path="/productsbycategory" element={<CategoryProductList />} />
-        <Route
-          path="/productsbycategory/:id"
-          element={<ProductsByCategory />}
-        />
-        <Route path="/orders" element={<OrderPage />} />
-        <Route
-          path="/dripirrigationsystem"
-          element={<Dripiriggationsystem />}
-        />
-        <Route path="/rootcultivation" element={<RooteCultivation />} />
-        <Route path="/ricecultivation" element={<RiceCulivation />} />
-        <Route path="/morefromharvest" element={<Morefromharvest />} />
-        <Route path="/mainharvestfromfarm" element={<Mainharvest />} />
+        <Route path="/productsbycategory/:id" element={<ProductsByCategory />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/whatinfarm" element={<WhatInFarmList />} />
-        <Route path="/whatinfarm/:id" element={<WhatInFarmDetail />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/myaccount" element={<MyAccount />} /> */}
-        <Route path="/myaccount" element={<MyAccount />} />
+
+        {/* Orders & Checkout */}
+        <Route path="/orders" element={<OrderPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<CartPage />} />
+
+        {/* Auth */}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/myaccount" element={<MyAccount />} />
+
+        {/* What We Do */}
+        <Route path="/rootcultivation" element={<Extraharvestdetail />} />
+        <Route path="/rootvegetables" element={<Extraharvestsubcategory />} />
+        <Route path="/ricecultivation" element={<Mostcultivateddetail />} />
+        <Route path="/morefromharvest" element={<Extraharvestfull />} />
+        <Route path="/mainharvestfromfarm" element={<Mostcultivatedfull />} />
+    
       </Route>
+          
     </Routes>
   );
 };

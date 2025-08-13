@@ -1,65 +1,80 @@
-import React, { useState, useEffect } from "react";
+
 import PropTypes from "prop-types";
-import AddToCartButton from "../buttons/AddToCartButton";
 import { productURL } from "../../utils/api";
+import { motion } from "framer-motion";
 
 
-export default function ProductCard({ product }) {
-  console.log(product);
-  
-  const [open, setOpen] = useState(false);
+export default function ProductCard({ product}) {
 
-  useEffect(() => {
-    const handleEsc = (e) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
 
+ 
   return (
-    <div className="product-collection-image">
-      <img   src={`${productURL}${product.image}`} alt={product.title} />
-      <h1>{product.product_name}</h1>
-      <h2>Price :₹{product.baseprices[0]?.original_price}</h2>
-      <button className="btn" onClick={() => setOpen(true)}>
-        Shop Now
-      </button>
-      {/* <AddToCartButton onClick={() => console.log("Added to cart")} /> */}
+    <article
+      className=" p-3"
+      aria-labelledby={`product-title-${product.id}`}
+      style={{
+        borderRadius: "10px",
+   
+        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+      }}
+    >
+      {/* Product Image */}
+      <img
+        src={`${productURL}${product.image}`}
+        alt={product.product_name || "Product image"}
+        loading="lazy"
+        style={{
+          width: "100%",
+          height: "auto",
+          borderRadius: "8px",
+          objectFit: "cover",
+        }}
+      />
 
-      {open && (
-        <>
-          <div className="modal-overlay" onClick={() => setOpen(false)} />
-          <div className="modal-box">
-            <div className="modal-header">
-              <h2>{product.title}</h2>
-              <button className="close-btn" onClick={() => setOpen(false)}>
-                ×
-              </button>
-            </div>
+      {/* Product Name */}
+      <h2
+        id={`product-title-${product.id}`}
+        style={{ fontSize: "1.1rem", marginTop: "0.8rem" }}
+      >
+        {product.product_name}
+      </h2>
 
-            {product.description && <p>{product.description}</p>}
+      {/* Price */}
+      <p style={{ fontWeight: "bold", color: "#294085" }}>
+        Price: ₹{product.baseprices?.[0]?.original_price ?? "N/A"}
+      </p>
 
-            {product.video && (
-              <video className="video" loop muted controls>
-                <source src={product.video} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
+        <motion.span
+        whileHover={{
+          x: 5,
+          transition: { duration: 0.2 },
+        }}
+        whileTap={{ scale: 0.98 }}
+        className="btn btn-outline "
+        style={{
+          borderRadius: "50px",
+          fontWeight: "500",
+          border: "1px solid #294085",
+          backgroundColor: "#294085",
+          color: "#fff",
+        }}
+        aria-label="Add to cart"
+       
+      >
+       Shop Now →
+      </motion.span>
 
-            {/* <button  style={{ background: "#6eb449", color: "#fff" }}>
-              Add To Cart
-            </button> */}
-          </div>
-        </>
-      )}
-    </div>
+    
+    </article>
   );
 }
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    product_name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    baseprices: PropTypes.array,
     description: PropTypes.string,
     video: PropTypes.string,
   }).isRequired,

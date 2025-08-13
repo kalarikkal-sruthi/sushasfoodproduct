@@ -1,63 +1,51 @@
 import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import coconutimage from "../assets/whatwedo/coconut.jpg";
-import rice from "../assets/whatwedo/ric.webp";
-import jathi from "../assets/whatwedo/jathi.jpg";
-import pepper from "../assets/whatwedo/pepper.jpeg";
-import kuttymulla from "../assets/whatwedo/kuttimulla.jpeg";
-import curryleaves from "../assets/whatwedo/curryleaves.jpg";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import root from "../assets/otherfarmcrops/root.webp";
+import spices from "../assets/otherfarmcrops/spices.png";
+import fruits from "../assets/otherfarmcrops/fruits.webp";
+import herbs from "../assets/otherfarmcrops/herbs.jpeg";
+import veg from "../assets/otherfarmcrops/vegetables.jpg";
+import ornamental from "../assets/otherfarmcrops/ornamentalplants.webp";
 
-
-function MostCommonCrops() {
-  const crops = [
+function Extraharvestcrops() {
+  const services = [
     {
-      title: "Coconut Cultivation (തെങ്ങ് കൃഷി)",
-      image: coconutimage,
-      alt: "Organic coconut cultivation with 750 coconut trees in Kerala",
+      title: "Tubers (കിഴങ്ങു വർഗ്ഗങ്ങൾ)",
+      image: root,
       description:
-        "We cultivate over 750 coconut trees and produce premium value-added coconut products using traditional and sustainable farming methods.",
-      link: "/coconutcultivation",
+        "We cultivate organic root vegetables like yam, cassava, and sweet potatoes using sustainable farming methods.",
     },
     {
-      title: "Rice Cultivation (നെൽകൃഷി)",
-      image: rice,
-      alt: "Ponmani rice cultivated organically in Kerala paddy fields",
+      title: "Fruits (പഴവർഗ്ഗങ്ങൾ)",
+      image: fruits,
       description:
-        "Ponmani rice is cultivated organically in our paddy fields, preserving soil health and delivering a nutrient-rich harvest.",
-      link: "/ricecultivation",
+        "We grow seasonal fruits such as mangoes, bananas, papayas, and jackfruit in an eco-friendly way.",
     },
     {
-      title: "Nutmeg Cultivation (ജാതിക്ക കൃഷി)",
-      image: jathi,
-      alt: "Organic nutmeg farming in Kerala for high-quality spices",
+      title: "Vegetables (പച്ചക്കറികൾ)",
+      image: veg,
       description:
-        "We grow organic nutmeg (Jathi) and process it into high-quality spices using eco-friendly practices.",
-      link: "/nutmegcultivation",
+        "Our fresh vegetables include seasonal greens, cucumbers, and gourds, all grown organically.",
     },
     {
-      title: "Pepper Cultivation (കുരുമുളക് കൃഷി)",
-      image: pepper,
-      alt: "Organic pepper cultivation in Kerala spice gardens",
+      title: "Herbs (ഔഷധസസ്യങ്ങൾ)",
+      image: herbs,
       description:
-        "Kerala’s famous black pepper grown organically for maximum flavor and quality.",
-      link: "/peppercultivation",
+        "We cultivate medicinal herbs like tulsi, mint, and lemongrass that promote health and wellness.",
     },
     {
-      title: "Kutty Mulla (കുട്ടി മുല്ല)",
-      image: kuttymulla,
-      alt: "Kutty Mulla aromatic flower cultivated organically",
+      title: "Spices (സുഗന്ധവ്യഞ്ജനങ്ങൾ)",
+      image: spices,
       description:
-        "Cultivated for its aromatic and medicinal value, Kutty Mulla is grown without chemicals or pesticides.",
-      link: "/kuttymullacultivation",
+        "Our farm produces traditional spices such as black pepper, cardamom, and turmeric organically.",
     },
     {
-      title: "Curry Leaves (കറിവേപ്പില)",
-      image: curryleaves,
-      alt: "Fresh organic curry leaves from Kerala farm",
+      title: "Ornamental & Garden Plants (അലങ്കാര സസ്യങ്ങളും പൂന്തോട്ട ചെടികളും)",
+      image: ornamental,
       description:
-        "Fresh, pesticide-free curry leaves grown organically for culinary and medicinal use.",
-      link: "/curryleavescultivation",
+        "We nurture ornamental, garden, and aquatic plants that enhance beauty and support biodiversity.",
     },
   ];
 
@@ -86,35 +74,33 @@ function MostCommonCrops() {
   };
 
   return (
-    <main>
+    <main aria-labelledby="extra-harvest-heading">
+     
+
       <Container className="mt-5">
-        <section aria-labelledby="most-common-crops">
-          <header>
-            <Row className="mb-3">
-              <Col>
+        <section>
+          <Row className="mb-3">
+            <Col>
+              <motion.section
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, margin: "-100px" }}
+              >
                 <motion.h2
                   variants={scrollVariants}
-                  initial="offscreen"
-                  whileInView="onscreen"
-                  viewport={{ once: true, margin: "-100px" }}
-                  id="most-common-crops"
+                  id="extra-harvest-heading"
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                  Most Cultivated Organic Crops on Our Farm
+                  Extra Harvest from Our Farm
                 </motion.h2>
-                <p className="text-muted">
-                  Explore the main crops we grow at Susha's Prakash Organic Farm
-                  in Kerala, using sustainable farming practices that protect
-                  the land and deliver nutrient-rich produce.
-                </p>
-              </Col>
-            </Row>
-          </header>
+              </motion.section>
+            </Col>
+          </Row>
 
           <Row className="g-5">
-            {crops.map((crop, index) => (
-              <Col lg={6} key={index} as="article">
+            {services.map((service, index) => (
+              <Col lg={6} key={index}>
                 <motion.div
                   initial="offscreen"
                   whileInView="onscreen"
@@ -132,15 +118,16 @@ function MostCommonCrops() {
                       <Row className="g-0 h-100">
                         <Col md={6} className="overflow-hidden">
                           <Card.Img
-                            src={crop.image}
-                            alt={crop.alt}
+                            src={service.image}
+                            alt={`${service.title} - Organic Farm Produce`}
                             className="object-fit-cover"
                             style={{
                               borderRadius: "12px 0 0 12px",
                               width: "100%",
-
+                             
                               objectFit: "cover",
                             }}
+                            loading="lazy"
                           />
                         </Col>
 
@@ -150,31 +137,26 @@ function MostCommonCrops() {
                               style={{ color: "#294085" }}
                               className="fw-bold fs-4 mb-3"
                             >
-                              {crop.title}
+                              {service.title}
                             </Card.Title>
                             <Card.Text className="flex-grow-1 text-muted">
-                              {crop.description}
+                              {service.description}
                             </Card.Text>
-                            <h6>Key Features</h6>
                             <ul>
-                              <li>Traditional Cultivation Techniques</li>
-                              <li>100% Organic Farming</li>
-                              <li>Nutrient-Rich Variety</li>
-                              <li>Eco-Friendly Practices</li>
+                              <li>Chemical-Free Cultivation</li>
+                              <li>Nutrient-Dense & Fresh</li>
+                              <li>Soil-Enriching Practices</li>
+                              <li>Eco-Friendly Pest Management</li>
                             </ul>
-
-
-                            
-                            <Link to={crop.link}>
-                              <motion.div
+                            <Link to="/rootcultivation" className="mt-auto">
+                              <motion.span
                                 whileHover={{
                                   x: 5,
                                   transition: { duration: 0.2 },
                                 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="btn btn-outline align-self-start mt-auto"
+                                className="btn btn-outline align-self-start"
                                 style={{
-                                  borderWidth: "2px",
                                   borderRadius: "50px",
                                   fontWeight: "500",
                                   border: "1px solid #294085",
@@ -182,8 +164,8 @@ function MostCommonCrops() {
                                   color: "#fff",
                                 }}
                               >
-                                Learn More  →
-                              </motion.div>
+                                Learn More →
+                              </motion.span>
                             </Link>
                           </Card.Body>
                         </Col>
@@ -195,10 +177,9 @@ function MostCommonCrops() {
             ))}
           </Row>
 
-
-<Row>
+          <Row>
             <Col className="text-center">
-              <Link to="/mainharvestfromfarm">
+              <Link to="/morefromharvest">
                 <motion.span
                   whileHover={{
                     x: 5,
@@ -219,11 +200,10 @@ function MostCommonCrops() {
               </Link>
             </Col>
           </Row>
-          
         </section>
       </Container>
     </main>
   );
 }
 
-export default MostCommonCrops;
+export default Extraharvestcrops;

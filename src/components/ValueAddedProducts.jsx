@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
-import essential from "../assets/essential/1.png";
+import { categoryUrl } from "../utils/api";
+
+import {} from "../utils/api";
 
 const ValueAddedProducts = () => {
   const dispatch = useDispatch();
@@ -21,26 +23,34 @@ const ValueAddedProducts = () => {
   }, [dispatch]);
 
   const bgColors = [
-    "radial-gradient(circle, rgba(195, 34, 34, 1) 0%, rgba(253, 187, 45, 1) 100%)",
-    "radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgba(45, 253, 187, 1) 100%)",
-    "radial-gradient(circle, rgba(153, 119, 186, 1) 0%, rgba(7, 33, 145, 1) 100%)",
-    "radial-gradient(circle, rgba(199, 70, 70, 1) 0%, rgba(77, 15, 15, 1) 100%)",
+    "radial-gradient(circle,rgba(0, 119, 174, 0.45) 0%, #0078ae 100%)",
+    "radial-gradient(circle,rgba(107, 174, 0, 0.52) 0%, #6bae00",
+
+    "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
+    "radial-gradient(circle,rgba(174, 0, 99, 0.49) 0%, #ae0064",
+    "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
+    "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
   ];
+
+  console.log(categories);
 
   if (loading) return <p className="text-center my-5">Loading...</p>;
   if (error) return <p className="text-danger text-center">Error: {error}</p>;
 
   return (
     <main>
-      <Container className="mt-5 pt-5">
+      <Container className="mt-5">
         <section aria-labelledby="value-added-products-title" className="mb-5">
           <header>
             <Row>
               <Col>
-                <h1 className="display-4 fw-bold" style={{ color: "#294085" }}>
+                <h1
+                  id="value-added-products-title"
+                  className="display-4 fw-bold"
+                  style={{ color: "#294085" }}
+                >
                   Value Added Products
                 </h1>
-
                 <p className="lead text-muted mb-0">
                   Discover our premium range of farm products, crafted to bring
                   you the freshest and healthiest options from our fields.
@@ -49,54 +59,59 @@ const ValueAddedProducts = () => {
             </Row>
           </header>
 
-          {/* Product categories grid */}
+          {/* Product Categories */}
           <Row className="g-4 mt-4">
             {categories?.map((category, index) => (
               <Col key={category.id || index} md={6}>
-                <article aria-labelledby={`category-${category.id}-title`}>
+                <article
+                  aria-labelledby={`category-${category.id}-title`}
+                  className="h-100"
+                >
                   <Link
                     to={`/productsbycategory/${category.id}`}
                     state={{
-                      bgColor: bgColors[index % bgColors.length],
-                    }}
+    bgColor: bgColors[category.id % bgColors.length],
+    categoryName: category.name, 
+  }}
                     style={{ textDecoration: "none" }}
                     aria-label={`View products in ${category.name}`}
                   >
                     <Card
                       className="h-100 shadow-sm border-0 p-3"
+                       
                       style={{
-                        background: bgColors[index % bgColors.length],
+                        background: bgColors[category.id % bgColors.length],
                         borderRadius: "12px",
                       }}
                     >
                       <Card.Img
                         className="w-50 m-auto"
                         variant="top"
-                        src={essential}
-                        alt={`${category.name} - category`}
+                        src={`${categoryUrl}${category.image}`}
+                        alt={`Fresh ${category.name} products`}
                         loading="lazy"
                       />
                       <Card.Body>
-                        <h4
+                        <h2
                           className="value-added-product-head h5"
                           id={`category-${category.id}-title`}
-                          as="h2"
                         >
                           {category.name}
-                        </h4>
+                        </h2>
                         <p className="value-added-product-para">
-                          Our essential organic oils are extracted from the
-                          finest quality plants and herbs, grown using
-                          sustainable and chemical-free farming methods.
-                          Cold-pressed and unrefined, they retain their natural
-                          aroma, nutrients, and therapeutic properties.
-                          {/* {category.description || "Explore our selection."} */}
+                          {category.description}
                         </p>
+                        {/* {category.tagline && (
+                          <p>
+                            <em>{category.tagline}</em>
+                          </p>
+                        )}
+                        {category.terms && <p>{category.terms}</p>}
                         <ul className="value-addedd-product-list">
-                          <li>Virigin Coconut Oil</li>{" "}
-                          <li>Virigin Coconut Oil</li>
-                          <li>Virigin Coconut Oil</li>{" "}
-                        </ul>
+                          <li>Virgin Coconut Oil</li>
+                          <li>Cold Pressed Groundnut Oil</li>
+                          <li>Organic Jaggery Powder</li>
+                        </ul> */}
                       </Card.Body>
                     </Card>
                   </Link>
@@ -105,10 +120,13 @@ const ValueAddedProducts = () => {
             ))}
           </Row>
 
-          {/* View All button */}
+          {/* View All Button */}
           <Row>
             <Col className="text-center mt-5">
-              <Link to="/productsbycategory" aria-label="View all products">
+              <Link
+                to="/productsbycategory" 
+                aria-label="View all value added products"
+              >
                 <motion.button
                   whileHover={{
                     x: 5,
@@ -125,7 +143,7 @@ const ValueAddedProducts = () => {
                     color: "#fff",
                   }}
                 >
-                  View All →
+                  View All Value Added Products →
                 </motion.button>
               </Link>
             </Col>

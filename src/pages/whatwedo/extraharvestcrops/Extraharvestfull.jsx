@@ -2,14 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import root from "../assets/otherfarmcrops/root.webp";
-import spices from "../assets/otherfarmcrops/spices.png";
-import fruits from "../assets/otherfarmcrops/fruits.webp";
-import herbs from "../assets/otherfarmcrops/herbs.jpeg";
-import veg from "../assets/otherfarmcrops/vegetables.jpg";
-import ornamental from "../assets/otherfarmcrops/ornamentalplants.webp";
 
-function Morefromharvest() {
+import root from "../../../assets/otherfarmcrops/root.webp";
+import spices from "../../../assets/otherfarmcrops/spices.png";
+import fruits from "../../../assets/otherfarmcrops/fruits.webp";
+import herbs from "../../../assets/otherfarmcrops/herbs.jpeg";
+import veg from "../../../assets/otherfarmcrops/vegetables.jpg";
+import ornamental from "../../../assets/otherfarmcrops/ornamentalplants.webp";
+
+function Extraharvestfull() {
   const services = [
     {
       title: "Root Vegetables",
@@ -74,33 +75,34 @@ function Morefromharvest() {
   };
 
   return (
-    <Container
-      as="section"
-      className="mb-5 mt-5 pt-5"
-      aria-labelledby="other-crops-heading"
-    >
-      <Row className="mb-5 mt-5 pt-5">
-        <Col className="">
-          <motion.section
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <motion.h2
-              variants={scrollVariants}
-              id="crops-heading"
-              className="fw-bold"
-              style={{ color: "#294085" }}
-            >
-              More from Our Fields
-            </motion.h2>
-          </motion.section>
-        </Col>
-      </Row>
+      <main>
+      <Container as="section" className="mt-5 " aria-labelledby="Extra Harvest From Farm">
+        <div className="padding-top"></div>
+        <div className="padding-top"></div>
+        <section>
+           <Row className="mb-5">
+            <Col>
+              <motion.section
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <motion.h1
+                  variants={scrollVariants}
+                  id="crops-heading"
+                  className="fw-bold"
+                  style={{ color: "#294085" }}
+                >
+                 Extra Harvest from Our Farm
+                </motion.h1>
+              </motion.section>
+            </Col>
+          </Row>
+         
 
       <Row className="g-5">
         {services.map((service, index) => (
-          <Col lg={6} key={index}>
+          <Col lg={6} key={index} as="article">
             <motion.div
               initial="offscreen"
               whileInView="onscreen"
@@ -120,8 +122,9 @@ function Morefromharvest() {
                       <motion.div className="h-100 w-100">
                         <Card.Img
                           src={service.image}
-                          alt={service.title || "Farm crop image"}
+                          alt={`${service.title} - Organic farm produce`}
                           className="object-fit-cover"
+                          loading="lazy"
                           style={{
                             borderRadius: "12px 0 0 12px",
                             width: "100%",
@@ -136,31 +139,34 @@ function Morefromharvest() {
                       <Card.Body className="p-4 d-flex flex-column">
                         <Card.Title
                           style={{ color: "#294085" }}
-                          className="fw-bold fs-4 mb-3 "
+                          className="fw-bold fs-4 mb-3"
+                          as="h3"
                         >
-                          {service.title || "Crop"}
+                          {service.title}
                         </Card.Title>
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
-                      <Link to="/dripirrigationsystem"><motion.a
-                          whileHover={{
-                            x: 5,
-                            transition: { duration: 0.2 },
-                          }}
+                        <motion.div
+                          whileHover={{ x: 5, transition: { duration: 0.2 } }}
                           whileTap={{ scale: 0.98 }}
-                          className="btn btn-outline align-self-start mt-auto"
-                          style={{
-                            borderWidth: "2px",
-                            borderRadius: "50px",
-                            fontWeight: "500",
-                            border: "1px solid #294085",
-                            backgroundColor: "#294085",
-                            color: "#fff",
-                          }}
+                          className="mt-auto"
                         >
-                          Learn More →
-                        </motion.a></Link>  
+                          <Link
+                            to="/rootvegetables"
+                            className="btn btn-outline align-self-start"
+                            style={{
+                              borderWidth: "2px",
+                              borderRadius: "50px",
+                              fontWeight: "500",
+                              border: "1px solid #294085",
+                              backgroundColor: "#294085",
+                              color: "#fff",
+                            }}
+                          >
+                            Learn More →
+                          </Link>
+                        </motion.div>
                       </Card.Body>
                     </Col>
                   </Row>
@@ -170,8 +176,10 @@ function Morefromharvest() {
           </Col>
         ))}
       </Row>
+      </section>
     </Container>
+    </main>
   );
 }
 
-export default Morefromharvest;
+export default Extraharvestfull;

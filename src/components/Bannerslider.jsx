@@ -10,7 +10,6 @@ function Bannerslider({ data }) {
   const isLooping = data.length > 3;
 
   return (
-    
     <section aria-label="Promotional Video Banner" className="banner-slider">
       <Swiper
         pagination={{ type: "fraction" }}
@@ -31,7 +30,7 @@ function Bannerslider({ data }) {
                 loop
                 muted
                 playsInline
-                Autoplay
+                autoPlay
                 preload="metadata"
                 aria-label={`Promotional video ${index + 1}`}
               >

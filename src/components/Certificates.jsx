@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
@@ -37,46 +35,33 @@ function Certificate({ data }) {
   }
 
   const services = [
-    {
-      title: "Organic",
-      image: key1,
-    },
-    {
-      title: "High Quality",
-      image: key2,
-    },
-    {
-      title: "Happy Customer",
-      image: key3,
-    },
-    {
-      title: "50+ Varieties",
-      image: key4,
-    },
+    { title: "Organic", image: key1, description: "Certified organic farming practices." },
+    { title: "High Quality", image: key2, description: "Premium quality produce from our farm." },
+    { title: "Happy Customer", image: key3, description: "Trusted by our valued customers." },
+    { title: "50+ Varieties", image: key4, description: "Wide variety of fresh farm produce." },
   ];
 
   return (
     <main>
-      <Container className="mt-5">
-        <section aria-labelledby="certificates-heading" className="">
+      <Container className="mt-4">
+       
+        <section aria-labelledby="certificates-heading">
           <motion.section
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, margin: "-100px" }}
-            className=""
           >
-            <motion.h3
+            <motion.h2
               variants={scrollVariants}
               id="certificates-heading"
-              className=" fw-bold mb-4 "
+              className="fw-bold mb-4"
               style={{ color: "#5caf47" }}
             >
               Our Recognized Certificates
-            </motion.h3>
+            </motion.h2>
           </motion.section>
 
           <Swiper
-            // pagination={{ type: "fraction" }}
             spaceBetween={20}
             slidesPerView={6}
             loop={true}
@@ -86,48 +71,52 @@ function Certificate({ data }) {
             className="mySwiper"
             aria-label="Certificates carousel"
           >
-            {data.map((item, index) => (
-              <SwiperSlide key={item.id || index}>
-                <figure
-                  className="certificate-main-div text-center "
-                  style={{
-                    width: "100%",
-                    margin: "0 auto",
-                    display: "block",
-
-                    borderRadius: "12px 0 0 12px",
-                  }}
-                >
-                  <img
-                    className="rounded"
-                    src={`${imgURLCertificate}${item.image}`}
-                    alt={item.title ? item.title : `Certificate ${item.id}`}
-                    loading="lazy"
+            {data.map((item, index) => {
+              const certTitle =
+                item.title || `Certificate ${index + 1}`;
+              return (
+                <SwiperSlide key={item.id || index}>
+                  <figure
+                    className="certificate-main-div text-center"
                     style={{
                       width: "100%",
-                      objectFit: "contain",
-                      borderRadius: "12px 0 0 12px",
                       margin: "0 auto",
-                      display: "block",
+                      borderRadius: "12px",
                     }}
-                  />
-                  {item.title && (
-                    <figcaption className="mt-2 text-muted small">
-                      {item.title}
-                    </figcaption>
-                  )}
-                </figure>
-              </SwiperSlide>
-            ))}
+                  >
+                    <img
+                      className="rounded"
+                      src={`${imgURLCertificate}${item.image}`}
+                      alt={`${certTitle} - Organic & Sustainable Farming Certification`}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        objectFit: "contain",
+                        borderRadius: "12px",
+                      }}
+                    />
+                    {item.title && (
+                      <figcaption className="mt-2 text-muted small">
+                        {item.title}
+                      </figcaption>
+                    )}
+                  </figure>
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </section>
-
-        <section className="key-features mt-5">
+        <section className="key-features mt-5" aria-labelledby="key-features-heading">
+         
           <div className="key-feature-container">
             {services.map((service, index) => (
-              <div className="key-feature-card" key={index}>
-                <img src={service.image} alt={service.title} />
-                <h3>{service.title}</h3>
+              <div className="key-feature-card text-center" key={index}>
+                <img
+                  src={service.image}
+                  alt={`${service.title} - ${service.description}`}
+                  loading="lazy"
+                />
+                <h3 className="mt-3">{service.title}</h3>
                 <p>{service.description}</p>
               </div>
             ))}

@@ -1,18 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import MostCommonCrops from "./MostCommonCrops";
-import OtherCrops from "./OtherCrops";
-import OtherFarmActivities from "./OtherFarmActivities";
+import Extraharvestcrops from "./Extraharvestcrops";
 
 const WhatWeDo = () => {
   return (
-    <main>
-      <Container className="mt-5 pt-5">
-        <section aria-labelledby="what-we-do-title" className="">
+    <main aria-labelledby="what-we-do-title">
+ 
+
+      <Container className="mt-5">
+        <section aria-labelledby="what-we-do-title">
           <Row className="mb-5">
-            <Col className="">
+            <Col>
               <motion.h1
                 id="what-we-do-title"
                 initial={{ opacity: 0 }}
@@ -30,20 +31,24 @@ const WhatWeDo = () => {
                 transition={{ delay: 0.3 }}
                 className="lead text-muted mb-0"
               >
-                Farm activities Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Ipsum, error unde! Dolores officia iusto
-                obcaecati, sequi laborum ipsum aliquam inventore nam magnam
-                doloribus, ullam qui corrupti id est, unde eum.
+                At <strong>Susha's Prakash Organic Farm</strong>, we grow
+                nutrient-rich organic crops using sustainable farming practices
+                that protect the environment and support local communities.
+                From rice cultivation and seasonal vegetables to value-added
+                farm products, our mission is to deliver healthy food while
+                caring for the land.
               </motion.p>
             </Col>
           </Row>
-          <Row>
-            <MostCommonCrops />
-            <OtherCrops />
-            {/* <OtherFarmActivities /> */}
-          </Row>
         </section>
       </Container>
+      <article aria-label="Main crops grown on our farm">
+        <MostCommonCrops />
+      </article>
+
+      <article aria-label="Additional farm produce and seasonal harvests">
+        <Extraharvestcrops />
+      </article>
     </main>
   );
 };

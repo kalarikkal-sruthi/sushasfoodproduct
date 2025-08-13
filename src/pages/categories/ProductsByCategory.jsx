@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
-import { api } from "../../utils/api";
-import { Container, Row, Col } from "react-bootstrap";
+import { api, productURL } from "../../utils/api";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
-import { productURL } from "../../utils/api";
 
 const ProductByCategory = () => {
   const { id } = useParams();
@@ -12,150 +11,189 @@ const ProductByCategory = () => {
   const [categoryName, setCategoryName] = useState("Category");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const bgColor = location.state?.bgColor || "#ffffff";
+  const bgColor = location.state?.bgColor || "#fff";
 
   useEffect(() => {
-    api
-      .get("/categories-with-products")
-      .then((res) => {
-        const matched = res.data.find((cat) => cat.id === parseInt(id));
-        if (matched) {
-          setCategoryName(matched.name);
-        }
-      })
-      .catch(() => {
-        setCategoryName("Category");
-      });
+    async function fetchData() {
+      try {
+        const categoryRes = await api.get("/categories-with-products");
+        const matched = categoryRes.data.find(
+          (cat) => cat.id === parseInt(id, 10)
+        );
+        if (matched) setCategoryName(matched.name);
 
-    // Fetch products by category
-    api
-      .get(`/categories/${id}/products`)
-      .then((res) => {
-        setProducts(res.data || []);
+        const productsRes = await api.get(`/categories/${id}/products`);
+        setProducts(productsRes.data || []);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch:", err);
-        setLoading(false);
-      });
+      }
+    }
+    fetchData();
   }, [id]);
 
+  const cardVariants = {
+    offscreen: { y: 50, opacity: 0 },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", bounce: 0.2, duration: 0.8 },
+    },
+  };
+
+  const cardHover = {
+    y: -5,
+    boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
+    transition: { duration: 0.3, ease: "easeOut" },
+  };
+
   if (loading) {
-    return <p className="text-center my-5">Loading...</p>;
+    return (
+      <main>
+        <Container>
+          <p className="text-center my-5">Loading...</p>
+        </Container>
+      </main>
+    );
   }
 
   return (
     <main>
-      <Container className="mt-5 pt-5">
-        <section aria-labelledby="category-heading" className="mt-5 mb-5">
-          <header>
-            <Row>
-              <Col>
-                <h1 className="display-4 fw-bold" style={{ color: "#294085" }}>
-                  {categoryName}
-                </h1>
+      <div className="padding-top"></div>
+      <div className="padding-top"></div>
+      <Container className="mt-5">
+        <header className="mb-5" aria-labelledby="category-heading">
+          <h1
+            id="category-heading"
+            className="display-4 fw-bold"
+            style={{ color: "#294085" }}
+          >
+            {categoryName}
+          </h1>
+          <p className="lead text-muted mb-0">
+            Discover our premium range of farm products, crafted to bring you
+            the freshest and healthiest options from our fields.
+          </p>
+        </header>
 
-                <p className="lead text-muted mb-0">
-                  Discover our premium range of farm products, crafted to bring
-                  you the freshest and healthiest options from our fields.
-                </p>
-              </Col>
-            </Row>
-          </header>
-
-          <Row className="g-4 mt-4">
-            {products.length > 0 ? (
-              <Row aria-label={`Products in ${categoryName}`}>
-                {products.map((product, index) => (
-                  <Col
-                    key={product.id || index}
-                    md={4}
-                    aria-labelledby={`product-${product.id}-title`}
+        {products.length > 0 ? (
+          <section
+            aria-label={`Products in ${categoryName}`}
+            className="product-list"
+          >
+            <Row className="g-5">
+              {products.map((product, index) => (
+                <Col
+                  as="article"
+                  lg={6}
+                  key={product.id || index}
+                  aria-labelledby={`product-${product.id}-title`}
+                >
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={cardVariants}
                   >
-                    <article>
-                      <Link
-                        state={{
-                          bgColor: bgColor,
-                          fromCategoryId: id,
+                    <motion.div whileHover={cardHover} className="h-100">
+                      <Card
+                        className="h-100 border-0 overflow-hidden"
+                        style={{
+                          boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
+                          borderRadius: "12px",
+                          backgroundColor: bgColor,
                         }}
-                        to={`/product/${product.id}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                        aria-label={`View details of ${product.product_name}`}
                       >
-                        <article
-                          style={{ background: bgColor }}
-                          className="product-collection-image"
-                          aria-labelledby={`product-${product.id}-name`}
-                        >
-                          <img
-                            src={`${productURL}${product.image}`}
-                            alt={product.product_name}
-                            className="img-fluid"
-                            loading="lazy"
-                          />
-                          <h2 id={`product-${product.id}-name`}>
-                            {product.product_name}
-                          </h2>
-                          <p>
-                            <strong>Price:</strong> ₹
-                            {product.baseprices[0]?.original_price}
-                          </p>
-                           <h5>Key Features</h5>
-                           <ul className="product-display-category">
-                            <li>Boost immunity and overall health</li>
-                            <li>Nourish skin and hair naturally</li>
-                            <li>Enhance flavor in cooking</li>
-                            <li>Promote relaxation and stress relief</li>
-                           </ul>
-                          <motion.button
-                            whileHover={{
-                              x: 5,
-                              transition: { duration: 0.2 },
-                            }}
-                            whileTap={{ scale: 0.98 }}
-                            className="btn btn-outline"
-                            style={{
-                              borderWidth: "2px",
-                              borderRadius: "50px",
-                              fontWeight: "500",
-                              border: "1px solid #294085",
-                              backgroundColor: "#294085",
-                              color: "#fff",
-                            }}
+                        <Row className="g-0 h-100">
+                          <Col
+                            md={6}
+                            className="overflow-hidden"
+                            style={{ background: bgColor }}
                           >
-                          Shop Now →
-                          </motion.button>
-                        </article>
-                        {/* <div className="card h-100 shadow-sm">
-                  <img
-                    src={`${productURL}${product.image}`}
-                    alt={product.product_name}
-                    className="card-img-top"
-                    loading="lazy"
-                    style={{ height: "250px", objectFit: "cover" }}
-                  />
-                  <div className="card-body">
-                    <h2
-                      id={`product-${product.id}-title`}
-                      className="card-title h5"
-                    >
-                      {product.product_name}
-                    </h2>
-                  
-                  </div>
-                </div> */}
-                      </Link>
-                    </article>
-                  </Col>
-                ))}
-              </Row>
-            ) : (
-              <p className="text-muted" role="note">
-                No products found in this category.
-              </p>
-            )}
-          </Row>
-        </section>
+                            <Card.Img
+                              src={`${productURL}${product.image}`}
+                              alt={`${product.product_name} - Organic farm product`}
+                              width="100%"
+                              className="object-fit-cover"
+                              style={{
+                                borderRadius: "12px 0 0 12px",
+
+                                objectFit: "contain",
+                              }}
+                              loading="lazy"
+                            />
+                          </Col>
+
+                          <Col md={6} className="d-flex flex-column">
+                            <Card.Body className="p-4 d-flex flex-column">
+                              <Card.Title
+                                id={`product-${product.id}-title`}
+                                style={{ color: "#294085" }}
+                                className="fw-bold fs-4 mb-3"
+                                as="h2"
+                              >
+                                {product.product_name}
+                              </Card.Title>
+                              <Card.Text className="flex-grow-1 text-muted">
+                                {product.description}
+                              </Card.Text>
+                              {product.baseprices?.[0]?.original_price && (
+                                <p className="product-price">
+                                  <strong>Price:</strong> ₹
+                                  {product.baseprices[0].original_price}
+                                </p>
+                              )}
+                              {/* <ul>
+                                <li>Chemical-Free Cultivation</li>
+                                <li>Nutrient-Dense & Fresh</li>
+                                <li>Soil-Enriching Practices</li>
+                                <li>Eco-Friendly Pest Management</li>
+                              </ul> */}
+
+                              <motion.div
+                                whileHover={{
+                                  x: 5,
+                                  transition: { duration: 0.2 },
+                                }}
+                                whileTap={{ scale: 0.98 }}
+                                className="mt-auto"
+                              >
+                                <Link
+
+                                
+                                  state={{
+                                    bgColor,
+                                    fromCategoryId: id,
+                                  }}
+                                  to={`/product/${product.id}`}
+                                  className="btn btn-outline align-self-start"
+                                  style={{
+                                    borderRadius: "50px",
+                                    fontWeight: "500",
+                                    border: "1px solid #294085",
+                                    backgroundColor: "#294085",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  Shop Now →
+                                </Link>
+                              </motion.div>
+                            </Card.Body>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
+                </Col>
+              ))}
+            </Row>
+          </section>
+        ) : (
+          <p className="text-muted" role="note">
+            No products found in this category.
+          </p>
+        )}
       </Container>
     </main>
   );

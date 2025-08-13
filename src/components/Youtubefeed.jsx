@@ -1,4 +1,4 @@
-import { Row, Col } from "react-bootstrap";
+import { Row, Col,Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
@@ -6,24 +6,44 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { imgURLVideo } from "../utils/api";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Youtubefeed = ({ data }) => {
   if (!data || data.length === 0) return null;
+     const scrollVariants = {
+    offscreen: { y: 50, opacity: 0 },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "tween", ease: "easeOut", duration: 0.8 },
+    },
+  };
+
 
   return (
-    <main>
-      <section className="padding-horizontal" aria-label="YouTube Feed Section">
+    <main aria-labelledby="youtube-feed-heading">
+    
+      <Container className="mt-5">
+
+      <section  aria-label="YouTube Video Gallery">
         <header className="header-bar">
-          <Row>
-            <Col xs={12} md={6} className="heading-main-div">
-              <div className="heading-main">
-                <h1>Check Our YouTube Feed</h1>
-              </div>
-            </Col>
-            <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">
-              <div className="view-all-button">
-                <button aria-label="View all YouTube videos">View All</button>
-              </div>
+          <Row className="mb-3">
+            <Col>
+              <motion.section
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <motion.h2
+                  variants={scrollVariants}
+                  id="extra-harvest-heading"
+                  className="fw-bold"
+                  style={{ color: "#5caf47" }}
+                >
+                 Check Our Youtube Feed
+                </motion.h2>
+              </motion.section>
             </Col>
           </Row>
         </header>
@@ -38,32 +58,39 @@ const Youtubefeed = ({ data }) => {
             slidesPerView={6}
             navigation={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
+            loop={true}
             modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
           >
-            {data.map((item) => (
-              <SwiperSlide key={item.id}>
+            {data.map((item, idx) => (
+              <SwiperSlide key={item.id || idx}>
                 <figure>
-                  <a
+                  <Link
                     href={item.video}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Watch video ${item.id}`}
+                    aria-label={`Watch YouTube video titled "${item.title || `Video ${idx + 1}`}"`}
                   >
                     <img
                       className="youtube-img"
                       src={`${imgURLVideo}${item.image}`}
-                      alt={`YouTube video thumbnail ${item.id}`}
+                      alt={item.title || `YouTube video thumbnail ${idx + 1}`}
                       loading="lazy"
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
-                  </a>
+                  </Link>
+                  {item.title && (
+                    <figcaption className="mt-2 text-muted">
+                      {item.title}
+                    </figcaption>
+                  )}
                 </figure>
               </SwiperSlide>
             ))}
           </Swiper>
         </section>
       </section>
+      </Container>
     </main>
   );
 };

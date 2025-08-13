@@ -12,9 +12,6 @@ import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
-
-import OrderDetails from "../../components/auth/OrderDetails";
-import Address from "../../components/auth/Address";
 import OrderPage from "../orders/OrderPage";
 
 const Profile = () => {

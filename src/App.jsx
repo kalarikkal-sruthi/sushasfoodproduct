@@ -1,17 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import MainLayouts from "./layout/MainLayouts";
+import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes/routes";
 import ScrollToTop from "./utils/ScrollToTop";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
+
 function App() {
   return (
-    <div>
-      <Router>
-        <ScrollToTop />
-        <AppRoutes />
-      </Router>
-    </div>
+    <Router>
+      <ScrollToTop />
+      <AppRoutes />
+         <ToastContainer style={{ zIndex: 99999 }} />
+    </Router>
   );
 }
 

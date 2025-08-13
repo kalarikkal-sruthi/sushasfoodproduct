@@ -1,4 +1,3 @@
-import React from "react";
 import { aboutURL } from "../utils/api";
 
 function Banner({ data }) {
