@@ -117,3 +117,20 @@ export const updateAddress = createAsyncThunk(
 );
 
 
+export const deleteAddress = createAsyncThunk(
+  "auth/deleteAddress",
+  async (id, { getState }) => {
+    const state = getState();
+    const storedToken = state.auth.token || localStorage.getItem("access");
+
+    const token = storedToken?.includes("|")
+      ? storedToken.split("|")[1]
+      : storedToken;
+
+    await api.delete(`/addresses/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return id; // ✅ return only the deleted address id
+  }
+);

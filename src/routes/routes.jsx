@@ -14,10 +14,14 @@ import Checkout from "../pages/checkout/Checkout";
 import CartPage from "../pages/auth/CartPage";
 import OrderPage from "../pages/orders/OrderPage";
 
-// Product & Category Pages
+
 import ProductDetail from "../pages/product/ProductDetail";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
 import ProductsByCategory from "../pages/categories/ProductsByCategory";
+
+
+import CheckoutPage from "../pages/checkout/CheckoutPage";
+
 
 // What We Do Pages
 import Extraharvestdetail from "../pages/whatwedo/extraharvestcrops/Extraharvestdetail";
@@ -43,7 +47,6 @@ const AppRoutes = () => {
         <Route path="/orders" element={<OrderPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<CartPage />} />
-
         {/* Auth */}
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -56,6 +59,9 @@ const AppRoutes = () => {
         <Route path="/morefromharvest" element={<Extraharvestfull />} />
         <Route path="/mainharvestfromfarm" element={<Mostcultivatedfull />} />
     
+
+        <Route path="/checkoutpage" element={<CheckoutPage />} />
+
       </Route>
           
     </Routes>
