@@ -19,6 +19,7 @@ import Morefromharvest from "../components/Morefromharvest";
 import RiceCulivation from "../components/RiceCulivation";
 import RooteCultivation from "../components/RooteCultivation";
 import Dripiriggationsystem from "../components/Dripiriggationsystem";
+import CheckoutPage from "../pages/checkout/CheckoutPage";
 
 
 const AppRoutes = () => {
@@ -49,6 +50,7 @@ const AppRoutes = () => {
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkoutpage" element={<CheckoutPage />} />
       </Route>
     </Routes>
   );
