@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    loginUser,
-    registerUser, 
-    fetchUser,
-    updateUser, 
-    getUser,
-    getAddresses,
-    createAddress, 
-    updateAddress,  
-    deleteAddress
-     } from "./authService";
+  loginUser,
+  registerUser,
+  fetchUser,
+  updateUser,
+  getUser,
+  getAddresses,
+  createAddress,
+  updateAddress,
+  deleteAddress,
+} from "./authService";
 
 const initialState = {
   user: null,
@@ -60,25 +60,23 @@ const authSlice = createSlice({
         console.log("getAddresses payload:", action.payload); // <-- see API address data
         state.addresses = action.payload;
       })
-       // ⬇⬇⬇ SID CHANGE 3: Add new address to store
+      // ⬇⬇⬇ SID CHANGE 3: Add new address to store
       .addCase(createAddress.fulfilled, (state, action) => {
         state.addresses.push(action.payload);
       })
       // ⬇⬇⬇ SID CHANGE 4: Update address in store
-       .addCase(updateAddress.fulfilled, (state, action) => {
+      .addCase(updateAddress.fulfilled, (state, action) => {
         const updated = action.payload; // already the address object
-        state.addresses = state.addresses.map(addr =>
+        state.addresses = state.addresses.map((addr) =>
           addr.id === updated.id ? updated : addr
         );
       })
       .addCase(deleteAddress.fulfilled, (state, action) => {
         const deletedId = action.payload;
-        state.addresses = state.addresses.filter(addr => addr.id !== deletedId);
+        state.addresses = state.addresses.filter(
+          (addr) => addr.id !== deletedId
+        );
       });
-
-
-
-  
   },
 });
 

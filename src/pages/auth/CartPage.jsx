@@ -5,25 +5,26 @@ import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
 
 function CartPage() {
+  const location =useLocation()
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
   const token = useSelector((state) => state.auth.token);
-  console.log('token:',token);
+  console.log("token:", token);
   const navigate = useNavigate();
-  
+
   const handleProceed = () => {
     if (!token) {
-      navigate('/login?redirect=/checkoutpage');
+      navigate("/login",{state:{from:location}});
     } else {
-      navigate('/checkoutpage')
+      navigate("/checkoutpage");
     }
-  }
+  };
 
   // Compute total only once using useMemo
   const grandTotal = useMemo(
@@ -148,9 +149,7 @@ function CartPage() {
                     </Col>
                     <Col md={3}>
                       <div className=" p-4 border rounded shadow-sm bg-light">
-                        <h3 className="mb-4  fw-bold">
-                          Order Summary
-                        </h3>
+                        <h3 className="mb-4  fw-bold">Order Summary</h3>
 
                         <div className="d-flex justify-content-between mb-2">
                           <span className="fw-semibold">Subtotal</span>
@@ -169,31 +168,7 @@ function CartPage() {
                           <h4 className="fw-bold">₹ {grandTotal}</h4>
                         </div>
 
-                     <div className="mb-3">
-                      
-                          <motion.button
-                          whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                          whileTap={{ scale: 0.98 }}
-                          className="btn btn-outline btn-sm"
-                          style={{
-                            borderRadius: "50px",
-                            fontWeight: "500",
-                            border: "1px solid #294085",
-                            backgroundColor: "#294085",
-                            color: "#fff",
-                          }}
-                          aria-label={`Proceed to checkout cart`}
-                          onClick={handleProceed}
-                        >
-                          Proceed to Checkout →
-                        </motion.button>
-                          <button onClick={handleProceed}>
-                          Proceed To Buy
-                        </button>
-
-                        </div>
-                        <div>
-                           <Link to="/login" aria-label="Proceed to checkout">
+                        <div className="mb-3">
                           <motion.button
                             whileHover={{ x: 5, transition: { duration: 0.2 } }}
                             whileTap={{ scale: 0.98 }}
@@ -202,14 +177,36 @@ function CartPage() {
                               borderRadius: "50px",
                               fontWeight: "500",
                               border: "1px solid #294085",
-                              backgroundColor: "#fff",
-                              color: "#294085",
+                              backgroundColor: "#294085",
+                              color: "#fff",
                             }}
                             aria-label={`Proceed to checkout cart`}
+                            onClick={handleProceed}
                           >
-                           Go BAck To Previous Page →
+                            Proceed to Checkout →
                           </motion.button>
-                        </Link>
+                        </div>
+                        <div>
+                          <Link to="/login"  state={{ from: location }} aria-label="Proceed to checkout">
+                            <motion.button
+                              whileHover={{
+                                x: 5,
+                                transition: { duration: 0.2 },
+                              }}
+                              whileTap={{ scale: 0.98 }}
+                              className="btn btn-outline btn-sm"
+                              style={{
+                                borderRadius: "50px",
+                                fontWeight: "500",
+                                border: "1px solid #294085",
+                                backgroundColor: "#fff",
+                                color: "#294085",
+                              }}
+                              aria-label={`Proceed to checkout cart`}
+                            >
+                              Go Back To Previous Page →
+                            </motion.button>
+                          </Link>
                         </div>
                       </div>
                     </Col>

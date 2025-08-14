@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 // Layout
@@ -10,9 +10,9 @@ import Home from "../pages/Home";
 import RegisterPage from "../pages/auth/RegisterPage";
 import LoginPage from "../pages/auth/Login";
 import MyAccount from "../pages/auth/MyAccount";
-import Checkout from "../pages/checkout/Checkout";
+
 import CartPage from "../pages/auth/CartPage";
-import OrderPage from "../pages/orders/OrderPage";
+
 
 import ProductDetail from "../pages/product/ProductDetail";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
@@ -43,8 +43,7 @@ const AppRoutes = () => {
         <Route path="/product/:id" element={<ProductDetail />} />
 
         {/* Orders & Checkout */}
-        <Route path="/orders" element={<OrderPage />} />
-        <Route path="/checkout" element={<Checkout />} />
+
         <Route path="/cart" element={<CartPage />} />
         {/* Auth */}
         <Route path="/register" element={<RegisterPage />} />

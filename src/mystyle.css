@@ -117,3 +117,27 @@ img.cart-image{
 hr {
   border-color: #929292;
 }
+
+
+/* src/styles/CheckoutPage.css */
+
+.cart-items-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.address-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.sticky-bottom-summary,
+.sticky-bottom-btn {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+}
