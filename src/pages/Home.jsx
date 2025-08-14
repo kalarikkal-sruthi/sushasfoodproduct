@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-
 import Instagramfeed from "../components/Instagramfeed";
 import Youtubefeed from "../components/Youtubefeed";
 import Testimonial from "../components/Testimonial";
@@ -15,6 +14,8 @@ import WhatWeDo from "../components/WhatWeDo";
 
 import ValueAddedProducts from "../components/ValueAddedProducts";
 import Ourstory from "../components/Ourstory";
+import Mostharvestcrops from "../components/Mostharvestcrops";
+import Extraharvestcrops from "../components/Extraharvestcrops";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -48,13 +49,21 @@ export default function Home() {
           name="description"
           content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
         />
-        <meta name="keywords" content="farm products, organic produce, value added products, fresh produce, healthy food" />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
       </Helmet>
       <Bannerslider data={homeVideoInGallary} />
       <Aboutfarm />
       <Ourstory />
       <Certificates data={certificates} />
       <WhatWeDo />
+
+      <Mostharvestcrops />
+
+      <Extraharvestcrops />
+
       <ValueAddedProducts data={products} />
       <Instagramfeed data={videoInstagram} />
       <Youtubefeed data={videoYoutube} />

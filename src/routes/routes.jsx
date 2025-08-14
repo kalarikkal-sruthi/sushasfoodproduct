@@ -14,14 +14,11 @@ import Checkout from "../pages/checkout/Checkout";
 import CartPage from "../pages/auth/CartPage";
 import OrderPage from "../pages/orders/OrderPage";
 
-
 import ProductDetail from "../pages/product/ProductDetail";
 import CategoryProductList from "../pages/categories/CategoryProdcutList";
 import ProductsByCategory from "../pages/categories/ProductsByCategory";
 
-
 import CheckoutPage from "../pages/checkout/CheckoutPage";
-
 
 // What We Do Pages
 import Extraharvestdetail from "../pages/whatwedo/extraharvestcrops/Extraharvestdetail";
@@ -33,14 +30,16 @@ import Extraharvestsubcategory from "../pages/whatwedo/extraharvestcrops/Extraha
 const AppRoutes = () => {
   return (
     <Routes>
-      
       <Route element={<MainLayouts />}>
         {/* Home */}
         <Route path="/" element={<Home />} />
 
         {/* Categories & Products */}
         <Route path="/productsbycategory" element={<CategoryProductList />} />
-        <Route path="/productsbycategory/:id" element={<ProductsByCategory />} />
+        <Route
+          path="/productsbycategory/:id"
+          element={<ProductsByCategory />}
+        />
         <Route path="/product/:id" element={<ProductDetail />} />
 
         {/* Orders & Checkout */}
@@ -53,17 +52,16 @@ const AppRoutes = () => {
         <Route path="/myaccount" element={<MyAccount />} />
 
         {/* What We Do */}
-        <Route path="/rootcultivation" element={<Extraharvestdetail />} />
-        <Route path="/rootvegetables" element={<Extraharvestsubcategory />} />
-        <Route path="/ricecultivation" element={<Mostcultivateddetail />} />
-        <Route path="/morefromharvest" element={<Extraharvestfull />} />
-        <Route path="/mainharvestfromfarm" element={<Mostcultivatedfull />} />
-    
+
+        <Route path="" element={<Extraharvestfull />} />
+        <Route path="" element={<Extraharvestsubcategory />} />
+        <Route path="" element={<Extraharvestdetail />} />
+
+        <Route path="" element={<Mostcultivatedfull />} />
+        <Route path="" element={<Mostcultivateddetail />} />
 
         <Route path="/checkoutpage" element={<CheckoutPage />} />
-
       </Route>
-          
     </Routes>
   );
 };

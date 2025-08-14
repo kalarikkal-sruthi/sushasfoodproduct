@@ -118,8 +118,8 @@ function CartPage() {
                                 style={{
                                   borderRadius: "50px",
                                   fontWeight: "500",
-                                  border: "1px solid #700f0f",
-                                  backgroundColor: "#700f0f",
+                                  border: "1px solid #d33838",
+                                  backgroundColor: "#d33838",
                                   color: "#fff",
                                 }}
                                 aria-label={`Remove ${item.product_name} from cart`}

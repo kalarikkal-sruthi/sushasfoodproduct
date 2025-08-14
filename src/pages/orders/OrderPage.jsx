@@ -1,254 +1,9 @@
-// src/pages/order/OrderPage.jsx
-// import React, { useEffect, useState } from "react";
-// import { Container, Row, Col, Button, Card } from "react-bootstrap";
-// import { Plus } from "react-bootstrap-icons";
-// import { useDispatch, useSelector } from "react-redux";
-
-// // 🆕 sid change: use these thunks from your store (adjust path as you asked)
-// import {
-//   getUser,
-//   getAddresses,
-//   createAddress,
-//   updateAddress,
-//   deleteAddress,
-// } from "../../store/authService";
-
-// import OrderCard from "../../components/order/OrderCard";
-// import AddressForm from "../../components/order/AddressForm";
-// import { useNavigate } from "react-router-dom";
-// import { logout as logoutAction } from "../../store/authSlice";
-
-// const OrderPage = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { token } = useSelector((state) => state.auth);// this fo rlogut
-//     useEffect(() => { //this useeffect fter logout, token is null.
-//     if (!token) {
-//       navigate("/login");
-//     }
-//   }, [token, navigate]);
-
-// const handleLogout = () => {
-//   dispatch(logoutAction()); // Redux clears user + token
-//   localStorage.removeItem("access");
-//   navigate("/login");
-// };
-//   // 🆕 sid change: read user + addresses from redux
-//   const { user, addresses = [] } = useSelector((state) => state.auth || {});
-
-//   // keep your existing UI state shapes
-//   const [activeTab, setActiveTab] = useState("orders");
-//   const [addressMode, setAddressMode] = useState("list"); // list | add | edit
-//   const [editData, setEditData] = useState(null);
-
-//   // dummy orders (unchanged)
-//   const orders = [
-//     { id: 4545, date: "Aug 5, 2025", total: "$120", shipTo: "John Doe" },
-//     { id: 4546, date: "Aug 6, 2025", total: "$250", shipTo: "Jane Smith" },
-//   ];
-
-//   // 🆕 sid change: load user & addresses once on mount
-//   useEffect(() => {
-//     dispatch(getUser());
-//     dispatch(getAddresses());
-//   }, [dispatch]);
-
-//   // 🆕 sid change: handle saving address (create or update)
-//   const handleSaveAddress = async (form) => {
-//     try {
-//       if (addressMode === "add") {
-//         await dispatch(createAddress(form));
-//         await dispatch(getAddresses());//AUTO RELOAD LIST OF ADDRESS AFTER SUBMIT
-//      } else if (addressMode === "edit" && editData?.id) {
-//   await dispatch(updateAddress({ ...form, id: editData.id }));
-//   await dispatch(getAddresses());
-// }
-
-//       // return to list view
-//       setAddressMode("list");
-//       setEditData(null);
-//       // (your slice already updates addresses on fulfilled, so no extra fetch required)
-//     } catch (err) {
-//       console.error("Error saving address:", err);
-//     }
-//   };
-
-//   // Render single address card — preserved styling but showing API fields
-//   const renderAddressCard = (address) => (
-//     <Card className="p-3 h-100" key={address.id}>
-//       <h6 className="fw-bold mb-2">
-//         {/* API fields: first_name, last_name */}
-//         {address.first_name ? `${address.first_name} ${address.last_name || ""}` : address.name}
-//       </h6>
-
-//       {/* fallback for older dummy shape (line1/line2) vs new API (address/landmark) */}
-//       {address.address ? <p className="mb-1">{address.address}</p> : <p className="mb-1">{address.line1}</p>}
-//       {address.landmark && <p className="mb-1">{address.landmark}</p>}
-//       {address.city && (
-//         <p className="mb-1">
-//           {address.city} {address.state_id ? `(${address.state_id})` : address.state} {address.pincode || address.zip}
-//         </p>
-//       )}
-//       {address.country && <p className="mb-2">{address.country}</p>}
-//       <div className="d-flex justify-content-between">
-//         <Button
-//           variant="link"
-//           size="sm"
-//           className="p-0"
-//           onClick={() => {
-//             setEditData(address);
-//             setAddressMode("edit");
-//           }}
-//         >
-//           Edit
-//         </Button>
-//         <Button
-//           variant="link"
-//           size="sm"
-//           className="p-0 text-danger"
-//           onClick={() => {
-//             if (window.confirm("Are you sure you want to delete this address?")) {
-//               dispatch(deleteAddress(address.id));
-//             }
-//           }}
-//         >
-//           Remove
-//         </Button>
-
-//       </div>
-//     </Card>
-//   );
-
-//   // Add card (same look you had)
-//   const renderAddCard = () => (
-//     <Card
-//       className="p-3 h-100 d-flex align-items-center justify-content-center text-center border-2 border-dashed"
-//       style={{ cursor: "pointer", minHeight: "150px" }}
-//       onClick={() => {
-//         setAddressMode("add");
-//         setEditData(null);
-//       }}
-//     >
-//       <Plus size={40} className="mb-2 text-success" />
-//       <span className="fw-bold">Add New Address</span>
-//     </Card>
-//   );
-
-//   const renderAddressGrid = () => (
-//   <Row className="mb-4 g-3">
-//     {addresses.map((address) => (
-//       <Col xs={6} key={address.id}>
-//         {renderAddressCard(address)}
-//       </Col>
-//     ))}
-//     <Col xs={6}>{renderAddCard()}</Col>
-//   </Row>
-// );
-
-//   return (
-//     <Container className="p-3 my-5">
-//       <div className="padding-top"></div>
-
-//       {/* Top Row (kept your original look) */}
-//       <Row className="align-items-center mb-3">
-//         <Col>
-//           <h4>Hello, {user?.name || "Username"}</h4> {/* 🆕 sid change */}
-//         </Col>
-//         <Col className="text-end">
-//           <Button
-//             style={{
-//               backgroundColor: "#fff",
-//               color: "#527e3e",
-//               border: "none",
-//               boxShadow: "none",
-//             }}
-//              onClick={handleLogout}
-//           >
-//             Logout
-//           </Button>
-//         </Col>
-//       </Row>
-
-//       {/* Second Row - Sidebar + Main */}
-//       <Row className="g-4">
-//         {/* Sidebar */}
-//         <Col xs={2} className="d-flex flex-column gap-2 p-0">
-//           <Button
-//             className={activeTab === "orders" ? "custom-active" : ""}
-//             onClick={() => {
-//               setActiveTab("orders");
-//               setAddressMode("list");
-//             }}
-//             style={{
-//               backgroundColor: activeTab === "orders" ? "#294085" : "#fff",
-//               color: activeTab === "orders" ? "#fff" : "#736e6e",
-//               fontWeight: "bold",
-//               border: "none",
-//               textAlign: "left",
-//             }}
-//           >
-//             Orders
-//             <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>View your orders</div>
-//           </Button>
-
-//           <Button
-//             className={activeTab === "address" ? "custom-active" : ""}
-//             onClick={() => {
-//               setActiveTab("address");
-//               setAddressMode("list");
-//             }}
-//             style={{
-//               backgroundColor: activeTab === "address" ? "#294085" : "#fff",
-//               color: activeTab === "address" ? "#fff" : "#736e6e",
-//               fontWeight: "bold",
-//               border: "none",
-//               textAlign: "left",
-//             }}
-//           >
-//             Address
-//             <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>Manage address</div>
-//           </Button>
-//         </Col>
-
-//         {/* Main content */}
-//         <Col xs={8}>
-//           {/* Orders tab (unchanged) */}
-//           {activeTab === "orders" && orders.map((order) => <OrderCard key={order.id} order={order} />)}
-
-//           {/* Address tab */}
-//           {activeTab === "address" &&
-//             (addressMode === "list" ? (
-//               renderAddressGrid()
-//             ) : (
-//               <AddressForm
-//                 // AddressForm expects initialData, onSubmit, onCancel (your existing form)
-//                 initialData={addressMode === "edit" ? editData : {}}
-//                 onSubmit={handleSaveAddress} // 🆕 sid change: create/update via thunk
-//                 onCancel={() => {
-//                   setAddressMode("list");
-//                   setEditData(null);
-//                 }}
-//               />
-//             ))}
-//         </Col>
-
-//         {/* optional right column (kept minimal; your previous layout used only 2 cols) */}
-//         <Col xs={2} className="d-flex align-items-start justify-content-end">
-//           {/* you mentioned 'rest of balance logout' — nothing was placed here previously,
-//               keep empty or put extra controls if needed */ }
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default OrderPage;
-
-// src/pages/order/OrderPage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, Suspense } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 import {
   getUser,
   getAddresses,
@@ -256,24 +11,47 @@ import {
   updateAddress,
   deleteAddress,
 } from "../../store/authService";
-import OrderCard from "../../components/order/OrderCard";
-import AddressForm from "../../components/order/AddressForm";
-import { useNavigate } from "react-router-dom";
 import { logout as logoutAction } from "../../store/authSlice";
-
-// 🆕 ADDED: cart and order related
 import { clearCart } from "../../store/cartSlice";
-// import { createOrder } from "../../store/orderService";
 import { getOrders, createOrder } from "../../store/orderSlice";
+import { useNavigate } from "react-router-dom";
+
+const OrderCard = React.lazy(() => import("../../components/order/OrderCard"));
+const AddressForm = React.lazy(() =>
+  import("../../components/order/AddressForm")
+);
 
 const OrderPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
+  const {
+    token,
+    user,
+    addresses = [],
+  } = useSelector((state) => state.auth || {});
+  const ordersState = useSelector((state) => state.order);
+  const orders = ordersState?.orders || [];
+  const cartItems = useSelector((state) => state.cart.items);
+  const selectedAddress = addresses.find((a) => a.is_default);
+
+  const [activeTab, setActiveTab] = useState("address");
+  const [addressMode, setAddressMode] = useState("list");
+  const [editData, setEditData] = useState(null);
+
+  
+
 
   useEffect(() => {
     if (!token) navigate("/login");
   }, [token, navigate]);
+
+
+
+  useEffect(() => {
+    dispatch(getUser());
+    dispatch(getAddresses());
+    dispatch(getOrders());
+  }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -281,42 +59,14 @@ const OrderPage = () => {
     navigate("/login");
   };
 
-  const { user, addresses = [] } = useSelector((state) => state.auth || {});
-
-  // 🆕 CHANGED: orders from Redux state instead of dummy
-  const ordersState = useSelector((state) => state.order);
-  console.log("📦 ordersState from Redux:", ordersState); // <--- check what's inside
-  const orders = ordersState?.orders || [];
-
-  // 🆕 cart + address for placing order
-  const cartItems = useSelector((state) => state.cart.items);
-  const selectedAddress = useSelector((state) =>
-    state.auth.addresses.find((a) => a.is_default)
-  );
-
-  const [activeTab, setActiveTab] = useState("orders");
-  const [addressMode, setAddressMode] = useState("list");
-  const [editData, setEditData] = useState(null);
-
-  useEffect(() => {
-    dispatch(getUser());
-    dispatch(getAddresses());
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log("Fetching orders...");
-    dispatch(getOrders());
-  }, [dispatch]);
-
   const handleSaveAddress = async (form) => {
     try {
       if (addressMode === "add") {
         await dispatch(createAddress(form));
-        await dispatch(getAddresses());
       } else if (addressMode === "edit" && editData?.id) {
         await dispatch(updateAddress({ ...form, id: editData.id }));
-        await dispatch(getAddresses());
       }
+      await dispatch(getAddresses());
       setAddressMode("list");
       setEditData(null);
     } catch (err) {
@@ -324,27 +74,12 @@ const OrderPage = () => {
     }
   };
 
-  // 🆕 NEW: place order from cart
-  // const handlePlaceOrder = async () => {
-  //   const orderPayload = {
-  //     address_id: selectedAddress?.id,
-  //     items: cartItems.map((item) => ({
-  //       product_id: item.id,
-  //       quantity: item.quantity,
-  //     })),
-  //   };
-  //   const result = await dispatch(createOrder(orderPayload));
-  //   if (result.meta.requestStatus === "fulfilled") {
-  //     dispatch(clearCart());
-  //     navigate(`/order-confirmation/${result.payload.id}`);
-  //   }
-  // };
   const handlePlaceOrder = async () => {
     if (cartItems.length === 0) return alert("Your cart is empty!");
 
     const orderPayload = {
       user_id: user.id,
-      address: selectedAddressId, // you must store which address user selects
+      address: selectedAddress?.id,
       special_instructions: "Leave at gate",
       cash_on_delivery: true,
       cart: cartItems.map((item) => ({
@@ -361,58 +96,84 @@ const OrderPage = () => {
     dispatch(getOrders());
   };
 
-  const renderAddressCard = (address) => (
-    <Card className="p-3 h-100" key={address.id}>
-      <h6 className="fw-bold mb-2">
-        {address.first_name
-          ? `${address.first_name} ${address.last_name || ""}`
-          : address.name}
-      </h6>
-      {address.address ? (
-        <p className="mb-1">{address.address}</p>
-      ) : (
-        <p className="mb-1">{address.line1}</p>
-      )}
-      {address.landmark && <p className="mb-1">{address.landmark}</p>}
-      {address.city && (
-        <p className="mb-1">
-          {address.city}{" "}
-          {address.state_id ? `(${address.state_id})` : address.state}{" "}
-          {address.pincode || address.zip}
-        </p>
-      )}
-      {address.country && <p className="mb-2">{address.country}</p>}
-      <div className="d-flex justify-content-between">
-        <Button
-          variant="link"
-          size="sm"
-          className="p-0"
-          onClick={() => {
-            setEditData(address);
-            setAddressMode("edit");
-          }}
-        >
-          Edit
-        </Button>
-        <Button
-          variant="link"
-          size="sm"
-          className="p-0 text-danger"
-          onClick={() => {
-            if (
-              window.confirm("Are you sure you want to delete this address?")
-            ) {
-              dispatch(deleteAddress(address.id));
-            }
-          }}
-        >
-          Remove
-        </Button>
-      </div>
-    </Card>
+  const renderAddressCard = useCallback(
+    (address) => (
+      <Card className="p-3 h-100" key={address.id}>
+        <h6 className="fw-bold mb-2">
+          {address.first_name
+            ? `${address.first_name} ${address.last_name || ""}`
+            : address.name}
+        </h6>
+        <p className="mb-1">{address.address || address.line1}</p>
+        {address.landmark && <p className="mb-1">{address.landmark}</p>}
+        {address.city && (
+          <p className="mb-1">
+            {address.city}{" "}
+            {address.state_id ? `(${address.state_id})` : address.state}{" "}
+            {address.pincode || address.zip}
+          </p>
+        )}
+        {address.country && <p className="mb-2">{address.country}</p>}
+        <div className="d-flex justify-content-between">
+          <motion.button
+            whileHover={{
+              x: 5,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline btn-sm mt-2"
+            style={{
+              borderRadius: "6px",
+              fontWeight: "500",
+              border: "1px solid #294085",
+              backgroundColor: "#294085",
+              color: "#fff",
+            }}
+            aria-label={`logout page`}
+            variant="link"
+            size="sm"
+            onClick={() => {
+              setEditData(address);
+              setAddressMode("edit");
+            }}
+          >
+            Edit →
+          </motion.button>
+
+          <motion.button
+            whileHover={{
+              x: 5,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline btn-sm mt-2"
+            style={{
+              borderRadius: "6px",
+              fontWeight: "500",
+              border: "1px solid #d33838",
+              backgroundColor: "#d33838",
+              color: "#fff",
+            }}
+            aria-label={`logout page`}
+            variant="link"
+            size="sm"
+            onClick={() => {
+              if (
+                window.confirm("Are you sure you want to delete this address?")
+              ) {
+                dispatch(deleteAddress(address.id));
+              }
+            }}
+          >
+            Remove →
+          </motion.button>
+        </div>
+      </Card>
+    ),
+    [dispatch]
   );
 
-  const renderAddCard = () => (
+  const renderAddCard = (
     <Card
       className="p-3 h-100 d-flex align-items-center justify-content-center text-center border-2 border-dashed"
       style={{ cursor: "pointer", minHeight: "150px" }}
@@ -426,114 +187,128 @@ const OrderPage = () => {
     </Card>
   );
 
-  const renderAddressGrid = () => (
-    <Row className="mb-4 g-3">
-      {addresses.map((address) => (
-        <Col xs={6} key={address.id}>
-          {renderAddressCard(address)}
-        </Col>
-      ))}
-      <Col xs={6}>{renderAddCard()}</Col>
-    </Row>
-  );
-
   return (
-    <Container>
-      <Row className="align-items-center mb-3">
-        <Col>
-          <h4>Hello, {user?.name || "Username"}</h4>
-        </Col>
-        <Col className="text-end">
-          <Button
-            style={{
-              backgroundColor: "#fff",
-              color: "#527e3e",
-              border: "none",
-              boxShadow: "none",
-            }}
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        </Col>
-      </Row>
-
-      <Row className="g-4">
-        <Col xs={3} className="d-flex flex-column gap-2 p-0">
-          <Button
-            className={activeTab === "orders" ? "custom-active" : ""}
-            onClick={() => {
-              setActiveTab("orders");
-              setAddressMode("list");
-            }}
-            style={{
-              backgroundColor: activeTab === "orders" ? "#294085" : "#fff",
-              color: activeTab === "orders" ? "#fff" : "#736e6e",
-              fontWeight: "bold",
-              border: "none",
-              textAlign: "left",
-            }}
-          >
-            Orders
-            <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
-              View your orders
-            </div>
-          </Button>
-          <Button
-            className={activeTab === "address" ? "custom-active" : ""}
-            onClick={() => {
-              setActiveTab("address");
-              setAddressMode("list");
-            }}
-            style={{
-              backgroundColor: activeTab === "address" ? "#294085" : "#fff",
-              color: activeTab === "address" ? "#fff" : "#736e6e",
-              fontWeight: "bold",
-              border: "none",
-              textAlign: "left",
-            }}
-          >
-            Address
-            <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
-              Manage address
-            </div>
-          </Button>
-        </Col>
-
-        <Col xs={9}>
-          {activeTab === "orders" &&
-            orders.map((order) => (
-              <OrderCard key={order.id} order={order} products={cartItems} /> // 🆕 PASSED cartItems here
-            ))}
-
-          {activeTab === "address" &&
-            (addressMode === "list" ? (
-              renderAddressGrid()
-            ) : (
-              <AddressForm
-                initialData={addressMode === "edit" ? editData : {}}
-                onSubmit={handleSaveAddress}
-                onCancel={() => {
-                  setAddressMode("list");
-                  setEditData(null);
-                }}
-              />
-            ))}
-        </Col>
-
-        <Col xs={2} className="d-flex align-items-start justify-content-end">
-          {activeTab === "orders" && cartItems.length > 0 && (
-            <Button
-              variant="success"
-              onClick={handlePlaceOrder}
-              style={{ fontWeight: "bold" }}
+    <main>
+      <Helmet>
+        <title>My Orders & Addresses - {user?.name || "User"}</title>
+        <meta
+          name="description"
+          content="View and manage your orders and delivery addresses. Update your account and track your purchases."
+        />
+      </Helmet>
+      <Container>
+        {/* Page Header */}
+        <Row className=" mb-3">
+          <Col className="p-0">
+            <h3>Hello, {user?.name || "User"}</h3>
+          </Col>
+          <Col className="text-end">
+            <motion.button
+              whileHover={{
+                x: 5,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="btn btn-outline btn-sm"
+              style={{
+                borderRadius: "6px",
+                fontWeight: "500",
+                border: "1px solid #d33838",
+                backgroundColor: "#d33838",
+                color: "#fff",
+              }}
+              aria-label={`logout page`}
+              onClick={handleLogout}
             >
-              Place Order
+              Logout →
+            </motion.button>
+          </Col>
+        </Row>
+
+        <Row className="g-4">
+          {/* Sidebar */}
+          <Col xs={3} className="d-flex flex-column gap-2 p-0">
+            <Button
+              onClick={() => {
+                setActiveTab("orders");
+                setAddressMode("list");
+              }}
+              style={{
+                backgroundColor: activeTab === "orders" ? "#294085" : "#fff",
+                color: activeTab === "orders" ? "#fff" : "#736e6e",
+                fontWeight: "bold",
+                border: "none",
+                textAlign: "left",
+              }}
+            >
+              Orders
+              <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
+                View your orders
+              </div>
             </Button>
-          )}
-        </Col>
-      </Row>
-    </Container>
+            <Button
+              onClick={() => {
+                setActiveTab("address");
+                setAddressMode("list");
+              }}
+              style={{
+                backgroundColor: activeTab === "address" ? "#294085" : "#fff",
+                color: activeTab === "address" ? "#fff" : "#736e6e",
+                fontWeight: "bold",
+                border: "none",
+                textAlign: "left",
+              }}
+            >
+              Address
+              <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
+                Manage address
+              </div>
+            </Button>
+          </Col>
+
+          {/* Content */}
+          <Col xs={9}>
+            <Suspense fallback={<p>Loading...</p>}>
+              {activeTab === "orders" &&
+                orders.map((order) => (
+                  <OrderCard
+                    key={order.id}
+                    order={order}
+                    products={cartItems}
+                  />
+                ))}
+              {activeTab === "address" &&
+                (addressMode === "list" ? (
+                  <Row className="mb-4 g-3">
+                    {addresses.map((address) => (
+                      <Col xs={6} key={address.id}>
+                        {renderAddressCard(address)}
+                      </Col>
+                    ))}
+                    <Col xs={6}>{renderAddCard}</Col>
+                  </Row>
+                ) : (
+                  <AddressForm
+                    initialData={addressMode === "edit" ? editData : {}}
+                    onSubmit={handleSaveAddress}
+                    onCancel={() => {
+                      setAddressMode("list");
+                      setEditData(null);
+                    }}
+                  />
+                ))}
+            </Suspense>
+            {activeTab === "orders" && cartItems.length > 0 && (
+              <div className="mt-4 text-end">
+                <Button variant="success" onClick={handlePlaceOrder}>
+                  Place Order
+                </Button>
+              </div>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </main>
   );
 };
 

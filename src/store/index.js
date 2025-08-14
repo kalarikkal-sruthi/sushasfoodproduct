@@ -7,7 +7,6 @@ import homeDataReducer from "./homeDataSlice";
 import productReducer from "./ProductSlice";
 import cartReducer from "./cartSlice";
 import categoryProductReducer from "./categoryProductSlice";
-import whatwillDataReducer from "./whatwillDataSlice";
 import orderReducer from "./orderSlice"
 
 const rootReducer = combineReducers({
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
   product: productReducer,
   cart: cartReducer,
   categoryProducts: categoryProductReducer,
-  whatwillData: whatwillDataReducer,
   order: orderReducer,
 });
 

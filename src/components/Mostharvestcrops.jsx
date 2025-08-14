@@ -8,8 +8,7 @@ import kuttymulla from "../assets/whatwedo/kuttimulla.jpeg";
 import curryleaves from "../assets/whatwedo/curryleaves.jpg";
 import { Link } from "react-router-dom";
 
-
-function MostCommonCrops() {
+function Mostharvestcrops() {
   const crops = [
     {
       title: "Coconut Cultivation (തെങ്ങ് കൃഷി)",
@@ -101,7 +100,7 @@ function MostCommonCrops() {
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                  Most Cultivated Organic Crops on Our Farm
+                  Most Harvest From Our Farm
                 </motion.h2>
                 <p className="text-muted">
                   Explore the main crops we grow at Susha's Prakash Organic Farm
@@ -163,8 +162,6 @@ function MostCommonCrops() {
                               <li>Eco-Friendly Practices</li>
                             </ul>
 
-
-                            
                             <Link to={crop.link}>
                               <motion.div
                                 whileHover={{
@@ -182,7 +179,7 @@ function MostCommonCrops() {
                                   color: "#fff",
                                 }}
                               >
-                                Learn More  →
+                                Learn More →
                               </motion.div>
                             </Link>
                           </Card.Body>
@@ -195,8 +192,7 @@ function MostCommonCrops() {
             ))}
           </Row>
 
-
-<Row>
+          <Row>
             <Col className="text-center">
               <Link to="/mainharvestfromfarm">
                 <motion.span
@@ -219,11 +215,10 @@ function MostCommonCrops() {
               </Link>
             </Col>
           </Row>
-          
         </section>
       </Container>
     </main>
   );
 }
 
-export default MostCommonCrops;
+export default Mostharvestcrops;

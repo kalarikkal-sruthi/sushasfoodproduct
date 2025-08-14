@@ -1,339 +1,22 @@
-// import React, { useState } from "react";
-// import { Form, Button, Card, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect, useCallback } from "react";
+import { Form, Card, Row, Col } from "react-bootstrap";
+import { motion } from "framer-motion";
 
-// const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
-//   const [form, setForm] = useState({
-//     first_name: initialData.first_name || "",
-//     last_name: initialData.last_name || "",
-//     address: initialData.address || "",
-//     landmark: initialData.landmark || "",
-//     city: initialData.city || "",
-//     state_id: initialData.state_id || "",
-//     country_id: initialData.country_id || "",
-//     pincode: initialData.pincode || "",
-//     phone_number: initialData.phone_number || "",
-//     store_id: initialData.store_id || "",
-//   });
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (onSubmit) onSubmit(form);
-//   };
-
-//   return (
-//     <>
-//     <div className="padding-top"></div>
-//       <Card className="p-4 shadow-sm">
-//         <h5 className="mb-3">
-//           {initialData && initialData.id ? "Edit Address" : "Add New Address"}
-//         </h5>
-//         <Form onSubmit={handleSubmit}>
-//           <Row>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>First Name</Form.Label>
-//                 <Form.Control
-//                   name="first_name"
-//                   value={form.first_name}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>Last Name</Form.Label>
-//                 <Form.Control
-//                   name="last_name"
-//                   value={form.last_name}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//           </Row>
-
-//           <Row>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>Address</Form.Label>
-//                 <Form.Control
-//                   name="address"
-//                   value={form.address}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>Landmark</Form.Label>
-//                 <Form.Control
-//                   name="landmark"
-//                   value={form.landmark}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//           </Row>
-
-//           <Row>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>City</Form.Label>
-//                 <Form.Control
-//                   name="city"
-//                   value={form.city}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>State ID</Form.Label>
-//                 <Form.Control
-//                   name="state_id"
-//                   type="number"
-//                   value={form.state_id}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//           </Row>
-
-//           <Row>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>Country ID</Form.Label>
-//                 <Form.Control
-//                   name="country_id"
-//                   type="number"
-//                   value={form.country_id}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>Pincode</Form.Label>
-//                 <Form.Control
-//                   name="pincode"
-//                   value={form.pincode}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//           </Row>
-
-//           <Row>
-//             <Col md={6}>
-//               <Form.Group className="mb-2">
-//                 <Form.Label>Phone Number</Form.Label>
-//                 <Form.Control
-//                   name="phone_number"
-//                   value={form.phone_number}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//             <Col md={6}>
-//               <Form.Group className="mb-3">
-//                 <Form.Label>Store ID</Form.Label>
-//                 <Form.Control
-//                   name="store_id"
-//                   type="number"
-//                   value={form.store_id}
-//                   onChange={handleChange}
-//                 />
-//               </Form.Group>
-//             </Col>
-//           </Row>
-
-//           <div className="d-flex justify-content-end">
-//           <Button
-//             type="submit"
-//             style={{ backgroundColor: "#86b86ff6", border: "none" }}
-//             >
-//             {initialData && initialData.id ? "Update Address" : "Save Address"}
-//           </Button>
-//           <Button
-//             variant="secondary"
-//             className="ms-2"
-//             onClick={() => {
-//               if (onCancel) onCancel();
-//             }}
-//             >
-//             Cancel
-//           </Button>
-//             </div>
-//         </Form>
-//       </Card>
-//     </>
-//   );
-// };
-
-// export default AddressForm;
-
-
-
-// import React, { useState, useEffect } from "react";
-
-// export default function AddressForm({ initialData, onCancel, onSave }) {
-//   const [form, setForm] = useState({
-//     first_name: "",
-//     last_name: "",
-//     address: "",
-//     landmark: "",
-//     city: "",
-//     state_id: "",
-//     country_id: "",
-//     pincode: "",
-//     phone_number: "",
-//     store_id: 1,
-//   });
-
-//   useEffect(() => {
-//     if (initialData) {
-//       setForm({
-//         first_name: initialData.first_name || "",
-//         last_name: initialData.last_name || "",
-//         address: initialData.address || "",
-//         landmark: initialData.landmark || "",
-//         city: initialData.city || "",
-//         state_id: initialData.state_id || "",
-//         country_id: initialData.country_id || "",
-//         pincode: initialData.pincode || "",
-//         phone_number: initialData.phone_number || "",
-//         store_id: initialData.store_id || 1,
-//       });
-//     }
-//   }, [initialData]);
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     onSave(form);
-//   };
-
-//   return (
-//     <div className="p-6 border rounded shadow bg-white">
-//       <h2 className="text-lg font-bold mb-4">
-//         {initialData ? "Edit Address" : "New Address"}
-//       </h2>
-
-//       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-//         <input
-//           name="first_name"
-//           placeholder="First Name"
-//           value={form.first_name}
-//           onChange={handleChange}
-//           className="border p-2 rounded"
-//         />
-//         <input
-//           name="last_name"
-//           placeholder="Last Name"
-//           value={form.last_name}
-//           onChange={handleChange}
-//           className="border p-2 rounded"
-//         />
-//         <input
-//           name="address"
-//           placeholder="Address"
-//           value={form.address}
-//           onChange={handleChange}
-//           className="border p-2 rounded col-span-2"
-//         />
-//         <input
-//           name="landmark"
-//           placeholder="Landmark"
-//           value={form.landmark}
-//           onChange={handleChange}
-//           className="border p-2 rounded col-span-2"
-//         />
-//         <input
-//           name="city"
-//           placeholder="City"
-//           value={form.city}
-//           onChange={handleChange}
-//           className="border p-2 rounded"
-//         />
-//         <input
-//           name="state_id"
-//           placeholder="State ID"
-//           value={form.state_id}
-//           onChange={handleChange}
-//           className="border p-2 rounded"
-//         />
-//         <input
-//           name="country_id"
-//           placeholder="Country ID"
-//           value={form.country_id}
-//           onChange={handleChange}
-//           className="border p-2 rounded"
-//         />
-//         <input
-//           name="pincode"
-//           placeholder="Pincode"
-//           value={form.pincode}
-//           onChange={handleChange}
-//           className="border p-2 rounded"
-//         />
-//         <input
-//           name="phone_number"
-//           placeholder="Phone Number"
-//           value={form.phone_number}
-//           onChange={handleChange}
-//           className="border p-2 rounded col-span-2"
-//         />
-
-//         <div className="col-span-2 flex justify-end gap-2">
-//           <button
-//             type="button"
-//             onClick={onCancel}
-//             className="px-4 py-2 bg-gray-300 rounded"
-//           >
-//             Cancel
-//           </button>
-//           <button
-//             type="submit"
-//             className="px-4 py-2 bg-green-500 text-white rounded"
-//           >
-//             Save
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// }
-
-
-
-
-// components/order/AddressForm.jsx
-
-import React, { useState, useEffect } from "react";
-import { Form, Button, Card, Row, Col } from "react-bootstrap";
-
-const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
-  // ✅ Sid's change: ensure form loads initialData for editing
+const AddressForm = React.memo(({ initialData = {}, onSubmit, onCancel }) => {
   const [form, setForm] = useState({
-    first_name: initialData.first_name || "",
-    last_name: initialData.last_name || "",
-    address: initialData.address || "",
-    landmark: initialData.landmark || "",
-    city: initialData.city || "",
-    state_id: initialData.state_id || "",
-    country_id: initialData.country_id || "",
-    pincode: initialData.pincode || "",
-    phone_number: initialData.phone_number || "",
-    store_id: initialData.store_id || "",
+    first_name: "",
+    last_name: "",
+    address: "",
+    landmark: "",
+    city: "",
+    state_id: "",
+    country_id: "",
+    pincode: "",
+    phone_number: "",
+    store_id: "",
   });
 
-  // ✅ Sid's change: update state when initialData changes (edit mode)
+  // Update when editing existing address
   useEffect(() => {
     setForm({
       first_name: initialData.first_name || "",
@@ -349,11 +32,12 @@ const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
     });
   }, [initialData]);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  // Stable handler to prevent unnecessary renders
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
-  // ✅ Sid's change: ensure full form data sent to onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onSubmit) onSubmit(form);
@@ -363,28 +47,33 @@ const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
     <>
       <div className="padding-top"></div>
       <Card className="p-4 shadow-sm">
-        <h5 className="mb-3">
-          {initialData && initialData.id ? "Edit Address" : "Add New Address"}
-        </h5>
-        <Form onSubmit={handleSubmit}>
+        <h2 className="h5 mb-3">
+          {initialData?.id ? "Edit Address" : "Add New Address"}
+        </h2>
+
+        <Form onSubmit={handleSubmit} aria-label="Address Form">
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="firstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   name="first_name"
                   value={form.first_name}
                   onChange={handleChange}
+                  placeholder="Enter first name"
+                  required
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="lastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   name="last_name"
                   value={form.last_name}
                   onChange={handleChange}
+                  placeholder="Enter last name"
+                  required
                 />
               </Form.Group>
             </Col>
@@ -392,22 +81,25 @@ const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="address">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
                   name="address"
                   value={form.address}
                   onChange={handleChange}
+                  placeholder="Street address"
+                  required
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="landmark">
                 <Form.Label>Landmark</Form.Label>
                 <Form.Control
                   name="landmark"
                   value={form.landmark}
                   onChange={handleChange}
+                  placeholder="Nearby landmark"
                 />
               </Form.Group>
             </Col>
@@ -415,23 +107,27 @@ const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="city">
                 <Form.Label>City</Form.Label>
                 <Form.Control
                   name="city"
                   value={form.city}
                   onChange={handleChange}
+                  placeholder="Enter city"
+                  required
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="stateId">
                 <Form.Label>State ID</Form.Label>
                 <Form.Control
                   name="state_id"
                   type="number"
                   value={form.state_id}
                   onChange={handleChange}
+                  placeholder="State ID"
+                  required
                 />
               </Form.Group>
             </Col>
@@ -439,23 +135,27 @@ const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="countryId">
                 <Form.Label>Country ID</Form.Label>
                 <Form.Control
                   name="country_id"
                   type="number"
                   value={form.country_id}
                   onChange={handleChange}
+                  placeholder="Country ID"
+                  required
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="pincode">
                 <Form.Label>Pincode</Form.Label>
                 <Form.Control
                   name="pincode"
                   value={form.pincode}
                   onChange={handleChange}
+                  placeholder="Enter pincode"
+                  required
                 />
               </Form.Group>
             </Col>
@@ -463,49 +163,69 @@ const AddressForm = ({ initialData = {}, onSubmit, onCancel }) => {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-2" controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   name="phone_number"
                   value={form.phone_number}
                   onChange={handleChange}
+                  placeholder="Enter phone number"
+                  required
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="storeId">
                 <Form.Label>Store ID</Form.Label>
                 <Form.Control
                   name="store_id"
                   type="number"
                   value={form.store_id}
                   onChange={handleChange}
+                  placeholder="Store ID"
                 />
               </Form.Group>
             </Col>
           </Row>
 
-          <div className="d-flex justify-content-end">
-            <Button
+          <div className="d-flex gap-2 justify-content-end">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
               type="submit"
-              style={{ backgroundColor: "#86b86ff6", border: "none" }}
-            >
-              {initialData && initialData.id ? "Update Address" : "Save Address"}
-            </Button>
-            <Button
-              variant="secondary"
-              className="ms-2"
-              onClick={() => {
-                if (onCancel) onCancel();
+              className="btn btn-danger btn-sm"
+              style={{
+                borderRadius: "6px",
+                fontWeight: "500",
+                border: "1px solid #294085",
+                backgroundColor: "#294085",
+                color: "#fff",
               }}
             >
+              {initialData?.id ? "Update Address" : "Save Address"}
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              type="button"
+              className="btn btn-outline-secondary btn-sm"
+              style={{
+                borderRadius: "6px",
+                fontWeight: "500",
+                border: "1px solid #d33838",
+                backgroundColor: "#d33838",
+                color: "#fff",
+              }}
+              onClick={onCancel}
+            >
               Cancel
-            </Button>
+            </motion.button>
           </div>
         </Form>
       </Card>
     </>
   );
-};
+});
 
 export default AddressForm;
