@@ -1,5 +1,3 @@
-
-
 // src/pages/order/OrderPage.jsx
 // import React, { useEffect, useState } from "react";
 // import { Container, Row, Col, Button, Card } from "react-bootstrap";
@@ -30,7 +28,6 @@
 //     }
 //   }, [token, navigate]);
 
-
 // const handleLogout = () => {
 //   dispatch(logoutAction()); // Redux clears user + token
 //   localStorage.removeItem("access");
@@ -55,7 +52,6 @@
 //     dispatch(getUser());
 //     dispatch(getAddresses());
 //   }, [dispatch]);
-  
 
 //   // 🆕 sid change: handle saving address (create or update)
 //   const handleSaveAddress = async (form) => {
@@ -76,8 +72,6 @@
 //       console.error("Error saving address:", err);
 //     }
 //   };
-
-
 
 //   // Render single address card — preserved styling but showing API fields
 //   const renderAddressCard = (address) => (
@@ -139,7 +133,6 @@
 //       <span className="fw-bold">Add New Address</span>
 //     </Card>
 //   );
-
 
 //   const renderAddressGrid = () => (
 //   <Row className="mb-4 g-3">
@@ -251,7 +244,6 @@
 
 // export default OrderPage;
 
-
 // src/pages/order/OrderPage.jsx
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
@@ -274,7 +266,6 @@ import { clearCart } from "../../store/cartSlice";
 // import { createOrder } from "../../store/orderService";
 import { getOrders, createOrder } from "../../store/orderSlice";
 
-
 const OrderPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -293,9 +284,9 @@ const OrderPage = () => {
   const { user, addresses = [] } = useSelector((state) => state.auth || {});
 
   // 🆕 CHANGED: orders from Redux state instead of dummy
-const ordersState = useSelector((state) => state.order); 
-console.log("📦 ordersState from Redux:", ordersState); // <--- check what's inside
-const orders = ordersState?.orders || [];
+  const ordersState = useSelector((state) => state.order);
+  console.log("📦 ordersState from Redux:", ordersState); // <--- check what's inside
+  const orders = ordersState?.orders || [];
 
   // 🆕 cart + address for placing order
   const cartItems = useSelector((state) => state.cart.items);
@@ -311,12 +302,11 @@ const orders = ordersState?.orders || [];
     dispatch(getUser());
     dispatch(getAddresses());
   }, [dispatch]);
-  
-  useEffect(() => {
-  console.log("Fetching orders...");
-  dispatch(getOrders());
-}, [dispatch]);
 
+  useEffect(() => {
+    console.log("Fetching orders...");
+    dispatch(getOrders());
+  }, [dispatch]);
 
   const handleSaveAddress = async (form) => {
     try {
@@ -350,27 +340,26 @@ const orders = ordersState?.orders || [];
   //   }
   // };
   const handlePlaceOrder = async () => {
-  if (cartItems.length === 0) return alert("Your cart is empty!");
+    if (cartItems.length === 0) return alert("Your cart is empty!");
 
-  const orderPayload = {
-    user_id: user.id,
-    address: selectedAddressId, // you must store which address user selects
-    special_instructions: "Leave at gate",
-    cash_on_delivery: true,
-    cart: cartItems.map(item => ({
-      product_id: item.id,
-      quantity: item.quantity,
-      price: item.price,
-      product_size_id: item.size_id || null,
-      product_prize_id: item.prize_id || null
-    }))
+    const orderPayload = {
+      user_id: user.id,
+      address: selectedAddressId, // you must store which address user selects
+      special_instructions: "Leave at gate",
+      cash_on_delivery: true,
+      cart: cartItems.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity,
+        price: item.price,
+        product_size_id: item.size_id || null,
+        product_prize_id: item.prize_id || null,
+      })),
+    };
+
+    await dispatch(createOrder(orderPayload));
+    dispatch(clearCart());
+    dispatch(getOrders());
   };
-
-  await dispatch(createOrder(orderPayload));
-  dispatch(clearCart());
-  dispatch(getOrders());
-};
-
 
   const renderAddressCard = (address) => (
     <Card className="p-3 h-100" key={address.id}>
@@ -410,7 +399,9 @@ const orders = ordersState?.orders || [];
           size="sm"
           className="p-0 text-danger"
           onClick={() => {
-            if (window.confirm("Are you sure you want to delete this address?")) {
+            if (
+              window.confirm("Are you sure you want to delete this address?")
+            ) {
               dispatch(deleteAddress(address.id));
             }
           }}
@@ -447,8 +438,7 @@ const orders = ordersState?.orders || [];
   );
 
   return (
-    <Container className="p-3 my-5">
-      <div className="padding-top"></div>
+    <Container>
       <Row className="align-items-center mb-3">
         <Col>
           <h4>Hello, {user?.name || "Username"}</h4>
@@ -469,7 +459,7 @@ const orders = ordersState?.orders || [];
       </Row>
 
       <Row className="g-4">
-        <Col xs={2} className="d-flex flex-column gap-2 p-0">
+        <Col xs={3} className="d-flex flex-column gap-2 p-0">
           <Button
             className={activeTab === "orders" ? "custom-active" : ""}
             onClick={() => {
@@ -510,7 +500,7 @@ const orders = ordersState?.orders || [];
           </Button>
         </Col>
 
-        <Col xs={8}>
+        <Col xs={9}>
           {activeTab === "orders" &&
             orders.map((order) => (
               <OrderCard key={order.id} order={order} products={cartItems} /> // 🆕 PASSED cartItems here

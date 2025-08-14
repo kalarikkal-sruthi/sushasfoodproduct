@@ -33,8 +33,8 @@ export default function Header() {
                 </button>
                 <div className="dropdown-sub-menu">
                   <Nav.Link href=""></Nav.Link>
-                  <Nav.Link href="">Main Harvest From Our Farm</Nav.Link>
-                  <Nav.Link href="">Sub Harvest From Our Farm</Nav.Link>
+                  <Nav.Link href="">Most Harvest From Our Farm</Nav.Link>
+                  <Nav.Link href="">Extra Harvest from Our Farm</Nav.Link>
                  
                  
                 </div>
@@ -45,10 +45,12 @@ export default function Header() {
                   <Nav.Link href="">Product Categories ▼</Nav.Link>
                 </button>
                 <div className="dropdown-sub-menu">
-                  <Nav.Link href="">Rasoi Manthras</Nav.Link>
                   <Nav.Link href="">Essential Products</Nav.Link>
+                  <Nav.Link href="">Rasoi Manthras</Nav.Link>
+                   <Nav.Link href="">Savera</Nav.Link>
                   <Nav.Link href="">Nyra</Nav.Link>
-                  <Nav.Link href="">Oil Products</Nav.Link>
+                  <Nav.Link href="">InterSpices</Nav.Link>
+                   <Nav.Link href="">Other</Nav.Link>
                  
                 </div>
               </div>
@@ -56,10 +58,7 @@ export default function Header() {
               <Nav.Link className="icon-img">
                 <img src={search} alt="susha's food product" />
               </Nav.Link>{" "}
-              <Nav.Link href="">|</Nav.Link>
-              <Nav.Link href="/cart" className="icon-img">
-                Cart <img src={shoppingcart} alt="susha's food product" />
-              </Nav.Link>{" "}
+             
               <Nav.Link href="">|</Nav.Link>
               {token ? (
                 <Nav.Link href="/myaccount" className="icon-img">
@@ -71,6 +70,10 @@ export default function Header() {
                 </Nav.Link>
                 
               )}
+               <Nav.Link href="">|</Nav.Link>
+              <Nav.Link href="/cart" className="icon-img">
+                Cart <img src={shoppingcart} alt="susha's food product" />
+              </Nav.Link>{" "}
                <Nav.Link href="/productsbycategory">Shop Now</Nav.Link>
             </Nav>
           </Navbar.Collapse>

@@ -70,15 +70,14 @@ const ValueAddedProducts = () => {
                   <Link
                     to={`/productsbycategory/${category.id}`}
                     state={{
-    bgColor: bgColors[category.id % bgColors.length],
-    categoryName: category.name, 
-  }}
+                      bgColor: bgColors[category.id % bgColors.length],
+                      categoryName: category.name,
+                    }}
                     style={{ textDecoration: "none" }}
                     aria-label={`View products in ${category.name}`}
                   >
                     <Card
                       className="h-100 shadow-sm border-0 p-3"
-                       
                       style={{
                         background: bgColors[category.id % bgColors.length],
                         borderRadius: "12px",
@@ -124,7 +123,7 @@ const ValueAddedProducts = () => {
           <Row>
             <Col className="text-center mt-5">
               <Link
-                to="/productsbycategory" 
+                to="/productsbycategory"
                 aria-label="View all value added products"
               >
                 <motion.button

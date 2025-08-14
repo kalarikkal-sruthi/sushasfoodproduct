@@ -6,6 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { productURL } from "../../utils/api";
 
 function CartPage() {
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ function CartPage() {
       <div className="padding-top" />
       <div className="padding-top" />
       <Container className="mt-5">
-        <div class="" style={{ padding: "0px 200px" }}>
+        <div class="calculation-padding">
           <section aria-labelledby="cart-heading">
             <header className="header-bar">
               <Row>
@@ -58,49 +60,144 @@ function CartPage() {
                 <p className="text-muted">Your cart is empty.</p>
               ) : (
                 <>
-                  <ul className="list-group">
-                    {cartItems.map((item) => (
-                      <li
-                        key={item.id}
-                        className="list-group-item d-flex justify-content-between align-items-start"
-                        role="article"
-                        aria-label={`Cart item: ${item.product_name}`}
-                      >
-                        <div>
-                          <h4>{item.product_name}</h4>
-                          <p>Size: {item.size || "Default"}</p>
-                          <p>
-                            ₹ {item.price} × {item.quantity}
-                          </p>
-                          <small className="text-secondary">
-                            Total: ₹ {item.price * item.quantity}
-                          </small>
-                        </div>
-                        <Button
-                          className="btn-sm"
-                          aria-label={`Remove ${item.product_name} from cart`}
-                          variant="outline-danger"
-                          onClick={() => dispatch(removeFromCart(item.id))}
+                  <Row>
+                    <Col md={9}>
+                      <ul className="list-group" aria-labelledby="cart-heading">
+                        {/* Headings row */}
+                        <li
+                          className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
+                          role="presentation"
                         >
-                          Remove
-                        </Button>
-                      </li>
-                    ))}
-                  </ul>
+                          <div style={{ width: "25%" }}>Product</div>
+                          <div style={{ width: "15%" }}>Quantity</div>
+                          <div style={{ width: "15%" }}>Price</div>
+                          <div style={{ width: "15%" }}>Total</div>
+                          <div style={{ width: "15%" }}>Action</div>
+                        </li>
 
-                  {/* Grand Total Section */}
-                  <div className="mt-4 text-end">
-                    <h4>Grand Total: ₹ {grandTotal}</h4>
-                  </div>
+                        {/* Items */}
+                        {cartItems.map((item) => (
+                          <li
+                            key={item.id}
+                            className="p-4 list-group-item d-flex justify-content-between align-items-center"
+                            role="article"
+                            aria-label={`Cart item: ${item.product_name}`}
+                          >
+                            {/* Product info */}
+                            <div style={{ width: "25%" }}>
+                              <img
+                                className="cart-image me-2"
+                                src={`${productURL}${item.image}`}
+                                alt={item.product_name}
+                                style={{ maxWidth: "50px", height: "auto" }}
+                              />
+                              <br></br>
+                              <span>{item.product_name}</span>
+                            </div>
 
-                  {/* Proceed to Buy Button */}
-                  <div className="view-all-button mt-4 text-end">
-                    <Link to="/login" aria-label="Proceed to checkout">
-                      <button className="btn btn-primary">
-                        Proceed To Buy
-                      </button>
-                    </Link>
-                  </div>
+                            {/* Quantity */}
+                            <div style={{ width: "15%" }}>{item.quantity}</div>
+
+                            {/* Price */}
+                            <div style={{ width: "15%" }}>₹ {item.price}</div>
+
+                            {/* Total */}
+                            <div style={{ width: "15%" }}>
+                              ₹ {item.price * item.quantity}
+                            </div>
+
+                            {/* Remove button */}
+                            <div style={{ width: "15%" }}>
+                              <motion.button
+                                whileHover={{
+                                  x: 5,
+                                  transition: { duration: 0.2 },
+                                }}
+                                whileTap={{ scale: 0.98 }}
+                                className="btn btn-outline btn-sm"
+                                style={{
+                                  borderRadius: "50px",
+                                  fontWeight: "500",
+                                  border: "1px solid #700f0f",
+                                  backgroundColor: "#700f0f",
+                                  color: "#fff",
+                                }}
+                                aria-label={`Remove ${item.product_name} from cart`}
+                                onClick={() =>
+                                  dispatch(removeFromCart(item.id))
+                                }
+                              >
+                                Remove →
+                              </motion.button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </Col>
+                    <Col md={3}>
+                      <div className=" p-4 border rounded shadow-sm bg-light">
+                        <h3 className="mb-4  fw-bold">
+                          Order Summary
+                        </h3>
+
+                        <div className="d-flex justify-content-between mb-2">
+                          <span className="fw-semibold">Subtotal</span>
+                          <span>₹ {grandTotal}</span>
+                        </div>
+
+                        <div className="d-flex justify-content-between mb-2">
+                          <span className="fw-semibold">Shipping</span>
+                          <span>₹ 0</span>
+                        </div>
+
+                        <hr />
+
+                        <div className="d-flex justify-content-between mb-3">
+                          <h4 className="fw-bold">Grand Total</h4>
+                          <h4 className="fw-bold">₹ {grandTotal}</h4>
+                        </div>
+
+                     <div className="mb-3">
+                        <Link to="/login" aria-label="Proceed to checkout">
+                          <motion.button
+                            whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                            whileTap={{ scale: 0.98 }}
+                            className="btn btn-outline btn-sm"
+                            style={{
+                              borderRadius: "50px",
+                              fontWeight: "500",
+                              border: "1px solid #294085",
+                              backgroundColor: "#294085",
+                              color: "#fff",
+                            }}
+                            aria-label={`Proceed to checkout cart`}
+                          >
+                            Proceed to Checkout →
+                          </motion.button>
+                        </Link>
+                        </div>
+                        <div>
+                           <Link to="/login" aria-label="Proceed to checkout">
+                          <motion.button
+                            whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                            whileTap={{ scale: 0.98 }}
+                            className="btn btn-outline btn-sm"
+                            style={{
+                              borderRadius: "50px",
+                              fontWeight: "500",
+                              border: "1px solid #294085",
+                              backgroundColor: "#fff",
+                              color: "#294085",
+                            }}
+                            aria-label={`Proceed to checkout cart`}
+                          >
+                           Go BAck To Previous Page →
+                          </motion.button>
+                        </Link>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
                 </>
               )}
             </section>
