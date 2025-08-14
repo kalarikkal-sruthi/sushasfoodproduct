@@ -8,6 +8,7 @@ import productReducer from "./ProductSlice";
 import cartReducer from "./cartSlice";
 import categoryProductReducer from "./categoryProductSlice";
 import orderReducer from "./orderSlice"
+import mostHarvestReducer from "./mostHarvestSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   categoryProducts: categoryProductReducer,
   order: orderReducer,
+  mostHarvest: mostHarvestReducer,
 });
 
 const persistConfig = {

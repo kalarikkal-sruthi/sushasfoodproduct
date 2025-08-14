@@ -11,6 +11,8 @@ export const productURL = "https://ms.myfezto.com/uploads/products/";
 export const aboutURL = "https://ms.myfezto.com/uploads/about-us-images/";
 export const categoryUrl = "https://ms.myfezto.com/uploads/Categories/";
 
+export const imgURLMostHarvest ="https://ms.myfezto.com/uploads/what_in_farm/"
+
 const api = axios.create({
   baseURL: "https://ms.myfezto.com/api",
 
