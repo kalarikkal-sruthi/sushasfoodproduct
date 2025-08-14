@@ -56,8 +56,8 @@ const AppRoutes = () => {
         <Route path="" element={<Extraharvestsubcategory />} />
         <Route path="" element={<Extraharvestdetail />} />
 
-        <Route path="" element={<Mostcultivatedfull />} />
-        <Route path="" element={<Mostcultivateddetail />} />
+        <Route path="/mostcultivated" element={<Mostcultivatedfull />} />
+        <Route path="/mostcultivated/:id" element={<Mostcultivateddetail />} /> 
 
         <Route path="/checkoutpage" element={<CheckoutPage />} />
       </Route>
