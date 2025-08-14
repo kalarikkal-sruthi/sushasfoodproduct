@@ -5,13 +5,25 @@ import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
 
 function CartPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+
+  const token = useSelector((state) => state.auth.token);
+  console.log('token:',token);
+  const navigate = useNavigate();
+  
+  const handleProceed = () => {
+    if (!token) {
+      navigate('/login?redirect=/checkoutpage');
+    } else {
+      navigate('/checkoutpage')
+    }
+  }
 
   // Compute total only once using useMemo
   const grandTotal = useMemo(
@@ -158,23 +170,27 @@ function CartPage() {
                         </div>
 
                      <div className="mb-3">
-                        <Link to="/login" aria-label="Proceed to checkout">
+                      
                           <motion.button
-                            whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                            whileTap={{ scale: 0.98 }}
-                            className="btn btn-outline btn-sm"
-                            style={{
-                              borderRadius: "50px",
-                              fontWeight: "500",
-                              border: "1px solid #294085",
-                              backgroundColor: "#294085",
-                              color: "#fff",
-                            }}
-                            aria-label={`Proceed to checkout cart`}
-                          >
-                            Proceed to Checkout →
-                          </motion.button>
-                        </Link>
+                          whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                          whileTap={{ scale: 0.98 }}
+                          className="btn btn-outline btn-sm"
+                          style={{
+                            borderRadius: "50px",
+                            fontWeight: "500",
+                            border: "1px solid #294085",
+                            backgroundColor: "#294085",
+                            color: "#fff",
+                          }}
+                          aria-label={`Proceed to checkout cart`}
+                          onClick={handleProceed}
+                        >
+                          Proceed to Checkout →
+                        </motion.button>
+                          <button onClick={handleProceed}>
+                          Proceed To Buy
+                        </button>
+
                         </div>
                         <div>
                            <Link to="/login" aria-label="Proceed to checkout">
