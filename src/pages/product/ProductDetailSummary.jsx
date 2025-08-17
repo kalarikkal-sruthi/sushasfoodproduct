@@ -4,6 +4,7 @@ import { addToCart } from "../../store/cartSlice";
 import { productURL } from "../../utils/api";
 import { motion } from "framer-motion";
 import { Toast, ToastContainer } from "react-bootstrap";
+import samplevideo from "../../assets/productdetail/1.mp4"
 
 const ProductDetailSummary = ({ product }) => {
   const [show, setShow] = useState(false);
@@ -111,7 +112,7 @@ const ProductDetailSummary = ({ product }) => {
           </div>
         </div>
       )}
-
+   
       <ToastContainer
         className="p-3 position-fixed top-50 start-50 translate-middle"
         style={{ zIndex: 9999 }}
@@ -150,7 +151,22 @@ const ProductDetailSummary = ({ product }) => {
       >
         Add To Cart →
       </motion.span>
+      <br></br>
+   <video
+        
+        controls
+        autoPlay={false}
+        loop={false}
+        muted
+        style={{ borderRadius: "12px",width:"100%",height:"100%" }}
+      >
+        {/* Source from local asset */}
+        <source src={samplevideo} type="video/mp4" />
 
+        {/* Fallback text */}
+        Your browser does not support the video tag.
+      </video>
+  
       <h5 className="mt-3">Features Of This Product</h5>
       <ul>
         <li>Chemical-Free Cultivation</li>

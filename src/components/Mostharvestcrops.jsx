@@ -297,7 +297,7 @@ import { imgURLMostHarvest } from "../utils/api";
 
 export default function MostHarvestcrops() {
   const dispatch = useDispatch();
-  const { homeData, loading, error } = useSelector((state) => state.mostHarvest);
+  const { homeData } = useSelector((state) => state.mostHarvest);
 
   useEffect(() => {
     console.log("[MostHarvestcrops] Dispatching fetchMostHarvestHome...");
@@ -328,8 +328,6 @@ export default function MostHarvestcrops() {
     },
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <main>
@@ -398,7 +396,7 @@ export default function MostHarvestcrops() {
                                 {item.name}
                               </Card.Title>
                               <Card.Text className="flex-grow-1 text-muted">
-                                {item.description}
+                                {item.description1?.slice(0,80)}
                               </Card.Text>
 
                               <h6>Key Features</h6>
@@ -406,7 +404,7 @@ export default function MostHarvestcrops() {
                                 <li>Traditional Cultivation Techniques</li>
                                 <li>100% Organic Farming</li>
                                 <li>Nutrient-Rich Variety</li>
-                                <li>Eco-Friendly Practices</li>
+                                
                               </ul>
 
                               <Link to={`/mostcultivated/${item.id}`}>

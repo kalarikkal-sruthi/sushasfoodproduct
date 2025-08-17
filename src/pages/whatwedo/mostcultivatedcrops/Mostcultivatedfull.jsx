@@ -356,8 +356,15 @@ export default function Mostcultivatedfull() {
                                 {item.name}
                               </h3>
                               <p className="flex-grow-1 text-muted">
-                                {item.description}
+                                  {item.description1?.slice(0,80)}
                               </p>
+                               <h6>Key Features</h6>
+                              <ul>
+                                <li>Traditional Cultivation Techniques</li>
+                                <li>100% Organic Farming</li>
+                                <li>Nutrient-Rich Variety</li>
+                                
+                              </ul>
                               <motion.div
                                 whileHover={{
                                   x: 5,

@@ -147,6 +147,13 @@ function Extraharvestfull() {
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
+                        <h6>Key Features</h6>
+                              <ul>
+                                <li>Traditional Cultivation Techniques</li>
+                                <li>100% Organic Farming</li>
+                                <li>Nutrient-Rich Variety</li>
+                                
+                              </ul>
                         <motion.div
                           whileHover={{ x: 5, transition: { duration: 0.2 } }}
                           whileTap={{ scale: 0.98 }}

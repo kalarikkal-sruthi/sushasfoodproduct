@@ -226,14 +226,14 @@ export default function Mostcultivateddetail() {
     dispatch(fetchMostHarvestDetail(id));
   }, [dispatch, id]);
 
-  const scrollVariants = {
-    offscreen: { y: 50, opacity: 0 },
-    onscreen: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "tween", ease: "easeOut", duration: 0.8 },
-    },
-  };
+  // const scrollVariants = {
+  //   offscreen: { y: 50, opacity: 0 },
+  //   onscreen: {
+  //     y: 0,
+  //     opacity: 1,
+  //     transition: { type: "tween", ease: "easeOut", duration: 0.8 },
+  //   },
+  // };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -289,7 +289,7 @@ export default function Mostcultivateddetail() {
                   ))
                 ) : (
                   detailData.image && (
-                    <Col md={4}>
+                    <Col md={12}>
                       <figure>
                         <img
                           src={`${imgURLMostHarvest}${detailData.image}`}

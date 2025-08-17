@@ -141,7 +141,7 @@ const Ourstory = () => {
                           aria-hidden="true"
                         ></i>
                       </motion.span>
-                      <span>{item}</span>
+                      <span >{item}</span>
                     </div>
                   </motion.div>
                 </Col>

@@ -124,7 +124,7 @@ function Extraharvestcrops() {
                             style={{
                               borderRadius: "12px 0 0 12px",
                               width: "100%",
-                             
+                             height:"314px",
                               objectFit: "cover",
                             }}
                             loading="lazy"
@@ -148,7 +148,7 @@ function Extraharvestcrops() {
                               <li>Soil-Enriching Practices</li>
                               <li>Eco-Friendly Pest Management</li>
                             </ul>
-                            <Link to="/rootcultivation" className="mt-auto">
+                            <Link to="/tubers" className="mt-auto">
                               <motion.span
                                 whileHover={{
                                   x: 5,
@@ -179,7 +179,7 @@ function Extraharvestcrops() {
 
           <Row>
             <Col className="text-center">
-              <Link to="/morefromharvest">
+              <Link to="/extrafull">
                 <motion.span
                   whileHover={{
                     x: 5,

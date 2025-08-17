@@ -147,13 +147,19 @@ function Extraharvestsubcategory() {
                         <Card.Text className="flex-grow-1 text-muted">
                           {service.description}
                         </Card.Text>
+                           <ul>
+                              <li>Chemical-Free Cultivation</li>
+                              <li>Nutrient-Dense & Fresh</li>
+                              <li>Soil-Enriching Practices</li>
+                              <li>Eco-Friendly Pest Management</li>
+                            </ul>
                         <motion.div
                           whileHover={{ x: 5, transition: { duration: 0.2 } }}
                           whileTap={{ scale: 0.98 }}
                           className="mt-auto"
                         >
                           <Link
-                            to="/rootcultivation"
+                            to="/rootvegetables"
                             className="btn btn-outline align-self-start"
                             style={{
                               borderWidth: "2px",

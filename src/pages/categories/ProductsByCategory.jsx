@@ -136,7 +136,7 @@ const ProductByCategory = () => {
                                 {product.product_name}
                               </Card.Title>
                               <Card.Text className="flex-grow-1 text-muted">
-                                {product.description}
+                                {product.description?.slice(0,500)}
                               </Card.Text>
                               {product.baseprices?.[0]?.original_price && (
                                 <p className="product-price">

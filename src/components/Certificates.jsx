@@ -63,7 +63,7 @@ function Certificate({ data }) {
 
           <Swiper
             spaceBetween={20}
-            slidesPerView={6}
+            slidesPerView={5}
             loop={true}
             navigation={true}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -92,6 +92,7 @@ function Certificate({ data }) {
                       style={{
                         width: "100%",
                         objectFit: "contain",
+                      height:"400px",
                         borderRadius: "12px",
                       }}
                     />
@@ -117,7 +118,7 @@ function Certificate({ data }) {
                   loading="lazy"
                 />
                 <h3 className="mt-3">{service.title}</h3>
-                <p>{service.description}</p>
+                <p style={{color:"#fff"}}>{service.description}</p>
               </div>
             ))}
           </div>

@@ -114,7 +114,9 @@ const ProductDetail = () => {
                 fallback={<Spinner animation="border" variant="primary" />}
               >
                 <ProductDetailGallery product={product} />
+              
               </Suspense>
+             
             </Col>
 
             <Col md={7} as="section" aria-label="Product Summary">
