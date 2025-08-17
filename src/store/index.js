@@ -9,6 +9,7 @@ import cartReducer from "./cartSlice";
 import categoryProductReducer from "./categoryProductSlice";
 import orderReducer from "./orderSlice"
 import mostHarvestReducer from "./mostHarvestSlice";
+import extraHarvestReducer from "./extraHarvestSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   categoryProducts: categoryProductReducer,
   order: orderReducer,
   mostHarvest: mostHarvestReducer,
+  extraHarvest: extraHarvestReducer,
 });
 
 const persistConfig = {

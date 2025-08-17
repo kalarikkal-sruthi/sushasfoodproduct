@@ -52,9 +52,9 @@ const AppRoutes = () => {
 
         {/* What We Do */}
 
-        <Route path="/tubers" element={<Extraharvestfull />} />
-        <Route path="/extrafull" element={<Extraharvestsubcategory />} />
-        <Route path="/rootvegetables" element={<Extraharvestdetail />} />
+        <Route path="" element={<Extraharvestfull />} />
+        <Route path="" element={<Extraharvestsubcategory />} />
+        <Route path="" element={<Extraharvestdetail />} />
 
         <Route path="/mostcultivated" element={<Mostcultivatedfull />} />
         <Route path="/mostcultivated/:id" element={<Mostcultivateddetail />} /> 
