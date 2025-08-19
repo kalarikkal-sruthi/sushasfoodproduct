@@ -5,7 +5,8 @@ import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
 import location from "../assets/header/location_on.png";
 import logonew from "../assets/header/logo-new.png";
-
+import { Link } from "react-router-dom";
+import { Youtube, Instagram, Facebook } from "react-bootstrap-icons";
 function Footer() {
   return (
     <div>
@@ -23,20 +24,41 @@ function Footer() {
                     <img src={logonew} alt="" />
                   </div>
                   <ul>
-                    <li>
+                    {/* <li>
                       <img src={mail} alt="" />
                       sushasfoodproducts@gmail.com
+                    </li> */}
+                  <li>
+                      <img src={mail} alt="" />
+                      <a href="mailto:sushasfoodproducts@gmail.com" style={{ textDecoration: "none", color: "inherit" }}>
+                         sushasfoodproducts@gmail.com
+                      </a>
                     </li>
-                    <li>
+
+                    {/* <li>
                       <img src={phone} alt="" />
                       9074 624 607
-                    </li>
+                    </li> */}
+                   
                     <li>
+                    <img src={phone} alt="" />
+                    <a href="tel:+919074624607" style={{ textDecoration: "none", color: "inherit" }}>
+                      +91 9074 624 607
+                    </a>
+                  </li>
+
+                    {/* <li>
                       <img src={phone} alt="" />
                       sushasfoodproducts.com
+                    </li> */}
+                         <li>
+                      <img src={phone} alt="" />
+                      <a href="https://sushasfoodproducts.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "inherit" }}>
+                        sushasfoodproducts.com
+                      </a>
                     </li>
                     <br></br>
-                    <h4>Follow Us</h4>
+                    {/* <h4>Follow Us</h4> */}
                   </ul>
                 </Col>
                 <Col xs={6} md={3} className="footer-div">
@@ -47,7 +69,7 @@ function Footer() {
                     <li>Terms&Condition</li>
                   </ul>
                 </Col>
-                <Col xs={6} md={3} className="footer-div">
+                {/* <Col xs={6} md={3} className="footer-div">
                   <h4>Cateogories</h4>
                   <ul>
                     <li>Shopping Cart</li>
@@ -55,7 +77,44 @@ function Footer() {
                     <li>About Us</li>
                     <li>Follow Us</li>
                   </ul>
-                </Col>
+                </Col> */}
+                
+
+                  <Col xs={6} md={3} className="footer-div">
+                    <h4>Categories</h4>
+                    <ul>
+                      <li>
+                        <Link to="/cart" style={{ textDecoration: "none", color: "inherit" }}>
+                          Shopping Cart
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/return-policy" style={{ textDecoration: "none", color: "inherit" }}>
+                          Return Policy
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/aboutus" style={{ textDecoration: "none", color: "inherit" }}>
+                          About Us
+                        </Link>
+                      </li>
+                      {/* <li>
+                        <Link to="/follow-us" style={{ textDecoration: "none", color: "inherit" }}>
+                          Follow Us
+                        </Link>
+                      </li> */}
+                      <h4 className="mt-4">Follow Us</h4>
+                      <ul style={{ display: "flex", gap: "15px", listStyle: "none", padding: 0 }}>
+          
+                          <li><a href="https://www.youtube.com/@Prakashfarm-r8" target="_blank"><Youtube size={20} color="red" /></a></li>
+                          <li><a href="https://www.instagram.com/sushasfoodproducts_official/" target="_blank"><Instagram size={20} color="#C13584" /></a></li>
+                          <li><a href="https://www.facebook.com/sushasfoodproducts/" target="_blank"><Facebook size={20} color="#4267B2" /></a></li>
+                      </ul>
+
+           
+            </ul>
+                  </Col>
+
                 <Col xs={6} md={3} className="footer-div">
                   <h4>Services</h4>
                   <ul>

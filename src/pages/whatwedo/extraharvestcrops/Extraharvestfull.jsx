@@ -106,56 +106,61 @@ function Extraharvestfull() {
   };
 
   return (
-    <main>
-      <Container
-        as="section"
-        className="mt-5"
-        aria-labelledby="Extra Harvest From Farm"
-      >
-        <div className="padding-top"></div>
-        <div className="padding-top"></div>
-       
-        <section>
-          <Row className="mb-5">
-            <Col>
-              <motion.section
+  <main>
+    <Container
+      as="section"
+      className="mt-5"
+      aria-labelledby="Extra Harvest From Farm"
+    >
+      <div className="padding-top"></div>
+      <div className="padding-top"></div>
+
+      <section>
+        <Row className="mb-5">
+          <Col>
+            <motion.section
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <motion.h1
+                variants={scrollVariants}
+                id="crops-heading"
+                className="fw-bold"
+                style={{ color: "#294085" }}
+              >
+                Extra Harvest from Our Farm
+              </motion.h1>
+            </motion.section>
+          </Col>
+          <Breadcrumbs
+            items={[
+              { label: "Home", path: "/" },
+              { label: "Extra Harvest", path: "/extraharvest" },
+            ]}
+          />
+        </Row>
+
+        <Row className="g-4">
+          {services.map((service, index) => (
+            <Col lg={6} key={index} as="article">
+              <motion.div
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
+                variants={cardVariants}
               >
-                <motion.h1
-                  variants={scrollVariants}
-                  id="crops-heading"
-                  className="fw-bold"
-                  style={{ color: "#294085" }}
-                >
-                  Extra Harvest from Our Farm
-                </motion.h1>
-              </motion.section>
-            </Col>
-             <Breadcrumbs
-          items={[
-            { label: "Home", path: "/" },
-            { label: "Extra Harvest", path: "/extraharvest" },
-          ]}
-        />
-          </Row>
-
-          <Row className="g-4">
-            {services.map((service, index) => (
-              <Col lg={6} key={index} as="article">
-                <motion.div
-                  initial="offscreen"
-                  whileInView="onscreen"
-                  viewport={{ once: true, margin: "-50px" }}
-                  variants={cardVariants}
-                >
-                  <motion.div whileHover={cardHover} className="h-100">
+                <motion.div whileHover={cardHover} className="h-100">
+                  <Link
+                    to={`/extraharvestfromfarm/${service.link}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
                     <Card
                       className="h-100 border-0 overflow-hidden"
                       style={{
                         boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
                         borderRadius: "12px",
+                        cursor: "pointer",
                       }}
                     >
                       <Row className="g-0 h-100">
@@ -188,6 +193,7 @@ function Extraharvestfull() {
                             <Card.Text className="flex-grow-1 text-muted">
                               {service.description}
                             </Card.Text>
+
                             <motion.div
                               whileHover={{
                                 x: 5,
@@ -196,8 +202,7 @@ function Extraharvestfull() {
                               whileTap={{ scale: 0.98 }}
                               className="mt-auto"
                             >
-                              <Link
-                                to={`/extraharvestfromfarm/${service.link}`}
+                              <span
                                 className="btn btn-outline align-self-start"
                                 style={{
                                   borderWidth: "2px",
@@ -209,21 +214,23 @@ function Extraharvestfull() {
                                 }}
                               >
                                 Learn More →
-                              </Link>
+                              </span>
                             </motion.div>
                           </Card.Body>
                         </Col>
                       </Row>
                     </Card>
-                  </motion.div>
+                  </Link>
                 </motion.div>
-              </Col>
-            ))}
-          </Row>
-        </section>
-      </Container>
-    </main>
-  );
+              </motion.div>
+            </Col>
+          ))}
+        </Row>
+      </section>
+    </Container>
+  </main>
+);
+
 }
 
 export default Extraharvestfull;

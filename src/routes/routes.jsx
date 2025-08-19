@@ -15,6 +15,7 @@ import Mostcultivateddetail from "../pages/whatwedo/mostcultivatedcrops/Mostcult
 import Extraharvestfull from "../pages/whatwedo/extraharvestcrops/Extraharvestfull";
 import Mostcultivatedfull from "../pages/whatwedo/mostcultivatedcrops/Mostcultivatedfull";
 import Extraharvestsubcategory from "../pages/whatwedo/extraharvestcrops/Extraharvestsubcategory";
+import Aboutfarm from "../components/Aboutfarm";
 
 const AppRoutes = () => {
   return (
@@ -47,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/mostharvestfromfarm/:id" element={<Mostcultivateddetail />} />
 
         <Route path="/checkoutpage" element={<CheckoutPage />} />
+        <Route path="/aboutus" element={<Aboutfarm />} />
       </Route>
     </Routes>
   );

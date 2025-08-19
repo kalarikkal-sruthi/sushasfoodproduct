@@ -97,6 +97,9 @@ export default function HomeCategories() {
                   variants={cardVariants}
                 >
                   <motion.div whileHover={cardHover} className="h-100">
+                    <Link to={`/extraharvestfromfarm/${cat.name}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
                    <Card
                       className="h-100 border-0 overflow-hidden"
                       style={{
@@ -104,6 +107,7 @@ export default function HomeCategories() {
                         borderRadius: "12px",
                       }}
                     >
+                      
                       <Row className="g-0 h-100">
                         <Col md={6} className="overflow-hidden">
                           <Card.Img
@@ -118,14 +122,14 @@ export default function HomeCategories() {
                             }}
                             loading="lazy"
                           />
+                         
                         </Col>
-
                         <Col md={6} className="d-flex flex-column">
                         <Card.Body className="p-4 d-flex flex-column">
                             <Card.Title
                               style={{ color: "#294085" }}
                               className="fw-bold fs-4 mb-3"
-                            >
+                              >
                               {cat.name}
                             </Card.Title>
                             <Card.Text className="flex-grow-1 text-muted">
@@ -134,14 +138,15 @@ export default function HomeCategories() {
                                {/* <ul
                                 dangerouslySetInnerHTML={{
                                   __html: item.description5,
-                                }}
-                              ></ul> */}
+                                  }}
+                                  ></ul> */}
                             {/* <ul>
                               <li>Chemical-Free Cultivation</li>
                               <li>Nutrient-Dense & Fresh</li>
                               <li>Soil-Enriching Practices</li>
                               <li>Eco-Friendly Pest Management</li>
-                            </ul> */}
+                              </ul> */}
+                            
                             <Link
                               to={`/extraharvestfromfarm/${cat.name}`}
                               className="btn btn-outline align-self-start"
@@ -153,13 +158,14 @@ export default function HomeCategories() {
                                 backgroundColor: "#294085",
                                 color: "#fff",
                               }}
-                            >
+                              >
                               Learn More →
                             </Link>
                           </Card.Body>
                         </Col>
                       </Row>
                     </Card>
+                    </Link>
                   </motion.div>
                 </motion.div>
               </Col>

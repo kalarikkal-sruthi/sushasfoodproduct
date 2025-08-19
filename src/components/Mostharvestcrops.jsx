@@ -87,8 +87,10 @@ export default function MostHarvestcrops() {
                           borderRadius: "12px",
                         }}
                       >
+                         <Link to={`/mostharvestfromfarm/${item.id}`} style={{ textDecoration: "none" }}>
                         <Row className="g-0 h-100">
                           <Col md={6} className="overflow-hidden">
+                          
                             <Card.Img
                               src={`${imgURLMostHarvest}${
                                 item.image || item.images?.[0]?.image
@@ -101,20 +103,23 @@ export default function MostHarvestcrops() {
                                 objectFit: "cover",
                               }}
                             />
+                            
                           </Col>
 
                           <Col md={6} className="d-flex flex-column">
                             <Card.Body className="p-4 d-flex flex-column">
+                               <Link to={`/mostharvestfromfarm/${item.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                               <Card.Title
                                 style={{ color: "#294085" }}
                                 className="fw-bold fs-4 mb-3"
                               >
                                 {item.name}
                               </Card.Title>
+                                 </Link>
                               <Card.Text className="flex-grow-1 text-muted">
                                 {item.description1?.slice(0, 150)}
                               </Card.Text>
-
+                              
                               <h6>Key Features</h6>
 
                               <ul
@@ -122,7 +127,7 @@ export default function MostHarvestcrops() {
                                   __html: item.description5,
                                 }}
                               ></ul>
-
+                             
                               <Link to={`/mostharvestfromfarm/${item.id}`}>
                                 <motion.div
                                   whileHover={{
@@ -146,6 +151,7 @@ export default function MostHarvestcrops() {
                             </Card.Body>
                           </Col>
                         </Row>
+                        </Link>
                       </Card>
                     </motion.div>
                   </motion.div>

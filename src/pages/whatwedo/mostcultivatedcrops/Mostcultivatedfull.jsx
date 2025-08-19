@@ -320,6 +320,10 @@ export default function Mostcultivatedfull() {
                     variants={cardVariants}
                   >
                     <motion.div whileHover={cardHover} className="h-100">
+                      <Link 
+                        to={`/mostharvestfromfarm/${item.id}`} 
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
                       <Card
                         className="h-100 border-0 overflow-hidden"
                         style={{
@@ -393,6 +397,7 @@ export default function Mostcultivatedfull() {
                           </Col>
                         </Row>
                       </Card>
+                        </Link>
                     </motion.div>
                   </motion.div>
                 </Col>

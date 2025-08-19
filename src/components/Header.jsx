@@ -5,13 +5,24 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import accountcircle from "../assets/header/account_circle.png";
 import search from "../assets/header/search.png";
 import shoppingcart from "../assets/header/Shopping cart.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../assets/header/logo-new.png"
+import { useEffect } from "react";
+import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
+import { Link } from "react-router-dom";
 
 export default function Header() {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
   
+  const { data: categories, loading, error } = useSelector(
+    (state) => state. categoryProducts
+  
+  );
+  useEffect(() => {
+    dispatch(fetchCategoriesWithProducts())
+  },[dispatch]);
   return (
     <div>
       <div>
@@ -44,15 +55,34 @@ export default function Header() {
                  
                   <Nav.Link href="">Product Categories ▼</Nav.Link>
                 </button>
-                <div className="dropdown-sub-menu">
+                {/* <div className="dropdown-sub-menu">
                   <Nav.Link href="">Essential Products</Nav.Link>
                   <Nav.Link href="">Rasoi Manthras</Nav.Link>
                    <Nav.Link href="">Savera</Nav.Link>
                   <Nav.Link href="">Nyra</Nav.Link>
                   <Nav.Link href="">InterSpices</Nav.Link>
                    <Nav.Link href="">Other</Nav.Link>
-                 
-                </div>
+                </div> */}
+
+                  <div className="dropdown-sub-menu">
+                      {loading && <span>Loading...</span>}
+                      {error && <span style={{ color: "red" }}>{error}</span>}
+
+                      {categories?.map((cat) => (
+                        <Nav.Link
+                          key={cat.id}
+                          as={Link}  // 👈 use react-router Link instead of href (avoids full page reload)
+                          to={`/productsbycategory/${cat.id}`}
+                          state={{ categoryName: cat.name }} // optional, if you need it like in homepage
+                        >
+                          {cat.name}
+                        </Nav.Link>
+                      ))}
+                    </div>
+
+
+
+
               </div>
               <Nav.Link href="">|</Nav.Link>
               <Nav.Link className="icon-img">
