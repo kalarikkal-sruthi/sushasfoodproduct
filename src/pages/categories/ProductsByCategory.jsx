@@ -77,123 +77,103 @@ const ProductByCategory = () => {
           </p>
         </header>
 
-        {products.length > 0 ? (
-          <section
-            aria-label={`Products in ${categoryName}`}
-            className="product-list"
-          >
-            <Row className="g-5">
-              {products.map((product, index) => (
-                <Col
-                  as="article"
-                  lg={6}
-                  key={product.id || index}
-                  aria-labelledby={`product-${product.id}-title`}
-                >
-                  <motion.div
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, margin: "-50px" }}
-                    variants={cardVariants}
-                  >
-                    <motion.div whileHover={cardHover} className="h-100">
-                      <Card
-                        className="h-100 border-0 overflow-hidden"
+        <section
+          aria-label={`Products in ${categoryName}`}
+          className=""
+        >
+        
+         <Row className="g-4">
+  {products && products.length > 0 ? (
+    products.map((product, index) => (
+      <Col lg={6} key={product.id || index} as="article">
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={cardVariants}
+        >
+          <motion.div whileHover={cardHover} className="h-100">
+            <Card
+              className="h-100 border-0 overflow-hidden"
+              style={{
+                boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
+                borderRadius: "12px",
+                backgroundColor: bgColor,
+              }}
+            >
+              <Row className="g-0 h-100">
+                <Col md={6} className="overflow-hidden" style={{ background: bgColor }}>
+                  <Card.Img
+                    src={`${productURL}${product.image}`}
+                    alt={`${product.product_name} - Organic farm product`}
+                    className="object-fit-cover"
+                    style={{
+                      borderRadius: "12px 0 0 12px",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    loading="lazy"
+                  />
+                </Col>
+
+                <Col md={6} className="d-flex flex-column">
+                  <Card.Body className="p-4 d-flex flex-column">
+                    <Card.Title
+                      id={`product-${product.id}-title`}
+                      style={{ color: "#294085" }}
+                      className="fw-bold fs-4 mb-3"
+                      as="h2"
+                    >
+                      {product.product_name}
+                    </Card.Title>
+
+                    <Card.Text className="flex-grow-1 text-muted">
+                      {product.description?.slice(0, 100)}
+                    </Card.Text>
+
+                    {product.baseprices?.[0]?.original_price && (
+                      <p className="product-price">
+                        <strong>Price:</strong> ₹{product.baseprices[0].original_price}
+                      </p>
+                    )}
+
+                    <Link to={`/product/${product.id}`} state={{ bgColor, fromCategoryId: id }}>
+                      <motion.div
+                        whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                        whileTap={{ scale: 0.98 }}
+                        className="btn btn-outline align-self-start mt-auto"
                         style={{
-                          boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
-                          borderRadius: "12px",
-                          backgroundColor: bgColor,
+                          borderWidth: "2px",
+                          borderRadius: "50px",
+                          fontWeight: "500",
+                          border: "1px solid #294085",
+                          backgroundColor: "#294085",
+                          color: "#fff",
                         }}
                       >
-                        <Row className="g-0 h-100">
-                          <Col
-                            md={6}
-                            className="overflow-hidden"
-                            style={{ background: bgColor }}
-                          >
-                            <Card.Img
-                              src={`${productURL}${product.image}`}
-                              alt={`${product.product_name} - Organic farm product`}
-                              width="100%"
-                              className="object-fit-cover"
-                              style={{
-                                borderRadius: "12px 0 0 12px",
-
-                                objectFit: "contain",
-                              }}
-                              loading="lazy"
-                            />
-                          </Col>
-
-                          <Col md={6} className="d-flex flex-column">
-                            <Card.Body className="p-4 d-flex flex-column">
-                              <Card.Title
-                                id={`product-${product.id}-title`}
-                                style={{ color: "#294085" }}
-                                className="fw-bold fs-4 mb-3"
-                                as="h2"
-                              >
-                                {product.product_name}
-                              </Card.Title>
-                              <Card.Text className="flex-grow-1 text-muted">
-                                {product.description?.slice(0,500)}
-                              </Card.Text>
-                              {product.baseprices?.[0]?.original_price && (
-                                <p className="product-price">
-                                  <strong>Price:</strong> ₹
-                                  {product.baseprices[0].original_price}
-                                </p>
-                              )}
-                              {/* <ul>
-                                <li>Chemical-Free Cultivation</li>
-                                <li>Nutrient-Dense & Fresh</li>
-                                <li>Soil-Enriching Practices</li>
-                                <li>Eco-Friendly Pest Management</li>
-                              </ul> */}
-
-                              <motion.div
-                                whileHover={{
-                                  x: 5,
-                                  transition: { duration: 0.2 },
-                                }}
-                                whileTap={{ scale: 0.98 }}
-                                className="mt-auto"
-                              >
-                                <Link
-
-                                
-                                  state={{
-                                    bgColor,
-                                    fromCategoryId: id,
-                                  }}
-                                  to={`/product/${product.id}`}
-                                  className="btn btn-outline align-self-start"
-                                  style={{
-                                    borderRadius: "50px",
-                                    fontWeight: "500",
-                                    border: "1px solid #294085",
-                                    backgroundColor: "#294085",
-                                    color: "#fff",
-                                  }}
-                                >
-                                  Shop Now →
-                                </Link>
-                              </motion.div>
-                            </Card.Body>
-                          </Col>
-                        </Row>
-                      </Card>
-                    </motion.div>
-                  </motion.div>
+                        Shop Now →
+                      </motion.div>
+                    </Link>
+                  </Card.Body>
                 </Col>
-              ))}
-            </Row>
-          </section>
-        ) : (
-          <p className="text-muted" role="note">
-            No products found in this category.
-          </p>
-        )}
+              </Row>
+            </Card>
+          </motion.div>
+        </motion.div>
+      </Col>
+    ))
+  ) : (
+    <Col>
+      <p className="text-muted" role="note">
+        No products found in this category.
+      </p>
+    </Col>
+  )}
+</Row>
+
+          
+        </section>
       </Container>
     </main>
   );

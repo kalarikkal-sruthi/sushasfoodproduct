@@ -1,24 +1,18 @@
-
 import PropTypes from "prop-types";
 import { productURL } from "../../utils/api";
 import { motion } from "framer-motion";
 
-
-export default function ProductCard({ product}) {
-
-
- 
+export default function ProductCard({ product }) {
   return (
     <article
       className=" p-3"
       aria-labelledby={`product-title-${product.id}`}
       style={{
         borderRadius: "10px",
-   
+
         boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
       }}
     >
-      {/* Product Image */}
       <img
         src={`${productURL}${product.image}`}
         alt={product.product_name || "Product image"}
@@ -30,21 +24,17 @@ export default function ProductCard({ product}) {
           objectFit: "cover",
         }}
       />
-
-      {/* Product Name */}
       <h2
         id={`product-title-${product.id}`}
         style={{ fontSize: "1.1rem", marginTop: "0.8rem" }}
       >
         {product.product_name}
       </h2>
-
-      {/* Price */}
       <p style={{ fontWeight: "bold", color: "#294085" }}>
         Price: ₹{product.baseprices?.[0]?.original_price ?? "N/A"}
       </p>
 
-        <motion.span
+      <motion.span
         whileHover={{
           x: 5,
           transition: { duration: 0.2 },
@@ -59,12 +49,9 @@ export default function ProductCard({ product}) {
           color: "#fff",
         }}
         aria-label="Add to cart"
-       
       >
-       Shop Now →
+        Shop Now →
       </motion.span>
-
-    
     </article>
   );
 }

@@ -565,7 +565,7 @@ button.register-button {
   top: 100%;
   left: 0;
   background-color: white;
-  min-width: 160px;
+  min-width: 200px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1;
   border-radius: 4px;

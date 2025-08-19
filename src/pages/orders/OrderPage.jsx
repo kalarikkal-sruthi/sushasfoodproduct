@@ -24,11 +24,7 @@ const AddressForm = React.lazy(() =>
 const OrderPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    token,
-    user,
-    addresses = [],
-  } = useSelector((state) => state.auth || {});
+  const { token, user, addresses = [] } = useSelector((state) => state.auth || {});
   const ordersState = useSelector((state) => state.order);
   const orders = ordersState?.orders || [];
   const cartItems = useSelector((state) => state.cart.items);
@@ -38,14 +34,9 @@ const OrderPage = () => {
   const [addressMode, setAddressMode] = useState("list");
   const [editData, setEditData] = useState(null);
 
-  
-
-
   useEffect(() => {
     if (!token) navigate("/login");
   }, [token, navigate]);
-
-
 
   useEffect(() => {
     dispatch(getUser());
@@ -116,10 +107,7 @@ const OrderPage = () => {
         {address.country && <p className="mb-2">{address.country}</p>}
         <div className="d-flex justify-content-between">
           <motion.button
-            whileHover={{
-              x: 5,
-              transition: { duration: 0.2 },
-            }}
+            whileHover={{ x: 5, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.98 }}
             className="btn btn-outline btn-sm mt-2"
             style={{
@@ -129,9 +117,7 @@ const OrderPage = () => {
               backgroundColor: "#294085",
               color: "#fff",
             }}
-            aria-label={`logout page`}
-            variant="link"
-            size="sm"
+            aria-label="edit address"
             onClick={() => {
               setEditData(address);
               setAddressMode("edit");
@@ -141,10 +127,7 @@ const OrderPage = () => {
           </motion.button>
 
           <motion.button
-            whileHover={{
-              x: 5,
-              transition: { duration: 0.2 },
-            }}
+            whileHover={{ x: 5, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.98 }}
             className="btn btn-outline btn-sm mt-2"
             style={{
@@ -154,13 +137,9 @@ const OrderPage = () => {
               backgroundColor: "#d33838",
               color: "#fff",
             }}
-            aria-label={`logout page`}
-            variant="link"
-            size="sm"
+            aria-label="delete address"
             onClick={() => {
-              if (
-                window.confirm("Are you sure you want to delete this address?")
-              ) {
+              if (window.confirm("Are you sure you want to delete this address?")) {
                 dispatch(deleteAddress(address.id));
               }
             }}
@@ -204,10 +183,7 @@ const OrderPage = () => {
           </Col>
           <Col className="text-end">
             <motion.button
-              whileHover={{
-                x: 5,
-                transition: { duration: 0.2 },
-              }}
+              whileHover={{ x: 5, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98 }}
               className="btn btn-outline btn-sm"
               style={{
@@ -217,7 +193,7 @@ const OrderPage = () => {
                 backgroundColor: "#d33838",
                 color: "#fff",
               }}
-              aria-label={`logout page`}
+              aria-label="logout"
               onClick={handleLogout}
             >
               Logout →
@@ -274,7 +250,7 @@ const OrderPage = () => {
                   <OrderCard
                     key={order.id}
                     order={order}
-                    products={cartItems}
+                    products={cartItems} // ⚠️ check if OrderCard really needs cartItems here
                   />
                 ))}
               {activeTab === "address" &&

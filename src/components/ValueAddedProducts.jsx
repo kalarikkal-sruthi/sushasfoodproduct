@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
 // import { categoryUrl } from "../utils/api";
-import img from "../assets/essential/1.png"
+import img from "../assets/essential/1.png";
 
 import {} from "../utils/api";
 
@@ -24,16 +24,13 @@ const ValueAddedProducts = () => {
   }, [dispatch]);
 
   const bgColors = [
-     "radial-gradient(circle,rgba(139, 35, 51, 0.49) 0%, #8b2333",
+    "radial-gradient(circle,rgba(139, 35, 51, 0.49) 0%, #8b2333",
     "radial-gradient(circle,rgba(0, 119, 174, 0.45) 0%, #0078ae 100%)",
-     "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
+    "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
     "radial-gradient(circle,rgba(174, 0, 99, 0.49) 0%, #ae0064",
-   
-   
 
     "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
-     "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
-   
+    "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
   ];
 
   console.log(categories);
@@ -65,50 +62,53 @@ const ValueAddedProducts = () => {
 
           {/* Product Categories */}
           <Row className="g-4 mt-4">
-     {categories
-  ?.slice()
-  .sort((a, b) => b.id - a.id) // largest id first
-  .map((category, index) => (
-              <Col key={category.id || index} md={6}>
-                <article
-                  aria-labelledby={`category-${category.id}-title`}
-                  className="h-100"
-                >
-                  <Link
-                    to={`/productsbycategory/${category.id}`}
-                    state={{
-                      bgColor: bgColors[category.id % bgColors.length],
-                      categoryName: category.name,
-                    }}
-                    style={{ textDecoration: "none" }}
-                    aria-label={`View products in ${category.name}`}
+            {categories
+              ?.slice()
+              .sort((a, b) => b.id - a.id) 
+              .map((category, index) => (
+                <Col key={category.id || index} md={6}>
+                  <article
+                    aria-labelledby={`category-${category.id}-title`}
+                    className="h-100"
                   >
-                    <Card
-                      className="h-100 shadow-sm border-0 p-3"
-                      style={{
-                        background: bgColors[category.id % bgColors.length],
-                        borderRadius: "12px",
+                    <Link
+                      to={`/productsbycategory/${category.id}`}
+                      state={{
+                        bgColor: bgColors[category.id % bgColors.length],
+                        categoryName: category.name,
                       }}
+                      style={{ textDecoration: "none" }}
+                      aria-label={`View products in ${category.name}`}
                     >
-                      <Card.Img
-                        className="w-50 m-auto"
-                        variant="top"
-                      src={img}
-                        // src={`${categoryUrl}${category.image}`}
-                        alt={`Fresh ${category.name} products`}
-                        loading="lazy"
-                      />
-                      <Card.Body>
-                        <h2
-                          className="value-added-product-head h5"
-                          id={`category-${category.id}-title`}
-                        >
-                          {category.name}
-                        </h2>
-                        <p className="value-added-product-para">
-                          {category.description}
-                        </p>
-                        {/* {category.tagline && (
+                      <Card
+                        className="h-100 shadow-sm border-0 p-3"
+                        style={{
+                          background: bgColors[category.id % bgColors.length],
+                          borderRadius: "12px",
+                        }}
+                      >
+                        <Card.Img
+                          className="w-50 m-auto"
+                          variant="top"
+                          src={img}
+                          // src={`${categoryUrl}${category.image}`}
+                          alt={`Fresh ${category.name} products`}
+                          loading="lazy"
+                        />
+                        <Card.Body>
+                          <h2
+                            className="value-added-product-head h5"
+                            id={`category-${category.id}-title`}
+                          >
+                            {category.name}
+                          </h2>
+                          <p className="value-added-product-para">
+                            Farm Fresh
+                          </p>
+                            <p className="value-added-product-para">
+                           No Preservatives
+                          </p>
+                          {/* {category.tagline && (
                           <p>
                             <em>{category.tagline}</em>
                           </p>
@@ -119,12 +119,12 @@ const ValueAddedProducts = () => {
                           <li>Cold Pressed Groundnut Oil</li>
                           <li>Organic Jaggery Powder</li>
                         </ul> */}
-                      </Card.Body>
-                    </Card>
-                  </Link>
-                </article>
-              </Col>
-            ))}
+                        </Card.Body>
+                      </Card>
+                    </Link>
+                  </article>
+                </Col>
+              ))}
           </Row>
 
           {/* View All Button */}

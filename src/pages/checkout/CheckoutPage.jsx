@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Row, Col, Card, Form, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { getAddresses } from "../../store/authService";
+import AddressForm from "../../components/order/AddressForm";
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
@@ -128,13 +129,14 @@ const CheckoutPage = React.memo(() => {
                         />
                       </Card>
                     ))}
-                    <Button
+                    <AddressForm />
+                    {/* <Button
                       variant="link"
                       className="p-0 mt-2"
                       onClick={() => navigate("/addresses")}
                     >
                       + Add New Address
-                    </Button>
+                    </Button> */}
                   </Card.Body>
                 </Card>
 

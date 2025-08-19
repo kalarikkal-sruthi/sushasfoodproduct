@@ -9,15 +9,14 @@ import ProductCard from "../../components/cards/ProductCard";
 const CategoryProductList = () => {
   const dispatch = useDispatch();
   const bgColors = [
+    "radial-gradient(circle,rgba(139, 35, 51, 0.49) 0%, #8b2333",
     "radial-gradient(circle,rgba(0, 119, 174, 0.45) 0%, #0078ae 100%)",
-    "radial-gradient(circle,rgba(107, 174, 0, 0.52) 0%, #6bae00",
-
     "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
     "radial-gradient(circle,rgba(174, 0, 99, 0.49) 0%, #ae0064",
+
     "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
     "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
   ];
-
   console.log(bgColors);
 
   const {
@@ -67,16 +66,19 @@ const CategoryProductList = () => {
 
   return (
     <main aria-labelledby="category-products-heading">
+      <div className="padding-top"></div>
+       <div className="padding-top"></div>
       <Container className="mt-5">
         <h1 id="category-products-heading" className="visually-hidden">
           Browse Products by Category
         </h1>
 
-        {categories?.map((category) => (
+        {[...categories]
+     .sort((a, b) => b.id - a.id) 
+        .map((category) => (
           <section
             key={category.id}
-            aria-labelledby={`category-title-${category.id}`}
-            className="mb-5"
+            aria-labelledby={`category-title-${category.id}`}piiku86qssName="mb-5"
           >
             <header className="mb-4">
               <motion.div
@@ -107,7 +109,10 @@ const CategoryProductList = () => {
               }}
             >
               <Row aria-label={`Products in ${category.name}`}>
-                {category.products?.slice(0, 4).map((product) => {
+                {category.products
+                ?.slice(0, 4)
+               
+                .map((product) => {
                   const bgColor = bgColors[category.id % bgColors.length]; 
 
                   return (

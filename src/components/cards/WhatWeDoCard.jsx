@@ -1,11 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+
 
 function WhatWeDoCard({ image, title, icon }) {
   return (
     <>
-   
       <div className="card-main">
         <img src={image} alt={title} />
         <div className="card-overlay">
@@ -22,7 +20,6 @@ function WhatWeDoCard({ image, title, icon }) {
       <div className="card-name">
         <h1>{title}</h1>
       </div>
-     
     </>
   );
 }

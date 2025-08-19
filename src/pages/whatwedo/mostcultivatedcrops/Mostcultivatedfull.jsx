@@ -238,7 +238,6 @@
 //   );
 // }
 
-
 // pages/Mostcultivatedfull.jsx
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -310,7 +309,7 @@ export default function Mostcultivatedfull() {
             </Col>
           </Row>
 
-          <Row className="g-5">
+          <Row className="g-4">
             {allData && allData.length > 0 ? (
               allData.map((item) => (
                 <Col lg={6} key={item.id} as="article">
@@ -332,7 +331,9 @@ export default function Mostcultivatedfull() {
                           <Col md={6} className="overflow-hidden">
                             <motion.figure className="h-100 w-100 m-0">
                               <Card.Img
-                                src={`${imgURLMostHarvest}${item.image || item.images?.[0]?.image}`}
+                                src={`${imgURLMostHarvest}${
+                                  item.image || item.images?.[0]?.image
+                                }`}
                                 alt={`${item.name} - Organic cultivation`}
                                 style={{
                                   borderRadius: "12px 0 0 12px",
@@ -356,15 +357,15 @@ export default function Mostcultivatedfull() {
                                 {item.name}
                               </h3>
                               <p className="flex-grow-1 text-muted">
-                                  {item.description1?.slice(0,80)}
+                                {item.description1?.slice(0, 80)}
                               </p>
-                               <h6>Key Features</h6>
-                              <ul>
-                                <li>Traditional Cultivation Techniques</li>
-                                <li>100% Organic Farming</li>
-                                <li>Nutrient-Rich Variety</li>
-                                
-                              </ul>
+                              <h6>Key Features</h6>
+
+                              <ul
+                                dangerouslySetInnerHTML={{
+                                  __html: item.description5,
+                                }}
+                              ></ul>
                               <motion.div
                                 whileHover={{
                                   x: 5,
@@ -373,7 +374,7 @@ export default function Mostcultivatedfull() {
                                 whileTap={{ scale: 0.98 }}
                               >
                                 <Link
-                                  to={`/mostcultivated/${item.id}`}
+                                  to={`/mostharvestfromfarm/${item.id}`}
                                   className="btn btn-outline align-self-start mt-auto"
                                   style={{
                                     borderWidth: "2px",

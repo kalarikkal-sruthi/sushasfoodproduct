@@ -1,10 +1,13 @@
 h2.value-added-product-head{
     color: white;
     font-size: 30px;
+    text-align: center;
 }
 p.value-added-product-para{
     color: white;
-    font-size: 12px;
+    font-size: 16px;
+    margin-bottom: 4px;
+    text-align: center;
 }
 ul.value-addedd-product-list{
     padding-left: 0px;
@@ -128,7 +131,7 @@ hr {
 }
 
 .address-scroll {
-  max-height: 300px;
+  /* max-height: 300px; */
   overflow-y: auto;
   padding-right: 5px;
 }

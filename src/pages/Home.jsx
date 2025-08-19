@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <div>
       <Helmet>
-        <title>Value Added Farm Products | Fresh & Organic</title>
+        <title>Susah's Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
@@ -54,7 +54,7 @@ export default function Home() {
           content="farm products, organic produce, value added products, fresh produce, healthy food"
         />
       </Helmet>
-      <Bannerslider data={homeVideoInGallary} />
+      {/* <Bannerslider data={homeVideoInGallary} /> */}
       <Aboutfarm />
       <Ourstory />
       <Certificates data={certificates} />

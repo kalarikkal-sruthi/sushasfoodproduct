@@ -109,7 +109,7 @@ function CartPage() {
                             </div>
 
                             {/* Quantity */}
-                            <div style={{ width: "15%" }}>{item.quantity}</div>
+                            <div style={{ width: "15%" }}>{item.quantity}({item.size})</div>
 
                             {/* Price */}
                             <div style={{ width: "15%" }}>₹ {item.price}</div>
