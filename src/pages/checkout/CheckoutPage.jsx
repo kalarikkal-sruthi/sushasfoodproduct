@@ -6,7 +6,7 @@ import { Button, Row, Col, Card, Form, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { getAddresses } from "../../store/authService";
 import AddressForm from "../../components/order/AddressForm";
-
+import { motion } from "framer-motion";
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,6 +14,8 @@ const CheckoutPage = React.memo(() => {
   const cartItems = useSelector((state) => state.cart.items);
   const addresses = useSelector((state) => state.auth.addresses || []);
   const user = useSelector((state) => state.auth.user);
+  const [addressMode, setAddressMode] = useState("list");
+  const [editData, setEditData] = useState(null);
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
 
@@ -93,55 +95,100 @@ const CheckoutPage = React.memo(() => {
               </Row>
             </header>
             <Row>
-             <Col md={7} className="d-flex flex-column">
+              <Col md={7} className="d-flex flex-column">
                 <Card className="flex-grow-1">
-                  <Card.Header>Delivery Address</Card.Header>
+                  <Card.Header>
+                    {" "}
+                    <strong>Delivery Address</strong>{" "}
+                  </Card.Header>
                   <Card.Body className="address-scroll">
-                    {addresses.map((addr) => (
-                      <Card
-                        key={addr.id}
-                        className={`p-2 mb-2 ${
-                          selectedAddressId === addr.id
-                            ? "border-success"
-                            : "border-light"
-                        }`}
-                        style={{
-                          cursor: "pointer",
-                          borderWidth: "2px",
+                    {addressMode === "list" ? (
+                      <>
+                        {addresses.map((addr) => (
+                          <Card
+                            key={addr.id}
+                            className={`p-2 mb-2 ${
+                              selectedAddressId === addr.id
+                                ? "border-success"
+                                : "border-light"
+                            }`}
+                            style={{ cursor: "pointer", borderWidth: "2px" }}
+                          >
+                            <Row className="align-items-center">
+                              <Col
+                                xs={9}
+                                onClick={() => setSelectedAddressId(addr.id)}
+                              >
+                                <Form.Check
+                                  type="radio"
+                                  name="address"
+                                  checked={selectedAddressId === addr.id}
+                                  onChange={() => setSelectedAddressId(addr.id)}
+                                  label={
+                                    <>
+                                      <strong>
+                                        {addr.first_name} {addr.last_name}
+                                      </strong>
+                                      <div className="text-muted small">
+                                        {addr.address}
+                                      </div>
+                                    </>
+                                  }
+                                />
+                              </Col>
+                              <Col xs={3} className="text-end">
+                                <motion.button
+                                  whileHover={{
+                                    x: 5,
+                                    transition: { duration: 0.2 },
+                                  }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="btn btn-outline btn-sm mt-2"
+                                  style={{
+                                    borderRadius: "6px",
+                                    fontWeight: "500",
+                                    border: "1px solid #294085",
+                                    backgroundColor: "#294085",
+                                    color: "#fff",
+                                  }}
+                                  aria-label="edit address"
+                                  onClick={() => {
+                                    setEditData(addr);
+                                    setAddressMode("edit");
+                                  }}
+                                >
+                                  Edit →
+                                </motion.button>
+                              </Col>
+                            </Row>
+                          </Card>
+                        ))}
+
+                        {/* Add new address button */}
+                        <Button
+                          variant="link"
+                          className="p-0 mt-2"
+                          onClick={() => setAddressMode("add")}
+                        >
+                          + Add New Address
+                        </Button>
+                      </>
+                    ) : (
+                      // Show form for Add/Edit
+                      <AddressForm
+                        initialData={addressMode === "edit" ? editData : {}}
+                        mode={addressMode}
+                        onCancel={() => {
+                          setAddressMode("list");
+                          setEditData(null);
                         }}
-                        onClick={() => setSelectedAddressId(addr.id)}
-                      >
-                        <Form.Check
-                          type="radio"
-                          name="address"
-                          checked={selectedAddressId === addr.id}
-                          onChange={() => setSelectedAddressId(addr.id)}
-                          label={
-                            <>
-                              <strong>
-                                {addr.first_name} {addr.last_name}
-                              </strong>
-                              <div className="text-muted small">
-                                {addr.address}
-                              </div>
-                            </>
-                          }
-                        />
-                      </Card>
-                    ))}
-                    <AddressForm />
-                    {/* <Button
-                      variant="link"
-                      className="p-0 mt-2"
-                      onClick={() => navigate("/addresses")}
-                    >
-                      + Add New Address
-                    </Button> */}
+                      />
+                    )}
                   </Card.Body>
                 </Card>
 
                 {/* Place Order */}
-                <div className="sticky-bottom-btn">
+                <div className=" mt-3">
                   <Button
                     variant="success"
                     className="w-100"
@@ -154,7 +201,7 @@ const CheckoutPage = React.memo(() => {
               </Col>
 
               <Col md={5} className="d-flex flex-column">
-                <Card className="flex-grow-1">
+                {/* <Card className="flex-grow-1">
                   <Card.Header>Your Cart</Card.Header>
                   <Card.Body className="cart-items-scroll">
                     {cartItems.map((item) => (
@@ -181,11 +228,14 @@ const CheckoutPage = React.memo(() => {
                       </Card>
                     ))}
                   </Card.Body>
-                </Card>
+                </Card> */}
 
                 {/* Totals */}
-                <div className="sticky-bottom-summary">
+                <div>
                   <Card>
+                    <Card.Header>
+                      <strong>Price Details</strong>
+                    </Card.Header>
                     <Card.Body>
                       <Row>
                         <Col>Subtotal</Col>
@@ -195,6 +245,11 @@ const CheckoutPage = React.memo(() => {
                         <Col>Discount</Col>
                         <Col className="text-end">₹ {discount.toFixed(2)}</Col>
                       </Row>
+                      <Row>
+                        <Col>Shipping Charge</Col>
+                        <Col className="text-end">₹ {discount.toFixed(2)}</Col>
+                      </Row>
+                      <hr></hr>
                       <Row>
                         <Col>
                           <strong>Payable</strong>
@@ -209,7 +264,6 @@ const CheckoutPage = React.memo(() => {
               </Col>
 
               {/* Address Section */}
-            
             </Row>
           </section>
         </div>

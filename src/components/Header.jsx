@@ -3,26 +3,28 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import accountcircle from "../assets/header/account_circle.png";
-import search from "../assets/header/search.png";
+
 import shoppingcart from "../assets/header/Shopping cart.png";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../assets/header/logo-new.png"
+import logo from "../assets/header/logo-new.png";
 import { useEffect } from "react";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
 import { Link } from "react-router-dom";
+import Searchbar from "./buttons/Searchbar";
 
 export default function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
-  
-  const { data: categories, loading, error } = useSelector(
-    (state) => state. categoryProducts
-  
-  );
+
+  const {
+    data: categories,
+    loading,
+    error,
+  } = useSelector((state) => state.categoryProducts);
   useEffect(() => {
-    dispatch(fetchCategoriesWithProducts())
-  },[dispatch]);
+    dispatch(fetchCategoriesWithProducts());
+  }, [dispatch]);
   return (
     <div>
       <div>
@@ -34,25 +36,30 @@ export default function Header() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+            <Nav className="ms-auto align-items-center">
+
+              <Nav.Link className="icon-img">
+                <Searchbar />
+             
+              </Nav.Link>
               <Nav.Link href="/">Home</Nav.Link>
-              
-             <div className="dropdown">
+              <Nav.Link href="">|</Nav.Link>
+              <div className="dropdown">
                 <button className="dropdown-main">
-                 
                   <Nav.Link href="">What We Do ▼</Nav.Link>
                 </button>
                 <div className="dropdown-sub-menu">
-                  
-                  <Nav.Link href="/mostharvestfromfarm">Most Harvest From Our Farm</Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm">Extra Harvest from Our Farm</Nav.Link>
-                 
-                 
+                  <Nav.Link href="/mostharvestfromfarm">
+                    Most Harvest From Our Farm
+                  </Nav.Link>
+                  <Nav.Link href="/extraharvestfromfarm">
+                    Extra Harvest from Our Farm
+                  </Nav.Link>
                 </div>
               </div>
+              <Nav.Link href="">|</Nav.Link>
               <div className="dropdown">
                 <button className="dropdown-main">
-                 
                   <Nav.Link href="">Product Categories ▼</Nav.Link>
                 </button>
                 {/* <div className="dropdown-sub-menu">
@@ -64,47 +71,51 @@ export default function Header() {
                    <Nav.Link href="">Other</Nav.Link>
                 </div> */}
 
-                  <div className="dropdown-sub-menu">
-                      {loading && <span>Loading...</span>}
-                      {error && <span style={{ color: "red" }}>{error}</span>}
+                <div className="dropdown-sub-menu">
+                  {loading && <span>Loading...</span>}
+                  {error && <span style={{ color: "red" }}>{error}</span>}
 
-                      {categories?.map((cat) => (
-                        <Nav.Link
-                          key={cat.id}
-                          as={Link}  // 👈 use react-router Link instead of href (avoids full page reload)
-                          to={`/productsbycategory/${cat.id}`}
-                          state={{ categoryName: cat.name }} // optional, if you need it like in homepage
-                        >
-                          {cat.name}
-                        </Nav.Link>
-                      ))}
-                    </div>
-
-
-
-
+                  {categories?.map((cat) => (
+                    <Nav.Link
+                      key={cat.id}
+                      as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
+                      to={`/productsbycategory/${cat.id}`}
+                      state={{ categoryName: cat.name }} // optional, if you need it like in homepage
+                    >
+                      {cat.name}
+                    </Nav.Link>
+                  ))}
+                </div>
               </div>
-              <Nav.Link href="">|</Nav.Link>
-              <Nav.Link className="icon-img">
-                <img src={search} alt="susha's food product" />
-              </Nav.Link>{" "}
              
               <Nav.Link href="">|</Nav.Link>
               {token ? (
-                <Nav.Link href="/myaccount" className="icon-img">
-                 My Account <img src={accountcircle} alt="susha's food product" />
-                </Nav.Link>
+                <div className="dropdown">
+                  <button className="dropdown-main">
+                    <Nav.Link href="/myaccount" className="icon-img">
+                      Account{" "}
+                      <img src={accountcircle} alt="susha's food product" />
+                    </Nav.Link>
+                  </button>
+                  <div className="dropdown-sub-menu">
+                    <Nav.Link href="">My Profile</Nav.Link>
+                    <Nav.Link href="">Orders</Nav.Link>
+
+                    <Nav.Link href="">Logout</Nav.Link>
+                  </div>
+                </div>
               ) : (
-                <Nav.Link href="/login" className="icon-img">
-                Login <img src={accountcircle} alt="susha's food product" />
+                <Nav.Link href="/account" className="icon-img">
+                  Login <img src={accountcircle} alt="susha's food product" />
                 </Nav.Link>
-                
               )}
-               <Nav.Link href="">|</Nav.Link>
+              <Nav.Link href="">|</Nav.Link>
               <Nav.Link href="/cart" className="icon-img">
-                Cart <img src={shoppingcart} alt="susha's food product" />
-              </Nav.Link>{" "}
-               <Nav.Link href="/productsbycategory">Shop Now</Nav.Link>
+                Cart(Count)
+                <img src={shoppingcart} alt="susha's food product" />
+              </Nav.Link>
+               <Nav.Link href="">|</Nav.Link>
+              <Nav.Link href="/productsbycategory">Shop Now</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

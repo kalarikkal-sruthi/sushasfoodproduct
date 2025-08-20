@@ -16,6 +16,7 @@ import Extraharvestfull from "../pages/whatwedo/extraharvestcrops/Extraharvestfu
 import Mostcultivatedfull from "../pages/whatwedo/mostcultivatedcrops/Mostcultivatedfull";
 import Extraharvestsubcategory from "../pages/whatwedo/extraharvestcrops/Extraharvestsubcategory";
 import Aboutfarm from "../components/Aboutfarm";
+import Account from "../pages/auth/Account";
 
 const AppRoutes = () => {
   return (
@@ -33,6 +34,7 @@ const AppRoutes = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/myaccount" element={<MyAccount />} />
+         <Route path="/account" element={<Account />} />
 
         <Route path="/extraharvestfromfarm" element={<Extraharvestfull />} />
         <Route

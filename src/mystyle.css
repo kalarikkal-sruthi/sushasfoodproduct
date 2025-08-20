@@ -144,3 +144,6 @@ hr {
   padding: 10px 0;
   border-top: 1px solid #ddd;
 }
+  h1.account-head{
+    font-size: 14px;
+  }

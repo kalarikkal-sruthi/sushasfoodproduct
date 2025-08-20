@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Form, Card, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { createAddress, updateAddress, getAddresses } from "../../store/authService" 
 
-const AddressForm = React.memo(({ initialData = {}, onSubmit, onCancel }) => {
+const AddressForm = React.memo(({ initialData = {}, mode = "add", onCancel }) => {
+  const dispatch = useDispatch();
+
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
@@ -16,7 +20,7 @@ const AddressForm = React.memo(({ initialData = {}, onSubmit, onCancel }) => {
     store_id: "",
   });
 
-  // Update when editing existing address
+  // populate form when editing
   useEffect(() => {
     setForm({
       first_name: initialData.first_name || "",
@@ -29,18 +33,30 @@ const AddressForm = React.memo(({ initialData = {}, onSubmit, onCancel }) => {
       pincode: initialData.pincode || "",
       phone_number: initialData.phone_number || "",
       store_id: initialData.store_id || "",
+      id: initialData.id || null,
     });
   }, [initialData]);
 
-  // Stable handler to prevent unnecessary renders
+  // handle input change
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }, []);
 
-  const handleSubmit = (e) => {
+  // handle submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onSubmit) onSubmit(form);
+    try {
+      if (mode === "add") {
+        await dispatch(createAddress(form));
+      } else if (mode === "edit" && form.id) {
+        await dispatch(updateAddress(form));
+      }
+      await dispatch(getAddresses());
+      onCancel(); // back to list after save
+    } catch (err) {
+      console.error("Error saving address:", err);
+    }
   };
 
   return (
@@ -48,7 +64,7 @@ const AddressForm = React.memo(({ initialData = {}, onSubmit, onCancel }) => {
       <div className="padding-top"></div>
       <Card className="p-4 shadow-sm">
         <h2 className="h5 mb-3">
-          {initialData?.id ? "Edit Address" : "Add New Address"}
+          {mode === "edit" ? "Edit Address" : "Add New Address"}
         </h2>
 
         <Form onSubmit={handleSubmit} aria-label="Address Form">
@@ -202,7 +218,7 @@ const AddressForm = React.memo(({ initialData = {}, onSubmit, onCancel }) => {
                 color: "#fff",
               }}
             >
-              {initialData?.id ? "Update Address" : "Save Address"}
+              {mode === "edit" ? "Update Address" : "Save Address"}
             </motion.button>
 
             <motion.button

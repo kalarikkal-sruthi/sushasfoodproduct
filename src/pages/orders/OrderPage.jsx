@@ -4,13 +4,7 @@ import { Plus } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import {
-  getUser,
-  getAddresses,
-  createAddress,
-  updateAddress,
-  deleteAddress,
-} from "../../store/authService";
+import { getUser, getAddresses, deleteAddress } from "../../store/authService";
 import { logout as logoutAction } from "../../store/authSlice";
 import { clearCart } from "../../store/cartSlice";
 import { getOrders, createOrder } from "../../store/orderSlice";
@@ -24,7 +18,11 @@ const AddressForm = React.lazy(() =>
 const OrderPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, user, addresses = [] } = useSelector((state) => state.auth || {});
+  const {
+    token,
+    user,
+    addresses = [],
+  } = useSelector((state) => state.auth || {});
   const ordersState = useSelector((state) => state.order);
   const orders = ordersState?.orders || [];
   const cartItems = useSelector((state) => state.cart.items);
@@ -48,21 +46,6 @@ const OrderPage = () => {
     dispatch(logoutAction());
     localStorage.removeItem("access");
     navigate("/login");
-  };
-
-  const handleSaveAddress = async (form) => {
-    try {
-      if (addressMode === "add") {
-        await dispatch(createAddress(form));
-      } else if (addressMode === "edit" && editData?.id) {
-        await dispatch(updateAddress({ ...form, id: editData.id }));
-      }
-      await dispatch(getAddresses());
-      setAddressMode("list");
-      setEditData(null);
-    } catch (err) {
-      console.error("Error saving address:", err);
-    }
   };
 
   const handlePlaceOrder = async () => {
@@ -125,6 +108,21 @@ const OrderPage = () => {
           >
             Edit →
           </motion.button>
+          <motion.button
+            whileHover={{ x: 5, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline btn-sm mt-2"
+            style={{
+              borderRadius: "6px",
+              fontWeight: "500",
+              border: "1px solid #294085",
+              backgroundColor: "#294085",
+              color: "#fff",
+            }}
+            aria-label="edit address"
+          >
+            Set As Default →
+          </motion.button>
 
           <motion.button
             whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -139,7 +137,9 @@ const OrderPage = () => {
             }}
             aria-label="delete address"
             onClick={() => {
-              if (window.confirm("Are you sure you want to delete this address?")) {
+              if (
+                window.confirm("Are you sure you want to delete this address?")
+              ) {
                 dispatch(deleteAddress(address.id));
               }
             }}
@@ -217,7 +217,7 @@ const OrderPage = () => {
                 textAlign: "left",
               }}
             >
-              Orders
+              Order Summary
               <div style={{ fontSize: "0.8rem", fontWeight: "normal" }}>
                 View your orders
               </div>
@@ -250,7 +250,7 @@ const OrderPage = () => {
                   <OrderCard
                     key={order.id}
                     order={order}
-                    products={cartItems} // ⚠️ check if OrderCard really needs cartItems here
+                    products={cartItems}
                   />
                 ))}
               {activeTab === "address" &&
@@ -266,7 +266,7 @@ const OrderPage = () => {
                 ) : (
                   <AddressForm
                     initialData={addressMode === "edit" ? editData : {}}
-                    onSubmit={handleSaveAddress}
+                    mode={addressMode}
                     onCancel={() => {
                       setAddressMode("list");
                       setEditData(null);
@@ -277,7 +277,7 @@ const OrderPage = () => {
             {activeTab === "orders" && cartItems.length > 0 && (
               <div className="mt-4 text-end">
                 <Button variant="success" onClick={handlePlaceOrder}>
-                  Place Order
+                  Nothing To Order
                 </Button>
               </div>
             )}

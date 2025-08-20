@@ -5,26 +5,16 @@ import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
 
-function CartPage() {
-  const location = useLocation();
+function Account() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
   const token = useSelector((state) => state.auth.token);
   console.log("token:", token);
-  const navigate = useNavigate();
-
-  const handleProceed = () => {
-    if (!token) {
-      navigate("/login", { state: { from: location } });
-    } else {
-      navigate("/checkoutpage");
-    }
-  };
 
   // Compute total only once using useMemo
   const grandTotal = useMemo(
@@ -36,7 +26,6 @@ function CartPage() {
   useEffect(() => {
     console.log("Cart items changed:", cartItems);
   }, [cartItems]);
-
   return (
     <main>
       <Helmet>
@@ -62,7 +51,7 @@ function CartPage() {
                     className="display-8 fw-bold mb-3"
                     style={{ color: "#294085" }}
                   >
-                    My Cart
+                    My Cart(count)
                   </h1>
                 </Col>
               </Row>
@@ -74,7 +63,7 @@ function CartPage() {
               ) : (
                 <>
                   <Row>
-                    <Col md={9}>
+                    <Col md={12}>
                       <ul className="list-group" aria-labelledby="cart-heading">
                         {/* Headings row */}
                         <li
@@ -110,9 +99,7 @@ function CartPage() {
 
                             {/* Quantity */}
                             <div style={{ width: "15%" }}>
-                              {item.size}
-                              <br></br>
-                              {item.quantity}
+                              {item.quantity}({item.size})
                             </div>
 
                             {/* Price */}
@@ -151,72 +138,81 @@ function CartPage() {
                         ))}
                       </ul>
                     </Col>
-                    <Col md={3}>
+                    <Col md={12}>
                       <div className=" p-4 border rounded shadow-sm bg-light">
-                        <h3 className="mb-4  fw-bold">Order Summary</h3>
-
-                        <div className="d-flex justify-content-between mb-2">
-                          <span className="fw-semibold">Subtotal</span>
-                          <span>₹ {grandTotal}</span>
-                        </div>
-
-                        <div className="d-flex justify-content-between mb-2">
-                          <span className="fw-semibold">Shipping</span>
-                          <span>₹ 0</span>
-                        </div>
-
-                        <hr />
-
-                        <div className="d-flex justify-content-between mb-3">
-                          <h4 className="fw-bold">Grand Total</h4>
+                        <div className="d-flex justify-content-around mb-3">
+                          <h4 className="fw-bold">Total Payble</h4>
                           <h4 className="fw-bold">₹ {grandTotal}</h4>
                         </div>
-
-                        <div className="mb-3">
-                          <motion.button
-                            whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                            whileTap={{ scale: 0.98 }}
-                            className="btn btn-outline btn-sm"
-                            style={{
-                              borderRadius: "50px",
-                              fontWeight: "500",
-                              border: "1px solid #294085",
-                              backgroundColor: "#294085",
-                              color: "#fff",
-                            }}
-                            aria-label={`Proceed to checkout cart`}
-                            onClick={handleProceed}
-                          >
-                            Proceed to Checkout →
-                          </motion.button>
-                        </div>
-                        <div>
-                          <Link
-                            to="/login"
-                            state={{ from: location }}
-                            aria-label="Proceed to checkout"
-                          >
-                            <motion.button
-                              whileHover={{
-                                x: 5,
-                                transition: { duration: 0.2 },
-                              }}
-                              whileTap={{ scale: 0.98 }}
-                              className="btn btn-outline btn-sm"
-                              style={{
-                                borderRadius: "50px",
-                                fontWeight: "500",
-                                border: "1px solid #294085",
-                                backgroundColor: "#fff",
-                                color: "#294085",
-                              }}
-                              aria-label={`Proceed to checkout cart`}
-                            >
-                              Go Back To Previous Page →
-                            </motion.button>
-                          </Link>
-                        </div>
                       </div>
+                    </Col>
+                  </Row>
+                  <Row className="mt-5">
+                    <Col>
+                      <h1 className="account-head">Have An Account</h1>
+                      <Link to="/login">
+                        {" "}
+                        <motion.button
+                          whileHover={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                          className="btn btn-outline btn-sm"
+                          style={{
+                            borderRadius: "50px",
+                            fontWeight: "500",
+                            border: "1px solid #294085",
+                            backgroundColor: "#294085",
+                            color: "#fff",
+                          }}
+                          aria-label={`Login`}
+                        >
+                          Login →
+                        </motion.button>
+                      </Link>
+                    </Col>
+                    <Col>
+                      <h1 className="account-head">New to Susha's Food</h1>
+                      <motion.button
+                        whileHover={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{ scale: 0.98 }}
+                        className="btn btn-outline btn-sm"
+                        style={{
+                          borderRadius: "50px",
+                          fontWeight: "500",
+                          border: "1px solid #294085",
+                          backgroundColor: "#294085",
+                          color: "#fff",
+                        }}
+                        aria-label={`Login`}
+                      >
+                        Sign Up →
+                      </motion.button>
+                    </Col>
+                    <Col>
+                      <h1 className="account-head">As a Guest</h1>
+                      <motion.button
+                        whileHover={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{ scale: 0.98 }}
+                        className="btn btn-outline btn-sm"
+                        style={{
+                          borderRadius: "50px",
+                          fontWeight: "500",
+                          border: "1px solid #294085",
+                          backgroundColor: "#294085",
+                          color: "#fff",
+                        }}
+                        aria-label={`Have An Account`}
+                      >
+                        Continue As Guest →
+                      </motion.button>
                     </Col>
                   </Row>
                 </>
@@ -229,4 +225,4 @@ function CartPage() {
   );
 }
 
-export default CartPage;
+export default Account;
