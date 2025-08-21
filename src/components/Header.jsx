@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Searchbar from "./buttons/Searchbar";
 
 import { logout as logoutAction } from "../store/authSlice";
-
+import { Badge } from "react-bootstrap"; // add this import
 export default function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -36,6 +36,12 @@ export default function Header() {
       navigate("/login");
     };
 
+    ///cart count section
+    const cartItems = useSelector((state) => state.cart.items);
+    //total count of all item even the qty chagne some item
+    const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    console.log('cart count::', cartCount);
+    
   return (
     <div>
       <div>
@@ -121,10 +127,30 @@ export default function Header() {
                 </Nav.Link>
               )}
               <Nav.Link href="">|</Nav.Link>
-              <Nav.Link href="/cart" className="icon-img">
-                Cart(Count)
+              {/* <Nav.Link href="/cart" className="icon-img">
+                Cart(Count)        
                 <img src={shoppingcart} alt="susha's food product" />
-              </Nav.Link>
+              </Nav.Link> */}
+              {/* <Nav.Link href="/cart" className="icon-img">
+              Cart{cartCount > 0 && `(${cartCount})`}
+              <img src={shoppingcart} alt="susha's food product" />
+            </Nav.Link> */}
+
+                  <Nav.Link href="/cart" className="position-relative d-flex align-items-center">
+                    <i className="bi bi-cart fs-4"></i>  {/* Bootstrap cart icon */}
+
+                    {/* Badge for cart count */}
+                    {cartCount > 0 && (
+                      <Badge
+                        bg="danger"
+                        pill
+                        className="position-absolute top-2 start-100 translate-middle"
+                      >
+                        {cartCount}
+                      </Badge>
+                    )}
+                  </Nav.Link>
+
                <Nav.Link href="">|</Nav.Link>
               <Nav.Link href="/productsbycategory">Shop Now</Nav.Link>
             </Nav>
