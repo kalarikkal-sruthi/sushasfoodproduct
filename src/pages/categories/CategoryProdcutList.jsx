@@ -13,7 +13,6 @@ const CategoryProductList = () => {
     "radial-gradient(circle,rgba(0, 119, 174, 0.45) 0%, #0078ae 100%)",
     "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
     "radial-gradient(circle,rgba(174, 0, 99, 0.49) 0%, #ae0064",
-
     "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
     "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
   ];

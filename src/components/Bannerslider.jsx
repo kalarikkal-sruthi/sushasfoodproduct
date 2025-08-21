@@ -34,7 +34,8 @@ function Bannerslider({ data }) {
                 preload="metadata"
                 aria-label={`Promotional video ${index + 1}`}
               >
-                <source src={`${videoURL}${item.video}`} type="video/mp4" />
+                  <source src={`${videoURL}${item.video}`} type="video/mp4" />
+                {/* <source src={`${videoURL}${item.video}`} type="video/mp4" /> */}
                 Your browser does not support the video tag.
               </video>
 
