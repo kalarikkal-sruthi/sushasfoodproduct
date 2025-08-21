@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../../store/cartSlice";
+import { decrementQuantity, incrementQuantity, removeFromCart } from "../../store/cartSlice";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -74,7 +74,7 @@ function CartPage() {
               ) : (
                 <>
                   <Row>
-                    <Col md={9}>
+                    <Col md={8}>
                       <ul className="list-group" aria-labelledby="cart-heading">
                         {/* Headings row */}
                         <li
@@ -109,11 +109,46 @@ function CartPage() {
                             </div>
 
                             {/* Quantity */}
-                            <div style={{ width: "15%" }}>
+                            {/* <div style={{ width: "15%" }}>
                               {item.size}
                               <br></br>
                               {item.quantity}
+                            </div> */}
+                            
+                               {/* Sid:changes on 21 aug 2025 - added quantity control buttons and logic */}
+                            <div style={{ width: "15%" }}>
+                              {/* Product Size * Quantity */}
+                              <div>
+                                <small className="text-muted">
+                                  {item.quantity} ({item.size})
+                                </small>
+                              </div>
+
+                              {/* Quantity Controls */}
+                              <div className="d-flex align-items-center mt-2">
+                                <motion.button
+                                  whileTap={{ scale: 0.95 }}
+                                  className="btn btn-sm btn-outline-secondary me-2"
+                                  onClick={() => dispatch(decrementQuantity(item.id))}
+                                  disabled={item.quantity === 1} // prevent going below 1
+                                  aria-label={`Decrease quantity of ${item.product_name}`}
+                                >
+                                  -
+                                </motion.button>
+
+                                <span>{item.quantity}</span>
+
+                                <motion.button
+                                  whileTap={{ scale: 0.95 }}
+                                  className="btn btn-sm btn-outline-secondary ms-2"
+                                  onClick={() => dispatch(incrementQuantity(item.id))}
+                                  aria-label={`Increase quantity of ${item.product_name}`}
+                                >
+                                  +
+                                </motion.button>
+                              </div>
                             </div>
+
 
                             {/* Price */}
                             <div style={{ width: "15%" }}>₹ {item.price}</div>
@@ -151,7 +186,7 @@ function CartPage() {
                         ))}
                       </ul>
                     </Col>
-                    <Col md={3}>
+                    <Col md={4}>
                       <div className=" p-4 border rounded shadow-sm bg-light">
                         <h3 className="mb-4  fw-bold">Order Summary</h3>
 

@@ -174,6 +174,7 @@ function Account() {
                     </Col>
                     <Col>
                       <h1 className="account-head">New to Susha's Food</h1>
+                        <Link to='/register'>
                       <motion.button
                         whileHover={{
                           x: 5,
@@ -192,9 +193,11 @@ function Account() {
                       >
                         Sign Up →
                       </motion.button>
+                      </Link>
                     </Col>
                     <Col>
                       <h1 className="account-head">As a Guest</h1>
+                      <Link to={'/guest'}>
                       <motion.button
                         whileHover={{
                           x: 5,
@@ -213,6 +216,7 @@ function Account() {
                       >
                         Continue As Guest →
                       </motion.button>
+                      </Link>
                     </Col>
                   </Row>
                 </>
