@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Row, Col, Card, Form, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import { getAddresses } from "../../store/authService";
+import { getAddresses, setDefaultAddress } from "../../store/authService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
+// import { createOrder } from "../../store/orderService"; // <-- make sure this exists
+
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const CheckoutPage = React.memo(() => {
   const cartItems = useSelector((state) => state.cart.items);
   const addresses = useSelector((state) => state.auth.addresses || []);
   const user = useSelector((state) => state.auth.user);
+
   const [addressMode, setAddressMode] = useState("list");
   const [editData, setEditData] = useState(null);
 
@@ -27,7 +30,7 @@ const CheckoutPage = React.memo(() => {
     return {
       subtotal: subtotalCalc,
       discount: 0,
-      payable: subtotalCalc - 0,
+      payable: subtotalCalc,
     };
   }, [cartItems]);
 
@@ -35,12 +38,13 @@ const CheckoutPage = React.memo(() => {
     dispatch(getAddresses());
   }, [dispatch]);
 
+  // 🔹 Always keep default address selected
   useEffect(() => {
-    if (addresses.length > 0 && selectedAddressId === null) {
+    if (addresses.length > 0) {
       const defaultAddr = addresses.find((addr) => addr.is_default);
       setSelectedAddressId(defaultAddr ? defaultAddr.id : addresses[0].id);
     }
-  }, [addresses, selectedAddressId]);
+  }, [addresses]);
 
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
@@ -62,7 +66,7 @@ const CheckoutPage = React.memo(() => {
       })),
     };
 
-    // Assuming createOrder is already imported
+    // Assuming createOrder is imported
     await dispatch(createOrder(orderData));
     navigate("/orders");
   }, [selectedAddressId, user, cartItems, dispatch, navigate]);
@@ -79,7 +83,7 @@ const CheckoutPage = React.memo(() => {
       <div className="padding-top" />
       <div className="padding-top" />
       <Container className="mt-5">
-        <div class="calculation-padding">
+        <div className="calculation-padding">
           <section aria-labelledby="cart-heading">
             <header className="header-bar">
               <Row>
@@ -98,8 +102,7 @@ const CheckoutPage = React.memo(() => {
               <Col md={7} className="d-flex flex-column">
                 <Card className="flex-grow-1">
                   <Card.Header>
-                    {" "}
-                    <strong>Delivery Address</strong>{" "}
+                    <strong>Delivery Address</strong>
                   </Card.Header>
                   <Card.Body className="address-scroll">
                     {addressMode === "list" ? (
@@ -115,20 +118,31 @@ const CheckoutPage = React.memo(() => {
                             style={{ cursor: "pointer", borderWidth: "2px" }}
                           >
                             <Row className="align-items-center">
-                              <Col
-                                xs={9}
-                                onClick={() => setSelectedAddressId(addr.id)}
-                              >
+                              <Col xs={9}>
                                 <Form.Check
                                   type="radio"
                                   name="address"
                                   checked={selectedAddressId === addr.id}
-                                  onChange={() => setSelectedAddressId(addr.id)}
+                                  onChange={() => {
+                                    setSelectedAddressId(addr.id);
+                                    dispatch(setDefaultAddress(addr.id)); // 🔹 update backend
+                                  }}
                                   label={
                                     <>
                                       <strong>
                                         {addr.first_name} {addr.last_name}
                                       </strong>
+                                      {addr.is_default && (
+                                        <span
+                                          style={{
+                                            color: "green",
+                                            marginLeft: "6px",
+                                            fontSize: "0.85rem",
+                                          }}
+                                        >
+                                          (Default)
+                                        </span>
+                                      )}
                                       <div className="text-muted small">
                                         {addr.address}
                                       </div>
@@ -174,7 +188,6 @@ const CheckoutPage = React.memo(() => {
                         </Button>
                       </>
                     ) : (
-                      // Show form for Add/Edit
                       <AddressForm
                         initialData={addressMode === "edit" ? editData : {}}
                         mode={addressMode}
@@ -201,36 +214,6 @@ const CheckoutPage = React.memo(() => {
               </Col>
 
               <Col md={5} className="d-flex flex-column">
-                {/* <Card className="flex-grow-1">
-                  <Card.Header>Your Cart</Card.Header>
-                  <Card.Body className="cart-items-scroll">
-                    {cartItems.map((item) => (
-                      <Card key={item.id} className="mb-3">
-                        <Card.Body className="d-flex align-items-center">
-                          <img
-                            src={item.image || "/placeholder.jpg"}
-                            alt={item.product_name}
-                            loading="lazy"
-                            width="60"
-                            height="60"
-                            style={{
-                              objectFit: "cover",
-                              marginRight: "15px",
-                            }}
-                          />
-                          <div className="flex-grow-1">
-                            <h5>{item.product_name}</h5>
-                            <p>Qty: {item.quantity}</p>
-                            <p>₹ {item.price}</p>
-                          </div>
-                          <div>₹ {item.price * item.quantity}</div>
-                        </Card.Body>
-                      </Card>
-                    ))}
-                  </Card.Body>
-                </Card> */}
-
-                {/* Totals */}
                 <div>
                   <Card>
                     <Card.Header>
@@ -249,7 +232,7 @@ const CheckoutPage = React.memo(() => {
                         <Col>Shipping Charge</Col>
                         <Col className="text-end">₹ {discount.toFixed(2)}</Col>
                       </Row>
-                      <hr></hr>
+                      <hr />
                       <Row>
                         <Col>
                           <strong>Payable</strong>
@@ -262,8 +245,6 @@ const CheckoutPage = React.memo(() => {
                   </Card>
                 </div>
               </Col>
-
-              {/* Address Section */}
             </Row>
           </section>
         </div>

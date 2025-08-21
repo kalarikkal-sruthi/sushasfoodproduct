@@ -72,7 +72,12 @@ export const getAddresses = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return response.data.data; // array of addresses
+    // return response.data.data; // array of addresses
+     // sid change 21 aug 2025 → normalize typo field `deafult` to `is_default`
+    return response.data.map(addr => ({
+      ...addr,
+      is_default: Boolean(addr.deafult), // normalize here
+    }));
   }
 )
 
@@ -95,6 +100,32 @@ export const createAddress = createAsyncThunk(
     return response.data; // return created address object
   }
 );
+
+// 🆕 sid changes on 21 aug 2025 - set an address as default
+// Add this to your authService.js file
+export const setDefaultAddress = createAsyncThunk(
+  "auth/setDefaultAddress",
+  async (addressId, { getState }) => {
+    const state = getState();
+    const storedToken = state.auth.token || localStorage.getItem("access");
+
+    const token = storedToken?.includes("|")
+      ? storedToken.split("|")[1]
+      : storedToken;
+
+    const response = await api.post(`/addresses/${addressId}/default`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    // return response.data; // return the updated address object
+
+      // sid change 21 aug 2025 → backend only returns {status, message}
+    // so we return the id instead
+    return { id: addressId };
+  }
+);
+
+
 
 // 🆕 sid change: updateAddress uses flat payload with id + fields
 export const updateAddress = createAsyncThunk(

@@ -9,6 +9,7 @@ import {
   createAddress,
   updateAddress,
   deleteAddress,
+  setDefaultAddress,
 } from "./authService";
 
 const initialState = {
@@ -76,7 +77,35 @@ const authSlice = createSlice({
         state.addresses = state.addresses.filter(
           (addr) => addr.id !== deletedId
         );
-      });
+      })
+
+      
+// 🆕 sid changes on 21 aug 2025 - update state when default is set
+// Add this to your authSlice.js in the extraReducers
+// .addCase(setDefaultAddress.fulfilled, (state, action) => {
+//   const updatedAddress = action.payload;
+  
+//   // CORRECT APPROACH: Update all addresses in a single map operation
+//   state.addresses = state.addresses.map(addr => 
+//     addr.id === updatedAddress.id 
+//       ? updatedAddress // Set the updated address as default
+//       : { ...addr, is_default: false } // Set all others as non-default
+//   );
+// })
+
+.addCase(setDefaultAddress.fulfilled, (state, action) => {
+  const updatedAddress = action.payload;
+
+  console.log("Default address set:", updatedAddress); // sid change 21 aug 2025
+
+  state.addresses = state.addresses.map(addr => ({
+    ...addr,
+    is_default: addr.id === updatedAddress.id
+  }));
+})
+
+
+
   },
 });
 
