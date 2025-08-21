@@ -46,8 +46,32 @@ const cartSlice = createSlice({
       state.items = [];
       localStorage.removeItem("cartItems");
     },
+       // sid:changes on 21 aug 2025 - increment quantity
+        incrementQuantity: (state, action) => {
+          const item = state.items.find((item) => item.id === action.payload);
+          if (item) {
+            item.quantity += 1;
+            saveCartToStorage(state.items);
+          }
+        },
+
+          // sid:changes on 21 aug 2025 - decrement quantity
+            decrementQuantity: (state, action) => {
+              const item = state.items.find((item) => item.id === action.payload);
+              if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                saveCartToStorage(state.items);
+              }
+            },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const {
+   addToCart,
+   removeFromCart,
+   clearCart,
+   incrementQuantity,
+   decrementQuantity,
+} = cartSlice.actions;
+
 export default cartSlice.reducer;
