@@ -9,14 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from "../assets/header/logo-new.png";
 import { useEffect } from "react";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Searchbar from "./buttons/Searchbar";
+
+import { logout as logoutAction } from "../store/authSlice";
 
 export default function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
 
+  const navigate = useNavigate();
   const {
     data: categories,
     loading,
@@ -25,6 +28,14 @@ export default function Header() {
   useEffect(() => {
     dispatch(fetchCategoriesWithProducts());
   }, [dispatch]);
+
+  
+    const handleLogout = () => {
+      dispatch(logoutAction());
+      localStorage.removeItem("access");
+      navigate("/login");
+    };
+
   return (
     <div>
       <div>
@@ -92,16 +103,16 @@ export default function Header() {
               {token ? (
                 <div className="dropdown">
                   <button className="dropdown-main">
-                    <Nav.Link href="/myaccount" className="icon-img">
+                    <Nav.Link href="/account" className="icon-img">
                       Account{" "}
                       <img src={accountcircle} alt="susha's food product" />
                     </Nav.Link>
                   </button>
                   <div className="dropdown-sub-menu">
-                    <Nav.Link href="">My Profile</Nav.Link>
-                    <Nav.Link href="">Orders</Nav.Link>
+                    <Nav.Link href="/">My Profile</Nav.Link>
+                    <Nav.Link href="/myaccount">Orders</Nav.Link>
 
-                    <Nav.Link href="">Logout</Nav.Link>
+                    <Nav.Link href="" onClick={handleLogout}>Logout</Nav.Link>
                   </div>
                 </div>
               ) : (
