@@ -54,7 +54,7 @@ export default function Home() {
           content="farm products, organic produce, value added products, fresh produce, healthy food"
         />
       </Helmet>
-      {/* <Bannerslider data={homeVideoInGallary} /> */}
+      <Bannerslider data={homeVideoInGallary} />
       <Aboutfarm />
       <Ourstory />
       <Certificates data={certificates} />

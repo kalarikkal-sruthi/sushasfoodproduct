@@ -21,7 +21,7 @@ const Aboutfarm = () => {
   return (
     <main>
       <div className="padding-top"></div>
-      <Container className="mt-5">
+      <div  className="padding-y mt-5">
         <section
           aria-labelledby="about-heading"
           className="about-farm-section"
@@ -112,7 +112,7 @@ const Aboutfarm = () => {
             </Col>
           </Row>
         </section>
-      </Container>
+      </div>
     </main>
   );
 };

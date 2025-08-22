@@ -147,3 +147,7 @@ hr {
   h1.account-head{
     font-size: 14px;
   }
+
+  .padding-y{
+    padding:0px 120px;
+  }

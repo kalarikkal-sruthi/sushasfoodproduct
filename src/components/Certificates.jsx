@@ -77,8 +77,8 @@ function Certificate({ data }) {
           </motion.section>
 
           <Swiper
-            spaceBetween={10}
-            slidesPerView={6}
+            // spaceBetween={10}
+            slidesPerView={4}
             loop={true}
             navigation={true}
             autoplay={{ delay: 4000, disableOnInteraction: false }}

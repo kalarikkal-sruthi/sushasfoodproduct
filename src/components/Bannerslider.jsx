@@ -4,7 +4,8 @@ import "swiper/css/navigation";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { videoURL } from "../utils/api";
+// import { videoURL } from "../utils/api";
+import video from "../assets/video/2.mp4";
 
 function Bannerslider({ data }) {
   const isLooping = data.length > 3;
@@ -22,7 +23,42 @@ function Bannerslider({ data }) {
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
-        {data.map((item, index) => (
+        <SwiperSlide>
+          <div className="video-container">
+            <video
+              className="video"
+              loop
+              muted
+              playsInline
+              autoPlay
+              preload="metadata"
+              aria-label={`Promotional video`}
+            >
+              <source src={video} type="video/mp4"></source>
+              {/* <source src={`${videoURL}${item.video}`} type="video/mp4" /> */}
+              Your browser does not support the video tag.
+            </video>
+
+            <div className="video-text">
+              <h1>Welcome to</h1>
+
+              <motion.h1
+                style={{ color: "#294085" }}
+                initial={{ opacity: 0, y: 80 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                Susha's Prakash Farm
+              </motion.h1>
+
+              <p>
+                Our work on the farm involves planting, harvesting, and taking
+                care of animals.
+              </p>
+            </div>
+          </div>
+        </SwiperSlide>
+        {/* {data.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="video-container">
               <video
@@ -34,8 +70,8 @@ function Bannerslider({ data }) {
                 preload="metadata"
                 aria-label={`Promotional video ${index + 1}`}
               >
-                  <source src={`${videoURL}${item.video}`} type="video/mp4" />
-                {/* <source src={`${videoURL}${item.video}`} type="video/mp4" /> */}
+                <source src={video} type="video/mp4" ></source>
+                <source src={`${videoURL}${item.video}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
@@ -58,7 +94,7 @@ function Bannerslider({ data }) {
               </div>
             </div>
           </SwiperSlide>
-        ))}
+        ))} */}
       </Swiper>
     </section>
   );
