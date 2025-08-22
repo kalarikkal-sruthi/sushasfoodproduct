@@ -4,7 +4,7 @@ import { Plus } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { getUser, getAddresses, deleteAddress } from "../../store/authService";
+import { getUser, getAddresses, deleteAddress, setDefaultAddress } from "../../store/authService";
 import { logout as logoutAction } from "../../store/authSlice";
 import { clearCart } from "../../store/cartSlice";
 import { getOrders, createOrder } from "../../store/orderSlice";
@@ -70,87 +70,94 @@ const OrderPage = () => {
     dispatch(getOrders());
   };
 
-  const renderAddressCard = useCallback(
-    (address) => (
-      <Card className="p-3 h-100" key={address.id}>
+const renderAddressCard = useCallback(
+  (address) => (
+    <Card className="p-3 h-100" key={address.id}>
+      <div className="d-flex justify-content-between align-items-center">
         <h6 className="fw-bold mb-2">
           {address.first_name
             ? `${address.first_name} ${address.last_name || ""}`
             : address.name}
         </h6>
-        <p className="mb-1">{address.address || address.line1}</p>
-        {address.landmark && <p className="mb-1">{address.landmark}</p>}
-        {address.city && (
-          <p className="mb-1">
-            {address.city}{" "}
-            {address.state_id ? `(${address.state_id})` : address.state}{" "}
-            {address.pincode || address.zip}
-          </p>
-        )}
-        {address.country && <p className="mb-2">{address.country}</p>}
-        <div className="d-flex justify-content-between">
-          <motion.button
-            whileHover={{ x: 5, transition: { duration: 0.2 } }}
-            whileTap={{ scale: 0.98 }}
-            className="btn btn-outline btn-sm mt-2"
-            style={{
-              borderRadius: "6px",
-              fontWeight: "500",
-              border: "1px solid #294085",
-              backgroundColor: "#294085",
-              color: "#fff",
-            }}
-            aria-label="edit address"
-            onClick={() => {
-              setEditData(address);
-              setAddressMode("edit");
-            }}
-          >
-            Edit →
-          </motion.button>
-          <motion.button
-            whileHover={{ x: 5, transition: { duration: 0.2 } }}
-            whileTap={{ scale: 0.98 }}
-            className="btn btn-outline btn-sm mt-2"
-            style={{
-              borderRadius: "6px",
-              fontWeight: "500",
-              border: "1px solid #294085",
-              backgroundColor: "#294085",
-              color: "#fff",
-            }}
-            aria-label="edit address"
-          >
-            Set As Default →
-          </motion.button>
 
-          <motion.button
-            whileHover={{ x: 5, transition: { duration: 0.2 } }}
-            whileTap={{ scale: 0.98 }}
-            className="btn btn-outline btn-sm mt-2"
-            style={{
-              borderRadius: "6px",
-              fontWeight: "500",
-              border: "1px solid #d33838",
-              backgroundColor: "#d33838",
-              color: "#fff",
+        {/* sid change 21 aug 2025 → Added radio button for default */}
+        <div>
+        <input
+            type="radio"
+            name="defaultAddress"
+            checked={Boolean(address.is_default)} // ensure boolean
+            onChange={() => {
+              console.log("Setting default address:", address); // log clicked one
+              dispatch(setDefaultAddress(address.id));
             }}
-            aria-label="delete address"
-            onClick={() => {
-              if (
-                window.confirm("Are you sure you want to delete this address?")
-              ) {
-                dispatch(deleteAddress(address.id));
-              }
-            }}
-          >
-            Remove →
-          </motion.button>
+            aria-label="set default address"
+          />
+          <small className="text-muted">Default</small>
         </div>
-      </Card>
-    ),
-    [dispatch]
-  );
+      </div>
+
+      <p className="mb-1">{address.address || address.line1}</p>
+      {address.landmark && <p className="mb-1">{address.landmark}</p>}
+      {address.city && (
+        <p className="mb-1">
+          {address.city}{" "}
+          {address.state_id ? `(${address.state_id})` : address.state}{" "}
+          {address.pincode || address.zip}
+        </p>
+      )}
+      {address.country && <p className="mb-2">{address.country}</p>}
+      <div className="d-flex justify-content-between">
+        <motion.button
+          whileHover={{ x: 5, transition: { duration: 0.2 } }}
+          whileTap={{ scale: 0.98 }}
+          className="btn btn-outline btn-sm mt-2"
+          style={{
+            borderRadius: "6px",
+            fontWeight: "500",
+            border: "1px solid #294085",
+            backgroundColor: "#294085",
+            color: "#fff",
+          }}
+          aria-label="edit address"
+          onClick={() => {
+            setEditData(address);
+            setAddressMode("edit");
+          }}
+        >
+          Edit →
+        </motion.button>
+
+        {/* sid change 21 aug 2025 → removed "Set As Default" button 
+            since radio now handles this */}
+        
+        <motion.button
+          whileHover={{ x: 5, transition: { duration: 0.2 } }}
+          whileTap={{ scale: 0.98 }}
+          className="btn btn-outline btn-sm mt-2"
+          style={{
+            borderRadius: "6px",
+            fontWeight: "500",
+            border: "1px solid #d33838",
+            backgroundColor: "#d33838",
+            color: "#fff",
+          }}
+          aria-label="delete address"
+          onClick={() => {
+            if (
+              window.confirm("Are you sure you want to delete this address?")
+            ) {
+              dispatch(deleteAddress(address.id));
+            }
+          }}
+        >
+          Remove →
+        </motion.button>
+      </div>
+    </Card>
+  ),
+  [dispatch]
+);
+
 
   const renderAddCard = (
     <Card
