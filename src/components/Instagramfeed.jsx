@@ -22,7 +22,7 @@ function Instagramfeed({ data }) {
 
   return (
     <main aria-labelledby="extra-harvest-heading">
-      <Container className="mt-5">
+      <div  className="padding-y mt-5">
          <Row className="mb-3">
             <Col>
               <motion.section
@@ -78,7 +78,7 @@ function Instagramfeed({ data }) {
             ))}
           </Swiper>
         </section>
-      </Container>
+      </div>
     </main>
   );
 }

@@ -28,7 +28,7 @@ function Testimonial({ data }) {
 
    
     <section  aria-labelledby="testimonial-heading">
-      <Container className="mt-5">
+      <div  className="padding-y mt-5">
       <header className="header-bar">
         <Row className="mb-3">
             <Col>
@@ -110,7 +110,7 @@ function Testimonial({ data }) {
               </Link>
             </Col>
           </Row>
-      </Container>
+      </div>
     </section>
     </main>
   );

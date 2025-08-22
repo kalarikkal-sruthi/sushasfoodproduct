@@ -21,11 +21,8 @@ const Aboutfarm = () => {
   return (
     <main>
       <div className="padding-top"></div>
-      <div  className="padding-y mt-5">
-        <section
-          aria-labelledby="about-heading"
-          className="about-farm-section"
-        >
+      <div className="padding-y mt-5">
+        <section aria-labelledby="about-heading" className="about-farm-section">
           <Row className="align-items-center justify-content-center">
             <Col md={7} className="pe-md-5">
               <motion.div
@@ -43,10 +40,7 @@ const Aboutfarm = () => {
                   >
                     About Susha's Prakash Farm
                   </motion.h1>
-                  <motion.p
-                    className="lead text-muted"
-                    variants={itemVariants}
-                  >
+                  <motion.p className="lead text-muted" variants={itemVariants}>
                     A sustainable <strong>organic farm in Kerala</strong>,
                     committed to regenerative agriculture and healthy
                     communities.

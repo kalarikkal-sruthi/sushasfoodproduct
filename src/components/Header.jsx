@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import accountcircle from "../assets/header/account_circle.png";
 
-import shoppingcart from "../assets/header/Shopping cart.png";
+// import shoppingcart from "../assets/header/Shopping cart.png";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../assets/header/logo-new.png";
 import { useEffect } from "react";

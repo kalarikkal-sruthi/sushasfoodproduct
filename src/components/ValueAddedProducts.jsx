@@ -40,7 +40,7 @@ const ValueAddedProducts = () => {
 
   return (
     <main>
-      <Container className="mt-5">
+       <div  className="padding-y mt-5">
         <section aria-labelledby="value-added-products-title" className="mb-5">
           <header>
             <Row>
@@ -88,9 +88,10 @@ const ValueAddedProducts = () => {
                         }}
                       >
                         <Card.Img
-                          className="w-50 m-auto"
+                          className=" m-auto"
                           variant="top"
                           src={img}
+                          style={{width:"400px"}}
                           // src={`${categoryUrl}${category.image}`}
                           alt={`Fresh ${category.name} products`}
                           loading="lazy"
@@ -156,7 +157,7 @@ const ValueAddedProducts = () => {
             </Col>
           </Row>
         </section>
-      </Container>
+      </div>
     </main>
   );
 };

@@ -1,6 +1,5 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
 import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
 import location from "../assets/header/location_on.png";

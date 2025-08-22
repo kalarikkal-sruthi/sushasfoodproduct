@@ -59,7 +59,7 @@ function Certificate({ data }) {
 
   return (
     <main>
-      <Container className="mt-4">
+       <div  className="padding-y mt-4">
         <section aria-labelledby="certificates-heading">
           <motion.section
             initial="offscreen"
@@ -78,7 +78,7 @@ function Certificate({ data }) {
 
           <Swiper
             // spaceBetween={10}
-            slidesPerView={4}
+            slidesPerView={6}
             loop={true}
             navigation={true}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -142,7 +142,7 @@ function Certificate({ data }) {
             ))}
           </div>
         </section>
-      </Container>
+      </div>
     </main>
   );
 }

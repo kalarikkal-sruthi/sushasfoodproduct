@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 const WhatWeDo = () => {
   return (
     <main aria-labelledby="what-we-do-title">
-      <Container className="mt-5">
+     <div  className="padding-y mt-5">
         <section aria-labelledby="what-we-do-title">
           <Row className="mb-5">
             <Col>
@@ -35,7 +35,7 @@ const WhatWeDo = () => {
             </Col>
           </Row>
         </section>
-      </Container>
+      </div>
     </main>
   );
 };

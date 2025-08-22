@@ -24,8 +24,7 @@ const Youtubefeed = ({ data }) => {
   return (
     <main aria-labelledby="youtube-feed-heading">
     
-      <Container className="mt-5">
-
+      <div  className="padding-y mt-5">
       <section  aria-label="YouTube Video Gallery">
         <header className="header-bar">
           <Row className="mb-3">
@@ -90,7 +89,7 @@ const Youtubefeed = ({ data }) => {
           </Swiper>
         </section>
       </section>
-      </Container>
+      </div>
     </main>
   );
 };

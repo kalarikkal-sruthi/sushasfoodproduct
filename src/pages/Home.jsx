@@ -62,7 +62,7 @@ export default function Home() {
 
       <Mostharvestcrops />
 
-      <Extraharvestcrops />
+      {/* <Extraharvestcrops /> */}
 
       <ValueAddedProducts data={products} />
       <Instagramfeed data={videoInstagram} />

@@ -44,7 +44,7 @@ export default function MostHarvestcrops() {
 
   return (
     <main>
-      <Container className="mt-5">
+      <div  className="padding-y mt-5">
         <section aria-labelledby="most-common-crops">
           <header>
             <Row className="mb-3">
@@ -71,7 +71,7 @@ export default function MostHarvestcrops() {
 
           <Row className="g-4">
             {homeData && homeData.length > 0 ? (
-              homeData.slice(0, 4).map((item) => (
+              homeData.slice(0, 8).map((item) => (
                 <Col lg={6} key={item.id} as="article">
                   <motion.div
                     initial="offscreen"
@@ -188,7 +188,7 @@ export default function MostHarvestcrops() {
             </Col>
           </Row>
         </section>
-      </Container>
+      </div>
     </main>
   );
 }
