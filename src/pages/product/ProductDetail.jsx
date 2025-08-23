@@ -13,6 +13,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
+console.log(data);
 
   useEffect(() => {
     dispatch(fetchProductById(id));

@@ -1,7 +1,7 @@
 // src/components/order/OrderCard.jsx
 import React from "react";
 import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
-import "./OrderCard.css"; // external CSS for speed + caching
+
 
 const OrderCard = ({ order = {}, products = [] }) => {
   return (

@@ -54,7 +54,7 @@ export default function Home() {
           content="farm products, organic produce, value added products, fresh produce, healthy food"
         />
       </Helmet>
-      {/* <Bannerslider data={homeVideoInGallary} /> */}
+      <Bannerslider data={homeVideoInGallary} />
       <Aboutfarm />
       <Ourstory />
       <Certificates data={certificates} />
@@ -62,7 +62,7 @@ export default function Home() {
 
       <Mostharvestcrops />
 
-      <Extraharvestcrops />
+      {/* <Extraharvestcrops /> */}
 
       <ValueAddedProducts data={products} />
       <Instagramfeed data={videoInstagram} />

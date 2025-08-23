@@ -35,16 +35,31 @@ function Certificate({ data }) {
   }
 
   const services = [
-    { title: "Organic", image: key1, description: "Certified organic farming practices." },
-    { title: "High Quality", image: key2, description: "Premium quality produce from our farm." },
-    { title: "Happy Customer", image: key3, description: "Trusted by our valued customers." },
-    { title: "50+ Varieties", image: key4, description: "Wide variety of fresh farm produce." },
+    {
+      title: "Organic",
+      image: key1,
+      description: "Certified organic farming practices.",
+    },
+    {
+      title: "High Quality",
+      image: key2,
+      description: "Premium quality produce from our farm.",
+    },
+    {
+      title: "Happy Customer",
+      image: key3,
+      description: "Trusted by our valued customers.",
+    },
+    {
+      title: "50+ Varieties",
+      image: key4,
+      description: "Wide variety of fresh farm produce.",
+    },
   ];
 
   return (
     <main>
-      <Container className="mt-4">
-       
+       <div  className="padding-y mt-4">
         <section aria-labelledby="certificates-heading">
           <motion.section
             initial="offscreen"
@@ -62,8 +77,8 @@ function Certificate({ data }) {
           </motion.section>
 
           <Swiper
-            spaceBetween={20}
-            slidesPerView={5}
+            // spaceBetween={10}
+            slidesPerView={6}
             loop={true}
             navigation={true}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -72,15 +87,16 @@ function Certificate({ data }) {
             aria-label="Certificates carousel"
           >
             {data.map((item, index) => {
-              const certTitle =
-                item.title || `Certificate ${index + 1}`;
+              const certTitle = item.title || `Certificate ${index + 1}`;
               return (
                 <SwiperSlide key={item.id || index}>
                   <figure
                     className="certificate-main-div text-center"
                     style={{
-                      width: "100%",
-                      margin: "0 auto",
+                      // width: "100%",
+                      height: "400px",
+                      objectFit: "contain",
+                      // margin: "0 auto",
                       borderRadius: "12px",
                     }}
                   >
@@ -91,8 +107,9 @@ function Certificate({ data }) {
                       loading="lazy"
                       style={{
                         width: "100%",
+                        height: "400px",
                         objectFit: "contain",
-                      height:"400px",
+                        // height:"400px",
                         borderRadius: "12px",
                       }}
                     />
@@ -107,8 +124,10 @@ function Certificate({ data }) {
             })}
           </Swiper>
         </section>
-        <section className="key-features mt-5" aria-labelledby="key-features-heading">
-         
+        <section
+          className="key-features mt-5"
+          aria-labelledby="key-features-heading"
+        >
           <div className="key-feature-container">
             {services.map((service, index) => (
               <div className="key-feature-card text-center" key={index}>
@@ -118,12 +137,12 @@ function Certificate({ data }) {
                   loading="lazy"
                 />
                 <h3 className="mt-3">{service.title}</h3>
-                <p style={{color:"#fff"}}>{service.description}</p>
+                <p style={{ color: "#fff" }}>{service.description}</p>
               </div>
             ))}
           </div>
         </section>
-      </Container>
+      </div>
     </main>
   );
 }

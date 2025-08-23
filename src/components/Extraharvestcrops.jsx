@@ -66,7 +66,7 @@ export default function HomeCategories() {
 
   return (
     <main aria-labelledby="extra-harvest-heading">
-      <Container className="mt-5">
+      <div  className="padding-y mt-5">
         <section>
           <Row className="mb-3">
             <Col>
@@ -196,7 +196,7 @@ export default function HomeCategories() {
             </Col>
           </Row>
         </section>
-      </Container>
+      </div>
     </main>
   );
 }

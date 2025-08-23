@@ -44,7 +44,7 @@ const Ourstory = () => {
 
   return (
     <main aria-labelledby="our-story-heading">
-      <Container>
+      <div  className="padding-y ">
         <section aria-labelledby="our-story-heading">
           <Row className="align-items-center justify-content-center">
             <Col md={12} className="pe-md-5">
@@ -149,7 +149,7 @@ const Ourstory = () => {
             </Row>
           </motion.section>
         </section>
-      </Container>
+      </div>
     </main>
   );
 };
