@@ -4,6 +4,7 @@ const imgURL = "https://ms.myfezto.com/uploads/";
 
 const videoURL = "https://ms.myfezto.com/uploads/banner-video/";
 const whatinfarmsURL = "https://ms.myfezto.com/uploads/what_in_farm/";
+export const whatinfarmsGalleryURL = "https://ms.myfezto.com/uploads/what_in_farm/gallery/";
 export const imgURLTestimonial = "https://ms.myfezto.com/uploads/testimonial/";
 export const imgURLCertificate = "https://ms.myfezto.com/uploads/certificates/";
 export const imgURLVideo = "https://ms.myfezto.com/uploads/video/";
