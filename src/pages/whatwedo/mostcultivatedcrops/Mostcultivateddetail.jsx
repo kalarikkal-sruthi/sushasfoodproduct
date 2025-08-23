@@ -110,16 +110,23 @@ export default function Mostcultivateddetail() {
               )}
             </Col>
           </Row>
+          <Row>
+           
+              {detailData.images?.map((img, index) =>
+                index === detailData.images.length - 1 ? (
+                   <Col>
+                  <img
+                    key={img.id}
+                    src={`${imgURLMostHarvest}${img.image}`}
+                    alt={detailData.name}
+                  />
+                  </Col>
+                ) : null
+              )}
+            
+          </Row>
           <Row className="align-items-center mt-3">
-             {detailData.images?.map((img) => (
-                <img
-                  key={img.id}
-                  src={`${imgURLMostHarvest}${img.image}`}
-                  alt={detailData.name}
-                />
-              ))}
             <Col md={12}>
-             
               <motion.img
                 key={detailData.id}
                 src={`${imgURLMostHarvest}${detailData.images?.at(-1)?.image}`}

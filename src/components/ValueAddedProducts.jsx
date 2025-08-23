@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
-// import { categoryUrl } from "../utils/api";
-import img from "../assets/essential/1.png";
+import { categoryUrl } from "../utils/api";
+
 
 import {} from "../utils/api";
 
@@ -81,7 +81,7 @@ const ValueAddedProducts = () => {
                       aria-label={`View products in ${category.name}`}
                     >
                       <Card
-                        className="h-100 shadow-sm border-0 p-3"
+                        className="h-100 shadow-sm border-0 p-5"
                         style={{
                           background: bgColors[category.id % bgColors.length],
                           borderRadius: "12px",
@@ -90,9 +90,9 @@ const ValueAddedProducts = () => {
                         <Card.Img
                           className=" m-auto"
                           variant="top"
-                          src={img}
+                          // src={img}
                           style={{width:"400px"}}
-                          // src={`${categoryUrl}${category.image}`}
+                          src={`${categoryUrl}${category.image}`}
                           alt={`Fresh ${category.name} products`}
                           loading="lazy"
                         />

@@ -12,6 +12,8 @@ import { imgURLMostHarvest } from "../utils/api";
 export default function MostHarvestcrops() {
   const dispatch = useDispatch();
   const { homeData } = useSelector((state) => state.mostHarvest);
+  console.log(homeData);
+  
 
   useEffect(() => {
     console.log("[MostHarvestcrops] Dispatching fetchMostHarvestHome...");

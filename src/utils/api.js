@@ -9,7 +9,7 @@ export const imgURLCertificate = "https://ms.myfezto.com/uploads/certificates/";
 export const imgURLVideo = "https://ms.myfezto.com/uploads/video/";
 export const productURL = "https://ms.myfezto.com/uploads/products/";
 export const aboutURL = "https://ms.myfezto.com/uploads/about-us-images/";
-export const categoryUrl = "https://ms.myfezto.com/uploads/Categories/";
+export const categoryUrl = "https://ms.myfezto.com/uploads/categories/";
 
 export const imgURLMostHarvest ="https://ms.myfezto.com/uploads/what_in_farm/"
 

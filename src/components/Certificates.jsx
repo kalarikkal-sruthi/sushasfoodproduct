@@ -77,8 +77,8 @@ function Certificate({ data }) {
           </motion.section>
 
           <Swiper
-            // spaceBetween={10}
-            slidesPerView={6}
+            spaceBetween={10}
+            slidesPerView={3}
             loop={true}
             navigation={true}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -93,9 +93,9 @@ function Certificate({ data }) {
                   <figure
                     className="certificate-main-div text-center"
                     style={{
-                      // width: "100%",
-                      height: "400px",
-                      objectFit: "contain",
+                      width: "100%",
+                      height: "500px",
+                      objectFit: "fill",
                       // margin: "0 auto",
                       borderRadius: "12px",
                     }}
@@ -107,8 +107,8 @@ function Certificate({ data }) {
                       loading="lazy"
                       style={{
                         width: "100%",
-                        height: "400px",
-                        objectFit: "contain",
+                        height: "500px",
+                        objectFit: "fill",
                         // height:"400px",
                         borderRadius: "12px",
                       }}
