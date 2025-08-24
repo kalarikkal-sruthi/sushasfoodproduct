@@ -5,7 +5,6 @@ import { productURL } from "../../utils/api";
 import { motion } from "framer-motion";
 import { Toast, ToastContainer } from "react-bootstrap";
 
-
 const ProductDetailSummary = ({ product }) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
@@ -35,13 +34,13 @@ const ProductDetailSummary = ({ product }) => {
   return (
     <section aria-label="Product Details" itemScope>
       <header className="mb-3" aria-labelledby="category-heading">
-        <h1
+        <h2
           id="category-heading"
           className="display-8 fw-bold"
           style={{ color: "#294085" }}
         >
           {product.product_name}
-        </h1>
+        </h2>
       </header>
       {product.description && (
         <p
@@ -152,7 +151,6 @@ const ProductDetailSummary = ({ product }) => {
         Add To Cart →
       </motion.span>
       <br></br>
- 
 
       <h5 className="mt-3">Features Of This Product</h5>
       <ul>

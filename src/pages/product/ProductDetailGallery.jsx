@@ -7,7 +7,16 @@ import "swiper/css/thumbs";
 import { useLocation } from "react-router-dom";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { productURL } from "../../utils/api";
-import samplevideo from "../../assets/productdetail/1.mp4";
+import video1 from "../../assets/productdetail/friedcoconutvideo.mp4";
+import video2 from "../../assets/productdetail/steelcompressedoil3.mp4";
+import video3 from "../../assets/productdetail/woodcompressedoil3.mp4";
+const videoMapping = {
+  "Essential Wood Pressed Coconut Oil(മരച്ചക്കിലാട്ടിയ വെളിച്ചെണ്ണ)": video3,
+
+  "Essential Steel Pressed Coconut oil(സ്റ്റീൽ ചക്കിലാട്ടിയ വെളിച്ചെണ്ണ )":
+    video2,
+  "Fried Coconut Masala(വറുത്ത തേങ്ങ മസാല)": video1,
+};
 
 const ProductDetailGallery = ({ product }) => {
   const location = useLocation();
@@ -98,15 +107,28 @@ const ProductDetailGallery = ({ product }) => {
         ))}
       </Swiper>
       <header className="mt-5" aria-labelledby="category-heading">
-        <h1
+        <h3
           id="category-heading"
-          className="display-8 fw-bold"
+          className="display-12 fw-bold"
           style={{ color: "#294085" }}
         >
-          How to Make {product.product_name}
-        </h1>
+          Preparation Of {product.product_name}
+        </h3>
       </header>
-      <video
+
+      {videoMapping[product?.product_name] && (
+        <video
+          className="mt-3"
+          controls
+          autoPlay={true}
+          muted
+          style={{ borderRadius: "12px", width: "100%", height: "100%" }}
+        >
+          <source src={videoMapping[product.product_name]} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
+      {/* <video
         className="mt-3"
         controls
         autoPlay={false}
@@ -114,11 +136,11 @@ const ProductDetailGallery = ({ product }) => {
         muted
         style={{ borderRadius: "12px", width: "100%", height: "100%" }}
       >
-        {/* Source from local asset */}
+        Source from local asset
         <source src={samplevideo} type="video/mp4" />
-        {/* Fallback text */}
+        
         Your browser does not support the video tag.
-      </video>
+      </video> */}
     </section>
   );
 };

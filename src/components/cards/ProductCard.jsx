@@ -26,7 +26,7 @@ export default function ProductCard({ product }) {
       />
       <h2
         id={`product-title-${product.id}`}
-        style={{ fontSize: "1.1rem", marginTop: "0.8rem" }}
+        style={{ fontSize: "1.5rem", marginTop: "0.8rem" }}
       >
         {product.product_name}
       </h2>

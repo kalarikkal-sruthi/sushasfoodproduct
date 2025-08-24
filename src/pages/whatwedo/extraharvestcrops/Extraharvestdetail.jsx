@@ -6,8 +6,8 @@ import { Col, Row, Container } from "react-bootstrap";
 import { fetchExtraHarvestSingle } from "../../../store/extraHarvestSlice";
 import { imgURLMostHarvest } from "../../../utils/api";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-import main from "../../../assets/whatwedofarm/1.jpeg";
-import main2 from "../../../assets/whatwedofarm/2.jpeg";
+// import main from "../../../assets/whatwedofarm/1.jpeg";
+// import main2 from "../../../assets/whatwedofarm/2.jpeg";
 
 export default function Extraharvestdetail() {
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ export default function Extraharvestdetail() {
             <Col md={4}>
               <motion.img
                 key={single.id}
-                src={main2}
+                // src={main2}
                 alt={single.name}
                 className="img-fluid rounded shadow"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -97,7 +97,7 @@ export default function Extraharvestdetail() {
             <Col md={4}>
               <motion.img
                 key={single.id}
-                src={main2}
+                // src={main2}
                 alt={single.name}
                 className="img-fluid rounded shadow"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -143,7 +143,7 @@ export default function Extraharvestdetail() {
             <Col md={12}>
               <motion.img
                 key={single.id}
-                src={main}
+                // src={main}
                 style={{ height: "500px", objectFit: "cover", width: "100%" }}
                 alt={single.name}
                 className="img-fluid rounded shadow"

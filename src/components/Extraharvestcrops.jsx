@@ -3,14 +3,14 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 // Static images
-import main2 from "../assets/whatwedofarm/2.jpeg";
+// import main2 from "../assets/whatwedofarm/2.jpeg";
 
 
 // Static categories
 const categories = [
   {
     name: "Tubers",
-    image:  main2,
+    // image:  main2,
     description:
       "We cultivate organic root vegetables like yam, cassava, and sweet potatoes using sustainable farming methods.",
     link: "/whatInFarms-Category?category=Tubers",
@@ -18,21 +18,21 @@ const categories = [
   },
   {
     name: "Fruits",
-    image:  main2,
+    // image:  main2,
     description:
       "We grow seasonal fruits such as mangoes, bananas, papayas, and jackfruit in an eco-friendly way.",
     link: "/whatInFarms-Category?category=Fruits",
   },
   {
     name: "Vegetables",
-    image:  main2,
+    // image:  main2,
     description:
       "Our fresh vegetables include seasonal greens, cucumbers, and gourds, all grown organically.",
     link: "/whatInFarms-Category?category=Vegetables",
   },
   {
     name: "Herbs",
-    image:  main2,
+    // image:  main2,
     description:
       "We cultivate medicinal herbs like tulsi, mint, and lemongrass that promote health and wellness.",
     link: "/whatInFarms-Category?category=Herbs",
