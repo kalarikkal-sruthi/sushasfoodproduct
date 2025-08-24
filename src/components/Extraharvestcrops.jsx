@@ -81,7 +81,7 @@ export default function HomeCategories() {
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                  Extra Harvest from Our Farm
+                  Extra Harvest Crops from Our Farm
                 </motion.h2>
               </motion.section>
             </Col>

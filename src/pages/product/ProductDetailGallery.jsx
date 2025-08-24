@@ -97,13 +97,13 @@ const ProductDetailGallery = ({ product }) => {
           </SwiperSlide>
         ))}
       </Swiper>
- <header className="mt-5" aria-labelledby="category-heading">
+      <header className="mt-5" aria-labelledby="category-heading">
         <h1
           id="category-heading"
           className="display-8 fw-bold"
           style={{ color: "#294085" }}
         >
-       How to Make  {product.product_name}
+          How to Make {product.product_name}
         </h1>
       </header>
       <video

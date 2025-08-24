@@ -67,7 +67,7 @@ const CategoryProductList = () => {
     <main aria-labelledby="category-products-heading">
       <div className="padding-top"></div>
        <div className="padding-top"></div>
-      <Container className="mt-5">
+         <div  className="padding-y mt-5">
         <h1 id="category-products-heading" className="visually-hidden">
           Browse Products by Category
         </h1>
@@ -173,7 +173,7 @@ const CategoryProductList = () => {
             </div>
           </section>
         ))}
-      </Container>
+</div>
     </main>
   );
 };

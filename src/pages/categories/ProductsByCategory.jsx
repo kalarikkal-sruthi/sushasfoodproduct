@@ -51,9 +51,9 @@ const ProductByCategory = () => {
   if (loading) {
     return (
       <main>
-        <Container>
+            <div  className="padding-y mt-5">
           <p className="text-center my-5">Loading...</p>
-        </Container>
+       </div>
       </main>
     );
   }
@@ -62,7 +62,7 @@ const ProductByCategory = () => {
     <main>
       <div className="padding-top"></div>
       <div className="padding-top"></div>
-      <Container className="mt-5">
+         <div  className="padding-y mt-5">
         <header className="mb-5" aria-labelledby="category-heading">
           <h1
             id="category-heading"
@@ -174,7 +174,7 @@ const ProductByCategory = () => {
 
           
         </section>
-      </Container>
+     </div>
     </main>
   );
 };

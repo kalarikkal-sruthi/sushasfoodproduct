@@ -151,3 +151,20 @@ hr {
   .padding-y{
     padding:0px 120px;
   }
+
+  .card-title{
+    font-size: 28px !important;
+  }
+  h6.key-faeture{
+    color: #0c8320;
+  }
+  .keyfeature-description{
+    color: #212529bf;
+  }
+  .crop-detail-section{
+    padding: 80px;
+    background-color: #f8f9fa;
+  }
+  .search-main{
+    width: 500px;
+  }

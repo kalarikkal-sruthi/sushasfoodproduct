@@ -50,7 +50,7 @@ const ValueAddedProducts = () => {
                   className="display-4 fw-bold"
                   style={{ color: "#294085" }}
                 >
-                  Value Added Products
+                  Value Added Products In Susha's Foods
                 </h1>
                 <p className="lead text-muted mb-0">
                   Discover our premium range of farm products, crafted to bring

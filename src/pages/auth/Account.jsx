@@ -51,7 +51,7 @@ function Account() {
                     className="display-8 fw-bold mb-3"
                     style={{ color: "#294085" }}
                   >
-                    My Cart(count)
+                    My Cart{cartItems.length=== 0 ? (null):(cartItems.length)}
                   </h1>
                 </Col>
               </Row>
@@ -147,81 +147,81 @@ function Account() {
                       </div>
                     </Col>
                   </Row>
-                  <Row className="mt-5">
-                    <Col>
-                      <h1 className="account-head">Have An Account</h1>
-                      <Link to="/login">
-                        {" "}
-                        <motion.button
-                          whileHover={{
-                            x: 5,
-                            transition: { duration: 0.2 },
-                          }}
-                          whileTap={{ scale: 0.98 }}
-                          className="btn btn-outline btn-sm"
-                          style={{
-                            borderRadius: "50px",
-                            fontWeight: "500",
-                            border: "1px solid #294085",
-                            backgroundColor: "#294085",
-                            color: "#fff",
-                          }}
-                          aria-label={`Login`}
-                        >
-                          Login →
-                        </motion.button>
-                      </Link>
-                    </Col>
-                    <Col>
-                      <h1 className="account-head">New to Susha's Food</h1>
-                        <Link to='/register'>
-                      <motion.button
-                        whileHover={{
-                          x: 5,
-                          transition: { duration: 0.2 },
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                        className="btn btn-outline btn-sm"
-                        style={{
-                          borderRadius: "50px",
-                          fontWeight: "500",
-                          border: "1px solid #294085",
-                          backgroundColor: "#294085",
-                          color: "#fff",
-                        }}
-                        aria-label={`Login`}
-                      >
-                        Sign Up →
-                      </motion.button>
-                      </Link>
-                    </Col>
-                    <Col>
-                      <h1 className="account-head">As a Guest</h1>
-                      <Link to={'/guest'}>
-                      <motion.button
-                        whileHover={{
-                          x: 5,
-                          transition: { duration: 0.2 },
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                        className="btn btn-outline btn-sm"
-                        style={{
-                          borderRadius: "50px",
-                          fontWeight: "500",
-                          border: "1px solid #294085",
-                          backgroundColor: "#294085",
-                          color: "#fff",
-                        }}
-                        aria-label={`Have An Account`}
-                      >
-                        Continue As Guest →
-                      </motion.button>
-                      </Link>
-                    </Col>
-                  </Row>
                 </>
               )}
             </section>
+            <Row className="mt-5">
+              <Col>
+                <h1 className="account-head">Have An Account</h1>
+                <Link to="/login">
+                  {" "}
+                  <motion.button
+                    whileHover={{
+                      x: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="btn btn-outline btn-sm"
+                    style={{
+                      borderRadius: "50px",
+                      fontWeight: "500",
+                      border: "1px solid #294085",
+                      backgroundColor: "#294085",
+                      color: "#fff",
+                    }}
+                    aria-label={`Login`}
+                  >
+                    Login →
+                  </motion.button>
+                </Link>
+              </Col>
+              <Col>
+                <h1 className="account-head">New to Susha's Food</h1>
+                <Link to="/register">
+                  <motion.button
+                    whileHover={{
+                      x: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="btn btn-outline btn-sm"
+                    style={{
+                      borderRadius: "50px",
+                      fontWeight: "500",
+                      border: "1px solid #294085",
+                      backgroundColor: "#294085",
+                      color: "#fff",
+                    }}
+                    aria-label={`Login`}
+                  >
+                    Sign Up →
+                  </motion.button>
+                </Link>
+              </Col>
+              <Col>
+                <h1 className="account-head">As a Guest</h1>
+                <Link to={"/guest"}>
+                  <motion.button
+                    whileHover={{
+                      x: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="btn btn-outline btn-sm"
+                    style={{
+                      borderRadius: "50px",
+                      fontWeight: "500",
+                      border: "1px solid #294085",
+                      backgroundColor: "#294085",
+                      color: "#fff",
+                    }}
+                    aria-label={`Have An Account`}
+                  >
+                    Continue As Guest →
+                  </motion.button>
+                </Link>
+              </Col>
+            </Row>
           </section>
         </div>
       </Container>

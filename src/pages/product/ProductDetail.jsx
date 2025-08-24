@@ -13,7 +13,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
-console.log(data);
+  console.log(data);
 
   useEffect(() => {
     dispatch(fetchProductById(id));
@@ -104,7 +104,7 @@ console.log(data);
         </script>
       </Helmet>
 
-      <Container className="mt-5">
+      <div className="padding-y mt-5">
         <div className="padding-top" />
         <div className="padding-top" />
 
@@ -115,9 +115,7 @@ console.log(data);
                 fallback={<Spinner animation="border" variant="primary" />}
               >
                 <ProductDetailGallery product={product} />
-              
               </Suspense>
-             
             </Col>
 
             <Col md={7} as="section" aria-label="Product Summary">
@@ -129,7 +127,7 @@ console.log(data);
             </Col>
           </Row>
         </article>
-      </Container>
+      </div>
     </main>
   );
 };

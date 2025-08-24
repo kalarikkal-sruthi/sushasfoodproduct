@@ -29,7 +29,7 @@
 }
 
 .logo-img {
-  width: 80px;
+  width: 100px;
   margin: 0 0 0 60px;
 
   /* border: 1px solid white; */
@@ -696,3 +696,4 @@ text-align: center;
     flex: 1 1 100%; 
   }
 }
+

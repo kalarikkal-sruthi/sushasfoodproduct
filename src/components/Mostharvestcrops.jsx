@@ -60,7 +60,7 @@ export default function MostHarvestcrops() {
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                  Most Harvest From Our Farm
+                  Most Harvest Crops From Our  Farm
                 </motion.h2>
                 <p className="text-muted">
                   Explore the main crops we grow using sustainable farming
@@ -102,6 +102,7 @@ export default function MostHarvestcrops() {
                               style={{
                                 borderRadius: "12px 0 0 12px",
                                 width: "100%",
+                                height:"100%",
                                 objectFit: "cover",
                               }}
                             />
@@ -109,26 +110,26 @@ export default function MostHarvestcrops() {
                           </Col>
 
                           <Col md={6} className="d-flex flex-column">
-                            <Card.Body className="p-4 d-flex flex-column">
+                            <Card.Body className="p-4 d-flex flex-column justify-content-center">
                                <Link to={`/mostharvestfromfarm/${item.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                               <Card.Title
                                 style={{ color: "#294085" }}
-                                className="fw-bold fs-4 mb-3"
+                                className="fw-bold fs-2 mb-3"
                               >
                                 {item.name}
                               </Card.Title>
                                  </Link>
-                              <Card.Text className="flex-grow-1 text-muted">
-                                {item.description1?.slice(0, 150)}
+                              <Card.Text className=" text-muted">
+                                {item.description?.slice(0,150)}...
                               </Card.Text>
                               
-                              <h6>Key Features</h6>
+                              <h6 className="key-faeture">Key Features</h6>
 
-                              <ul
+                              <div className="keyfeature-description"
                                 dangerouslySetInnerHTML={{
                                   __html: item.description5,
                                 }}
-                              ></ul>
+                              ></div>
                              
                               <Link to={`/mostharvestfromfarm/${item.id}`}>
                                 <motion.div

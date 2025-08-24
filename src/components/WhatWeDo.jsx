@@ -16,7 +16,7 @@ const WhatWeDo = () => {
                 className="display-4 fw-bold"
                 style={{ color: "#294085" }}
               >
-                What We Do
+                What We Do Prakash Farm
               </motion.h1>
 
               <motion.p

@@ -108,7 +108,7 @@ function Searchbar() {
   };
 
   return (
-    <div className="position-relative">
+    <div className="position-relative search-main ">
       <Form onSubmit={handleSubmit}>
         <InputGroup>
           <FormControl
