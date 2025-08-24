@@ -72,12 +72,22 @@ export const getAddresses = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    // return response.data.data; // array of addresses
-     // sid change 21 aug 2025 → normalize typo field `deafult` to `is_default`
-    return response.data.map(addr => ({
+    // // return response.data.data; // array of addresses
+    //  // sid change 21 aug 2025 → normalize typo field `deafult` to `is_default`
+    // return response.data.map(addr => ({
+    //   ...addr,
+    //   is_default: Boolean(addr.deafult), // normalize here
+    // }));
+
+     // sid changed on 24 aug 2025 → backend response has shape {status, message, data:[...]}
+    // so we must use response.data.data, not response.data
+    return response.data.data.map(addr => ({
       ...addr,
-      is_default: Boolean(addr.deafult), // normalize here
+      // normalize typo from backend: "deafult" → is_default boolean
+      is_default: Boolean(addr.deafult),
     }));
+
+
   }
 )
 
