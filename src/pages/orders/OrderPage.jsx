@@ -36,11 +36,21 @@ const OrderPage = () => {
     if (!token) navigate("/login");
   }, [token, navigate]);
 
+  // useEffect(() => {
+  //   dispatch(getUser());
+  //   dispatch(getAddresses());
+  //   dispatch(getOrders());
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(getUser());
-    dispatch(getAddresses());
-    dispatch(getOrders());
-  }, [dispatch]);
+  dispatch(getUser());
+  dispatch(getAddresses()).then(res => {
+    // sid changed on 24 aug 2025 → debug to confirm addresses fetched correctly
+    console.log("addresses after fetch (OrderPage):", res.payload);
+  });
+  dispatch(getOrders());
+}, [dispatch]);
+
 
   const handleLogout = () => {
     dispatch(logoutAction());
