@@ -29,6 +29,10 @@ export default function Header() {
   const token = useSelector((state) => state.auth.token);
   console.log(token);
 
+  const user = useSelector((state) => state.auth.user);
+  console.log('user:',user);
+  
+
   const navigate = useNavigate();
   const {
     data: categories,
@@ -116,29 +120,32 @@ export default function Header() {
                 </div>
               </div>
 
-              <Nav.Link href="">|</Nav.Link>
-              {token ? (
-                <div className="dropdown">
-                  <button className="dropdown-main">
-                    <Nav.Link href="/account" className="icon-img">
-                      Account{" "}
-                      <img src={accountcircle} alt="susha's food product" />
-                    </Nav.Link>
-                  </button>
-                  <div className="dropdown-sub-menu">
-                    <Nav.Link href="/myaccount">My Profile</Nav.Link>
-                    {/* <Nav.Link href="/myaccount">Orders</Nav.Link> */}
+           <Nav.Link href="">|</Nav.Link>
+{token ? (
+  <div className="dropdown">
+    <button className="dropdown-main">
+      {/* sid changed on 25 aug 2025 → if logged in, username should go to /myaccount instead of /account */}
+      <Nav.Link href="/myaccount" className="icon-img">
+       {/* sid changed on 25 aug 2025 → fetch user info from auth slice */}
+        {user?.name || "Account"}{" "}
+        <img src={accountcircle} alt="susha's food product" />
+      </Nav.Link>
+    </button>
+    <div className="dropdown-sub-menu">
+      <Nav.Link href="/myaccount">My Profile</Nav.Link>
+      {/* <Nav.Link href="/myaccount">Orders</Nav.Link> */}
+      <Nav.Link href="" onClick={handleLogout}>
+        Logout
+      </Nav.Link>
+    </div>
+  </div>
+) : (
+  // sid changed on 25 aug 2025 → if not logged in, go to /account for login
+  <Nav.Link href="/account" className="icon-img">
+    Login <img src={accountcircle} alt="susha's food product" />
+  </Nav.Link>
+)}
 
-                    <Nav.Link href="" onClick={handleLogout}>
-                      Logout
-                    </Nav.Link>
-                  </div>
-                </div>
-              ) : (
-                <Nav.Link href="/account" className="icon-img">
-                  Login <img src={accountcircle} alt="susha's food product" />
-                </Nav.Link>
-              )}
               <Nav.Link href="">|</Nav.Link>
               {/* <Nav.Link href="/cart" className="icon-img">
                 Cart(Count)        

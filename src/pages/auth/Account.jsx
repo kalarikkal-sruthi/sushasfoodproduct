@@ -26,207 +26,221 @@ function Account() {
   useEffect(() => {
     console.log("Cart items changed:", cartItems);
   }, [cartItems]);
-  return (
-    <main>
-      <Helmet>
-        <title>My Cart | Susha's Food Products</title>
-        <meta
-          name="description"
-          content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
-        />
-        <link rel="canonical" href="https://myfezto.com/cart" />
-        <link rel="preload" href="https://myfezto.com/cart" as="document" />
-      </Helmet>
+return (
+  <main>
+    <Helmet>
+      <title>My Cart | Susha's Food Products</title>
+      <meta
+        name="description"
+        content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
+      />
+      <link rel="canonical" href="https://myfezto.com/cart" />
+      <link rel="preload" href="https://myfezto.com/cart" as="document" />
+    </Helmet>
 
-      <div className="padding-top" />
-      <div className="padding-top" />
-      <Container className="mt-5">
-        <div class="calculation-padding">
-          <section aria-labelledby="cart-heading">
-            <header className="header-bar">
-              <Row>
-                <Col xs={12}>
-                  <h1
-                    id="cart-heading"
-                    className="display-8 fw-bold mb-3"
-                    style={{ color: "#294085" }}
-                  >
-                    My Cart{cartItems.length=== 0 ? (null):(cartItems.length)}
-                  </h1>
-                </Col>
-              </Row>
-            </header>
-
-            <section aria-live="polite">
-              {cartItems.length === 0 ? (
-                <p className="text-muted">Your cart is empty.</p>
-              ) : (
+    <div className="padding-top" />
+    <div className="padding-top" />
+    <Container className="mt-5">
+      <div className="calculation-padding">
+        <section aria-labelledby="cart-heading">
+          <Row>
+            {/* LEFT SIDE = CART (take 8 cols) */}
+            <Col md={8}>
+              {token ? (
                 <>
-                  <Row>
-                    <Col md={12}>
-                      <ul className="list-group" aria-labelledby="cart-heading">
-                        {/* Headings row */}
-                        <li
-                          className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
-                          role="presentation"
+                  <header className="header-bar">
+                    <Row>
+                      <Col xs={12}>
+                        <h1
+                          id="cart-heading"
+                          className="display-8 fw-bold mb-3"
+                          style={{ color: "#294085" }}
                         >
-                          <div style={{ width: "25%" }}>Product</div>
-                          <div style={{ width: "15%" }}>Quantity</div>
-                          <div style={{ width: "15%" }}>Price</div>
-                          <div style={{ width: "15%" }}>Total</div>
-                          <div style={{ width: "15%" }}>Action</div>
-                        </li>
+                          My Cart
+                          {cartItems.length === 0 ? null : cartItems.length}
+                        </h1>
+                      </Col>
+                    </Row>
+                  </header>
 
-                        {/* Items */}
-                        {cartItems.map((item) => (
-                          <li
-                            key={item.id}
-                            className="p-4 list-group-item d-flex justify-content-between align-items-center"
-                            role="article"
-                            aria-label={`Cart item: ${item.product_name}`}
-                          >
-                            {/* Product info */}
-                            <div style={{ width: "25%" }}>
-                              <img
-                                className="cart-image me-2"
-                                src={`${productURL}${item.image}`}
-                                alt={item.product_name}
-                                style={{ maxWidth: "50px", height: "auto" }}
-                              />
-                              <br></br>
-                              <span>{item.product_name}</span>
-                            </div>
-
-                            {/* Quantity */}
-                            <div style={{ width: "15%" }}>
-                              {item.quantity}({item.size})
-                            </div>
-
-                            {/* Price */}
-                            <div style={{ width: "15%" }}>₹ {item.price}</div>
-
-                            {/* Total */}
-                            <div style={{ width: "15%" }}>
-                              ₹ {item.price * item.quantity}
-                            </div>
-
-                            {/* Remove button */}
-                            <div style={{ width: "15%" }}>
-                              <motion.button
-                                whileHover={{
-                                  x: 5,
-                                  transition: { duration: 0.2 },
-                                }}
-                                whileTap={{ scale: 0.98 }}
-                                className="btn btn-outline btn-sm"
-                                style={{
-                                  borderRadius: "50px",
-                                  fontWeight: "500",
-                                  border: "1px solid #d33838",
-                                  backgroundColor: "#d33838",
-                                  color: "#fff",
-                                }}
-                                aria-label={`Remove ${item.product_name} from cart`}
-                                onClick={() =>
-                                  dispatch(removeFromCart(item.id))
-                                }
+                  <section aria-live="polite">
+                    {cartItems.length === 0 ? (
+                      <p className="text-muted">Your cart is empty.</p>
+                    ) : (
+                      <>
+                        <Row>
+                          <Col md={12}>
+                            <ul
+                              className="list-group"
+                              aria-labelledby="cart-heading"
+                            >
+                              {/* Headings row */}
+                              <li
+                                className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
+                                role="presentation"
                               >
-                                Remove →
-                              </motion.button>
+                                <div style={{ width: "25%" }}>Product</div>
+                                <div style={{ width: "15%" }}>Quantity</div>
+                                <div style={{ width: "15%" }}>Price</div>
+                                <div style={{ width: "15%" }}>Total</div>
+                                <div style={{ width: "15%" }}>Action</div>
+                              </li>
+
+                              {/* Items */}
+                              {cartItems.map((item) => (
+                                <li
+                                  key={item.id}
+                                  className="p-4 list-group-item d-flex justify-content-between align-items-center"
+                                  role="article"
+                                  aria-label={`Cart item: ${item.product_name}`}
+                                >
+                                  {/* Product info */}
+                                  <div style={{ width: "25%" }}>
+                                    <img
+                                      className="cart-image me-2"
+                                      src={`${productURL}${item.image}`}
+                                      alt={item.product_name}
+                                      style={{ maxWidth: "50px", height: "auto" }}
+                                    />
+                                    <br />
+                                    <span>{item.product_name}</span>
+                                  </div>
+
+                                  {/* Quantity */}
+                                  <div style={{ width: "15%" }}>
+                                    {item.quantity} ({item.size})
+                                  </div>
+
+                                  {/* Price */}
+                                  <div style={{ width: "15%" }}>
+                                    ₹ {item.price}
+                                  </div>
+
+                                  {/* Total */}
+                                  <div style={{ width: "15%" }}>
+                                    ₹ {item.price * item.quantity}
+                                  </div>
+
+                                  {/* Remove button */}
+                                  <div style={{ width: "15%" }}>
+                                    <motion.button
+                                      whileHover={{
+                                        x: 5,
+                                        transition: { duration: 0.2 },
+                                      }}
+                                      whileTap={{ scale: 0.98 }}
+                                      className="btn btn-outline btn-sm"
+                                      style={{
+                                        borderRadius: "50px",
+                                        fontWeight: "500",
+                                        border: "1px solid #d33838",
+                                        backgroundColor: "#d33838",
+                                        color: "#fff",
+                                      }}
+                                      aria-label={`Remove ${item.product_name} from cart`}
+                                      onClick={() =>
+                                        dispatch(removeFromCart(item.id))
+                                      }
+                                    >
+                                      Remove →
+                                    </motion.button>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </Col>
+                          <Col md={12}>
+                            <div className="p-4 border rounded shadow-sm bg-light">
+                              <div className="d-flex justify-content-around mb-3">
+                                <h4 className="fw-bold">Total Payable</h4>
+                                <h4 className="fw-bold">₹ {grandTotal}</h4>
+                              </div>
                             </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Col>
-                    <Col md={12}>
-                      <div className=" p-4 border rounded shadow-sm bg-light">
-                        <div className="d-flex justify-content-around mb-3">
-                          <h4 className="fw-bold">Total Payble</h4>
-                          <h4 className="fw-bold">₹ {grandTotal}</h4>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
+                          </Col>
+                        </Row>
+                      </>
+                    )}
+                  </section>
                 </>
+              ) : (
+                <p className="text-muted">Login to see your cart.</p>
               )}
-            </section>
-            <Row className="mt-5">
-              <Col>
-                <h1 className="account-head">Have An Account</h1>
-                <Link to="/login">
-                  {" "}
-                  <motion.button
-                    whileHover={{
-                      x: 5,
-                      transition: { duration: 0.2 },
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn btn-outline btn-sm"
-                    style={{
-                      borderRadius: "50px",
-                      fontWeight: "500",
-                      border: "1px solid #294085",
-                      backgroundColor: "#294085",
-                      color: "#fff",
-                    }}
-                    aria-label={`Login`}
-                  >
-                    Login →
-                  </motion.button>
-                </Link>
-              </Col>
-              <Col>
-                <h1 className="account-head">New to Susha's Food</h1>
-                <Link to="/register">
-                  <motion.button
-                    whileHover={{
-                      x: 5,
-                      transition: { duration: 0.2 },
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn btn-outline btn-sm"
-                    style={{
-                      borderRadius: "50px",
-                      fontWeight: "500",
-                      border: "1px solid #294085",
-                      backgroundColor: "#294085",
-                      color: "#fff",
-                    }}
-                    aria-label={`Login`}
-                  >
-                    Sign Up →
-                  </motion.button>
-                </Link>
-              </Col>
-              <Col>
-                <h1 className="account-head">As a Guest</h1>
-                <Link to={"/guest"}>
-                  <motion.button
-                    whileHover={{
-                      x: 5,
-                      transition: { duration: 0.2 },
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn btn-outline btn-sm"
-                    style={{
-                      borderRadius: "50px",
-                      fontWeight: "500",
-                      border: "1px solid #294085",
-                      backgroundColor: "#294085",
-                      color: "#fff",
-                    }}
-                    aria-label={`Have An Account`}
-                  >
-                    Continue As Guest →
-                  </motion.button>
-                </Link>
-              </Col>
-            </Row>
-          </section>
-        </div>
-      </Container>
-    </main>
-  );
+            </Col>
+
+            {/* RIGHT SIDE = LOGIN/REGISTER/GUEST (take 4 cols) */}
+            <Col md={4}>
+              <div className="d-flex flex-column gap-4 align-items-end">
+                <div>
+                  <h1 className="account-head text-end">Have An Account</h1>
+                  <Link to="/login">
+                    <motion.button
+                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                      whileTap={{ scale: 0.98 }}
+                      className="btn btn-outline btn-sm"
+                      style={{
+                        borderRadius: "50px",
+                        fontWeight: "500",
+                        border: "1px solid #294085",
+                        backgroundColor: "#294085",
+                        color: "#fff",
+                      }}
+                      aria-label={`Login`}
+                    >
+                      Login →
+                    </motion.button>
+                  </Link>
+                </div>
+
+                <div>
+                  <h1 className="account-head text-end">New to Susha's Food</h1>
+                  <Link to="/register">
+                    <motion.button
+                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                      whileTap={{ scale: 0.98 }}
+                      className="btn btn-outline btn-sm"
+                      style={{
+                        borderRadius: "50px",
+                        fontWeight: "500",
+                        border: "1px solid #294085",
+                        backgroundColor: "#294085",
+                        color: "#fff",
+                      }}
+                      aria-label={`Register`}
+                    >
+                      Sign Up →
+                    </motion.button>
+                  </Link>
+                </div>
+
+                <div>
+                  <h1 className="account-head text-end">As a Guest</h1>
+                  <Link to="/guest">
+                    <motion.button
+                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                      whileTap={{ scale: 0.98 }}
+                      className="btn btn-outline btn-sm"
+                      style={{
+                        borderRadius: "50px",
+                        fontWeight: "500",
+                        border: "1px solid #294085",
+                        backgroundColor: "#294085",
+                        color: "#fff",
+                      }}
+                      aria-label={`Continue As Guest`}
+                    >
+                      Continue As Guest →
+                    </motion.button>
+                  </Link>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </section>
+      </div>
+    </Container>
+  </main>
+);
+
 }
 
 export default Account;
