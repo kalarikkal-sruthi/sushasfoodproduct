@@ -14,6 +14,11 @@ const categories = [
     description:
       "We cultivate organic root vegetables like yam, cassava, and sweet potatoes using sustainable farming methods.",
     link: "/whatInFarms-Category?category=Tubers",
+    features: [
+      "Rich in dietary fiber and energy",
+      "Naturally grown without chemicals",
+      "Sustainably harvested",
+    ],
   },
   {
     name: "Fruits",
@@ -21,21 +26,35 @@ const categories = [
     description:
       "We grow seasonal fruits such as mangoes, bananas, papayas, and jackfruit in an eco-friendly way.",
     link: "/whatInFarms-Category?category=Fruits",
+    features: [
+      "Fresh and seasonal produce",
+      "Rich in vitamins and antioxidants",
+      "Eco-friendly cultivation",
+    ],
   },
   {
-    title: "Spices",
+    name: "Spices",
     image: spices,
     description:
       "We cultivate traditional spices organically with natural methods.",
     link: "/whatInFarms-Category?category=Spices",
+    features: [
+      "Authentic aroma and taste",
+      "Organically cultivated",
+      "Hand-harvested and sun-dried",
+    ],
   },
-
   {
     name: "Herbs",
     image: herbs,
     description:
       "We cultivate medicinal herbs like tulsi, mint, and lemongrass that promote health and wellness.",
     link: "/whatInFarms-Category?category=Herbs",
+    features: [
+      "Medicinal and aromatic properties",
+      "Supports holistic wellness",
+      "Chemical-free farming",
+    ],
   },
 ];
 
@@ -135,33 +154,33 @@ export default function HomeCategories() {
                                 {cat.description?.slice(0, 150)}
                               </Card.Text>
                               <h6 className="key-faeture">Key Features</h6>
+                              {cat.features && (
+                                <ul style={{backgroundColor:"#f8f9fa"}}>
+                                  {cat.features.map((feature, i) => (
+                                    <li key={i}>{feature}</li>
+                                  ))}
+                                </ul>
+                              )}
 
-                              <div
-                                className="keyfeature-description"
-                                dangerouslySetInnerHTML={{
-                                  __html: cat.description5,
-                                }}
-                              ></div>
-<Link    to={`/extraharvestfromfarm/${cat.name}`}>
-                <motion.span
-                  whileHover={{
-                    x: 5,
-                    transition: { duration: 0.2 },
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn btn-outline mt-5"
-                  style={{
-                    borderRadius: "50px",
-                    fontWeight: "500",
-                    border: "1px solid #294085",
-                    backgroundColor: "#294085",
-                    color: "#fff",
-                  }}
-                >
-                  View All →
-                </motion.span>
-              </Link>
-                              
+                              <Link to={`/extraharvestfromfarm/${cat.name}`}>
+                                <motion.span
+                                  whileHover={{
+                                    x: 5,
+                                    transition: { duration: 0.2 },
+                                  }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="btn btn-outline mt-5"
+                                  style={{
+                                    borderRadius: "50px",
+                                    fontWeight: "500",
+                                    border: "1px solid #294085",
+                                    backgroundColor: "#294085",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  View All →
+                                </motion.span>
+                              </Link>
                             </Card.Body>
                           </Col>
                         </Row>
