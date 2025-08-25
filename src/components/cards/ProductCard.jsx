@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
       >
         {product.product_name}
       </h2>
-      <p style={{ fontWeight: "bold", color: "#294085" }}>
+      <p style={{ fontWeight: "bold", color: "#000" }}>
         Price: ₹{product.baseprices?.[0]?.original_price ?? "N/A"}
       </p>
 

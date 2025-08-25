@@ -71,110 +71,101 @@ const CategoryProductList = () => {
           Browse Products by Category
         </h1>
 
-        {[...categories]
-          .sort((a, b) => b.id - a.id)
-          .map((category, index) => (
-            <section
-              key={category.id}
-              aria-labelledby={`category-title-${category.id}`}
-              piiku86qssName="mb-5"
+       {[...categories]
+  .sort((a, b) => b.id - a.id)
+  .map((category, categoryIndex) => (
+    <section
+      key={category.id}
+      aria-labelledby={`category-title-${category.id}`}
+      className="mb-5"
+    >
+      <header className="mb-4">
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <Link
+            to={`/productsbycategory/${category.id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+            aria-label={`Browse all products in ${category.name}`}
+            state={{ categoryIndex }}  
+          >
+            <motion.h2
+              variants={scrollVariants}
+              id={`category-title-${category.id}`}
+              className="fw-bold"
+              style={{ color: "#294085" }}
             >
-              <header className="mb-4">
-                <motion.div
-                  initial="offscreen"
-                  whileInView="onscreen"
-                  viewport={{ once: true, margin: "-100px" }}
-                >
-                  <Link
-                    to={`/productsbycategory/${category.id}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    aria-label={`Browse all products in ${category.name}`}
-                  >
-                    <motion.h2
-                      variants={scrollVariants}
-                      id={`category-title-${category.id}`}
-                      className="fw-bold"
-                      style={{ color: "#294085" }}
-                    >
-                      {category.name || "Untitled Category"}
-                    </motion.h2>
-                  </Link>
-                </motion.div>
-              </header>
-              <article
-                style={{
-                  background: bgColors[index % bgColors.length],
-                  borderRadius: "12px",
-                }}
-              >
-                <Row aria-label={`Products in ${category.name}`}>
-                  {category.products
-                    ?.slice(0, 4)
+              {category.name || "Untitled Category"}
+            </motion.h2>
+          </Link>
+        </motion.div>
+      </header>
 
-                    .map((product, index) => {
-                      const bgColor = bgColors[index % bgColors.length];
+      <article
+        style={{
+          background: bgColors[categoryIndex % bgColors.length],
+          borderRadius: "12px",
+        }}
+      >
+        <Row aria-label={`Products in ${category.name}`}>
+          {category.products?.slice(0, 4).map((product,productIndex) => {
+            const bgColor = bgColors[categoryIndex % bgColors.length]; // ✅ use categoryIndex
 
-                      return (
-                        <Col key={product.id} xs={6} md={3}>
-                          <article
-                            style={{
-                              background: bgColor,
-                              borderRadius: "12px",
-                              padding: "8px",
-                            }}
-                          >
-                            <Link
-                              to={`/product/${product.id}`}
-                              state={{
-                                bgColor: bgColors[index % bgColors.length],
-                                categoryName: category.name,
-                              }}
-                              style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                                display: "block",
-                              }}
-                              aria-label={`View details for ${product.name}`}
-                            >
-                              <ProductCard
-                                product={{
-                                  ...product,
-                                  price:
-                                    product.price ??
-                                    product.selling_price ??
-                                    "N/A",
-                                  imageLoading: "lazy",
-                                }}
-                                id={`product-${product.id}-title`}
-                              />
-                            </Link>
-                          </article>
-                        </Col>
-                      );
-                    })}
-                </Row>
-              </article>
-              <div className="text-center mt-4">
-                <Link
-                  to={`/productsbycategory/${category.id}`}
-                  aria-label={`View all products in ${category.name}`}
-                  state={{
-                    bgColor: bgColors[index % bgColors.length],
-                    categoryName: category.name,
+            return (
+              <Col key={product.id} xs={6} md={3}>
+                <article
+                  style={{
+                    background: bgColor,
+                    borderRadius: "12px",
+                    padding: "8px",
                   }}
                 >
-                  <motion.span
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn btn-outline"
-                    style={buttonStyle}
+                  <Link
+                    to={`/product/${product.id}`}
+                  state={{ bgColor: bgColors[productIndex % bgColors.length], categoryName: category.name, }}
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                      display: "block",
+                    }}
+                    aria-label={`View details for ${product.name}`}
                   >
-                    View All →
-                  </motion.span>
-                </Link>
-              </div>
-            </section>
-          ))}
+                    <ProductCard
+                      product={{
+                        ...product,
+                        price: product.price ?? product.selling_price ?? "N/A",
+                        imageLoading: "lazy",
+                      }}
+                      id={`product-${product.id}-title`}
+                    />
+                  </Link>
+                </article>
+              </Col>
+            );
+          })}
+        </Row>
+      </article>
+
+      <div className="text-center mt-4">
+        <Link
+          to={`/productsbycategory/${category.id}`}
+          aria-label={`View all products in ${category.name}`}
+         state={{ bgColor: bgColors[categoryIndex % bgColors.length], categoryName: category.name, }}
+        >
+          <motion.span
+            whileHover={{ x: 5, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline"
+            style={buttonStyle}
+          >
+            View All →
+          </motion.span>
+        </Link>
+      </div>
+    </section>
+))}
       </div>
     </main>
   );

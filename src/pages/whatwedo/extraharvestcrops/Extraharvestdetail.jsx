@@ -55,10 +55,10 @@ export default function Extraharvestdetail() {
             <Breadcrumbs
               items={[
                 { label: "Home", path: "/" },
-                { label: "Most Harvest", path: "/mostharvestfromfarm" },
+                { label: "Extra Harvest", path: "/extraharvestfromfarm" },
                 {
                   label: single.name,
-                  path: `/mostharvestfromfarm/${single.category}`,
+                  path: `/extraharvestfromfarm/${single.category}`,
                 },
               ]}
             />

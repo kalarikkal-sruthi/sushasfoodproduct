@@ -119,7 +119,7 @@ const ProductByCategory = () => {
                 </Col>
 
                 <Col md={6} className="d-flex flex-column">
-                  <Card.Body className="p-4 d-flex flex-column">
+                  <Card.Body className="p-4 d-flex flex-column justify-content-center">
                     <Card.Title
                       id={`product-${product.id}-title`}
                       style={{ color: "#294085" }}
@@ -129,7 +129,7 @@ const ProductByCategory = () => {
                       {product.product_name}
                     </Card.Title>
 
-                    <Card.Text className="flex-grow-1 text-muted">
+                    <Card.Text className=" text-muted">
                       {product.description?.slice(0, 350)}...
                     </Card.Text>
 
