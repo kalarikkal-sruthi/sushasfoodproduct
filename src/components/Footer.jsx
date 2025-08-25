@@ -80,9 +80,9 @@ function Footer() {
                     </ul>
                     <h4>Services</h4>
                     <ul>
-                      <li>Shopping Cart</li>
-                      <li>Return Policy</li>
-                      <li>About Us</li>
+                      <li>Culturing Organic products</li>
+                      <li>Produce Value Added Products</li>
+                      <li>Selling Susha's Food Outlet</li>
                     </ul>
                   </Col>
                   {/* <Col xs={6} md={3} className="footer-div">
