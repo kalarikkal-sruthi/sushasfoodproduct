@@ -45,7 +45,7 @@ function Extraharvestsubcategory() {
   <main>
     <div className="padding-top"></div>
     <div className="padding-top"></div>
-    <Container className="mt-5">
+    <div  className="padding-y mt-5">
       <Row className="mb-0">
         <Col>
           <motion.section
@@ -130,7 +130,7 @@ function Extraharvestsubcategory() {
           </Col>
         ))}
       </Row>
-    </Container>
+    </div>
   </main>
 );
 
