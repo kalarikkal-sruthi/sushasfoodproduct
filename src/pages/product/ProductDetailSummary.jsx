@@ -41,7 +41,9 @@ const ProductDetailSummary = ({ product }) => {
         >
           {product.product_name}
         </h2>
+        <h4 className="mt-2 mb-0">How we make</h4>
       </header>
+
       {product.description && (
         <p
           className="product-description"
@@ -152,13 +154,13 @@ const ProductDetailSummary = ({ product }) => {
       </motion.span>
       <br></br>
 
-      <h5 className="mt-3">Features Of This Product</h5>
+      {/* <h5 className="mt-3">Features Of This Product</h5>
       <ul>
         <li>Chemical-Free Cultivation</li>
         <li>Nutrient-Dense & Fresh</li>
         <li>Soil-Enriching Practices</li>
         <li>Eco-Friendly Pest Management</li>
-      </ul>
+      </ul> */}
     </section>
   );
 };

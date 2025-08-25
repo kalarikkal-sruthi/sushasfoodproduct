@@ -15,6 +15,16 @@ import Searchbar from "./buttons/Searchbar";
 import { logout as logoutAction } from "../store/authSlice";
 import { Badge } from "react-bootstrap"; // add this import
 export default function Header() {
+
+
+   const bgColors = [
+  "radial-gradient(circle, rgb(133 41 110 / 30%) 0%, #85296E 100%)", // light sky blue
+  "radial-gradient(circle, rgb(133 110 41 / 30%) 0%, #856E29 100%)", // soft lavender
+  "radial-gradient(circle, rgb(41 133 64 / 30%) 0%, #298540 100%)", // pale golden
+  "radial-gradient(circle, rgb(105 121 170 / 30%) 0%, #6979AA 100%)"  // mint green
+];
+
+  console.log(bgColors);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
@@ -89,12 +99,16 @@ export default function Header() {
                   {loading && <span>Loading...</span>}
                   {error && <span style={{ color: "red" }}>{error}</span>}
 
-                  {categories?.map((cat) => (
+                  {categories?.map((cat,index) => (
                     <Nav.Link
                       key={cat.id}
                       as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
                       to={`/productsbycategory/${cat.id}`}
-                      state={{ categoryName: cat.name }} // optional, if you need it like in homepage
+                      
+                      state={{
+                  bgColor: bgColors[index % bgColors.length],
+                  categoryName: cat.name,
+                }}
                     >
                       {cat.name}
                     </Nav.Link>

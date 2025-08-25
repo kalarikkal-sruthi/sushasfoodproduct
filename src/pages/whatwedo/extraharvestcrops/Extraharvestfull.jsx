@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import root from "../../../assets/otherfarmcrops/root.webp";
+import tubers from "../../../assets/otherfarmcrops/root.webp";
 import spices from "../../../assets/otherfarmcrops/spices.png";
 import fruits from "../../../assets/otherfarmcrops/fruits.webp";
 import herbs from "../../../assets/otherfarmcrops/herbs.jpeg";
@@ -18,7 +18,7 @@ function Extraharvestfull() {
   const services = [
     {
       title: "Tubers",
-      image: root,
+      image: tubers,
       description:
         "We cultivate root vegetables organically using sustainable practices.",
       link: "Tubers",

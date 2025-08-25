@@ -111,6 +111,7 @@ const ProductByCategory = () => {
                       borderRadius: "12px 0 0 12px",
                       width: "100%",
                       height: "100%",
+                      padding:"30px",
                       objectFit: "cover",
                     }}
                     loading="lazy"
@@ -129,7 +130,7 @@ const ProductByCategory = () => {
                     </Card.Title>
 
                     <Card.Text className="flex-grow-1 text-muted">
-                      {product.description?.slice(0, 100)}...
+                      {product.description?.slice(0, 350)}...
                     </Card.Text>
 
                     {product.baseprices?.[0]?.original_price && (

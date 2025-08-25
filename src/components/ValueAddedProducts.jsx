@@ -23,15 +23,23 @@ const ValueAddedProducts = () => {
     dispatch(fetchCategoriesWithProducts());
   }, [dispatch]);
 
-  const bgColors = [
-    "radial-gradient(circle,rgba(139, 35, 51, 0.49) 0%, #8b2333",
-    "radial-gradient(circle,rgba(0, 119, 174, 0.45) 0%, #0078ae 100%)",
-    "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
-    "radial-gradient(circle,rgba(174, 0, 99, 0.49) 0%, #ae0064",
+const bgColors = [
+  "radial-gradient(circle, rgb(133 41 110 / 30%) 0%, #85296E 100%)", // light sky blue
+  "radial-gradient(circle, rgb(133 110 41 / 30%) 0%, #856E29 100%)", // soft lavender
+  "radial-gradient(circle, rgb(41 133 64 / 30%) 0%, #298540 100%)", // pale golden
+  "radial-gradient(circle, rgb(105 121 170 / 30%) 0%, #6979AA 100%)"  // mint green
+];
 
-    "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
-    "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
-  ];
+
+  // const bgColors = [
+  //   "radial-gradient(circle,rgba(139, 35, 51, 0.49) 0%, #8b2333",
+  //   "radial-gradient(circle,rgba(0, 119, 174, 0.45) 0%, #0078ae 100%)",
+  //   "radial-gradient(circle,rgba(174, 122, 0, 0.49) 0%, #ae7b00",
+  //   "radial-gradient(circle,rgba(174, 0, 99, 0.49) 0%, #ae0064",
+
+  //   "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
+  //   "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
+  // ];
 
   console.log(categories);
 
@@ -74,7 +82,7 @@ const ValueAddedProducts = () => {
                     <Link
                       to={`/productsbycategory/${category.id}`}
                       state={{
-                        bgColor: bgColors[category.id % bgColors.length],
+                        bgColor: bgColors[index % bgColors.length],
                         categoryName: category.name,
                       }}
                       style={{ textDecoration: "none" }}
@@ -83,7 +91,7 @@ const ValueAddedProducts = () => {
                       <Card
                         className="h-100 shadow-sm border-0 p-5"
                         style={{
-                          background: bgColors[category.id % bgColors.length],
+                          background: bgColors[index % bgColors.length],
                           borderRadius: "12px",
                         }}
                       >
