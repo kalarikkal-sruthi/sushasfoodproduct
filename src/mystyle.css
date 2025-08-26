@@ -185,3 +185,8 @@ h6.key-faeture {
 .search-main {
   width: 400px;
 }
+
+.form-check-input:checked {
+    background-color: #294085;
+    border-color: #294085;
+}

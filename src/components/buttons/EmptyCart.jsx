@@ -3,11 +3,25 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const EmptyCart = () => {
   return (
-    <main className="py-5">
-      <Container>
+    <main>
+          <Helmet>
+            <title>My Cart | Susha's Food Products</title>
+            <meta
+              name="description"
+              content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
+            />
+            <link rel="canonical" href="https://myfezto.com/cart" />
+            <link rel="preload" href="https://myfezto.com/cart" as="document" />
+          </Helmet>
+    
+          
+          <Container className="mt-5">
+   
+    
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={7}>
             <Card className="shadow-sm border-0 text-center p-4">
@@ -35,7 +49,7 @@ const EmptyCart = () => {
              Sign in to view your saved items.
               </p>
 
-              <div className="d-flex gap-2 justify-content-center flex-wrap">
+              <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                 <>
                   <div>
                     <h1 className="account-head text-start">As a Guest</h1>

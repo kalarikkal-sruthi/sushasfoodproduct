@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button, Row, Col, Card, Form, Container } from "react-bootstrap";
+import { Button, Row, Col, Card, Form, Container,Modal } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { getAddresses, setDefaultAddress } from "../../store/authService";
 import AddressForm from "../../components/order/AddressForm";
@@ -10,6 +10,14 @@ import { motion } from "framer-motion";
 // import { createOrder } from "../../store/orderService"; // <-- make sure this exists
 
 const CheckoutPage = React.memo(() => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+    handlePlaceOrder(); // call your order function
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -101,7 +109,7 @@ const CheckoutPage = React.memo(() => {
             <Row>
               <Col md={7} className="d-flex flex-column">
                 <Card className="flex-grow-1">
-                  <Card.Header>
+                  <Card.Header className="fs-5">
                     <strong>Delivery Address</strong>
                   </Card.Header>
                   <Card.Body className="address-scroll">
@@ -179,13 +187,25 @@ const CheckoutPage = React.memo(() => {
                         ))}
 
                         {/* Add new address button */}
-                        <Button
-                          variant="link"
-                          className="p-0 mt-2"
+                        <motion.button
+                          whileHover={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                          className="btn btn-outline btn-sm mt-2"
+                          style={{
+                            borderRadius: "6px",
+                            fontWeight: "500",
+                            border: "1px solid #294085",
+                            backgroundColor: "#294085",
+                            color: "#fff",
+                          }}
+                          aria-label="add address"
                           onClick={() => setAddressMode("add")}
                         >
                           + Add New Address
-                        </Button>
+                        </motion.button>
                       </>
                     ) : (
                       <AddressForm
@@ -200,23 +220,57 @@ const CheckoutPage = React.memo(() => {
                   </Card.Body>
                 </Card>
 
-                {/* Place Order */}
-                <div className=" mt-3">
-                  <Button
-                    variant="success"
-                    className="w-100"
-                    onClick={handlePlaceOrder}
+                <div className=" mt-3 text-end">
+                  <motion.button
+                    whileHover={{
+                      x: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="btn btn-outline "
+                    style={{
+                      borderRadius: "50px",
+                      fontWeight: "500",
+                      border: "1px solid #294085",
+                      backgroundColor: "#294085",
+                      color: "#fff",
+                    }}
+                    onClick={handleShow}
                     disabled={cartItems.length === 0}
                   >
-                    Complete Order
-                  </Button>
+                    Complete Order →
+                  </motion.button>
                 </div>
+                <Modal className="complete-order-popup" show={show} onHide={handleClose} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Order Created</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    🎉 Your order has been created successfully. <br />
+                    You’ll now be redirected to the payment page.
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        handleClose();
+                        // Example redirect to payment
+                        window.location.href = "/payment";
+                      }}
+                    >
+                      Go to Payment
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </Col>
 
               <Col md={5} className="d-flex flex-column">
                 <div>
                   <Card>
-                    <Card.Header>
+                    <Card.Header className="fs-5">
                       <strong>Price Details</strong>
                     </Card.Header>
                     <Card.Body>
@@ -234,10 +288,10 @@ const CheckoutPage = React.memo(() => {
                       </Row>
                       <hr />
                       <Row>
-                        <Col>
+                        <Col className="fs-5">
                           <strong>Payable</strong>
                         </Col>
-                        <Col className="text-end">
+                        <Col className="fs-5 text-end">
                           <strong>₹ {payable.toFixed(2)}</strong>
                         </Col>
                       </Row>

@@ -78,7 +78,7 @@ function CartPage() {
                       <ul className="list-group" aria-labelledby="cart-heading">
                         {/* Headings row */}
                         <li
-                          className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
+                          className="fs-5 list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
                           role="presentation"
                         >
                           <div style={{ width: "25%" }}>Product</div>
