@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { decrementQuantity, incrementQuantity, removeFromCart } from "../../store/cartSlice";
+import { clearCart, decrementQuantity, incrementQuantity, removeFromCart } from "../../store/cartSlice";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,6 +8,7 @@ import { Button, Container } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
+import { logout } from "../../store/authSlice";
 
 function CartPage() {
   const location = useLocation();
@@ -25,6 +26,11 @@ function CartPage() {
       navigate("/checkoutpage");
     }
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearCart());
+  }
 
   // Compute total only once using useMemo
   const grandTotal = useMemo(
@@ -68,8 +74,10 @@ function CartPage() {
               </Row>
             </header>
 
-            <section aria-live="polite">
-              {cartItems.length === 0 ? (
+           <section aria-live="polite">
+              {!token ? (
+                <p className="text-muted">Please login to view your cart.</p>
+              ) : cartItems.length === 0 ? (
                 <p className="text-muted">Your cart is empty.</p>
               ) : (
                 <>
