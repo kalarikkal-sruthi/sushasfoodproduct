@@ -8,6 +8,7 @@ import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
+import EmptyCart from "../../components/buttons/EmptyCart";
 
 function Account() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ return (
         <section aria-labelledby="cart-heading">
           <Row>
             {/* LEFT SIDE = CART (take 8 cols) */}
-            <Col md={8}>
+            <Col md={12}>
               {token ? (
                 <>
                   <header className="header-bar">
@@ -163,15 +164,16 @@ return (
                   </section>
                 </>
               ) : (
-                <p className="text-muted">Login to see your cart.</p>
+               <EmptyCart />
               )}
             </Col>
 
             {/* RIGHT SIDE = LOGIN/REGISTER/GUEST (take 4 cols) */}
-            <Col md={4}>
-              <div className="d-flex flex-column gap-4 align-items-end">
+            {/* <Col md={12}>
+            <h4 className="mb-3 mt-5">Easily track your Orders, manage your Wishlist, and enjoy personalized Recommendations.</h4>
+              <div className="d-flex flex-row gap-4 justify-content-start">
                 <div>
-                  <h1 className="account-head text-end">Have An Account</h1>
+                  <h1 className="account-head text-start">Have An Account</h1>
                   <Link to="/login">
                     <motion.button
                       whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -192,7 +194,7 @@ return (
                 </div>
 
                 <div>
-                  <h1 className="account-head text-end">New to Susha's Food</h1>
+                  <h1 className="account-head text-start">New to Susha's Food</h1>
                   <Link to="/register">
                     <motion.button
                       whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -213,7 +215,7 @@ return (
                 </div>
 
                 <div>
-                  <h1 className="account-head text-end">As a Guest</h1>
+                  <h1 className="account-head text-start">As a Guest</h1>
                   <Link to="/guest">
                     <motion.button
                       whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -233,7 +235,7 @@ return (
                   </Link>
                 </div>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </section>
       </div>
