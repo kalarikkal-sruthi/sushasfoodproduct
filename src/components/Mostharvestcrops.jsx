@@ -71,9 +71,9 @@ export default function MostHarvestcrops() {
             </Row>
           </header>
 
-          <Row className="g-4">
+          <Row className="g-5">
             {homeData && homeData.length > 0 ? (
-              homeData.slice(0, 8).map((item) => (
+              homeData.slice(0, 4).map((item) => (
                 <Col lg={6} key={item.id} as="article">
                   <motion.div
                     initial="offscreen"

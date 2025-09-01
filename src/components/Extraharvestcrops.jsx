@@ -106,7 +106,7 @@ export default function HomeCategories() {
             </Col>
           </Row>
 
-          <Row className="g-4">
+          <Row className="g-5">
             {categories.map((cat, index) => (
               <Col lg={6} key={index}>
                 <motion.div

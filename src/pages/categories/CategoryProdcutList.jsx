@@ -8,12 +8,16 @@ import ProductCard from "../../components/cards/ProductCard";
 
 const CategoryProductList = () => {
   const dispatch = useDispatch();
-  const bgColors = [
-    "radial-gradient(circle, rgb(133 41 110 / 30%) 0%, #85296E 100%)", // light sky blue
-    "radial-gradient(circle, rgb(133 110 41 / 30%) 0%, #856E29 100%)", // soft lavender
-    "radial-gradient(circle, rgb(41 133 64 / 30%) 0%, #298540 100%)", // pale golden
-    "radial-gradient(circle, rgb(105 121 170 / 30%) 0%, #6979AA 100%)", // mint green
+   const bgColors = [
+"radial-gradient(circle, #143064 0%, #143064 100%)",
+    "radial-gradient(circle,#6f4e37 0%, #6f4e37 100%)",
+    "radial-gradient(circle,#cf321d 0%, #cf321d",
+    "radial-gradient(circle,#373703 0%, #373703",
+
+    // "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
+    // "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
   ];
+
 
   console.log(bgColors);
 

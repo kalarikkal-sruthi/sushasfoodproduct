@@ -10,7 +10,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 
 function Extraharvestsubcategory() {
   const { category } = useParams();
-  console.log(category);
+
 
   const dispatch = useDispatch();
   const {
@@ -24,7 +24,7 @@ function Extraharvestsubcategory() {
       dispatch(fetchExtraHarvestByCategory(category));
     }
   }, [category, dispatch]);
-
+  console.log(categoryData);
   if (loading)
     return (
       <div className="d-flex justify-content-center align-items-center p-5">

@@ -11,15 +11,24 @@ import { Link } from "react-router-dom";
 
 const Youtubefeed = ({ data }) => {
   if (!data || data.length === 0) return null;
-     const scrollVariants = {
-    offscreen: { y: 50, opacity: 0 },
-    onscreen: {
+  console.log(data);
+  
+ 
+ const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
       y: 0,
       opacity: 1,
-      transition: { type: "tween", ease: "easeOut", duration: 0.8 },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
-
+    const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+  };
 
   return (
     <main aria-labelledby="youtube-feed-heading">
@@ -29,20 +38,25 @@ const Youtubefeed = ({ data }) => {
         <header className="header-bar">
           <Row className="mb-3">
             <Col>
-              <motion.section
-                initial="offscreen"
-                whileInView="onscreen"
-                viewport={{ once: true, margin: "-100px" }}
+               <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={containerVariants}
               >
-                <motion.h2
-                  variants={scrollVariants}
-                  id="extra-harvest-heading"
-                  className="fw-bold"
-                  style={{ color: "#5caf47" }}
-                >
-                 Check Our Youtube Feed
-                </motion.h2>
-              </motion.section>
+                 <header>
+                                  <motion.h2
+                                    id="our-story-heading"
+                                    className="display-5 fw-bold mb-3"
+                                    style={{ color: "#294085" }}
+                                    variants={itemVariants}
+                                  >
+                                      Check Our Youtube Feed
+                                  </motion.h2>
+                                </header>
+            
+              </motion.div>
+               
             </Col>
           </Row>
         </header>
@@ -65,7 +79,7 @@ const Youtubefeed = ({ data }) => {
               <SwiperSlide key={item.id || idx}>
                 <figure>
                   <Link
-                    href={item.video}
+                   to={item.video}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Watch YouTube video titled "${item.title || `Video ${idx + 1}`}"`}

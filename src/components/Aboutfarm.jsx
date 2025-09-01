@@ -34,43 +34,43 @@ const Aboutfarm = () => {
                 <header>
                   <motion.h1
                     id="about-heading"
-                    className="display-4 fw-bold"
+                    className="display-4 fw-bold mb-3"
                     variants={itemVariants}
                     style={{ color: "#294085" }}
                   >
                     About Susha's Prakash Farm
                   </motion.h1>
-                  <motion.p className="lead text-muted" variants={itemVariants}>
+                  <p className="lead text-muted" >
                     A sustainable <strong>organic farm in Kerala</strong>,
                     committed to regenerative agriculture and healthy
                     communities.
-                  </motion.p>
+                  </p>
                 </header>
 
                 <article>
-                  <motion.p variants={itemVariants}>
+                 <p>
                     Meet <strong>P T Sushama</strong>, the founder of Susha's
                     Prakash Organic Farms. Inspired by my husband Prakash, who
                     has been a role model in agriculture, our farm is dedicated
                     to the mutual flourishing of people and nature.
-                  </motion.p>
+                </p>
 
-                  <motion.p variants={itemVariants}>
+                    <p>
                     Our mission is to foster a healthy community by providing
                     affordable <strong>organic produce</strong> while upholding{" "}
                     <strong>sustainable farming practices</strong> that
                     rejuvenate nature. Our regenerative methods improve soil
                     health, promote biodiversity, and cultivate the most
                     nutrient-dense food possible.
-                  </motion.p>
+               </p>
 
-                  <motion.p variants={itemVariants}>
+                      <p>
                     We have received many recognitions for our contribution to
                     sustainable agriculture. From our harvest, we create{" "}
                     <strong>value-added products</strong> which are sold in our
                     farm outlet, ensuring freshness and quality straight from
                     the source.
-                  </motion.p>
+                 </p>
                 </article>
               </motion.div>
             </Col>

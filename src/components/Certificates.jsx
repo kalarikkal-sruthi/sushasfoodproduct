@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
+import { Navigation, Pagination, Autoplay, A11y} from "swiper/modules";
 import key1 from "../assets/ourkey/icon1.png";
 import key2 from "../assets/ourkey/icon2.png";
 import key3 from "../assets/ourkey/icon3.png";
@@ -77,12 +77,12 @@ function Certificate({ data }) {
           </motion.section>
 
           <Swiper
-            spaceBetween={10}
+             modules={[Pagination, Navigation, Autoplay, A11y,]}
+            spaceBetween={20}
             slidesPerView={3}
             loop={true}
             navigation={true}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            modules={[Pagination, Navigation, Autoplay, A11y]}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
             className="mySwiper"
             aria-label="Certificates carousel"
           >
@@ -94,8 +94,10 @@ function Certificate({ data }) {
                     className="certificate-main-div text-center"
                     style={{
                       width: "100%",
-                      height: "500px",
-                      objectFit: "fill",
+                      height:"auto",
+                      maxHeight: "400px",
+                      // objectFit:'contain',
+                      // objectFit: "fill",
                       // margin: "0 auto",
                       borderRadius: "12px",
                     }}
@@ -106,9 +108,12 @@ function Certificate({ data }) {
                       alt={`${certTitle} - Organic & Sustainable Farming Certification`}
                       loading="lazy"
                       style={{
+                          maxHeight: "400px",
                         width: "100%",
-                        height: "500px",
-                        objectFit: "fill",
+                        height:"auto",
+                      // maxHeight: "400px",
+                      objectFit:'fill',
+                    
                         // height:"400px",
                         borderRadius: "12px",
                       }}

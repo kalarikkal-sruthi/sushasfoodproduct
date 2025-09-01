@@ -250,19 +250,32 @@ const CheckoutPage = React.memo(() => {
                     You’ll now be redirected to the payment page.
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    {/* <Button variant="secondary" onClick={handleClose}>
                       Cancel
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={() => {
+                    </Button> */}
+                     <motion.button
+                    whileHover={{
+                      x: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="btn btn-outline "
+                    style={{
+                      borderRadius: "50px",
+                      fontWeight: "500",
+                      border: "1px solid #294085",
+                      backgroundColor: "#294085",
+                      color: "#fff",
+                    }}
+                   onClick={() => {
                         handleClose();
                         // Example redirect to payment
                         window.location.href = "/payment";
                       }}
-                    >
-                      Go to Payment
-                    </Button>
+                  >
+                     Go to Payment →
+                  </motion.button>
+                   
                   </Modal.Footer>
                 </Modal>
               </Col>

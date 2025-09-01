@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart, decrementQuantity, incrementQuantity, removeFromCart } from "../../store/cartSlice";
+import {
+  clearCart,
+  decrementQuantity,
+  incrementQuantity,
+  removeFromCart,
+} from "../../store/cartSlice";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,6 +14,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
 import { logout } from "../../store/authSlice";
+import EmptyCart from "../../components/buttons/EmptyCart";
+import EmptyCartCart from "../../components/buttons/EmptyCartCart";
 
 function CartPage() {
   const location = useLocation();
@@ -30,7 +37,7 @@ function CartPage() {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(clearCart());
-  }
+  };
 
   // Compute total only once using useMemo
   const grandTotal = useMemo(
@@ -74,9 +81,9 @@ function CartPage() {
               </Row>
             </header>
 
-           <section aria-live="polite">
+            <section aria-live="polite">
               {!token ? (
-                <p className="text-muted">Please login to view your cart.</p>
+                <EmptyCartCart />
               ) : cartItems.length === 0 ? (
                 <p className="text-muted">Your cart is empty.</p>
               ) : (
@@ -122,8 +129,8 @@ function CartPage() {
                               <br></br>
                               {item.quantity}
                             </div> */}
-                            
-                               {/* Sid:changes on 21 aug 2025 - added quantity control buttons and logic */}
+
+                            {/* Sid:changes on 21 aug 2025 - added quantity control buttons and logic */}
                             <div style={{ width: "15%" }}>
                               {/* Product Size * Quantity */}
                               <div>
@@ -137,7 +144,9 @@ function CartPage() {
                                 <motion.button
                                   whileTap={{ scale: 0.95 }}
                                   className="btn btn-sm btn-outline-secondary me-2"
-                                  onClick={() => dispatch(decrementQuantity(item.id))}
+                                  onClick={() =>
+                                    dispatch(decrementQuantity(item.id))
+                                  }
                                   disabled={item.quantity === 1} // prevent going below 1
                                   aria-label={`Decrease quantity of ${item.product_name}`}
                                 >
@@ -149,14 +158,15 @@ function CartPage() {
                                 <motion.button
                                   whileTap={{ scale: 0.95 }}
                                   className="btn btn-sm btn-outline-secondary ms-2"
-                                  onClick={() => dispatch(incrementQuantity(item.id))}
+                                  onClick={() =>
+                                    dispatch(incrementQuantity(item.id))
+                                  }
                                   aria-label={`Increase quantity of ${item.product_name}`}
                                 >
                                   +
                                 </motion.button>
                               </div>
                             </div>
-
 
                             {/* Price */}
                             <div style={{ width: "15%" }}>₹ {item.price}</div>
