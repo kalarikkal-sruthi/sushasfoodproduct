@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
 import location from "../assets/header/location_on.png";
-import logonew from "../assets/header/logo-new.png";
+import logonew from "../assets/header/logowhite.jpeg";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Youtube, Instagram, Facebook } from "react-bootstrap-icons";
@@ -72,17 +72,20 @@ function Footer() {
                     </ul>
                   </Col>
                   <Col xs={6} md={3} className="footer-div">
-                    <h4>Information</h4>
+                    <h4>Usefull Links</h4>
                     <ul>
-                      <li>Delivery Information</li>
-                      <li>Privacy Policy</li>
-                      <li>Terms&Condition</li>
+                      <Link   style={{ textDecoration: "none" }} to=""><li>About Us</li></Link>
+                    <Link style={{ textDecoration: "none" }}> <li>Privacy Policy</li></Link> 
+                     <Link style={{ textDecoration: "none" }}><li>Terms and Conditions</li></Link> 
+                     <Link style={{ textDecoration: "none" }}><li>Refund/Cancellation Policy</li></Link> 
+                      <Link style={{ textDecoration: "none" }}><li>Shipping Policy</li></Link>
                     </ul>
                     <h4>Services</h4>
                     <ul>
                       <li>Culturing Organic products</li>
                       <li>Produce Value Added Products</li>
-                      <li>Selling Susha's Food Outlet</li>
+                      <li>Selling Through Susha's Food Outlet</li>
+                      <li>Online Selling</li>
                     </ul>
                   </Col>
                   {/* <Col xs={6} md={3} className="footer-div">
@@ -96,7 +99,7 @@ function Footer() {
                 </Col> */}
 
                   <Col xs={6} md={3} className="footer-div">
-                    <h4>Categories</h4>
+                    <h4>Product Categories</h4>
                     <ul>
                       <li>
                         <Link

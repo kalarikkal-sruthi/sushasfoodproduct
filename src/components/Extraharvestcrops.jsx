@@ -1,62 +1,77 @@
 import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import tubers from "../assets/otherfarmcrops/root.webp";
-import spices from "../assets/otherfarmcrops/spices.png";
-import fruits from "../assets/otherfarmcrops/fruits.webp";
-import herbs from "../assets/otherfarmcrops/herbs.jpeg";
+import tubers from "../assets/extra harvest/tubers and spices.webp";
+import veg from "../assets/extra harvest/vegetables.webp";
+import animal from "../assets/extra harvest/animal.webp"
+import herbs from "../assets/extra harvest/herbs.webp";
 
 // Static categories
-const categories = [
-  {
-    name: "Tubers",
-    image: tubers,
-    description:
-      "We cultivate organic root vegetables like yam, cassava, and sweet potatoes using sustainable farming methods.",
-    link: "/whatInFarms-Category?category=Tubers",
-    features: [
-      "Rich in dietary fiber and energy",
-      "Naturally grown without chemicals",
-      "Sustainably harvested",
-    ],
-  },
-  {
-    name: "Fruits",
-    image: fruits,
-    description:
-      "We grow seasonal fruits such as mangoes, bananas, papayas, and jackfruit in an eco-friendly way.",
-    link: "/whatInFarms-Category?category=Fruits",
-    features: [
-      "Fresh and seasonal produce",
-      "Rich in vitamins and antioxidants",
-      "Eco-friendly cultivation",
-    ],
-  },
-  {
-    name: "Spices",
-    image: spices,
-    description:
-      "We cultivate traditional spices organically with natural methods.",
-    link: "/whatInFarms-Category?category=Spices",
-    features: [
-      "Authentic aroma and taste",
-      "Organically cultivated",
-      "Hand-harvested and sun-dried",
-    ],
-  },
-  {
-    name: "Herbs",
-    image: herbs,
-    description:
-      "We cultivate medicinal herbs like tulsi, mint, and lemongrass that promote health and wellness.",
-    link: "/whatInFarms-Category?category=Herbs",
-    features: [
-      "Medicinal and aromatic properties",
-      "Supports holistic wellness",
-      "Chemical-free farming",
-    ],
-  },
-];
+ const services = [
+    {
+      title: "Tubers and Spices",
+      image: tubers,
+      description:
+        "We cultivate root vegetables organically using sustainable practices.",
+      link: "Tubers",
+      features: [
+        "Organic yam, cassava, and sweet potatoes",
+        "Rich in energy and dietary fiber",
+        "Sustainably farmed without chemicals",
+      ],
+    },
+    // {
+    //   title: "Spices",
+    //   image: spices,
+    //   description:
+    //     "We cultivate traditional spices organically with natural methods.",
+    //   link: "Spices",
+    //   features: [
+    //     "Authentic aroma and flavor",
+    //     "Naturally dried and hand-processed",
+    //     "Free from chemical additives",
+    //   ],
+    // },
+    
+    {
+      title: "Herbs",
+      image: herbs,
+      description:
+        "We grow herbs like tulsi, mint, and lemongrass, known for their medicinal properties.",
+      link: "Herbs",
+      features: [
+        "Medicinal and aromatic properties",
+        "Supports holistic wellness",
+        "100% natural and chemical-free",
+      ],
+    },
+    {
+      title: "Vegetables",
+      image: veg,
+      description:
+        "Our vegetable garden features seasonal greens and organically grown produce.",
+      link: "Vegetables",
+      features: [
+        "Fresh and seasonal greens",
+        "High nutritional value",
+        "Organically cultivated",
+      ],
+    },
+    {
+      title: "Animal Care and Maintenance",
+      image: animal,
+      description:
+        "We provide organic care and sustainable maintenance practices for farm animals.",
+      link: "Animal care and maintenance",
+      features: [
+        "Natural feeding practices",
+        "Safe and humane environment",
+        "Sustainable maintenance methods",
+      ],
+    },
+    
+  ];
+
 
 export default function HomeCategories() {
   const cardVariants = {
@@ -107,7 +122,7 @@ export default function HomeCategories() {
           </Row>
 
           <Row className="g-5">
-            {categories.map((cat, index) => (
+            {services.map((cat, index) => (
               <Col lg={6} key={index}>
                 <motion.div
                   initial="offscreen"
@@ -117,7 +132,7 @@ export default function HomeCategories() {
                 >
                   <motion.div whileHover={cardHover} className="h-100">
                     <Link
-                      to={`/extraharvestfromfarm/${cat.name}`}
+                      to={`/extraharvestfromfarm/${cat.link}`}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
                       <Card
@@ -148,7 +163,7 @@ export default function HomeCategories() {
                                 style={{ color: "#294085" }}
                                 className="fw-bold fs-2 mb-3"
                               >
-                                {cat.name}
+                                {cat. title}
                               </Card.Title>
                               <Card.Text className=" text-muted">
                                 {cat.description?.slice(0, 150)}
@@ -162,7 +177,7 @@ export default function HomeCategories() {
                                 </ul>
                               )}
 
-                              <Link to={`/extraharvestfromfarm/${cat.name}`}>
+                              <Link  to={`/extraharvestfromfarm/${cat.link}`}>
                                 <motion.span
                                   whileHover={{
                                     x: 5,

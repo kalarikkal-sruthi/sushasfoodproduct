@@ -60,6 +60,7 @@ const ProductByCategory = () => {
 
   return (
     <main>
+       <div className="padding-top"></div>
       <div className="padding-top"></div>
       <div className="padding-top"></div>
          <div  className="padding-y mt-5">
@@ -82,7 +83,7 @@ const ProductByCategory = () => {
           className=""
         >
         
-         <Row className="g-4">
+         <Row className="g-5">
   {products && products.length > 0 ? (
     products.map((product, index) => (
       <Col lg={6} key={product.id || index} as="article">
@@ -111,7 +112,7 @@ const ProductByCategory = () => {
                       borderRadius: "12px 0 0 12px",
                       width: "100%",
                       height: "100%",
-                      padding:"30px",
+                      // padding:"30px",
                       objectFit: "cover",
                     }}
                     loading="lazy"
@@ -130,7 +131,7 @@ const ProductByCategory = () => {
                     </Card.Title>
 
                     <Card.Text className=" text-muted">
-                      {product.description?.slice(0, 350)}...
+                      {product.description?.slice(0, 250)}...
                     </Card.Text>
 
                     {product.baseprices?.[0]?.original_price && (

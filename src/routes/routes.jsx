@@ -17,6 +17,10 @@ import Mostcultivatedfull from "../pages/whatwedo/mostcultivatedcrops/Mostcultiv
 import Extraharvestsubcategory from "../pages/whatwedo/extraharvestcrops/Extraharvestsubcategory";
 import Aboutfarm from "../components/Aboutfarm";
 import Account from "../pages/auth/Account";
+import Privacypolicy from "../pages/companyinformation/Privacypolicy";
+import Termsconditions from "../pages/companyinformation/Termsconditions";
+import Refundcancellationpolicy from "../pages/companyinformation/Refundcancellationpolicy";
+import Shippingpolicy from "../pages/companyinformation/Shippingpolicy";
 
 const AppRoutes = () => {
   return (
@@ -51,7 +55,14 @@ const AppRoutes = () => {
 
         <Route path="/checkoutpage" element={<CheckoutPage />} />
         <Route path="/aboutus" element={<Aboutfarm />} />
-      </Route>
+
+        <Route path="/privacy-policy" element={<Privacypolicy />}></Route>
+     <Route path="/terms-and-conditions" element={<Termsconditions />}></Route>
+       <Route path="/refund-cancellation-policy" element={<Refundcancellationpolicy />}></Route>
+
+  <Route path="/shipping-policy" element={<Shippingpolicy />}></Route> 
+ 
+     </Route>
     </Routes>
   );
 };

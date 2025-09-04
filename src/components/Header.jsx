@@ -6,7 +6,7 @@ import accountcircle from "../assets/header/account_circle.png";
 
 // import shoppingcart from "../assets/header/Shopping cart.png";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../assets/header/logo-new.png";
+import logo from "../assets/header/logowhite.jpeg";
 import { useEffect } from "react";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,14 +17,8 @@ import { Badge } from "react-bootstrap"; // add this import
 export default function Header() {
 
 
-   const bgColors = [
-  "radial-gradient(circle, rgb(133 41 110 / 30%) 0%, #85296E 100%)", // light sky blue
-  "radial-gradient(circle, rgb(133 110 41 / 30%) 0%, #856E29 100%)", // soft lavender
-  "radial-gradient(circle, rgb(41 133 64 / 30%) 0%, #298540 100%)", // pale golden
-  "radial-gradient(circle, rgb(105 121 170 / 30%) 0%, #6979AA 100%)"  // mint green
-];
 
-  console.log(bgColors);
+  
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
@@ -103,14 +97,14 @@ export default function Header() {
                   {loading && <span>Loading...</span>}
                   {error && <span style={{ color: "red" }}>{error}</span>}
 
-                  {categories?.map((cat,index) => (
+                  {categories?.map((cat) => (
                     <Nav.Link
                       key={cat.id}
                       as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
                       to={`/productsbycategory/${cat.id}`}
                       
                       state={{
-                  bgColor: bgColors[index % bgColors.length],
+                  
                   categoryName: cat.name,
                 }}
                     >

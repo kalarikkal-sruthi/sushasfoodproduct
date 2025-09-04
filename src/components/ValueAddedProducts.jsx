@@ -92,7 +92,7 @@ const itemVariants = {
                       aria-label={`View products in ${category.name}`}
                     >
                       <Card
-                        className=" shadow-sm border-0 p-5"
+                        className=" shadow-sm border-0 "
                         style={{
                          
                           borderRadius: "12px",
@@ -102,7 +102,7 @@ const itemVariants = {
                           className=" m-auto"
                           variant="top"
                           // src={img}
-                          style={{width:"50%"}}
+                         
                           src={`${categoryUrl}${category.image}`}
                           alt={`Fresh ${category.name} products`}
                           loading="lazy"

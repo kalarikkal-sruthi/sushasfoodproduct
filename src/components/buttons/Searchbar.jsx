@@ -9,12 +9,7 @@ import { useNavigate } from "react-router-dom";
 import search from "../../assets/header/search.png";
 
 function Searchbar() {
- const bgColors = [
-  "radial-gradient(circle, rgb(133 41 110 / 30%) 0%, #85296E 100%)", // light sky blue
-  "radial-gradient(circle, rgb(133 110 41 / 30%) 0%, #856E29 100%)", // soft lavender
-  "radial-gradient(circle, rgb(41 133 64 / 30%) 0%, #298540 100%)", // pale golden
-  "radial-gradient(circle, rgb(105 121 170 / 30%) 0%, #6979AA 100%)"  // mint green
-];
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,13 +62,13 @@ function Searchbar() {
           className="list-group position-absolute w-100 mt-1"
           style={{ zIndex: 1000 }}
         >
-          {searchResults.map((item, index) => {
-  const bgColor = bgColors[index % bgColors.length]; // pick gradient
+          {searchResults.map((item) => {
+ 
   return (
     <li
       key={item.id}
       className="list-group-item list-group-item-action"
-      onClick={() => handleSelectProduct(item.id, bgColor, item.categoryName)}
+      onClick={() => handleSelectProduct(item.id,  item.categoryName)}
       style={{
         // background: bgColor,
         cursor: "pointer",

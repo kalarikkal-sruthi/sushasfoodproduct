@@ -8,18 +8,9 @@ import ProductCard from "../../components/cards/ProductCard";
 
 const CategoryProductList = () => {
   const dispatch = useDispatch();
-   const bgColors = [
-"radial-gradient(circle, #143064 0%, #143064 100%)",
-    "radial-gradient(circle,#6f4e37 0%, #6f4e37 100%)",
-    "radial-gradient(circle,#cf321d 0%, #cf321d",
-    "radial-gradient(circle,#373703 0%, #373703",
-
-    // "radial-gradient(circle,rgba(101, 34, 140, 0.5) 0%, #65228c",
-    // "radial-gradient(circle,rgba(174, 58, 0, 0.5) 0%, #ae3a00",
-  ];
 
 
-  console.log(bgColors);
+
 
   const {
     data: categories,
@@ -109,26 +100,26 @@ const CategoryProductList = () => {
 
       <article
         style={{
-          background: bgColors[categoryIndex % bgColors.length],
+        
           borderRadius: "12px",
         }}
       >
         <Row aria-label={`Products in ${category.name}`}>
-          {category.products?.slice(0, 4).map((product,productIndex) => {
-            const bgColor = bgColors[categoryIndex % bgColors.length]; // ✅ use categoryIndex
+          {category.products?.slice(0, 4).map((product) => {
+           
 
             return (
               <Col key={product.id} xs={6} md={3}>
                 <article
                   style={{
-                    background: bgColor,
+                   
                     borderRadius: "12px",
                     padding: "8px",
                   }}
                 >
                   <Link
                     to={`/product/${product.id}`}
-                  state={{ bgColor: bgColors[productIndex % bgColors.length], categoryName: category.name, }}
+                  state={{ categoryName: category.name, }}
                     style={{
                       textDecoration: "none",
                       color: "inherit",
@@ -156,7 +147,7 @@ const CategoryProductList = () => {
         <Link
           to={`/productsbycategory/${category.id}`}
           aria-label={`View all products in ${category.name}`}
-         state={{ bgColor: bgColors[categoryIndex % bgColors.length], categoryName: category.name, }}
+         state={{ categoryName: category.name, }}
         >
           <motion.span
             whileHover={{ x: 5, transition: { duration: 0.2 } }}

@@ -74,7 +74,7 @@ const ProductDetailGallery = ({ product }) => {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain", // keeps aspect ratio
-                padding:'30px'
+                // padding:'30px'
               }}
               onError={(e) => (e.target.src = "/collections/2.png")}
             />
@@ -101,7 +101,7 @@ const ProductDetailGallery = ({ product }) => {
                 maxHeight: "100%",
                 maxWidth: "100%",
                 objectFit: "contain",
-                padding:'10px'
+                // padding:'10px'
               }}
               onError={(e) => (e.target.src = "/collections/2.png")}
             />

@@ -1,21 +1,21 @@
 import axios from "axios";
 
-const imgURL = "https://ms.myfezto.com/uploads/";
+const imgURL = "http://134.209.158.7:8080/uploads/";
 
-const videoURL = "https://ms.myfezto.com/uploads/banner-video/";
-const whatinfarmsURL = "https://ms.myfezto.com/uploads/what_in_farm/";
-export const whatinfarmsGalleryURL = "https://ms.myfezto.com/uploads/what_in_farm/gallery/";
-export const imgURLTestimonial = "https://ms.myfezto.com/uploads/testimonial/";
-export const imgURLCertificate = "https://ms.myfezto.com/uploads/certificates/";
-export const imgURLVideo = "https://ms.myfezto.com/uploads/video/";
-export const productURL = "https://ms.myfezto.com/uploads/products/";
-export const aboutURL = "https://ms.myfezto.com/uploads/about-us-images/";
-export const categoryUrl = "https://ms.myfezto.com/uploads/categories/";
+const videoURL = "http://134.209.158.7:8080/uploads/banner-video/";
+const whatinfarmsURL = "http://134.209.158.7:8080/uploads/what_in_farm/";
+export const whatinfarmsGalleryURL = "http://134.209.158.7:8080/uploads/what_in_farm/gallery/";
+export const imgURLTestimonial = "http://134.209.158.7:8080/uploads/testimonial/";
+export const imgURLCertificate = "http://134.209.158.7:8080/uploads/certificates/";
+export const imgURLVideo = "http://134.209.158.7:8080/uploads/video/";
+export const productURL = "http://134.209.158.7:8080/uploads/products/";
+export const aboutURL = "http://134.209.158.7:8080/uploads/about-us-images/";
+export const categoryUrl = "http://134.209.158.7:8080/uploads/categories/";
 
-export const imgURLMostHarvest ="https://ms.myfezto.com/uploads/what_in_farm/"
+export const imgURLMostHarvest ="http://134.209.158.7:8080/uploads/what_in_farm/"
 
 const api = axios.create({
-  baseURL: "https://ms.myfezto.com/api",
+  baseURL: "http://134.209.158.7:8080/api",
 
   headers: {
     "Content-Type": "application/json",

@@ -29,10 +29,10 @@ export default function Home() {
   const homeVideoInGallary = data?.homeVideoInGallary || [];
   // const whatInFarms = data?.whatInFarms || [];
   const products = data?.products || [];
-  const testimonials = data?.testimonial || [];
+  // const testimonials = data?.testimonial || [];
   const certificates = data?.certificates || [];
-  const videoInstagram = data?.videoInstagram || [];
-  const videoYoutube = data?.videoYoutube || [];
+  // const videoInstagram = data?.videoInstagram || [];
+  // const videoYoutube = data?.videoYoutube || [];
 
   // const aboutusImage = data?.aboutusImage || [];
   // const categories = data?.categories || [];
@@ -72,9 +72,9 @@ export default function Home() {
 
        
 
-      <Instagramfeed data={videoInstagram} />
-      <Youtubefeed data={videoYoutube} />
-      <Testimonial data={testimonials} />
+      {/* <Instagramfeed data={videoInstagram} /> */}
+      {/* <Youtubefeed data={videoYoutube} />
+      <Testimonial data={testimonials} /> */}
     </div>
   );
 }

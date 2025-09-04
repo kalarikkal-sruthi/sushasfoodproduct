@@ -2,21 +2,17 @@ import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import tubers from "../../../assets/otherfarmcrops/root.webp";
-import spices from "../../../assets/otherfarmcrops/spices.png";
-import fruits from "../../../assets/otherfarmcrops/fruits.webp";
-import herbs from "../../../assets/otherfarmcrops/herbs.jpeg";
-import veg from "../../../assets/otherfarmcrops/vegetables.jpg";
-import ornamental from "../../../assets/otherfarmcrops/ornamentalplants.webp";
-import garden from "../../../assets/otherfarmcrops/gardenplants.jpg";
-import animal from "../../../assets/otherfarmcrops/animalcare.jpg";
-import aquatic from "../../../assets/otherfarmcrops/aquaticplants.jpg";
-import Breadcrumbs from "../../../components/Breadcrumbs";
-
+import fruits from "../../../assets/extra harvest/fruits.webp";
+// import spices from "../../../assets/otherfarmcrops/spices.png";
+import tubers from "../../../assets/extra harvest/tubers and spices.webp";
+import veg from "../../../assets/extra harvest/vegetables.webp";
+import animal from "../../../assets/extra harvest/animal.webp"
+import herbs from "../../../assets/extra harvest/herbs.webp";
+import Breadcrumbs from "../../../components/Breadcrumbs"; 
 function Extraharvestfull() {
   const services = [
     {
-      title: "Tubers",
+      title: "Tubers and Spices",
       image: tubers,
       description:
         "We cultivate root vegetables organically using sustainable practices.",
@@ -27,18 +23,18 @@ function Extraharvestfull() {
         "Sustainably farmed without chemicals",
       ],
     },
-    {
-      title: "Spices",
-      image: spices,
-      description:
-        "We cultivate traditional spices organically with natural methods.",
-      link: "Spices",
-      features: [
-        "Authentic aroma and flavor",
-        "Naturally dried and hand-processed",
-        "Free from chemical additives",
-      ],
-    },
+    // {
+    //   title: "Spices",
+    //   image: spices,
+    //   description:
+    //     "We cultivate traditional spices organically with natural methods.",
+    //   link: "Spices",
+    //   features: [
+    //     "Authentic aroma and flavor",
+    //     "Naturally dried and hand-processed",
+    //     "Free from chemical additives",
+    //   ],
+    // },
     {
       title: "Fruits",
       image: fruits,
@@ -89,7 +85,7 @@ function Extraharvestfull() {
     },
     {
       title: "Ornamental Plants",
-      image: ornamental,
+      // image: ornamental,
       description:
         "We nurture ornamental plants that beautify spaces and support biodiversity.",
       link: "Ornamental Plants",
@@ -101,7 +97,7 @@ function Extraharvestfull() {
     },
     {
       title: "Garden Plants",
-      image: garden,
+      // image: garden,
       description:
         "Our garden plants enhance greenery and bring life to any environment.",
       link: "Garden Plants",
@@ -113,7 +109,7 @@ function Extraharvestfull() {
     },
     {
       title: "Aquatic Plants",
-      image: aquatic,
+      // image: aquatic,
       description:
         "We cultivate aquatic plants that enrich ponds, lakes, and water gardens.",
       link: "Aquatic Plants",
@@ -185,7 +181,7 @@ function Extraharvestfull() {
             />
           </Row>
 
-          <Row className="g-4">
+          <Row className="g-5">
             {services.map((service, index) => (
               <Col lg={6} key={index} as="article">
                 <motion.div
