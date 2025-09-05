@@ -3,75 +3,73 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import tubers from "../assets/extra harvest/tubers and spices.webp";
 import veg from "../assets/extra harvest/vegetables.webp";
-import animal from "../assets/extra harvest/animal.webp"
+import animal from "../assets/extra harvest/animal.webp";
 import herbs from "../assets/extra harvest/herbs.webp";
 
 // Static categories
- const services = [
-    {
-      title: "Tubers and Spices",
-      image: tubers,
-      description:
-        "We cultivate root vegetables organically using sustainable practices.",
-      link: "Tubers",
-      features: [
-        "Organic yam, cassava, and sweet potatoes",
-        "Rich in energy and dietary fiber",
-        "Sustainably farmed without chemicals",
-      ],
-    },
-    // {
-    //   title: "Spices",
-    //   image: spices,
-    //   description:
-    //     "We cultivate traditional spices organically with natural methods.",
-    //   link: "Spices",
-    //   features: [
-    //     "Authentic aroma and flavor",
-    //     "Naturally dried and hand-processed",
-    //     "Free from chemical additives",
-    //   ],
-    // },
-    
-    {
-      title: "Herbs",
-      image: herbs,
-      description:
-        "We grow herbs like tulsi, mint, and lemongrass, known for their medicinal properties.",
-      link: "Herbs",
-      features: [
-        "Medicinal and aromatic properties",
-        "Supports holistic wellness",
-        "100% natural and chemical-free",
-      ],
-    },
-    {
-      title: "Vegetables",
-      image: veg,
-      description:
-        "Our vegetable garden features seasonal greens and organically grown produce.",
-      link: "Vegetables",
-      features: [
-        "Fresh and seasonal greens",
-        "High nutritional value",
-        "Organically cultivated",
-      ],
-    },
-    {
-      title: "Animal Care and Maintenance",
-      image: animal,
-      description:
-        "We provide organic care and sustainable maintenance practices for farm animals.",
-      link: "Animal care and maintenance",
-      features: [
-        "Natural feeding practices",
-        "Safe and humane environment",
-        "Sustainable maintenance methods",
-      ],
-    },
-    
-  ];
+const services = [
+  {
+    title: "Tubers and Spices",
+    image: tubers,
+    description:
+      "We cultivate root vegetables organically using sustainable practices.",
+    link: "Tubers",
+    features: [
+      "Organic yam, cassava, and sweet potatoes",
+      "Rich in energy and dietary fiber",
+      "Sustainably farmed without chemicals",
+    ],
+  },
+  // {
+  //   title: "Spices",
+  //   image: spices,
+  //   description:
+  //     "We cultivate traditional spices organically with natural methods.",
+  //   link: "Spices",
+  //   features: [
+  //     "Authentic aroma and flavor",
+  //     "Naturally dried and hand-processed",
+  //     "Free from chemical additives",
+  //   ],
+  // },
 
+  {
+    title: "Herbs",
+    image: herbs,
+    description:
+      "We grow herbs like tulsi, mint, and lemongrass, known for their medicinal properties.",
+    link: "Herbs",
+    features: [
+      "Medicinal and aromatic properties",
+      "Supports holistic wellness",
+      "100% natural and chemical-free",
+    ],
+  },
+  {
+    title: "Vegetables",
+    image: veg,
+    description:
+      "Our vegetable garden features seasonal greens and organically grown produce.",
+    link: "Vegetables",
+    features: [
+      "Fresh and seasonal greens",
+      "High nutritional value",
+      "Organically cultivated",
+    ],
+  },
+  {
+    title: "Animal Care and Maintenance",
+    image: animal,
+    description:
+      "We provide organic care and sustainable maintenance practices for farm animals.",
+    link: "Animal care and maintenance",
+    features: [
+      "Natural feeding practices",
+      "Safe and humane environment",
+      "Sustainable maintenance methods",
+    ],
+  },
+];
 
 export default function HomeCategories() {
   const cardVariants = {
@@ -163,28 +161,28 @@ export default function HomeCategories() {
                                 style={{ color: "#294085" }}
                                 className="fw-bold fs-2 mb-3"
                               >
-                                {cat. title}
+                                {cat.title}
                               </Card.Title>
                               <Card.Text className=" text-muted">
                                 {cat.description?.slice(0, 150)}
                               </Card.Text>
                               <h6 className="key-faeture">Key Features</h6>
                               {cat.features && (
-                                <ul style={{backgroundColor:"#f8f9fa"}}>
+                                <ul style={{ backgroundColor: "#f8f9fa" }}>
                                   {cat.features.map((feature, i) => (
                                     <li key={i}>{feature}</li>
                                   ))}
                                 </ul>
                               )}
 
-                              <Link  to={`/extraharvestfromfarm/${cat.link}`}>
+                              <Link to={`/extraharvestfromfarm/${cat.link}`}>
                                 <motion.span
                                   whileHover={{
                                     x: 5,
                                     transition: { duration: 0.2 },
                                   }}
                                   whileTap={{ scale: 0.98 }}
-                                  className="btn btn-outline mt-5"
+                                  className="btn btn-outline "
                                   style={{
                                     borderRadius: "50px",
                                     fontWeight: "500",

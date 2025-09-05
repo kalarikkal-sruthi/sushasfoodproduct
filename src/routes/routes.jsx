@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import MainLayouts from "../layout/MainLayouts";
 import Home from "../pages/Home";
@@ -24,46 +24,56 @@ import Shippingpolicy from "../pages/companyinformation/Shippingpolicy";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route element={<MainLayouts />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/productsbycategory" element={<CategoryProductList />} />
-        <Route
-          path="/productsbycategory/:id"
-          element={<ProductsByCategory />}
-        />
-        <Route path="/product/:id" element={<ProductDetail />} />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayouts />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/productsbycategory" element={<CategoryProductList />} />
+          <Route
+            path="/productsbycategory/:id"
+            element={<ProductsByCategory />}
+          />
+          <Route path="/product/:id" element={<ProductDetail />} />
 
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/myaccount" element={<MyAccount />} />
-         <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/myaccount" element={<MyAccount />} />
+          <Route path="/account" element={<Account />} />
 
-        <Route path="/extraharvestfromfarm" element={<Extraharvestfull />} />
-        <Route
-          path="/extraharvestfromfarm/:category"
-          element={<Extraharvestsubcategory />}
-        />
-        <Route
-          path="/extraharvestfromfarm/detail/:id"
-          element={<Extraharvestdetail />}
-        />
+          <Route path="/extraharvestfromfarm" element={<Extraharvestfull />} />
+          <Route
+            path="/extraharvestfromfarm/:category"
+            element={<Extraharvestsubcategory />}
+          />
+          <Route
+            path="/extraharvestfromfarm/detail/:id"
+            element={<Extraharvestdetail />}
+          />
 
-        <Route path="/mostharvestfromfarm" element={<Mostcultivatedfull />} />
-        <Route path="/mostharvestfromfarm/:id" element={<Mostcultivateddetail />} />
+          <Route path="/mostharvestfromfarm" element={<Mostcultivatedfull />} />
+          <Route
+            path="/mostharvestfromfarm/:id"
+            element={<Mostcultivateddetail />}
+          />
 
-        <Route path="/checkoutpage" element={<CheckoutPage />} />
-        <Route path="/aboutus" element={<Aboutfarm />} />
+          <Route path="/checkoutpage" element={<CheckoutPage />} />
+          <Route path="/aboutus" element={<Aboutfarm />} />
 
-        <Route path="/privacy-policy" element={<Privacypolicy />}></Route>
-     <Route path="/terms-and-conditions" element={<Termsconditions />}></Route>
-       <Route path="/refund-cancellation-policy" element={<Refundcancellationpolicy />}></Route>
+          <Route path="/privacy-policy" element={<Privacypolicy />}></Route>
+          <Route
+            path="/terms-and-conditions"
+            element={<Termsconditions />}
+          ></Route>
+          <Route
+            path="/refund-cancellation-policy"
+            element={<Refundcancellationpolicy />}
+          ></Route>
 
-  <Route path="/shipping-policy" element={<Shippingpolicy />}></Route> 
- 
-     </Route>
-    </Routes>
+          <Route path="/shipping-policy" element={<Shippingpolicy />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

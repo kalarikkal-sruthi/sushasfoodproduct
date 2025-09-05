@@ -73,7 +73,7 @@ function Extraharvestsubcategory() {
         ]}
       />
 
-      <Row className="g-4 mt-3">
+      <Row className="g-5 mt-3">
         {categoryData?.map((item) => (
           <Col md={4} key={item.id}>
             <motion.div whileHover={{ y: -5 }}>

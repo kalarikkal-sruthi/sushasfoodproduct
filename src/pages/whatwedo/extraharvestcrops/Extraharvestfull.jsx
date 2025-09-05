@@ -9,6 +9,9 @@ import veg from "../../../assets/extra harvest/vegetables.webp";
 import animal from "../../../assets/extra harvest/animal.webp"
 import herbs from "../../../assets/extra harvest/herbs.webp";
 import Breadcrumbs from "../../../components/Breadcrumbs"; 
+import ornamental from "../../../assets/extra harvest/ornamental plants.webp"
+import gardenplants from "../../../assets/extra harvest/garden plants.webp"
+import aquatic from "../../../assets/extra harvest/aquatic.webp"
 function Extraharvestfull() {
   const services = [
     {
@@ -85,7 +88,7 @@ function Extraharvestfull() {
     },
     {
       title: "Ornamental Plants",
-      // image: ornamental,
+      image: ornamental,
       description:
         "We nurture ornamental plants that beautify spaces and support biodiversity.",
       link: "Ornamental Plants",
@@ -97,7 +100,7 @@ function Extraharvestfull() {
     },
     {
       title: "Garden Plants",
-      // image: garden,
+      image: gardenplants,
       description:
         "Our garden plants enhance greenery and bring life to any environment.",
       link: "Garden Plants",
@@ -109,7 +112,7 @@ function Extraharvestfull() {
     },
     {
       title: "Aquatic Plants",
-      // image: aquatic,
+      image: aquatic,
       description:
         "We cultivate aquatic plants that enrich ponds, lakes, and water gardens.",
       link: "Aquatic Plants",
@@ -248,7 +251,7 @@ function Extraharvestfull() {
                                     transition: { duration: 0.2 },
                                   }}
                                   whileTap={{ scale: 0.98 }}
-                                  className="btn btn-outline mt-5"
+                                  className="btn btn-outline"
                                   style={{
                                     borderRadius: "50px",
                                     fontWeight: "500",

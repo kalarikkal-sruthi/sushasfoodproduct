@@ -80,7 +80,7 @@ export default function Mostcultivatedfull() {
             </Col>
           </Row>
 
-          <Row className="g-4">
+          <Row className="g-5">
             {allData && allData.length > 0 ? (
               allData.map((item) => (
                 <Col lg={6} key={item.id} as="article">
