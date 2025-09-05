@@ -4,14 +4,11 @@ import ScrollToTop from "./utils/ScrollToTop";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 function App() {
   return (
     <Router>
       <ScrollToTop />
       <AppRoutes />
-      
     </Router>
   );
 }
