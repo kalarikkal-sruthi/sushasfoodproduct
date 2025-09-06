@@ -143,6 +143,7 @@ function Footer() {
                             }}
                           >
                             {cat.name}
+                            <br />
                           </Link>
                         ))}
                       </li>

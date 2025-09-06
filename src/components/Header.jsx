@@ -71,10 +71,10 @@ export default function Header() {
                   <Nav.Link href="/mostharvestfromfarm">
                     Most Harvest Plants
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm/Tubers">
-                    Tubers and Spices
+                  <Nav.Link href="/extraharvestfromfarm">
+                   Extra Harvest Plants
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
+                  {/* <Nav.Link href="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
                   <Nav.Link href="/extraharvestfromfarm/Herbs">Herbs</Nav.Link>{" "}
                   <Nav.Link href="/extraharvestfromfarm/Vegetables">Vegetables</Nav.Link>{" "}
                   <Nav.Link href="/extraharvestfromfarm/Animal care and maintenance">
@@ -88,7 +88,7 @@ export default function Header() {
                   </Nav.Link>
                   <Nav.Link href="/extraharvestfromfarm/Aquatic Plants">
                     Aquatic Plants
-                  </Nav.Link>
+                  </Nav.Link> */}
                 </div>
               </div>
               <Nav.Link href="">|</Nav.Link>
