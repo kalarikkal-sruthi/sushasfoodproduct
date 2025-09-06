@@ -15,24 +15,21 @@ import Searchbar from "./buttons/Searchbar";
 import { logout as logoutAction } from "../store/authSlice";
 import { Badge } from "react-bootstrap"; // add this import
 export default function Header() {
-
-
-
-  
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   console.log(token);
 
   const user = useSelector((state) => state.auth.user);
-  console.log('user:',user);
-  
+  console.log("user:", user);
 
   const navigate = useNavigate();
+
   const {
     data: categories,
     loading,
     error,
   } = useSelector((state) => state.categoryProducts);
+
   useEffect(() => {
     dispatch(fetchCategoriesWithProducts());
   }, [dispatch]);
@@ -68,14 +65,29 @@ export default function Header() {
               <Nav.Link href="">|</Nav.Link>
               <div className="dropdown">
                 <button className="dropdown-main">
-                  <Nav.Link href="">What We Do ▼</Nav.Link>
+                  <Nav.Link href=""> Farm Activities▼</Nav.Link>
                 </button>
                 <div className="dropdown-sub-menu">
                   <Nav.Link href="/mostharvestfromfarm">
-                    Most Harvest From Our Farm
+                    Most Harvest Plants
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm">
-                    Extra Harvest from Our Farm
+                  <Nav.Link href="/extraharvestfromfarm/Tubers">
+                    Tubers and Spices
+                  </Nav.Link>
+                  <Nav.Link href="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
+                  <Nav.Link href="/extraharvestfromfarm/Herbs">Herbs</Nav.Link>{" "}
+                  <Nav.Link href="/extraharvestfromfarm/Vegetables">Vegetables</Nav.Link>{" "}
+                  <Nav.Link href="/extraharvestfromfarm/Animal care and maintenance">
+                    Animal Care and Maintenance
+                  </Nav.Link>
+                  <Nav.Link href="/extraharvestfromfarm/Ornamental Plants">
+                    Ornamental Plants
+                  </Nav.Link>
+                  <Nav.Link href="/extraharvestfromfarm/Garden Plants">
+                    Garden Plants
+                  </Nav.Link>
+                  <Nav.Link href="/extraharvestfromfarm/Aquatic Plants">
+                    Aquatic Plants
                   </Nav.Link>
                 </div>
               </div>
@@ -102,11 +114,9 @@ export default function Header() {
                       key={cat.id}
                       as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
                       to={`/productsbycategory/${cat.id}`}
-                      
                       state={{
-                  
-                  categoryName: cat.name,
-                }}
+                        categoryName: cat.name,
+                      }}
                     >
                       {cat.name}
                     </Nav.Link>
@@ -114,31 +124,31 @@ export default function Header() {
                 </div>
               </div>
 
-           <Nav.Link href="">|</Nav.Link>
-{token ? (
-  <div className="dropdown">
-    <button className="dropdown-main">
-      {/* sid changed on 25 aug 2025 → if logged in, username should go to /myaccount instead of /account */}
-      <Nav.Link href="/myaccount" className="icon-img">
-       {/* sid changed on 25 aug 2025 → fetch user info from auth slice */}
-        {user?.name || "Account"}{" "}
-        <img src={accountcircle} alt="susha's food product" />
-      </Nav.Link>
-    </button>
-    <div className="dropdown-sub-menu">
-      <Nav.Link href="/myaccount">My Profile</Nav.Link>
-      {/* <Nav.Link href="/myaccount">Orders</Nav.Link> */}
-      <Nav.Link href="" onClick={handleLogout}>
-        Logout
-      </Nav.Link>
-    </div>
-  </div>
-) : (
-  // sid changed on 25 aug 2025 → if not logged in, go to /account for login
-  <Nav.Link href="/account" className="icon-img">
-    Login <img src={accountcircle} alt="susha's food product" />
-  </Nav.Link>
-)}
+              <Nav.Link href="">|</Nav.Link>
+              {token ? (
+                <div className="dropdown">
+                  <button className="dropdown-main">
+                    {/* sid changed on 25 aug 2025 → if logged in, username should go to /myaccount instead of /account */}
+                    <Nav.Link href="/myaccount" className="icon-img">
+                      {/* sid changed on 25 aug 2025 → fetch user info from auth slice */}
+                      {user?.name || "Account"}{" "}
+                      <img src={accountcircle} alt="susha's food product" />
+                    </Nav.Link>
+                  </button>
+                  <div className="dropdown-sub-menu">
+                    <Nav.Link href="/myaccount">My Profile</Nav.Link>
+                    {/* <Nav.Link href="/myaccount">Orders</Nav.Link> */}
+                    <Nav.Link href="" onClick={handleLogout}>
+                      Logout
+                    </Nav.Link>
+                  </div>
+                </div>
+              ) : (
+                // sid changed on 25 aug 2025 → if not logged in, go to /account for login
+                <Nav.Link href="/account" className="icon-img">
+                  Login <img src={accountcircle} alt="susha's food product" />
+                </Nav.Link>
+              )}
 
               <Nav.Link href="">|</Nav.Link>
               {/* <Nav.Link href="/cart" className="icon-img">

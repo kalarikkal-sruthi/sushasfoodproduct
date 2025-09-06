@@ -1,4 +1,5 @@
 import Row from "react-bootstrap/Row";
+import { useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
@@ -7,7 +8,15 @@ import logonew from "../assets/header/logowhite.jpeg";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Youtube, Instagram, Facebook } from "react-bootstrap-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
 function Footer() {
+  const dispatch = useDispatch();
+  const { data: categories } = useSelector((state) => state.categoryProducts);
+
+  useEffect(() => {
+    dispatch(fetchCategoriesWithProducts());
+  }, [dispatch]);
   return (
     <div>
       <div className="padding-top"></div>
@@ -30,12 +39,12 @@ function Footer() {
                     </li> */}
                       <li>
                         <img src={mail} alt="" />
-                        <a
+                        <Link
                           href="mailto:sushasfoodproducts@gmail.com"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           sushasfoodproducts@gmail.com
-                        </a>
+                        </Link>
                       </li>
 
                       {/* <li>
@@ -45,12 +54,12 @@ function Footer() {
 
                       <li>
                         <img src={phone} alt="" />
-                        <a
+                        <Link
                           href="tel:+919074624607"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           +91 9074 624 607
-                        </a>
+                        </Link>
                       </li>
 
                       {/* <li>
@@ -59,14 +68,14 @@ function Footer() {
                     </li> */}
                       <li>
                         <img src={phone} alt="" />
-                        <a
-                          href="https://sushasfoodproducts.com"
+                        <Link
+                          to="https://sushasfoodproducts.com"
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           sushasfoodproducts.com
-                        </a>
+                        </Link>
                       </li>
                       {/* <h4>Follow Us</h4> */}
                     </ul>
@@ -74,11 +83,32 @@ function Footer() {
                   <Col xs={6} md={3} className="footer-div">
                     <h4>Usefull Links</h4>
                     <ul>
-                      <Link   style={{ textDecoration: "none" }} to=""><li>About Us</li></Link>
-                    <Link style={{ textDecoration: "none" }}> <li>Privacy Policy</li></Link> 
-                     <Link style={{ textDecoration: "none" }}><li>Terms and Conditions</li></Link> 
-                     <Link style={{ textDecoration: "none" }}><li>Refund/Cancellation Policy</li></Link> 
-                      <Link style={{ textDecoration: "none" }}><li>Shipping Policy</li></Link>
+                      {/* <Link   style={{ textDecoration: "none" }} to=""><li>About Us</li></Link> */}
+                      <Link
+                        to="/privacy-policy"
+                        style={{ textDecoration: "none" }}
+                      >
+                        {" "}
+                        <li>Privacy Policy</li>
+                      </Link>
+                      <Link
+                        to="/terms-and-conditions"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <li>Terms and Conditions</li>
+                      </Link>
+                      <Link
+                        to="/refund-cancellation-policy"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <li>Refund/Cancellation Policy</li>
+                      </Link>
+                      <Link
+                        to="/shipping-policy"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <li>Shipping Policy</li>
+                      </Link>
                     </ul>
                     <h4>Services</h4>
                     <ul>
@@ -102,50 +132,20 @@ function Footer() {
                     <h4>Product Categories</h4>
                     <ul>
                       <li>
-                        <Link
-                          to="/cart"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Essential Products
-                        </Link>
+                        {categories?.map((cat) => (
+                          <Link
+                            style={{ textDecoration: "none", color: "inherit" }}
+                            key={cat.id}
+                            as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
+                            to={`/productsbycategory/${cat.id}`}
+                            state={{
+                              categoryName: cat.name,
+                            }}
+                          >
+                            {cat.name}
+                          </Link>
+                        ))}
                       </li>
-                      <li>
-                        <Link
-                          to="/return-policy"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Rasoi Manthra
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/aboutus"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Savera
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/aboutus"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Interspices
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/aboutus"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Nyra
-                        </Link>
-                      </li>
-                      {/* <li>
-                        <Link to="/follow-us" style={{ textDecoration: "none", color: "inherit" }}>
-                          Follow Us
-                        </Link>
-                      </li> */}
                     </ul>
                     <h4 className="mt-4">Follow Us</h4>
                     <ul
@@ -196,7 +196,7 @@ function Footer() {
                       <h4> Retail Outlet:</h4>
                       <li>
                         <img src={location} alt="" />
-                        Prakash Gas Agency Building
+                        Susha's Foods
                         <br></br> Thazhepalam, Tirur <br></br>
                         Malappuram Dt., Pin: 676 101
                       </li>
