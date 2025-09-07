@@ -51,7 +51,7 @@ export default function Header() {
       <div>
         <Navbar fixed="top" expand="lg" className=" nav-bar ">
           <Navbar.Brand to="#home">
-            <Nav.Link to="/">
+            <Nav.Link as={Link} to="/">
               <img className="logo-img" src={logo} alt="susha's food product" />
             </Nav.Link>
           </Navbar.Brand>
@@ -61,17 +61,17 @@ export default function Header() {
               <Nav.Link className="icon-img">
                 <Searchbar />
               </Nav.Link>
-              <Nav.Link to="/">Home</Nav.Link>
+              <Nav.Link as={Link}  to="/">Home</Nav.Link>
               <Nav.Link to="">|</Nav.Link>
               <div className="dropdown">
                 <button className="dropdown-main">
-                  <Nav.Link to=""> Farm Activities▼</Nav.Link>
+                  <Nav.Link as={Link} to=""> Farm Activities▼</Nav.Link>
                 </button>
                 <div className="dropdown-sub-menu">
-                  <Nav.Link to="/mostharvestfromfarm">
+                  <Nav.Link  as={Link} to="/mostharvestfromfarm">
                     Most Harvest Plants
                   </Nav.Link>
-                  <Nav.Link to="/extraharvestfromfarm">
+                  <Nav.Link  as={Link} to="/extraharvestfromfarm">
                    Extra Harvest Plants
                   </Nav.Link>
                   {/* <Nav.Link to="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
@@ -94,7 +94,7 @@ export default function Header() {
               <Nav.Link to="">|</Nav.Link>
               <div className="dropdown">
                 <button className="dropdown-main">
-                  <Nav.Link to="">Product Categories ▼</Nav.Link>
+                  <Nav.Link as={Link} to="">Product Categories ▼</Nav.Link>
                 </button>
                 {/* <div className="dropdown-sub-menu">
                   <Nav.Link to="">Essential Products</Nav.Link>
@@ -124,28 +124,28 @@ export default function Header() {
                 </div>
               </div>
 
-              <Nav.Link to="">|</Nav.Link>
+              <Nav.Link as={Link} to="">|</Nav.Link>
               {token ? (
                 <div className="dropdown">
                   <button className="dropdown-main">
                     {/* sid changed on 25 aug 2025 → if logged in, username should go to /myaccount instead of /account */}
-                    <Nav.Link to="/myaccount" className="icon-img">
+                    <Nav.Link as={Link} to="/myaccount" className="icon-img">
                       {/* sid changed on 25 aug 2025 → fetch user info from auth slice */}
                       {user?.name || "Account"}{" "}
                       <img src={accountcircle} alt="susha's food product" />
                     </Nav.Link>
                   </button>
                   <div className="dropdown-sub-menu">
-                    <Nav.Link to="/myaccount">My Profile</Nav.Link>
+                    <Nav.Link  as={Link} to="/myaccount">My Profile</Nav.Link>
                     {/* <Nav.Link to="/myaccount">Orders</Nav.Link> */}
-                    <Nav.Link to="" onClick={handleLogout}>
+                    <Nav.Link  as={Link} to="" onClick={handleLogout}>
                       Logout
                     </Nav.Link>
                   </div>
                 </div>
               ) : (
                 // sid changed on 25 aug 2025 → if not logged in, go to /account for login
-                <Nav.Link to="/account" className="icon-img">
+                <Nav.Link as={Link} to="/account" className="icon-img">
                   Login <img src={accountcircle} alt="susha's food product" />
                 </Nav.Link>
               )}
@@ -160,7 +160,7 @@ export default function Header() {
               <img src={shoppingcart} alt="susha's food product" />
             </Nav.Link> */}
 
-              <Nav.Link
+              <Nav.Link as={Link}
                 to="/cart"
                 className="position-relative d-flex align-items-center"
               >
@@ -178,7 +178,7 @@ export default function Header() {
               </Nav.Link>
 
               <Nav.Link to="">|</Nav.Link>
-              <Nav.Link to="/productsbycategory">Shop Now</Nav.Link>
+              <Nav.Link as={Link} to="/productsbycategory">Shop Now</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
