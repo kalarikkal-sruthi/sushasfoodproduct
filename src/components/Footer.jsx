@@ -5,6 +5,7 @@ import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
 import location from "../assets/header/location_on.png";
 import logonew from "../assets/header/logowhite.jpeg";
+import www from "../assets/header/www.png"
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Youtube, Instagram, Facebook } from "react-bootstrap-icons";
@@ -40,7 +41,7 @@ function Footer() {
                       <li>
                         <img src={mail} alt="" />
                         <Link
-                          href="mailto:sushasfoodproducts@gmail.com"
+                          to="mailto:sushasfoodproducts@gmail.com"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           sushasfoodproducts@gmail.com
@@ -55,7 +56,7 @@ function Footer() {
                       <li>
                         <img src={phone} alt="" />
                         <Link
-                          href="tel:+919074624607"
+                          to="tel:+919074624607"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           +91 9074 624 607
@@ -67,7 +68,7 @@ function Footer() {
                       sushasfoodproducts.com
                     </li> */}
                       <li>
-                        <img src={phone} alt="" />
+                        <img src={www} alt="" />
                         <Link
                           to="https://sushasfoodproducts.com"
                           target="_blank"
@@ -136,7 +137,7 @@ function Footer() {
                           <Link
                             style={{ textDecoration: "none", color: "inherit" }}
                             key={cat.id}
-                            as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
+                            as={Link} // 👈 use react-router Link instead of to (avoids full page reload)
                             to={`/productsbycategory/${cat.id}`}
                             state={{
                               categoryName: cat.name,
@@ -159,7 +160,7 @@ function Footer() {
                     >
                       <li>
                         <a
-                          href="https://www.youtube.com/@Prakashfarm-r8"
+                          to="https://www.youtube.com/@Prakashfarm-r8"
                           target="_blank"
                         >
                           <Youtube size={20} color="red" />
@@ -167,7 +168,7 @@ function Footer() {
                       </li>
                       <li>
                         <a
-                          href="https://www.instagram.com/sushasfoodproducts_official/"
+                          to="https://www.instagram.com/sushasfoodproducts_official/"
                           target="_blank"
                         >
                           <Instagram size={20} color="#C13584" />
@@ -175,7 +176,7 @@ function Footer() {
                       </li>
                       <li>
                         <a
-                          href="https://www.facebook.com/sushasfoodproducts/"
+                          to="https://www.facebook.com/sushasfoodproducts/"
                           target="_blank"
                         >
                           <Facebook size={20} color="#4267B2" />

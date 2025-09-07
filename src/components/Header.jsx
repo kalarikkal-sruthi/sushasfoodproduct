@@ -50,8 +50,8 @@ export default function Header() {
     <div>
       <div>
         <Navbar fixed="top" expand="lg" className=" nav-bar ">
-          <Navbar.Brand href="#home">
-            <Nav.Link href="/">
+          <Navbar.Brand to="#home">
+            <Nav.Link to="/">
               <img className="logo-img" src={logo} alt="susha's food product" />
             </Nav.Link>
           </Navbar.Brand>
@@ -61,48 +61,48 @@ export default function Header() {
               <Nav.Link className="icon-img">
                 <Searchbar />
               </Nav.Link>
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="">|</Nav.Link>
+              <Nav.Link to="/">Home</Nav.Link>
+              <Nav.Link to="">|</Nav.Link>
               <div className="dropdown">
                 <button className="dropdown-main">
-                  <Nav.Link href=""> Farm Activities▼</Nav.Link>
+                  <Nav.Link to=""> Farm Activities▼</Nav.Link>
                 </button>
                 <div className="dropdown-sub-menu">
-                  <Nav.Link href="/mostharvestfromfarm">
+                  <Nav.Link to="/mostharvestfromfarm">
                     Most Harvest Plants
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm">
+                  <Nav.Link to="/extraharvestfromfarm">
                    Extra Harvest Plants
                   </Nav.Link>
-                  {/* <Nav.Link href="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm/Herbs">Herbs</Nav.Link>{" "}
-                  <Nav.Link href="/extraharvestfromfarm/Vegetables">Vegetables</Nav.Link>{" "}
-                  <Nav.Link href="/extraharvestfromfarm/Animal care and maintenance">
+                  {/* <Nav.Link to="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
+                  <Nav.Link to="/extraharvestfromfarm/Herbs">Herbs</Nav.Link>{" "}
+                  <Nav.Link to="/extraharvestfromfarm/Vegetables">Vegetables</Nav.Link>{" "}
+                  <Nav.Link to="/extraharvestfromfarm/Animal care and maintenance">
                     Animal Care and Maintenance
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm/Ornamental Plants">
+                  <Nav.Link to="/extraharvestfromfarm/Ornamental Plants">
                     Ornamental Plants
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm/Garden Plants">
+                  <Nav.Link to="/extraharvestfromfarm/Garden Plants">
                     Garden Plants
                   </Nav.Link>
-                  <Nav.Link href="/extraharvestfromfarm/Aquatic Plants">
+                  <Nav.Link to="/extraharvestfromfarm/Aquatic Plants">
                     Aquatic Plants
                   </Nav.Link> */}
                 </div>
               </div>
-              <Nav.Link href="">|</Nav.Link>
+              <Nav.Link to="">|</Nav.Link>
               <div className="dropdown">
                 <button className="dropdown-main">
-                  <Nav.Link href="">Product Categories ▼</Nav.Link>
+                  <Nav.Link to="">Product Categories ▼</Nav.Link>
                 </button>
                 {/* <div className="dropdown-sub-menu">
-                  <Nav.Link href="">Essential Products</Nav.Link>
-                  <Nav.Link href="">Rasoi Manthras</Nav.Link>
-                   <Nav.Link href="">Savera</Nav.Link>
-                  <Nav.Link href="">Nyra</Nav.Link>
-                  <Nav.Link href="">InterSpices</Nav.Link>
-                   <Nav.Link href="">Other</Nav.Link>
+                  <Nav.Link to="">Essential Products</Nav.Link>
+                  <Nav.Link to="">Rasoi Manthras</Nav.Link>
+                   <Nav.Link to="">Savera</Nav.Link>
+                  <Nav.Link to="">Nyra</Nav.Link>
+                  <Nav.Link to="">InterSpices</Nav.Link>
+                   <Nav.Link to="">Other</Nav.Link>
                 </div> */}
 
                 <div className="dropdown-sub-menu">
@@ -112,7 +112,7 @@ export default function Header() {
                   {categories?.map((cat) => (
                     <Nav.Link
                       key={cat.id}
-                      as={Link} // 👈 use react-router Link instead of href (avoids full page reload)
+                      as={Link} // 👈 use react-router Link instead of to (avoids full page reload)
                       to={`/productsbycategory/${cat.id}`}
                       state={{
                         categoryName: cat.name,
@@ -124,44 +124,44 @@ export default function Header() {
                 </div>
               </div>
 
-              <Nav.Link href="">|</Nav.Link>
+              <Nav.Link to="">|</Nav.Link>
               {token ? (
                 <div className="dropdown">
                   <button className="dropdown-main">
                     {/* sid changed on 25 aug 2025 → if logged in, username should go to /myaccount instead of /account */}
-                    <Nav.Link href="/myaccount" className="icon-img">
+                    <Nav.Link to="/myaccount" className="icon-img">
                       {/* sid changed on 25 aug 2025 → fetch user info from auth slice */}
                       {user?.name || "Account"}{" "}
                       <img src={accountcircle} alt="susha's food product" />
                     </Nav.Link>
                   </button>
                   <div className="dropdown-sub-menu">
-                    <Nav.Link href="/myaccount">My Profile</Nav.Link>
-                    {/* <Nav.Link href="/myaccount">Orders</Nav.Link> */}
-                    <Nav.Link href="" onClick={handleLogout}>
+                    <Nav.Link to="/myaccount">My Profile</Nav.Link>
+                    {/* <Nav.Link to="/myaccount">Orders</Nav.Link> */}
+                    <Nav.Link to="" onClick={handleLogout}>
                       Logout
                     </Nav.Link>
                   </div>
                 </div>
               ) : (
                 // sid changed on 25 aug 2025 → if not logged in, go to /account for login
-                <Nav.Link href="/account" className="icon-img">
+                <Nav.Link to="/account" className="icon-img">
                   Login <img src={accountcircle} alt="susha's food product" />
                 </Nav.Link>
               )}
 
-              <Nav.Link href="">|</Nav.Link>
-              {/* <Nav.Link href="/cart" className="icon-img">
+              <Nav.Link to="">|</Nav.Link>
+              {/* <Nav.Link to="/cart" className="icon-img">
                 Cart(Count)        
                 <img src={shoppingcart} alt="susha's food product" />
               </Nav.Link> */}
-              {/* <Nav.Link href="/cart" className="icon-img">
+              {/* <Nav.Link to="/cart" className="icon-img">
               Cart{cartCount > 0 && `(${cartCount})`}
               <img src={shoppingcart} alt="susha's food product" />
             </Nav.Link> */}
 
               <Nav.Link
-                href="/cart"
+                to="/cart"
                 className="position-relative d-flex align-items-center"
               >
                 <i className="bi bi-cart fs-4"></i> {/* Bootstrap cart icon */}
@@ -177,8 +177,8 @@ export default function Header() {
                 )}
               </Nav.Link>
 
-              <Nav.Link href="">|</Nav.Link>
-              <Nav.Link href="/productsbycategory">Shop Now</Nav.Link>
+              <Nav.Link to="">|</Nav.Link>
+              <Nav.Link to="/productsbycategory">Shop Now</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
