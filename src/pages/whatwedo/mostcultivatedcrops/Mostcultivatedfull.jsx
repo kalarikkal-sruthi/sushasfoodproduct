@@ -133,14 +133,14 @@ export default function Mostcultivatedfull() {
                                   {item.name}
                                 </h3>
                                 <p className=" text-muted">
-                                   {item.description?.slice(0,150)}...
+                                   {item.description?.slice(0,200)}...
                                 </p>
-                            <h6 className="key-faeture">Key Features</h6>
+                            {/* <h6 className="key-faeture">Key Features</h6>
                                 <ul
                                   dangerouslySetInnerHTML={{
                                     __html: item.description5,
                                   }}
-                                ></ul>
+                                ></ul> */}
                                 <motion.div
                                   whileHover={{
                                     x: 5,

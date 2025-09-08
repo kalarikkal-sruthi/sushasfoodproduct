@@ -56,6 +56,7 @@ export default function Extraharvestdetail() {
               items={[
                 { label: "Home", path: "/" },
                 { label: "Extra Harvest", path: "/extraharvestfromfarm" },
+                { label: single.category, path: `/extraharvestfromfarm/${single.category}` },
                 {
                   label: single.name,
                   path: `/extraharvestfromfarm/${single.category}`,
@@ -86,13 +87,13 @@ export default function Extraharvestdetail() {
               {single.description4 && <p>{single.description4}</p>}
             </Col>
           </Row>
-          <Row className="align-items-center mt-5">
+          <Row className="align-items-center ">
             <Col md={4} className="mb-3">
               {single.images?.[0] && (
                 <motion.img
                   src={`${whatinfarmsGalleryURL}${single.images[0].image}`}
                   alt={single.name}
-                  className="img-fluid rounded shadow vh-75"
+                  className="img-fluid rounded shadow vh-75 mt-5"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}

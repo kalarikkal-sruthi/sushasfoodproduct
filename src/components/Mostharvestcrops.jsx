@@ -60,7 +60,7 @@ export default function MostHarvestcrops() {
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                  Most Harvest Crops From Our  Farm
+                Best Yields of the Season
                 </motion.h2>
                 <p className="text-muted">
                   Explore the main crops we grow using sustainable farming
@@ -120,16 +120,16 @@ export default function MostHarvestcrops() {
                               </Card.Title>
                                  </Link>
                               <Card.Text className=" text-muted">
-                                {item.description?.slice(0,150)}...
+                                {item.description?.slice(0,200)}...
                               </Card.Text>
                               
-                              <h6 className="key-faeture">Key Features</h6>
+                              {/* <h6 className="key-faeture">Key Features</h6>
 
                               <div className="keyfeature-description"
                                 dangerouslySetInnerHTML={{
                                   __html: item.description5,
                                 }}
-                              ></div>
+                              ></div> */}
                              
                               <Link to={`/mostharvestfromfarm/${item.id}`}>
                                 <motion.div

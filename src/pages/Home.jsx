@@ -32,7 +32,7 @@ export default function Home() {
   // const testimonials = data?.testimonial || [];
   const certificates = data?.certificates || [];
   // const videoInstagram = data?.videoInstagram || [];
-  // const videoYoutube = data?.videoYoutube || [];
+  const videoYoutube = data?.videoYoutube || [];
 
   // const aboutusImage = data?.aboutusImage || [];
   // const categories = data?.categories || [];
@@ -69,11 +69,11 @@ export default function Home() {
 
 
 
-
+<Youtubefeed data={videoYoutube} />
        
 
       {/* <Instagramfeed data={videoInstagram} /> */}
-      {/* <Youtubefeed data={videoYoutube} />
+      {/* 
       <Testimonial data={testimonials} /> */}
     </div>
   );

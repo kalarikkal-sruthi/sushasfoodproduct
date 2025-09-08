@@ -32,6 +32,7 @@ const ProductByCategory = () => {
     }
     fetchData();
   }, [id]);
+console.log(products);
 
   const cardVariants = {
     offscreen: { y: 50, opacity: 0 },
@@ -60,7 +61,7 @@ const ProductByCategory = () => {
 
   return (
     <main>
-       <div className="padding-top"></div>
+    
       <div className="padding-top"></div>
       <div className="padding-top"></div>
          <div  className="padding-y mt-5">
@@ -131,8 +132,9 @@ const ProductByCategory = () => {
                     </Card.Title>
 
                     <Card.Text className=" text-muted">
-                      {product.description?.slice(0, 250)}...
+                      {product.description?.slice(0, 200)}...
                     </Card.Text>
+                    <span>{}</span>
 
                     {product.baseprices?.[0]?.original_price && (
                       <p className="product-price">

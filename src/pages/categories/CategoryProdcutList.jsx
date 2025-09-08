@@ -67,7 +67,7 @@ const CategoryProductList = () => {
         </h1>
 
        {[...categories]
-  .sort((a, b) => b.id - a.id)
+  
   .map((category, categoryIndex) => (
     <section
       key={category.id}

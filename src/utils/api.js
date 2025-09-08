@@ -10,7 +10,7 @@ export const imgURLCertificate = "https://admin.sushasfoodproducts.com/uploads/c
 export const imgURLVideo = "https://admin.sushasfoodproducts.com/uploads/video/";
 export const productURL = "https://admin.sushasfoodproducts.com/uploads/products/";
 export const aboutURL = "https://admin.sushasfoodproducts.com/about-us-images/";
-export const categoryUrl = "https://admin.sushasfoodproducts.com/Categories/";
+export const categoryUrl = "https://admin.sushasfoodproducts.com/uploads/categories/";
 
 export const imgURLMostHarvest ="https://admin.sushasfoodproducts.com/uploads/what_in_farm/"
 

@@ -108,7 +108,11 @@ const ProductDetailGallery = ({ product }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <header className="mt-5" aria-labelledby="category-heading">
+    
+
+      {videoMapping[product?.product_name] && (
+<>
+          <header className="mt-5" aria-labelledby="category-heading">
         <h3
           id="category-heading"
           className="display-12 fw-bold"
@@ -117,8 +121,6 @@ const ProductDetailGallery = ({ product }) => {
           Preparation Of {product.product_name}
         </h3>
       </header>
-
-      {videoMapping[product?.product_name] && (
         <video
           className="mt-3"
           controls
@@ -128,7 +130,7 @@ const ProductDetailGallery = ({ product }) => {
         >
           <source src={videoMapping[product.product_name]} type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video></>
       )}
       {/* <video
         className="mt-3"

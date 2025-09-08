@@ -69,26 +69,26 @@ export default function Header() {
                 </button>
                 <div className="dropdown-sub-menu">
                   <Nav.Link  as={Link} to="/mostharvestfromfarm">
-                    Most Harvest Plants
+                   Best Yields Plants
                   </Nav.Link>
-                  <Nav.Link  as={Link} to="/extraharvestfromfarm">
+                  {/* <Nav.Link  as={Link} to="/extraharvestfromfarm">
                    Extra Harvest Plants
-                  </Nav.Link>
-                  {/* <Nav.Link to="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
-                  <Nav.Link to="/extraharvestfromfarm/Herbs">Herbs</Nav.Link>{" "}
-                  <Nav.Link to="/extraharvestfromfarm/Vegetables">Vegetables</Nav.Link>{" "}
-                  <Nav.Link to="/extraharvestfromfarm/Animal care and maintenance">
+                  </Nav.Link> */}
+                  <Nav.Link as={Link} to="/extraharvestfromfarm/Fruits">Fruits</Nav.Link>
+                  <Nav.Link as={Link} to="/extraharvestfromfarm/Herbs">Herbs</Nav.Link>{" "}
+                  <Nav.Link  as={Link} to="/extraharvestfromfarm/Vegetables">Vegetables</Nav.Link>{" "}
+                  <Nav.Link as={Link} to="/extraharvestfromfarm/Animal care and maintenance">
                     Animal Care and Maintenance
                   </Nav.Link>
-                  <Nav.Link to="/extraharvestfromfarm/Ornamental Plants">
+                  <Nav.Link as={Link} to="/extraharvestfromfarm/Ornamental Plants">
                     Ornamental Plants
                   </Nav.Link>
-                  <Nav.Link to="/extraharvestfromfarm/Garden Plants">
+                  <Nav.Link as={Link} to="/extraharvestfromfarm/Garden Plants">
                     Garden Plants
                   </Nav.Link>
-                  <Nav.Link to="/extraharvestfromfarm/Aquatic Plants">
+                  <Nav.Link  as={Link} to="/extraharvestfromfarm/Aquatic Plants">
                     Aquatic Plants
-                  </Nav.Link> */}
+                  </Nav.Link>
                 </div>
               </div>
               <Nav.Link to="">|</Nav.Link>
@@ -160,22 +160,25 @@ export default function Header() {
               <img src={shoppingcart} alt="susha's food product" />
             </Nav.Link> */}
 
-              <Nav.Link as={Link}
-                to="/cart"
-                className="position-relative d-flex align-items-center"
-              >
-                <i className="bi bi-cart fs-4"></i> {/* Bootstrap cart icon */}
-                {/* Badge for cart count */}
-                {cartCount > 0 && (
-                  <Badge
-                    bg="danger"
-                    pill
-                    className="position-absolute top-2 start-100 translate-middle"
-                  >
-                    {cartCount}
-                  </Badge>
-                )}
-              </Nav.Link>
+            <Nav.Link
+  as={Link}
+  to="/cart"
+  className="position-relative d-flex align-items-center"
+>
+  <i className="bi bi-cart fs-4"></i> {/* Bootstrap cart icon */}
+
+  {/* Badge for cart count, only if user is logged in */}
+  {token && cartCount > 0 && (
+    <Badge
+      bg="danger"
+      pill
+      className="position-absolute top-2 start-100 translate-middle"
+    >
+      {cartCount}
+    </Badge>
+  )}
+</Nav.Link>
+
 
               <Nav.Link to="">|</Nav.Link>
               <Nav.Link as={Link} to="/productsbycategory">Shop Now</Nav.Link>

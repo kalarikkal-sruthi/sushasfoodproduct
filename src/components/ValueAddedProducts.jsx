@@ -75,10 +75,10 @@ const itemVariants = {
           </header>
 
           {/* Product Categories */}
-          <Row className="g-5 mt-4">
+          <Row className="g-5 mt-4 justify-content-center">
             {categories
               ?.slice()
-              .sort((a, b) => b.id - a.id) 
+              
               .map((category, index) => (
                 <Col key={category.id || index} md={6}>
                   <article

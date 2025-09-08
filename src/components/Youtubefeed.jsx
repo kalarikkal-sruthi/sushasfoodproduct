@@ -68,7 +68,7 @@ const Youtubefeed = ({ data }) => {
           <Swiper
             pagination={{ type: "fraction" }}
             spaceBetween={20}
-            slidesPerView={6}
+            slidesPerView={5}
             navigation={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={true}
