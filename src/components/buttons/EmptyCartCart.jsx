@@ -52,7 +52,7 @@ const EmptyCartCart = () => {
               <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                 <>
                   <div>
-                    <h1 className="account-head text-start">As a Guest</h1>
+                    {/* <h1 className="account-head text-start">As a Guest</h1> */}
                     <Link to="/login">
                       <motion.button
                         whileHover={{ x: 5, transition: { duration: 0.2 } }}

@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import  { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  clearCart,
+
   decrementQuantity,
   incrementQuantity,
   removeFromCart,
@@ -9,11 +9,11 @@ import {
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Button, Container } from "react-bootstrap";
+import {Container } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
-import { logout } from "../../store/authSlice";
+
 import EmptyCart from "../../components/buttons/EmptyCart";
 import EmptyCartCart from "../../components/buttons/EmptyCartCart";
 
@@ -21,6 +21,7 @@ function CartPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+console.log(cartItems);
 
   const token = useSelector((state) => state.auth.token);
   console.log("token:", token);
@@ -34,15 +35,15 @@ function CartPage() {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    dispatch(clearCart());
-  };
+  // const handleLogout = () => {
+  //   dispatch(logout());
+  //   dispatch(clearCart());
+  // };
 
   // Compute total only once using useMemo
   const grandTotal = useMemo(
     () =>
-      cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+      cartItems.reduce((total, item) => total + item.selectPrice * item.quantity, 0),
     [cartItems]
   );
 
@@ -82,11 +83,9 @@ function CartPage() {
             </header>
 
             <section aria-live="polite">
-              {!token ? (
+              {cartItems.length === 0 ? (
                 <EmptyCartCart />
-              ) : cartItems.length === 0 ? (
-                <p className="text-muted">Your cart is empty.</p>
-              ) : (
+            ) : (
                 <>
                   <Row>
                     <Col md={8}>
@@ -169,11 +168,11 @@ function CartPage() {
                             </div>
 
                             {/* Price */}
-                            <div style={{ width: "15%" }}>₹ {item.price}</div>
+                            <div style={{ width: "15%" }}>₹ {item.selectPrice}</div>
 
                             {/* Total */}
                             <div style={{ width: "15%" }}>
-                              ₹ {item.price * item.quantity}
+                              ₹ {item.selectPrice * item.quantity}
                             </div>
 
                             {/* Remove button */}
@@ -206,17 +205,17 @@ function CartPage() {
                     </Col>
                     <Col md={4}>
                       <div className=" p-4 border rounded shadow-sm bg-light">
-                        <h3 className="mb-4  fw-bold">Order Summary</h3>
+                        <h3 className="mb-4  fw-bold">Price Details</h3>
 
                         <div className="d-flex justify-content-between mb-2">
                           <span className="fw-semibold">Subtotal</span>
                           <span>₹ {grandTotal}</span>
                         </div>
 
-                        <div className="d-flex justify-content-between mb-2">
-                          <span className="fw-semibold">Shipping</span>
-                          <span>₹ 0</span>
-                        </div>
+                        {/* <div className="d-flex justify-content-between mb-2">
+                          <span className="fw-semibold">Shipping Charge</span>
+                          <span>₹ {}</span>
+                        </div> */}
 
                         <hr />
 

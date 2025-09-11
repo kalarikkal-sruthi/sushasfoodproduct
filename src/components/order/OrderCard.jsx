@@ -1,48 +1,83 @@
-// src/components/order/OrderCard.jsx
-import React from "react";
 import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
+import { getOrderItems } from "../../store/orderSlice";
 
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { cancelOrder } from "../../store/orderSlice";
+const OrderCard = ({ order = {} }) => {
+  
 
-const OrderCard = ({ order = {}, products = [] }) => {
+// console.log(order);
+
+  
+
+ const dispatch = useDispatch();
+const orderDetails = order.orderdetails;
+const orderId= orderDetails.map(detail => detail.order_id);
+
+// console.log(orderId);
+
+  const orderItems = useSelector(
+    (state) => state.orders?.orderItems?.[orderId] || []
+  );
+
+  const token = useSelector((state) => state.auth.token);
+
+  const handleCancel = (orderId) => {
+    dispatch(cancelOrder({ orderId, token }));
+  };
+
+  useEffect(() => {
+   
+    
+    if (orderId) {
+      // console.log("Dispatching getOrderItems for order:", orderId);
+      dispatch(getOrderItems({orderId, token}));
+    }
+  }, [dispatch, orderId,token]);
+
+  // console.log("Order Items for order", orderId, ":", orderItems);
+
   return (
     <article className="order-card mb-4">
       <Card>
-        {/* Header */}
+       
         <Card.Header as="header" className="order-header">
           <Row className="align-items-center">
             <Col>
               <small>ORDER PLACED</small>
-              <div>{order.date || "20 October 2024"}</div>
+              <div>{order.date}</div>
             </Col>
             <Col>
               <small>TOTAL</small>
-              <div>₹{order.total || "519.00"}</div>
+              <div>₹{order.total_amount}</div>
             </Col>
             <Col>
               <small>SHIP TO</small>
+              <div>
               <Dropdown>
-                <Dropdown.Toggle
-                  variant="link"
-                  className="ship-to-toggle"
-                >
-                  {order.shipTo || "Customer Name"}
+                <Dropdown.Toggle variant="link" className="ship-to-toggle p-0" style={{textDecoration:'none',color:'black'}}>
+                  {order.billing_first_name}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>Address 1</Dropdown.Item>
-                  <Dropdown.Item>Address 2</Dropdown.Item>
+                  <Dropdown.Item>{order.address}</Dropdown.Item>
+                  <Dropdown.Item>{order.billing_city}</Dropdown.Item>
+                  <Dropdown.Item>{order.billing_state}</Dropdown.Item>
+                  <Dropdown.Item>{order.billing_post_code}</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+              </div>
             </Col>
             <Col className="text-end">
               <small>ORDER #</small>
-              <div>{order.id || "4545"}</div>
+              <div>{order.order_no || "4545"}</div>
               <div className="mt-1">
-                <Button variant="outline-secondary" size="sm" className="me-2">
+                {/* <Button variant="outline-secondary" size="sm" className="me-2">
                   View Order Details
                 </Button>
                 <Button variant="outline-secondary" size="sm">
                   Invoice
-                </Button>
+                </Button> */}
               </div>
             </Col>
           </Row>
@@ -52,37 +87,49 @@ const OrderCard = ({ order = {}, products = [] }) => {
         <Card.Body as="section">
           <Row className="mb-3">
             <Col>
-              <strong>Delivered On Date …/…/….</strong>
+              <strong>Delivered On Date - {order.date}</strong>
             </Col>
           </Row>
 
           <Row>
-            {/* Product List */}
-            <Col md={8}>
-              {products.map((prod) => (
-                <Row key={prod.id} className="align-items-center mb-3">
-                  <Col xs={2}>
-                    <img
-                      src={prod.image || "/placeholder.png"}
-                      alt={`${prod.name} - ${prod.variant || ""}`}
-                      loading="lazy"
-                      className="product-image"
-                    />
-                  </Col>
-                  <Col>
-                    <div className="product-name">{prod.name}</div>
-                    <small className="text-muted">
-                      {prod.variant || ""} - {prod.quantity} Piece
-                    </small>
-                    <div>₹{prod.price}</div>
-                    {prod.oldPrice && prod.oldPrice !== prod.price && (
-                      <small className="text-muted text-decoration-line-through">
-                        ₹{prod.oldPrice}
+          
+            <Col md={12}>
+              {orderItems.length > 0 ? (
+                orderItems.map((prod) => (
+                  <Row
+                    key={prod.id || prod.product_id}
+                    className="align-items-center mb-3"
+                  >
+                    <Col xs={4}>
+                      <img
+                        src={prod.image || "/placeholder.png"}
+                        alt={`${prod.name || prod.product_name} - ${
+                          prod.variant || ""
+                        }`}
+                        loading="lazy"
+                        className="product-image"
+                      />
+                    </Col>
+                    <Col xs={8}>
+                      <div className="product-name">
+                        {prod.name || prod.product_name}
+                      </div>
+                      <small className="text-muted">
+                        {prod.variant || prod.size || ""} - {prod.quantity}{" "}
+                        Piece
                       </small>
-                    )}
-                  </Col>
-                </Row>
-              ))}
+                      <div>₹{prod.price || prod.original_price}</div>
+                      {prod.oldPrice && prod.oldPrice !== prod.price && (
+                        <small className="text-muted text-decoration-line-through">
+                          ₹{prod.price}
+                        </small>
+                      )}
+                    </Col>
+                  </Row>
+                ))
+              ) : (
+                <p>No items found for this order.</p>
+              )}
             </Col>
 
             {/* Action Buttons */}
@@ -90,9 +137,7 @@ const OrderCard = ({ order = {}, products = [] }) => {
               md={4}
               className="d-flex flex-column align-items-end justify-content-start gap-2"
             >
-              <Button className="btn-light-yellow">Return Item</Button>
-              <Button className="btn-light-yellow">Write Product Review</Button>
-              <Button className="btn-green">Reorder</Button>
+              {/* Future buttons like return/reorder */}
             </Col>
           </Row>
 
@@ -101,13 +146,8 @@ const OrderCard = ({ order = {}, products = [] }) => {
 
           {/* Cancel Row */}
           <Row className="align-items-center">
-            <Col className="text-start">
-              <small className="text-danger">
-                Return eligible only before shipping
-              </small>
-            </Col>
             <Col className="text-end">
-              <Button className="btn-orange">Cancel Order</Button>
+              <Button onClick={() => handleCancel(orderId)} className="btn-orange">Cancel Order</Button>
             </Col>
           </Row>
         </Card.Body>

@@ -6,6 +6,7 @@ import "./index.css";
 import "./animation.css";
 import "./style.css";
 import "./mystyle.css";
+import "./responsive.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 

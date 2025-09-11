@@ -9,27 +9,58 @@ const ProductDetailSummary = ({ product }) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || null);
+  // initialize selectedSize with size + priceObj if available
+  const [selectedSize, setSelectedSize] = useState(() => {
+    if (product.sizes?.length > 0 && product.prices?.length > 0) {
+      return {
+        ...product.sizes[0],
+        priceId: product.sizes[0].id,
+        price: product.prices[0]?.original_price || 0,
+        priceObj: product.prices[0],
+      };
+    }
+    return null;
+  });
 
-  const handleAddToCart = useCallback(() => {
-    if (!selectedSize) return;
+ const handleAddToCart = useCallback(() => {
+  if (!product) return;
 
-    dispatch(
-      addToCart({
-        id: product.id,
-        product_name: product.product_name,
-        price: product.baseprices?.[0]?.original_price || 0,
-        image: product.image,
-        size: selectedSize.size,
-        sizeId: selectedSize.id,
-        quantity: 1,
-      })
-    );
-    setShow(true);
-    setTimeout(() => {
-      setShow(false);
-    }, 2000);
-  }, [dispatch, product, selectedSize, setShow]);
+  let priceObj = null;
+  let chosenSize = null;
+
+  if (product.sizes?.length === 1) {
+    // only one size → baseprices
+    priceObj = product.baseprices?.[0] || { original_price: 0, offer_price: 0 };
+    chosenSize = product.sizes[0]; // the only available size
+  } else if (product.sizes?.length > 1) {
+    // must select a size
+    if (!selectedSize) return; 
+    priceObj = selectedSize.priceObj || { original_price: selectedSize.price, offer_price: 0 };
+    chosenSize = selectedSize; // use the selected size
+  }
+
+  if (!priceObj || !chosenSize) return; // safety check
+
+  dispatch(
+    addToCart({
+      id: product.id,
+      product_name: product.product_name,
+      originalPrice: priceObj.original_price,
+      offerPrice: priceObj.offer_price,
+      selectPrice:
+        priceObj.offer_price && priceObj.offer_price > 0
+          ? priceObj.offer_price
+          : priceObj.original_price,
+      image: product.image,
+      size: chosenSize.size, 
+      sizeId: chosenSize.id, 
+      quantity: 1,
+    })
+  );
+
+  setShow(true);
+  setTimeout(() => setShow(false), 2000);
+}, [dispatch, product, selectedSize]);
 
   return (
     <section aria-label="Product Details" itemScope>
@@ -53,6 +84,8 @@ const ProductDetailSummary = ({ product }) => {
           {product.description}
         </p>
       )}
+
+      {/* Base Price (for single-size products) */}
       {product.baseprices?.[0] && (
         <div
           className="my-4"
@@ -70,50 +103,71 @@ const ProductDetailSummary = ({ product }) => {
           </span>
         </div>
       )}
+
+      {/* Sizes */}
       {product.sizes?.length > 0 && (
         <div className="my-4" aria-label="Available Sizes">
           <strong>Available Sizes:</strong>
           <div className="d-flex gap-3 mt-3 flex-wrap">
-            {product.sizes.map((size) => (
-              <div
-                key={size.id}
-                className="text-center"
-                style={{ width: "100px" }}
-              >
-                <img
-                  src={`${productURL}${size.image}`}
-                  alt={`Image for size ${size.size}`}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                    borderRadius: "6px",
-                    border:
-                      selectedSize?.id === size.id
-                        ? "2px solid green"
-                        : "1px solid #ddd",
-                  }}
-                  loading="lazy"
-                  onClick={() => setSelectedSize(size)}
-                />
-                <button
-                  className={`btn btn-sm mt-2 w-100 ${
-                    selectedSize?.id === size.id
-                      ? "btn-success"
-                      : "btn-outline-success"
-                  }`}
-                  type="button"
-                  aria-label={`Size ${size.size}`}
-                  onClick={() => setSelectedSize(size)}
+            {product.sizes.map((size, index) => {
+              const priceObj = product.prices[index]; // full price object
+
+              return (
+                <div
+                  key={size.id}
+                  className="text-center"
+                  style={{ width: "100px" }}
                 >
-                  {size.size}
-                </button>
-              </div>
-            ))}
+                  <img
+                    src={`${productURL}${size.image}`}
+                    alt={`Image for size ${size.size}`}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "contain",
+                      borderRadius: "6px",
+                      border:
+                        selectedSize?.id === size.id
+                          ? "2px solid green"
+                          : "1px solid #ddd",
+                    }}
+                    loading="lazy"
+                    onClick={() =>
+                      setSelectedSize({
+                        ...size,
+                        priceId: size.id,
+                        price: priceObj.original_price,
+                        priceObj,
+                      })
+                    }
+                  />
+                  <button
+                    className={`btn btn-sm mt-2 w-100 ${
+                      selectedSize?.id === size.id
+                        ? "btn-success"
+                        : "btn-outline-success"
+                    }`}
+                    type="button"
+                    aria-label={`Size ${size.size}`}
+                    onClick={() =>
+                      setSelectedSize({
+                        ...size,
+                        priceId: size.id,
+                        price: priceObj.original_price,
+                        priceObj,
+                      })
+                    }
+                  >
+                    {size.size}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
 
+      {/* Toast Notification */}
       <ToastContainer
         className="p-3 position-fixed top-50 start-50 translate-middle"
         style={{ zIndex: 9999 }}
@@ -131,11 +185,9 @@ const ProductDetailSummary = ({ product }) => {
         </Toast>
       </ToastContainer>
 
+      {/* Add to Cart Button */}
       <motion.span
-        whileHover={{
-          x: 5,
-          transition: { duration: 0.2 },
-        }}
+        whileHover={{ x: 5, transition: { duration: 0.2 } }}
         whileTap={{ scale: 0.98 }}
         className="btn btn-outline"
         style={{
@@ -146,21 +198,10 @@ const ProductDetailSummary = ({ product }) => {
           color: "#fff",
         }}
         aria-label="Add to cart"
-        onClick={() => {
-          handleAddToCart();
-        }}
+        onClick={handleAddToCart}
       >
         Add To Cart →
       </motion.span>
-      <br></br>
-
-      {/* <h5 className="mt-3">Features Of This Product</h5>
-      <ul>
-        <li>Chemical-Free Cultivation</li>
-        <li>Nutrient-Dense & Fresh</li>
-        <li>Soil-Enriching Practices</li>
-        <li>Eco-Friendly Pest Management</li>
-      </ul> */}
     </section>
   );
 };

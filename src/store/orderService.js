@@ -18,29 +18,41 @@ export const getOrdersApi = async (userId, token) => {
   return response.data;
 };
 
-// Get items for a specific order
 export const getOrderItemsApi = async (orderId, token) => {
-  const response = await api.get(`/order/${orderId}/items`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
+  try {
+    const response = await api.get(`/order/${orderId}/items`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log("API Response for order items:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error fetching order items:", error.response?.data || error.message);
+    throw error;
+  }
 };
-
 // Cancel order
 export const cancelOrderApi = async (orderId, token) => {
-  const response = await api.post(`/order/cancel/${orderId}`, {}, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await api.post(
+    `/order/cancel/${orderId}`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   return response.data;
 };
 
 // Return an order item
 export const returnOrderItemApi = async (orderItemId, reason, token) => {
-  const response = await api.post(`/order/item/return`, {
-    order_item_id: orderItemId,
-    reason,
-  }, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await api.post(
+    `/order/item/return`,
+    {
+      order_item_id: orderItemId,
+      reason,
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   return response.data;
 };

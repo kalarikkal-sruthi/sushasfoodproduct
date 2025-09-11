@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-
-
 function WhatWeDoCard({ image, title, icon }) {
   return (
     <>
@@ -23,12 +21,10 @@ function WhatWeDoCard({ image, title, icon }) {
     </>
   );
 }
-
 WhatWeDoCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
 };
-
 export default WhatWeDoCard;
