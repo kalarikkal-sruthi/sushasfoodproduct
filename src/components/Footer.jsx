@@ -209,7 +209,7 @@ function Footer() {
             </section>
             <div className="padding-top"></div>
             <div className="bottom-footer">
-              <p>@ 2025 SUSHA'S PRAKASH FARM</p>
+              <p>© Susha's Foods 2025 Made with by BSL Solutions</p>
             </div>
           </Container>
         </div>

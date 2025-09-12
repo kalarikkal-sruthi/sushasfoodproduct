@@ -30,7 +30,7 @@
     padding-top: 20px;
 }
 .padding-y{
-    padding: 0 25px;
+    padding: 0 20px;
 }
 .key-feature-card img{
     width: 25%;
@@ -49,6 +49,16 @@
 }
 .key-feature-card{
     padding: 10px;
+}
+.btn-responsive{
+    padding: 2px 8px !important;
+    font-size: 10px !important;
+}
+.res-header-top{
+    margin-top: 110px;
+}
+.crop-detail-section{
+    padding: 20px;
 }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {  } 

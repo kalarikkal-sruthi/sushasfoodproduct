@@ -20,9 +20,9 @@ const WhatWeDo = () => {
 
   return (
     <main aria-labelledby="what-we-do-title">
-      <div className="padding-y mt-5">
+      <div className="padding-y mt-3 mt-lg-5">
         <section aria-labelledby="what-we-do-title">
-          <Row className="mb-5">
+          <Row className="mb-3 mb-lg-5">
             <Col>
                             <motion.div
                 initial="hidden"
@@ -33,7 +33,7 @@ const WhatWeDo = () => {
                  <header>
                                   <motion.h1
                                     id="our-story-heading"
-                                    className="display-6  display-lg-4 fw-bold mb-3"
+                                    className="display-lg-1 display-6   fw-bold mb-1 mb-lg-3 "
                                     style={{ color: "#294085" }}
                                     variants={itemVariants}
                                   >

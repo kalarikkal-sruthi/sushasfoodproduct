@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,7 +12,6 @@ export default function MostHarvestcrops() {
   const dispatch = useDispatch();
   const { homeData } = useSelector((state) => state.mostHarvest);
   console.log(homeData);
-  
 
   useEffect(() => {
     console.log("[MostHarvestcrops] Dispatching fetchMostHarvestHome...");
@@ -46,7 +44,7 @@ export default function MostHarvestcrops() {
 
   return (
     <main>
-      <div  className="padding-y mt-5">
+      <div className="padding-y  mt-3 mt-lg-5">
         <section aria-labelledby="most-common-crops">
           <header>
             <Row className="mb-3">
@@ -57,10 +55,10 @@ export default function MostHarvestcrops() {
                   whileInView="onscreen"
                   viewport={{ once: true, margin: "-100px" }}
                   id="most-common-crops"
-                  className="fw-bold"
+                  className="fw-bold "
                   style={{ color: "#5caf47" }}
                 >
-                Best Yields of the Season
+                  Best Yields of the Season
                 </motion.h2>
                 <p className="text-muted">
                   Explore the main crops we grow using sustainable farming
@@ -89,71 +87,78 @@ export default function MostHarvestcrops() {
                           borderRadius: "12px",
                         }}
                       >
-                         <Link to={`/mostharvestfromfarm/${item.id}`} style={{ textDecoration: "none" }}>
-                        <Row className="g-0 h-100">
-                          <Col md={6} className="overflow-hidden">
-                          
-                            <Card.Img
-                              src={`${imgURLMostHarvest}${
-                                item.image || item.images?.[0]?.image
-                              }`}
-                              alt={item.name}
-                              className="object-fit-cover"
-                              style={{
-                                borderRadius: "12px 0 0 12px",
-                                width: "100%",
-                                height:"100%",
-                                objectFit: "cover",
-                              }}
-                            />
-                            
-                          </Col>
+                        <Link
+                          to={`/mostharvestfromfarm/${item.id}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <Row className="g-0 h-100">
+                            <Col md={6} className="overflow-hidden">
+                              <Card.Img
+                                src={`${imgURLMostHarvest}${
+                                  item.image || item.images?.[0]?.image
+                                }`}
+                                alt={item.name}
+                                className="object-fit-cover"
+                                style={{
+                                  borderRadius: "12px 0 0 12px",
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </Col>
 
-                          <Col md={6} className="d-flex flex-column">
-                            <Card.Body className="p-4 d-flex flex-column justify-content-center">
-                               <Link to={`/mostharvestfromfarm/${item.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                              <Card.Title
-                                style={{ color: "#294085" }}
-                                className="fw-bold fs-lg-2  fs-4 mb-3"
-                              >
-                                {item.name}
-                              </Card.Title>
-                                 </Link>
-                              <Card.Text className=" text-muted">
-                                {item.description?.slice(0,200)}...
-                              </Card.Text>
-                              
-                              {/* <h6 className="key-faeture">Key Features</h6>
+                            <Col md={6} className="d-flex flex-column">
+                              <Card.Body className="p-2 p-lg-4 d-flex flex-column justify-content-center">
+                                <Link
+                                  to={`/mostharvestfromfarm/${item.id}`}
+                                  style={{
+                                    textDecoration: "none",
+                                    color: "inherit",
+                                  }}
+                                >
+                                  <Card.Title
+                                    style={{ color: "#294085" }}
+                                    className="fw-bold fs-lg-2  fs-4 mb-1 mb-lg-3"
+                                  >
+                                    {item.name}
+                                  </Card.Title>
+                                </Link>
+                                <Card.Text className=" text-muted">
+                                  {item.description?.slice(0, 200)}...
+                                </Card.Text>
+
+                                {/* <h6 className="key-faeture">Key Features</h6>
 
                               <div className="keyfeature-description"
                                 dangerouslySetInnerHTML={{
                                   __html: item.description5,
                                 }}
                               ></div> */}
-                             
-                              <Link to={`/mostharvestfromfarm/${item.id}`}>
-                                <motion.div
-                                  whileHover={{
-                                    x: 5,
-                                    transition: { duration: 0.2 },
-                                  }}
-                                  whileTap={{ scale: 0.98 }}
-                                  className="btn  btn-outline align-self-start mt-auto"
-                                  style={{
-                                    borderWidth: "2px",
-                                    borderRadius: "50px",
-                                    fontWeight: "500",
-                                    border: "1px solid #294085",
-                                    backgroundColor: "#294085",
-                                    color: "#fff",
-                                  }}
-                                >
-                                  Learn More →
-                                </motion.div>
-                              </Link>
-                            </Card.Body>
-                          </Col>
-                        </Row>
+
+                                <Link to={`/mostharvestfromfarm/${item.id}`}>
+                                  <motion.div
+                                    whileHover={{
+                                      x: 5,
+                                      transition: { duration: 0.2 },
+                                    }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="btn  btn-responsive btn-outline align-self-start mt-auto"
+                                    style={{
+                                      borderWidth: "2px",
+                                      borderRadius: "50px",
+                                      fontWeight: "500",
+                                      border: "1px solid #294085",
+                                      backgroundColor: "#294085",
+                                      color: "#fff",
+                                    }}
+                                  >
+                                    Learn More →
+                                  </motion.div>
+                                </Link>
+                              </Card.Body>
+                            </Col>
+                          </Row>
                         </Link>
                       </Card>
                     </motion.div>
@@ -176,7 +181,7 @@ export default function MostHarvestcrops() {
                     transition: { duration: 0.2 },
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-outline mt-5"
+                  className="btn btn-outline mt-3 mt-lg-5 btn-responsive"
                   style={{
                     borderRadius: "50px",
                     fontWeight: "500",

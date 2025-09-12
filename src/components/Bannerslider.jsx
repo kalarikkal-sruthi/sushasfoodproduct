@@ -47,7 +47,7 @@ function Bannerslider({ data }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                Susha's Prakash Farm
+                SUSHA'S FOODS
               </motion.h1>
 
               <p>

@@ -6,6 +6,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { fetchMostHarvestViewAll } from "../../../store/mostHarvestSlice";
 import { imgURLMostHarvest } from "../../../utils/api";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
 
 export default function Mostcultivatedfull() {
   const dispatch = useDispatch();
@@ -44,9 +45,25 @@ export default function Mostcultivatedfull() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <main>
+    <main className="res-header-top">
+      <Helmet>
+              <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+              <meta
+                name="description"
+                content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+              />
+              <meta
+                name="keywords"
+                content="farm products, organic produce, value added products, fresh produce, healthy food"
+              />
+                
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+            />
+          </Helmet>
       <div
-        className="padding-y mt-5"
+        className="padding-y mt-3  mt-lg-5 "
         as="section"
         aria-labelledby="crops-heading"
       >
@@ -54,7 +71,7 @@ export default function Mostcultivatedfull() {
         <div className="padding-top"></div>
 
         <section>
-          <Row className="mb-3">
+          <Row className="mb-3 mb-lg-1">
             <Col>
               <motion.section
                 initial="offscreen"
@@ -64,26 +81,25 @@ export default function Mostcultivatedfull() {
                 <motion.h1
                   variants={scrollVariants}
                   id="crops-heading"
-                  className="fw-bold"
+                  className="fw-bold dispaly-6 display-lg-1"
                   style={{ color: "#294085" }}
                 >
                   Most Cultivated Organic Crops on Our Farm
                 </motion.h1>
               </motion.section>
               <Breadcrumbs
-                            items={[
-                              { label: "Home", path: "/" },
-                              { label: "Most Harvest", path: "/mostharvestfromfarm" },
-                             
-                            ]}
-                          />
+                items={[
+                  { label: "Home", path: "/" },
+                  { label: "Most Harvest", path: "/mostharvestfromfarm" },
+                ]}
+              />
             </Col>
           </Row>
 
-          <Row className="g-5">
+          <Row className="g-3 g-lg-5">
             {allData && allData.length > 0 ? (
               allData.map((item) => (
-                <Col lg={6} key={item.id} as="article">
+                <Col lg={6} xs={6} key={item.id} as="article">
                   <motion.div
                     initial="offscreen"
                     whileInView="onscreen"
@@ -91,66 +107,70 @@ export default function Mostcultivatedfull() {
                     variants={cardVariants}
                   >
                     <motion.div whileHover={cardHover} className="h-100">
-                      <Link
-                        to={`/mostharvestfromfarm/${item.id}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
+                      <Card
+                        className="h-100 border-0 overflow-hidden"
+                        style={{
+                          boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
+                          borderRadius: "12px",
+                        }}
                       >
-                        <Card
-                          className="h-100 border-0 overflow-hidden"
-                          style={{
-                            boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
-                            borderRadius: "12px",
-                          }}
+                        <Link
+                          to={`/mostharvestfromfarm/${item.id}`}
+                          style={{ textDecoration: "none" }}
                         >
                           <Row className="g-0 h-100">
                             <Col md={6} className="overflow-hidden">
-                              <motion.figure className="h-100 w-100 m-0">
-                                <Card.Img
-                                  src={`${imgURLMostHarvest}${
-                                    item.image || item.images?.[0]?.image
-                                  }`}
-                                  alt={`${item.name} - Organic cultivation`}
-                                  style={{
-                                    borderRadius: "12px 0 0 12px",
-                                    width: "100%",
-                                      height:"100%",
-                                    objectFit: "cover",
-                                  }}
-                                  loading="lazy"
-                                />
-                                <figcaption className="visually-hidden">
-                                  {item.description}
-                                </figcaption>
-                              </motion.figure>
+                              <Card.Img
+                                src={`${imgURLMostHarvest}${
+                                  item.image || item.images?.[0]?.image
+                                }`}
+                                alt={item.name}
+                                className="object-fit-cover"
+                                style={{
+                                  borderRadius: "12px 0 0 12px",
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                }}
+                              />
                             </Col>
 
                             <Col md={6} className="d-flex flex-column">
-                              <Card.Body className="p-4 d-flex flex-column justify-content-center">
-                                <h3
-                                  style={{ color: "#294085" }}
-                                  className="fw-bold fs-2 mb-3"
-                                >
-                                  {item.name}
-                                </h3>
-                                <p className=" text-muted">
-                                   {item.description?.slice(0,200)}...
-                                </p>
-                            {/* <h6 className="key-faeture">Key Features</h6>
-                                <ul
-                                  dangerouslySetInnerHTML={{
-                                    __html: item.description5,
+                              <Card.Body className="p-2 p-lg-4 d-flex flex-column justify-content-center">
+                                <Link
+                                  to={`/mostharvestfromfarm/${item.id}`}
+                                  style={{
+                                    textDecoration: "none",
+                                    color: "inherit",
                                   }}
-                                ></ul> */}
-                                <motion.div
-                                  whileHover={{
-                                    x: 5,
-                                    transition: { duration: 0.2 },
-                                  }}
-                                  whileTap={{ scale: 0.98 }}
                                 >
-                                  <Link
-                                    to={`/mostharvestfromfarm/${item.id}`}
-                                    className="btn btn-outline align-self-start mt-auto"
+                                  <Card.Title
+                                    style={{ color: "#294085" }}
+                                    className="fw-bold fs-lg-2  fs-4 mb-1 mb-lg-3"
+                                  >
+                                    {item.name}
+                                  </Card.Title>
+                                </Link>
+                                <Card.Text className=" text-muted">
+                                  {item.description?.slice(0, 200)}...
+                                </Card.Text>
+
+                                {/* <h6 className="key-faeture">Key Features</h6>
+
+                              <div className="keyfeature-description"
+                                dangerouslySetInnerHTML={{
+                                  __html: item.description5,
+                                }}
+                              ></div> */}
+
+                                <Link to={`/mostharvestfromfarm/${item.id}`}>
+                                  <motion.div
+                                    whileHover={{
+                                      x: 5,
+                                      transition: { duration: 0.2 },
+                                    }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="btn  btn-responsive btn-outline align-self-start mt-auto"
                                     style={{
                                       borderWidth: "2px",
                                       borderRadius: "50px",
@@ -158,23 +178,24 @@ export default function Mostcultivatedfull() {
                                       border: "1px solid #294085",
                                       backgroundColor: "#294085",
                                       color: "#fff",
-                                      textDecoration: "none",
                                     }}
                                   >
                                     Learn More →
-                                  </Link>
-                                </motion.div>
+                                  </motion.div>
+                                </Link>
                               </Card.Body>
                             </Col>
                           </Row>
-                        </Card>
-                      </Link>
+                        </Link>
+                      </Card>
                     </motion.div>
                   </motion.div>
                 </Col>
               ))
             ) : (
-              <p>No data found.</p>
+              <Col>
+                <p>No data found.</p>
+              </Col>
             )}
           </Row>
         </section>

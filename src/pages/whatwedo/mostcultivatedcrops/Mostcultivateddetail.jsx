@@ -6,6 +6,7 @@ import { whatinfarmsURL, whatinfarmsGalleryURL } from "../../../utils/api";
 import { motion } from "framer-motion";
 import { Container, Row, Col } from "react-bootstrap";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
 
 export default function Mostcultivateddetail() {
   const { id } = useParams();
@@ -25,16 +26,32 @@ export default function Mostcultivateddetail() {
   if (!detailData) return <p>No details found.</p>;
 
   return (
-    <>
-      <div className="padding-top"></div>
+    <main className="res-header-top">
+      <Helmet>
+        <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
+      <div className="padding-top "></div>
       <div className="padding-top"></div>
 
-      <div className="padding-y mt-5">
+      <div className="padding-y mt-3 mt-lg-5">
         <section
           aria-labelledby="crop-detail-title"
           className="crop-detail-section"
         >
-          <Row className="mb-3">
+          <Row className="mb-3 mb-lg-1">
             <Col>
               <motion.h1
                 id="crop-detail-title"
@@ -50,6 +67,7 @@ export default function Mostcultivateddetail() {
               {/* Main description */}
             </Col>
             <Breadcrumbs
+              className="mb-lg-2 mb-0"
               items={[
                 { label: "Home", path: "/" },
                 { label: "Most Harvest", path: "/mostharvestfromfarm" },
@@ -67,14 +85,26 @@ export default function Mostcultivateddetail() {
                 key={detailData.id}
                 src={`${whatinfarmsURL}${detailData.image}`}
                 alt={detailData.name}
-                className="img-fluid rounded shadow "
+                className="img-fluid rounded shadow  mb-2 mb-lg-0"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               />
             </Col>
+            <Col md={4} className="">
+              {detailData.images?.[0] && (
+                <motion.img
+                  src={`${whatinfarmsGalleryURL}${detailData.images[0].image}`}
+                  alt={detailData.name}
+                  className="img-fluid rounded shadow vh-75 "
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                />
+              )}
+            </Col>
           </Row>
-          <Row className="mt-5">
+          <Row className="mt-2 mt-lg-3">
             <Col md={12}>
               <p>{detailData.description}</p>
               {detailData.description1 && <p>{detailData.description1}</p>}
@@ -83,22 +113,8 @@ export default function Mostcultivateddetail() {
               {detailData.description4 && <p>{detailData.description4}</p>}
             </Col>
           </Row>
-          <Row className="align-items-center ">
-            <Col md={4} className="mb-3">
-              {detailData.images?.[0] && (
-                <motion.img
-                  src={`${whatinfarmsGalleryURL}${detailData.images[0].image}`}
-                  alt={detailData.name}
-                  className="img-fluid rounded shadow vh-75 mt-5"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-              )}
-            </Col>
-          </Row>
 
-          <Row className="mt-5">
+          <Row className="">
             <Col md={12}>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -118,8 +134,8 @@ export default function Mostcultivateddetail() {
             </Col>
           </Row>
 
-          <Row className="align-items-center mt-3">
-            <Col md={12} className="mb-3">
+          <Row className="align-items-center mt-3 mt-lg-1">
+            <Col md={12} className="mb-3 mb-lg-1">
               {detailData.images?.length > 0 && (
                 <motion.img
                   src={`${whatinfarmsGalleryURL}${
@@ -136,6 +152,6 @@ export default function Mostcultivateddetail() {
           </Row>
         </section>
       </div>
-    </>
+    </main>
   );
 }
