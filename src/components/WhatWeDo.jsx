@@ -33,7 +33,7 @@ const WhatWeDo = () => {
                  <header>
                                   <motion.h1
                                     id="our-story-heading"
-                                    className="display-4 fw-bold mb-3"
+                                    className="display-6  display-lg-4 fw-bold mb-3"
                                     style={{ color: "#294085" }}
                                     variants={itemVariants}
                                   >

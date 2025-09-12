@@ -147,7 +147,7 @@ function Certificate({ data }) {
           </Swiper>
         </section>
         <section
-          className="key-features mt-5"
+          className="key-features mt-3 mt-lg-5"
           aria-labelledby="key-features-heading"
         >
           <div className="key-feature-container">

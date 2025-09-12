@@ -706,7 +706,7 @@ text-align: center;
 
 @media (max-width: 600px) {
   .key-feature-card {
-    flex: 1 1 100%; 
+    /* flex: 1 1 100%;  */
   }
 }
 

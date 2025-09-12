@@ -114,7 +114,7 @@ export default function MostHarvestcrops() {
                                <Link to={`/mostharvestfromfarm/${item.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                               <Card.Title
                                 style={{ color: "#294085" }}
-                                className="fw-bold fs-2 mb-3"
+                                className="fw-bold fs-lg-2  fs-4 mb-3"
                               >
                                 {item.name}
                               </Card.Title>
@@ -138,7 +138,7 @@ export default function MostHarvestcrops() {
                                     transition: { duration: 0.2 },
                                   }}
                                   whileTap={{ scale: 0.98 }}
-                                  className="btn btn-outline align-self-start mt-auto"
+                                  className="btn  btn-outline align-self-start mt-auto"
                                   style={{
                                     borderWidth: "2px",
                                     borderRadius: "50px",

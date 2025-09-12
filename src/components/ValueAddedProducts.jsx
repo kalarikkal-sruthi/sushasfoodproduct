@@ -58,7 +58,7 @@ const itemVariants = {
               >
                  <motion.h1
                                     id="value-added-products-title"
-                  className="display-2  display-lg-4 fw-bold"
+                  className="display-6  display-lg-4 fw-bold"
                   style={{ color: "#294085" }}
                                   variants={itemVariants}
                                 >

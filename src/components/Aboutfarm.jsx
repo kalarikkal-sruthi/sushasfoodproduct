@@ -34,7 +34,7 @@ const Aboutfarm = () => {
                 <header>
                   <motion.h1
                     id="about-heading"
-                    className="display-4 fw-bold mb-3"
+                    className="display-6  display-lg-4 fw-bold mb-3"
                     variants={itemVariants}
                     style={{ color: "#294085" }}
                   >
