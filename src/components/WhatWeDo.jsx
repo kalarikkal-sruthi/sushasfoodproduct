@@ -24,25 +24,24 @@ const WhatWeDo = () => {
         <section aria-labelledby="what-we-do-title">
           <Row className="mb-3 mb-lg-5">
             <Col>
-                            <motion.div
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={containerVariants}
               >
-                 <header>
-                                  <motion.h1
-                                    id="our-story-heading"
-                                    className="heading-res fw-bold mb-1 mb-lg-3 "
-                                    style={{ color: "#294085" }}
-                                    variants={itemVariants}
-                                  >
-                                      What We Do Prakash Farm
-                                  </motion.h1>
-                                </header>
-            
+                <header>
+                  <motion.h1
+                    id="our-story-heading"
+                    className="heading-res fw-bold mb-1 mb-lg-3 "
+                    style={{ color: "#294085" }}
+                    variants={itemVariants}
+                  >
+                    What We Do Prakash Farm
+                  </motion.h1>
+                </header>
               </motion.div>
-       
+
               <p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

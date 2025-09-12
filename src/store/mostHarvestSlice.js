@@ -5,7 +5,9 @@ import { api } from "../utils/api"; // ✅ make sure api is exported correctly
 export const fetchMostHarvestFull = createAsyncThunk(
   "mostHarvest/fetchHome",
   async (_, { rejectWithValue }) => {
-    console.log("[mostHarvestSlice] Fetching Home data (backend calls it 'Full')...");
+    console.log(
+      "[mostHarvestSlice] Fetching Home data (backend calls it 'Full')..."
+    );
     try {
       const res = await api.get("/whatInFarms-Full");
       console.log("[mostHarvestSlice] Home data fetched:", res.data);
@@ -17,7 +19,7 @@ export const fetchMostHarvestFull = createAsyncThunk(
   }
 );
 
-// 2️⃣ Fetch view all list
+
 export const fetchMostHarvestViewAll = createAsyncThunk(
   "mostHarvest/fetchViewAll",
   async (_, { rejectWithValue }) => {
@@ -52,7 +54,7 @@ export const fetchMostHarvestDetail = createAsyncThunk(
 const mostHarvestSlice = createSlice({
   name: "mostHarvest",
   initialState: {
-    homeData: [],     // ✅ renamed for clarity
+    homeData: [], 
     allData: [],
     detailData: null,
     loading: false,
@@ -61,21 +63,21 @@ const mostHarvestSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Home data
+     
       .addCase(fetchMostHarvestFull.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchMostHarvestFull.fulfilled, (state, action) => {
         state.loading = false;
-        state.homeData = action.payload; // ✅ store as homeData
+        state.homeData = action.payload; 
       })
       .addCase(fetchMostHarvestFull.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      // View all
+      
       .addCase(fetchMostHarvestViewAll.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -89,7 +91,7 @@ const mostHarvestSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Detail
+     
       .addCase(fetchMostHarvestDetail.pending, (state) => {
         state.loading = true;
         state.error = null;

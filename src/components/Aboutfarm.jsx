@@ -75,7 +75,7 @@ const Aboutfarm = () => {
               </motion.div>
             </Col>
 
-            {/* Image Section */}
+          
             <Col md={5}>
               <motion.figure
                 style={{ textAlign: "center" }}

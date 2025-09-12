@@ -5,10 +5,10 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (crendentials) => {
     const res = await api.post("/login", crendentials);
-    // console.log("Login API response.data:", res);
+    
     return {
       token: res.data,
-      // user: res.data.user,
+     
     };
   }
 );
@@ -38,8 +38,6 @@ export const getUser = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState();
     const storedToken = state.auth.token || localStorage.getItem("access");
-
-    // Extract only the part after "|"
     const token = storedToken?.includes("|")
       ? storedToken.split("|")[1]
       : storedToken;
@@ -49,14 +47,10 @@ export const getUser = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       },
     });
-console.log("response",response.data)
-    return response.data; // { id, name, email, ... }
-    
-    
+    console.log("response", response.data);
+    return response.data; 
   }
 );
-
-
 
 export const getAddresses = createAsyncThunk(
   "auth/getAddresses",
@@ -72,27 +66,15 @@ export const getAddresses = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    // // return response.data.data; // array of addresses
-    //  // sid change 21 aug 2025 → normalize typo field `deafult` to `is_default`
-    // return response.data.map(addr => ({
-    //   ...addr,
-    //   is_default: Boolean(addr.deafult), // normalize here
-    // }));
 
-     // sid changed on 24 aug 2025 → backend response has shape {status, message, data:[...]}
-    // so we must use response.data.data, not response.data
-    return response.data.data.map(addr => ({
+    return response.data.data.map((addr) => ({
       ...addr,
-      // normalize typo from backend: "deafult" → is_default boolean
+     
       is_default: Boolean(addr.deafult),
     }));
-
-
   }
-)
+);
 
-
-// ⬇⬇⬇ SID CHANGE 1: Create a new address
 export const createAddress = createAsyncThunk(
   "auth/createAddress",
   async (addressData, { getState }) => {
@@ -107,12 +89,11 @@ export const createAddress = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return response.data; // return created address object
+    return response.data; 
   }
 );
 
-// 🆕 sid changes on 21 aug 2025 - set an address as default
-// Add this to your authService.js file
+
 export const setDefaultAddress = createAsyncThunk(
   "auth/setDefaultAddress",
   async (addressId, { getState }) => {
@@ -123,21 +104,17 @@ export const setDefaultAddress = createAsyncThunk(
       ? storedToken.split("|")[1]
       : storedToken;
 
-    const response = await api.post(`/addresses/${addressId}/default`, {}, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    // return response.data; // return the updated address object
-
-      // sid change 21 aug 2025 → backend only returns {status, message}
-    // so we return the id instead
+    const response = await api.post(
+      `/addresses/${addressId}/default`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return { id: addressId };
   }
 );
 
-
-
-// 🆕 sid change: updateAddress uses flat payload with id + fields
 export const updateAddress = createAsyncThunk(
   "auth/updateAddress",
   async (addressData, { getState }) => {
@@ -148,15 +125,17 @@ export const updateAddress = createAsyncThunk(
       ? storedToken.split("|")[1]
       : storedToken;
 
-    const response = await api.put(`/addresses/${addressData.id}`, addressData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await api.put(
+      `/addresses/${addressData.id}`,
+      addressData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
-    // ✅ Only return the updated address object
     return response.data.data;
   }
 );
-
 
 export const deleteAddress = createAsyncThunk(
   "auth/deleteAddress",
@@ -172,6 +151,6 @@ export const deleteAddress = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return id; // ✅ return only the deleted address id
+    return id;
   }
 );

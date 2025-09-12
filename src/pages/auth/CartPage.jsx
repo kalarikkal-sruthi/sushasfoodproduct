@@ -52,7 +52,21 @@ function CartPage() {
   useEffect(() => {
     console.log("Cart items changed:", cartItems);
   }, [cartItems]);
-
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+  };
   return (
     <main className="res-header-top">
       <Helmet>
@@ -77,13 +91,23 @@ function CartPage() {
             <header className="header-bar">
               <Row>
                 <Col xs={12}>
-                  <h1
-                    id="cart-heading"
-                    className="display-8 fw-bold mb-3"
-                    style={{ color: "#294085" }}
-                  >
-                    My Cart
-                  </h1>
+                  <header>
+                    <motion.div
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      variants={containerVariants}
+                    >
+                      <motion.h1
+                        id="about-heading"
+                        className=" heading-res fw-bold mb-1 mb-lg-3"
+                        variants={itemVariants}
+                        style={{ color: "#294085" }}
+                      >
+                        My Cart
+                      </motion.h1>
+                    </motion.div>
+                  </header>
                 </Col>
               </Row>
             </header>
@@ -164,7 +188,7 @@ function CartPage() {
 
                               {/* Price */}
                               <div className="col-6 col-md-2 mb-2 mb-md-0">
-                               <p className=" d-block d-md-none mb-0">
+                                <p className=" d-block d-md-none mb-0">
                                   Price:
                                 </p>
                                 ₹ {item.selectPrice}
@@ -172,7 +196,7 @@ function CartPage() {
 
                               {/* Total */}
                               <div className="col-6 col-md-2 mb-2 mb-md-0">
-                                 <p className=" d-block d-md-none mb-0">
+                                <p className=" d-block d-md-none mb-0">
                                   Total:
                                 </p>
                                 ₹ {item.selectPrice * item.quantity}

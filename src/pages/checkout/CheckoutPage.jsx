@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +8,6 @@ import { createOrderApi } from "../../store/orderService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
 import { getUser } from "../../store/authService";
-
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const CheckoutPage = React.memo(() => {
   const addresses = useSelector((state) => state.auth.addresses || []);
   const user = useSelector((state) => state.auth.user);
   console.log(user);
-  
+
   const userId = useSelector((state) => state.auth.user?.id);
 
   const [addressMode, setAddressMode] = useState("list");
@@ -32,14 +30,12 @@ const CheckoutPage = React.memo(() => {
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
 
-
   const [paymentMethod, setPaymentMethod] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
 
-
   const [activeTab, setActiveTab] = useState("orders");
-  
+
   const { subtotal, discount, payable } = useMemo(() => {
     const subtotalCalc = cartItems.reduce((sum, item) => {
       const price = parseFloat(item.selectPrice || 0);
@@ -58,7 +54,6 @@ const CheckoutPage = React.memo(() => {
     dispatch(getUser());
   }, [dispatch]);
 
-  
   useEffect(() => {
     if (addresses.length > 0) {
       const defaultAddr = addresses.find((addr) => addr.is_default);
@@ -68,7 +63,6 @@ const CheckoutPage = React.memo(() => {
       console.log("Selected User ID:", selectedAddr.user_id);
     }
   }, [addresses]);
-
 
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
@@ -85,7 +79,7 @@ const CheckoutPage = React.memo(() => {
 
     const orderData = {
       user_id: userId,
-      address: selectedAddressId, 
+      address: selectedAddressId,
       special_instructions: "vvv",
       cash_on_delivery: paymentMethod === "COD",
       cart: cartItems.map((item) => ({
@@ -103,9 +97,7 @@ const CheckoutPage = React.memo(() => {
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
         navigate("/myaccount");
-          setActiveTab(activeTab);
-
-     
+        setActiveTab(activeTab);
       } else if (paymentMethod === "RAZORPAY") {
         // TODO: Razorpay integration
       }
@@ -115,21 +107,58 @@ const CheckoutPage = React.memo(() => {
       setShowPopup(true);
     }
   }, [selectedAddressId, paymentMethod, userId, cartItems, user, navigate]);
-
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+  };
   return (
-    <main>
+    <main className="res-header-top">
       <Helmet>
-        <title>Checkout - Your Store</title>
+        <title>Checkout | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Complete your purchase securely and quickly on our checkout page."
         />
       </Helmet>
-      <div className="padding-top" />
-      <div className="padding-top" />
-      <div className="padding-top" />
-      <Container className="mt-5">
+      <div className="padding-top"></div>
+      <div className="padding-top d-lg-block d-none"></div>
+
+      <Container className="mt-3 mt-lg-5">
         <Row>
+          <Row>
+            <header className="header-bar">
+              <Row>
+                <Col xs={12}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={containerVariants}
+                  >
+                    <motion.h1
+                      id="value-added-products-title"
+                      className="heading-res fw-bold"
+                      style={{ color: "#294085" }}
+                      variants={itemVariants}
+                    >
+                      Checkout Your Items
+                    </motion.h1>
+                  </motion.div>
+                </Col>
+              </Row>
+            </header>
+          </Row>
           {/* Address Section */}
           <Col md={7}>
             <Card>
@@ -261,10 +290,16 @@ const CheckoutPage = React.memo(() => {
             </Card>
 
             <div className="mt-3 text-end">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={containerVariants}
+              ></motion.div>
               <motion.button
                 whileHover={{ x: 5 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn btn-outline"
+                className="btn btn-outline mb-3 mb-lg-0"
                 style={{
                   borderRadius: "50px",
                   fontWeight: "500",

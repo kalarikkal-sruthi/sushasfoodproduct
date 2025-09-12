@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import search from "../../assets/header/search.png";
 
 function Searchbar() {
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,16 +21,15 @@ function Searchbar() {
     dispatch(setSearchQuery(e.target.value));
   };
 
- const handleSelectProduct = (productId, bgColor, categoryName) => {
-  navigate(`/product/${productId}`, {
-    state: { bgColor, categoryName }, // 👈 pass state here
-  });
-  dispatch(setSearchQuery(""));
-};
+  const handleSelectProduct = (productId, bgColor, categoryName) => {
+    navigate(`/product/${productId}`, {
+      state: { bgColor, categoryName },
+    });
+    dispatch(setSearchQuery(""));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // optional: could navigate to a search results page
   };
 
   return (
@@ -56,30 +53,27 @@ function Searchbar() {
         </InputGroup>
       </Form>
 
-      {/* 🔍 Search Results Dropdown */}
       {searchQuery && searchResults.length > 0 && (
         <ul
           className="list-group position-absolute w-100 mt-1"
           style={{ zIndex: 1000 }}
         >
           {searchResults.map((item) => {
- 
-  return (
-    <li
-      key={item.id}
-      className="list-group-item list-group-item-action"
-      onClick={() => handleSelectProduct(item.id,  item.categoryName)}
-      style={{
-        // background: bgColor,
-        cursor: "pointer",
-        // color: "#fff",
-      }}
-    >
-      {item.product_name}{" "}
-      <small className="text-light">({item.categoryName})</small>
-    </li>
-  );
-})}        </ul>
+            return (
+              <li
+                key={item.id}
+                className="list-group-item list-group-item-action"
+                onClick={() => handleSelectProduct(item.id, item.categoryName)}
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                {item.product_name}{" "}
+                <small className="text-light">({item.categoryName})</small>
+              </li>
+            );
+          })}{" "}
+        </ul>
       )}
     </div>
   );

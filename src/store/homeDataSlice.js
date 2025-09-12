@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../utils/api";
 
-// Async thunk for fetching home page data
+
 export const fetchHomeData = createAsyncThunk(
   "home/fetchData",
   async (_, { rejectWithValue }) => {
@@ -17,8 +17,8 @@ export const fetchHomeData = createAsyncThunk(
 const homeDataSlice = createSlice({
   name: "homeData",
   initialState: {
-    data: null,       // should be null, not "null"
-    loading: false,   // should be boolean, not "false"
+    data: null, 
+    loading: false, 
     error: null,
   },
   reducers: {},

@@ -26,12 +26,15 @@ export default function ProductCard({ product }) {
       />
       <h2
         id={`product-title-${product.id}`}
-        style={{ }}
+        style={{}}
         className="product-category-title"
       >
         {product.product_name}
       </h2>
-      <p className="product-price" style={{ fontWeight: "bold", color: "#000" }}>
+      <p
+        className="product-price"
+        style={{ fontWeight: "bold", color: "#000" }}
+      >
         Price: ₹{product.baseprices?.[0]?.original_price ?? "N/A"}
       </p>
 

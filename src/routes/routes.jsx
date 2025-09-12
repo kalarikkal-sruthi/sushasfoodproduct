@@ -33,7 +33,10 @@ const AppRoutes = () => {
 
         {/* Products */}
         <Route path="/productsbycategory" element={<CategoryProductList />} />
-        <Route path="/productsbycategory/:id" element={<ProductsByCategory />} />
+        <Route
+          path="/productsbycategory/:id"
+          element={<ProductsByCategory />}
+        />
         <Route path="/product/:id" element={<ProductDetail />} />
 
         {/* Cart / Auth */}
@@ -45,12 +48,21 @@ const AppRoutes = () => {
 
         {/* Extra harvest crops */}
         <Route path="/extraharvestfromfarm" element={<Extraharvestfull />} />
-        <Route path="/extraharvestfromfarm/:category" element={<Extraharvestsubcategory />} />
-        <Route path="/extraharvestfromfarm/detail/:id" element={<Extraharvestdetail />} />
+        <Route
+          path="/extraharvestfromfarm/:category"
+          element={<Extraharvestsubcategory />}
+        />
+        <Route
+          path="/extraharvestfromfarm/detail/:id"
+          element={<Extraharvestdetail />}
+        />
 
         {/* Most cultivated crops */}
         <Route path="/mostharvestfromfarm" element={<Mostcultivatedfull />} />
-        <Route path="/mostharvestfromfarm/:id" element={<Mostcultivateddetail />} />
+        <Route
+          path="/mostharvestfromfarm/:id"
+          element={<Mostcultivateddetail />}
+        />
 
         {/* Checkout */}
         <Route path="/checkoutpage" element={<CheckoutPage />} />
@@ -59,7 +71,10 @@ const AppRoutes = () => {
         <Route path="/aboutus" element={<Aboutfarm />} />
         <Route path="/privacy-policy" element={<Privacypolicy />} />
         <Route path="/terms-and-conditions" element={<Termsconditions />} />
-        <Route path="/refund-cancellation-policy" element={<Refundcancellationpolicy />} />
+        <Route
+          path="/refund-cancellation-policy"
+          element={<Refundcancellationpolicy />}
+        />
         <Route path="/shipping-policy" element={<Shippingpolicy />} />
       </Route>
     </Routes>

@@ -63,7 +63,7 @@ const OrderPage = () => {
 
   const renderAddressCard = useCallback(
     (address) => (
-      <Card className="p-3 h-100" key={address.id}>
+      <Card className="p-2 h-100" key={address.id}>
         <div className="d-flex justify-content-between align-items-center">
           <h6 className="fw-bold mb-2">
             {address.first_name
@@ -147,7 +147,7 @@ const OrderPage = () => {
 
   const renderAddCard = (
     <Card
-      className="p-3 h-100 d-flex align-items-center justify-content-center text-center border-2 border-dashed"
+      className="p-2 p-lg-3 h-100 d-flex align-items-center justify-content-center text-center border-2 border-dashed"
       style={{ cursor: "pointer", minHeight: "150px" }}
       onClick={() => {
         setAddressMode("add");
@@ -193,8 +193,8 @@ const OrderPage = () => {
           </Col>
         </Row>
 
-        <Row className="g-4">
-          <Col xs={3} className="d-flex flex-column gap-2 p-0">
+        <Row className="g-3 g-lg-5">
+          <Col xs={12} lg={3} className="d-flex flex-column gap-2 p-0">
             <Button
               onClick={() => {
                 setActiveTab("orders");
@@ -234,7 +234,7 @@ const OrderPage = () => {
           </Col>
 
           {/* Content */}
-          <Col xs={9}>
+          <Col xs={12} lg={9}>
             <Suspense fallback={<p>Loading...</p>}>
               {activeTab === "orders" &&
                 orders.map((order) => (
@@ -248,7 +248,7 @@ const OrderPage = () => {
                 (addressMode === "list" ? (
                   <Row className="mb-4 g-3">
                     {addresses.map((address) => (
-                      <Col xs={6} key={address.id}>
+                      <Col xs={12} lg={6} key={address.id}>
                         {renderAddressCard(address)}
                       </Col>
                     ))}

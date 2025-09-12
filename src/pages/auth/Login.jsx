@@ -68,7 +68,7 @@ const LoginPage = () => {
           content="Securely log in t Susha's Food Product to manage orders, view your profile, and enjoy personalized offers."
         />
         <link rel="canonical" href="https://www.sushasfoodproduct.com/login" />
-         <meta
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
@@ -76,14 +76,17 @@ const LoginPage = () => {
 
       {/* Page spacing */}
       <div className="padding-top"></div>
-         <div className="padding-top d-lg-block d-none"></div>
+      <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
       <Container className="mt-3 mt-lg-5">
-           <div class="calculation-padding" style={{}}>
-        <section aria-labelledby="login-title" className="calculation-padding">
-          <div className="auth-container   m-auto">
-            {/* Left side illustration */}
-            {/* <div className="auth-left fade-in-left">
+        <div class="calculation-padding" style={{}}>
+          <section
+            aria-labelledby="login-title"
+            className="calculation-padding"
+          >
+            <div className="auth-container   m-auto">
+              {/* Left side illustration */}
+              {/* <div className="auth-left fade-in-left">
               <img
                 src="/images/auth/login.jpg"
                 alt="Illustration of secure login process"
@@ -92,116 +95,118 @@ const LoginPage = () => {
               />
             </div> */}
 
-            {/* Right side form */}
-            <div className="auth-right fade-in-right">
-              <form onSubmit={handleLogin} className="auth-form" noValidate>
-                <header className="header-bar fade-in-right">
+              {/* Right side form */}
+              <div className="auth-right fade-in-right">
+                <form onSubmit={handleLogin} className="auth-form" noValidate>
+                  <header className="header-bar fade-in-right">
+                    <Row>
+                      <Col xs={12}>
+                        <h1
+                          id="login-title"
+                          className="display-6 fw-bold mb-1 mb-lg-3"
+                          style={{ color: "#294085" }}
+                        >
+                          Login to Your Account
+                        </h1>
+                      </Col>
+                    </Row>
+                  </header>
+
+                  {/* Email Field */}
                   <Row>
-                    <Col xs={12}>
-                      <h1
-                        id="login-title"
-                        className="display-6 fw-bold mb-1 mb-lg-3"
-                        style={{ color: "#294085" }}
-                      >
-                        Login to Your Account
-                      </h1>
+                    <Col xs={12} md={12}>
+                      <label htmlFor="email" className="form-label">
+                        Email Address
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email Address"
+                        className={`form-control ${
+                          errors.email ? "is-invalid" : ""
+                        }`} // sid changes on 22 aug 2025: added bootstrap validation class
+                        value={formValues.email}
+                        onChange={handleChange}
+                        required
+                        autoComplete="email"
+                        aria-required="true"
+                      />
+                      {/* sid changes on 22 aug 2025: show email error */}
+                      {errors.email && (
+                        <div className="invalid-feedback">{errors.email}</div>
+                      )}
                     </Col>
                   </Row>
-                </header>
 
-                {/* Email Field */}
-                <Row>
-                  <Col xs={12} md={12}>
-                    <label htmlFor="email" className="form-label">
-                      Email Address
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Email Address"
-                      className={`form-control ${
-                        errors.email ? "is-invalid" : ""
-                      }`} // sid changes on 22 aug 2025: added bootstrap validation class
-                      value={formValues.email}
-                      onChange={handleChange}
-                      required
-                      autoComplete="email"
-                      aria-required="true"
-                    />
-                    {/* sid changes on 22 aug 2025: show email error */}
-                    {errors.email && (
-                      <div className="invalid-feedback">{errors.email}</div>
-                    )}
-                  </Col>
-                </Row>
+                  {/* Password Field */}
+                  <Row>
+                    <Col xs={12} md={12}>
+                      <label htmlFor="password" className="form-label">
+                        Password
+                      </label>
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        className={`form-control ${
+                          errors.password ? "is-invalid" : ""
+                        }`} // sid changes on 22 aug 2025: added bootstrap validation class
+                        value={formValues.password}
+                        onChange={handleChange}
+                        required
+                        autoComplete="current-password"
+                        aria-required="true"
+                      />
+                      {/* sid changes on 22 aug 2025: show password error */}
+                      {errors.password && (
+                        <div className="invalid-feedback">
+                          {errors.password}
+                        </div>
+                      )}
+                    </Col>
+                  </Row>
 
-                {/* Password Field */}
-                <Row>
-                  <Col xs={12} md={12}>
-                    <label htmlFor="password" className="form-label">
-                      Password
-                    </label>
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="Password"
-                      className={`form-control ${
-                        errors.password ? "is-invalid" : ""
-                      }`} // sid changes on 22 aug 2025: added bootstrap validation class
-                      value={formValues.password}
-                      onChange={handleChange}
-                      required
-                      autoComplete="current-password"
-                      aria-required="true"
-                    />
-                    {/* sid changes on 22 aug 2025: show password error */}
-                    {errors.password && (
-                      <div className="invalid-feedback">{errors.password}</div>
-                    )}
-                  </Col>
-                </Row>
+                  {/* General error */}
+                  {errors.general && (
+                    <p className="text-danger mt-2">{errors.general}</p>
+                  )}
 
-                {/* General error */}
-                {errors.general && (
-                  <p className="text-danger mt-2">{errors.general}</p>
-                )}
+                  {/* Login Button */}
+                  <div className="mt-4">
+                    <motion.button
+                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                      whileTap={{ scale: 0.98 }}
+                      className="login-button btn btn-primary w-100"
+                      style={{
+                        borderRadius: "50px",
+                        fontWeight: "500",
+                        backgroundColor: "#294085",
+                        borderColor: "#294085",
+                      }}
+                      aria-label="Login to your account"
+                      type="submit"
+                    >
+                      Login →
+                    </motion.button>
+                  </div>
 
-                {/* Login Button */}
-                <div className="mt-4">
-                  <motion.button
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                    whileTap={{ scale: 0.98 }}
-                    className="login-button btn btn-primary w-100"
-                    style={{
-                      borderRadius: "50px",
-                      fontWeight: "500",
-                      backgroundColor: "#294085",
-                      borderColor: "#294085",
-                    }}
-                    aria-label="Login to your account"
-                    type="submit"
-                  >
-                    Login →
-                  </motion.button>
-                </div>
-
-                {/* Register Link */}
-                <p className="register-link-text mt-3 text-center">
-                  <button
-                    type="button"
-                    onClick={() => navigate("/register")}
-                    className="register-button btn btn-link"
-                    aria-label="Create a new account"
-                  >
-                    Don’t have an account? Create an Account
-                  </button>
-                </p>
-              </form>
+                  {/* Register Link */}
+                  <p className="register-link-text mt-3 text-center">
+                    <button
+                      type="button"
+                      onClick={() => navigate("/register")}
+                      className="register-button btn btn-link"
+                      aria-label="Create a new account"
+                    >
+                      Don’t have an account? Create an Account
+                    </button>
+                  </p>
+                </form>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
         </div>
       </Container>
     </main>

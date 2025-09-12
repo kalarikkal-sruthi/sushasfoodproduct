@@ -44,6 +44,21 @@ const ProductByCategory = () => {
     },
   };
 
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+  };
   const cardHover = {
     y: -5,
     boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
@@ -62,33 +77,42 @@ const ProductByCategory = () => {
 
   return (
     <main className="res-header-top">
-        <Helmet>
-                          <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
-                          <meta
-                            name="description"
-                            content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
-                          />
-                          <meta
-                            name="keywords"
-                            content="farm products, organic produce, value added products, fresh produce, healthy food"
-                          />
-                            
-                        <meta
-                          name="viewport"
-                          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-                        />
-                      </Helmet>
-  <div className="padding-top d-lg-block d-none"></div>
+      <Helmet>
+        <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
+      <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
       <div className="padding-y padding-y mt-3 mt-lg-5">
         <header className="mb-3 mb-lg-5" aria-labelledby="category-heading">
-          <h1
-            id="category-heading"
-            className="display-4 fw-bold"
-            style={{ color: "#294085" }}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
           >
-            {categoryName}
-          </h1>
+            <motion.h1
+              id="value-added-products-title"
+              className="heading-res fw-bold"
+              style={{ color: "#294085" }}
+              variants={itemVariants}
+            >
+              {categoryName}
+            </motion.h1>
+          </motion.div>
+
           <p className="lead text-muted mb-0">
             Discover our premium range of farm products, crafted to bring you
             the freshest and healthiest options from our fields.
@@ -117,8 +141,7 @@ const ProductByCategory = () => {
                       >
                         <Row className="g-0 h-100">
                           <Col
-                            md={6} 
-                            
+                            md={6}
                             className="overflow-hidden"
                             style={{ background: bgColor }}
                           >

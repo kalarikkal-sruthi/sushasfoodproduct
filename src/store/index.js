@@ -7,7 +7,7 @@ import homeDataReducer from "./homeDataSlice";
 import productReducer from "./ProductSlice";
 import cartReducer from "./cartSlice";
 import categoryProductReducer from "./categoryProductSlice";
-import orderReducer from "./orderSlice"
+import orderReducer from "./orderSlice";
 import mostHarvestReducer from "./mostHarvestSlice";
 import extraHarvestReducer from "./extraHarvestSlice";
 

@@ -187,19 +187,22 @@ h6.key-faeture {
 }
 
 .form-check-input:checked {
-    background-color: #294085;
-    border-color: #294085;
+  background-color: #294085;
+  border-color: #294085;
 }
-.complete-order-popup{
+
+.complete-order-popup {
   text-align: center;
   padding: 10px;
 }
-.complete-order-popup .modal-header{
+
+.complete-order-popup .modal-header {
   border-bottom: none;
 
 }
-.complete-order-popup .modal-footer{
-  border-top:none ;
+
+.complete-order-popup .modal-footer {
+  border-top: none;
   text-align: center;
   justify-content: center;
 }

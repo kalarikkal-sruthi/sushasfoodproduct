@@ -43,7 +43,7 @@ function Termsconditions() {
               <strong>‘you’</strong> refers to the user or viewer of our
               website.
             </p>
-          
+
             <p>
               The use of this website is subject to the following terms of use:
             </p>
@@ -115,13 +115,41 @@ function Termsconditions() {
             <p>
               <ul>
                 <li>
-                 We reserve the right (but not the obligation) to remove, refuse, delete, or edit any reviews, comments, suggestions, ideas, questions, or other content posted on our website by you.
+                  We reserve the right (but not the obligation) to remove,
+                  refuse, delete, or edit any reviews, comments, suggestions,
+                  ideas, questions, or other content posted on our website by
+                  you.
                 </li>
-                <li>We list availability information for products sold by us on the website, including on each product information page. Beyond what we say on that page or elsewhere on the website, we cannot be more specific about availability. Please note that dispatch estimates are just that—they are not guaranteed dispatch times and should not be relied upon as such. As we process your order, you will be informed via email or call if any products you order turn out to be unavailable.</li>
-                <li>We, as a merchant, reserve the right to refuse service and/or terminate accounts without prior notice if these Terms and Conditions are violated or if we decide, in our sole discretion, that it would be in Sushas Food Products’ best interests to do so.</li>
-                <li>You are solely responsible for all content that you upload, post, email, or otherwise transmit via our site. The information you provide to us shall be maintained by us in accordance with our Privacy Policy.</li>
                 <li>
-                  We, as a merchant, shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any transaction, on account of the cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time.
+                  We list availability information for products sold by us on
+                  the website, including on each product information page.
+                  Beyond what we say on that page or elsewhere on the website,
+                  we cannot be more specific about availability. Please note
+                  that dispatch estimates are just that—they are not guaranteed
+                  dispatch times and should not be relied upon as such. As we
+                  process your order, you will be informed via email or call if
+                  any products you order turn out to be unavailable.
+                </li>
+                <li>
+                  We, as a merchant, reserve the right to refuse service and/or
+                  terminate accounts without prior notice if these Terms and
+                  Conditions are violated or if we decide, in our sole
+                  discretion, that it would be in Sushas Food Products’ best
+                  interests to do so.
+                </li>
+                <li>
+                  You are solely responsible for all content that you upload,
+                  post, email, or otherwise transmit via our site. The
+                  information you provide to us shall be maintained by us in
+                  accordance with our Privacy Policy.
+                </li>
+                <li>
+                  We, as a merchant, shall be under no liability whatsoever in
+                  respect of any loss or damage arising directly or indirectly
+                  out of the decline of authorization for any transaction, on
+                  account of the cardholder having exceeded the preset limit
+                  mutually agreed by us with our acquiring bank from time to
+                  time.
                 </li>
               </ul>
             </p>

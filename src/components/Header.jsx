@@ -156,7 +156,7 @@ export default function Header() {
                 <Nav.Link to="" className="d-none d-lg-block">
                   |
                 </Nav.Link>
-   
+
                 <NavDropdown
                   title="Farm Activities"
                   id="farm-dropdown"
@@ -228,7 +228,12 @@ export default function Header() {
                 </NavDropdown>
 
                 <div className="d-lg-none  d-block">
-                  <h5 className="d-block d-lg-none mb-0 mt-3" style={{color:"#294085"}}>Farm Activities</h5>
+                  <h5
+                    className="d-block d-lg-none mb-0 mt-3"
+                    style={{ color: "#294085" }}
+                  >
+                    Farm Activities
+                  </h5>
                   <NavDropdown.Item as={Link} to="/mostharvestfromfarm">
                     Best Yields Plants
                   </NavDropdown.Item>
@@ -268,7 +273,12 @@ export default function Header() {
                   >
                     Aquatic Plants
                   </NavDropdown.Item>
-<h5 className="d-block d-lg-none mb-0 mt-3" style={{color:"#294085"}}>Our Products</h5>
+                  <h5
+                    className="d-block d-lg-none mb-0 mt-3"
+                    style={{ color: "#294085" }}
+                  >
+                    Our Products
+                  </h5>
                   {categories?.map((cat) => (
                     <NavDropdown.Item
                       key={cat.id}

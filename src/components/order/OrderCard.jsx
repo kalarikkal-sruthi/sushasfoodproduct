@@ -3,7 +3,6 @@ import { getOrderItems } from "../../store/orderSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { cancelOrder } from "../../store/orderSlice";
 
 import { productURL } from "../../utils/api";
 const OrderCard = ({ order = {} }) => {
@@ -12,17 +11,9 @@ const OrderCard = ({ order = {} }) => {
 
   console.log(orderId);
 
-  // const orderItems = useSelector(
-  //   (state) => state.orders?.orderItems?.[orderId] || []
-  // );
-
   const token = useSelector((state) => state.auth.token);
   const { items, loading, error } = useSelector((state) => state.order);
   console.log(items);
-
-
-
-
 
   useEffect(() => {
     if (orderId && token) {
@@ -32,17 +23,6 @@ const OrderCard = ({ order = {} }) => {
 
   if (loading) return <p>Loading order items...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
-
-const handleCancel = async (orderId) => {
-  if (!window.confirm("Cancel this order?")) return;
-  try {
-    const res = await dispatch(cancelOrder({ orderId, token })).unwrap();
-    alert(res.message || "Order cancelled successfully ✅");
-  } catch (err) {
-    alert(err.message || "Failed to cancel ❌");
-  }
-};
-
 
   return (
     <article className="order-card mb-4">
@@ -80,14 +60,7 @@ const handleCancel = async (orderId) => {
             <Col className="text-end">
               <small>ORDER #</small>
               <div>{order.order_no || "4545"}</div>
-              <div className="mt-1">
-                {/* <Button variant="outline-secondary" size="sm" className="me-2">
-                  View Order Details
-                </Button>
-                <Button variant="outline-secondary" size="sm">
-                  Invoice
-                </Button> */}
-              </div>
+              <div className="mt-1"></div>
             </Col>
           </Row>
         </Card.Header>
@@ -135,30 +108,19 @@ const handleCancel = async (orderId) => {
               )}
             </Col>
 
-            {/* Action Buttons */}
             <Col
               md={4}
               className="d-flex flex-column align-items-end justify-content-start gap-2"
-            >
-              {/* Future buttons like return/reorder */}
-            </Col>
+            ></Col>
           </Row>
 
-          {/* Divider */}
           <hr className="mt-3 mb-3" />
 
-          {/* Cancel Row */}
           <Row className="align-items-center">
             <Col className="text-end">
-           <button
-  className="btn btn-danger btn-sm"
-  onClick={() => handleCancel(order.id)}
-  disabled={loading}
->
-  {loading ? "Cancelling..." : "Cancel Order"}
-</button>
-
-
+              <button className="btn btn-danger btn-sm" disabled={loading}>
+                {loading ? "Cancelling..." : "Cancel Order"}
+              </button>
             </Col>
           </Row>
         </Card.Body>

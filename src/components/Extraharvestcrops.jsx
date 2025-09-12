@@ -113,119 +113,117 @@ export default function HomeCategories() {
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                 Further Crops from Our Farm
+                  Further Crops from Our Farm
                 </motion.h2>
               </motion.section>
             </Col>
           </Row>
 
+          <Row className="g-3 g-lg-5">
+            {services && services.length > 0 ? (
+              services.slice(0, 4).map((item) => (
+                <Col lg={6} xs={6} key={item.id} as="article">
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={cardVariants}
+                  >
+                    <motion.div whileHover={cardHover} className="h-100">
+                      <Card
+                        className="h-100 border-0 overflow-hidden"
+                        style={{
+                          boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
+                          borderRadius: "12px",
+                        }}
+                      >
+                        <Link
+                          to={`/mostharvestfromfarm/${item.id}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <Row className="g-0 h-100">
+                            <Col md={6} className="overflow-hidden">
+                              <Card.Img
+                                src={item.image}
+                                alt={item.name}
+                                className="object-fit-cover"
+                                style={{
+                                  borderRadius: "12px 0 0 12px",
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </Col>
 
-                    <Row className="g-3 g-lg-5">
-                      {services && services.length > 0 ? (
-                        services.slice(0, 4).map((item) => (
-                          <Col lg={6} xs={6} key={item.id} as="article">
-                            <motion.div
-                              initial="offscreen"
-                              whileInView="onscreen"
-                              viewport={{ once: true, margin: "-50px" }}
-                              variants={cardVariants}
-                            >
-                              <motion.div whileHover={cardHover} className="h-100">
-                                <Card
-                                  className="h-100 border-0 overflow-hidden"
+                            <Col md={6} className="d-flex flex-column">
+                              <Card.Body className="p-3 p-lg-4 d-flex flex-column justify-content-center">
+                                <Link
+                                  to={`/mostharvestfromfarm/${item.id}`}
                                   style={{
-                                    boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
-                                    borderRadius: "12px",
+                                    textDecoration: "none",
+                                    color: "inherit",
                                   }}
                                 >
-                                  <Link
-                                    to={`/mostharvestfromfarm/${item.id}`}
-                                    style={{ textDecoration: "none" }}
+                                  <Card.Title
+                                    style={{ color: "#294085" }}
+                                    className="fw-bold  mb-1 mb-lg-3"
                                   >
-                                    <Row className="g-0 h-100">
-                                      <Col md={6} className="overflow-hidden">
-                                        <Card.Img
-                                          src={item.image}
-                                          alt={item.name}
-                                          className="object-fit-cover"
-                                          style={{
-                                            borderRadius: "12px 0 0 12px",
-                                            width: "100%",
-                                            height: "100%",
-                                            objectFit: "cover",
-                                          }}
-                                        />
-                                      </Col>
-          
-                                      <Col md={6} className="d-flex flex-column">
-                                        <Card.Body className="p-3 p-lg-4 d-flex flex-column justify-content-center">
-                                          <Link
-                                            to={`/mostharvestfromfarm/${item.id}`}
-                                            style={{
-                                              textDecoration: "none",
-                                              color: "inherit",
-                                            }}
-                                          >
-                                            <Card.Title
-                                              style={{ color: "#294085" }}
-                                              className="fw-bold  mb-1 mb-lg-3"
-                                            >
-                                              {item.title}
-                                            </Card.Title>
-                                          </Link>
-                                          <Card.Text className=" text-muted">
-                                            {item.description?.slice(0, 200)}...
-                                          </Card.Text>
-          
-                                       
-                              {item.features && (
-                                <div className="d-lg-block d-none">
-                                  <h6 className="key-faeture">Key Features</h6>
-                                <ul style={{ backgroundColor: "#f8f9fa" }}>
-                                  {item.features.map((feature, i) => (
-                                    <li key={i}>{feature}</li>
-                                  ))}
-                                </ul>
-                                </div >
-                              )}
+                                    {item.title}
+                                  </Card.Title>
+                                </Link>
+                                <Card.Text className=" text-muted">
+                                  {item.description?.slice(0, 200)}...
+                                </Card.Text>
 
-                                        <Link to={`/extraharvestfromfarm/${item.link}`}>
-                                            <motion.div
-                                              whileHover={{
-                                                x: 5,
-                                                transition: { duration: 0.2 },
-                                              }}
-                                              whileTap={{ scale: 0.98 }}
-                                              className="btn  btn-responsive btn-outline align-self-start mt-auto"
-                                              style={{
-                                                borderWidth: "2px",
-                                                borderRadius: "50px",
-                                                fontWeight: "500",
-                                                border: "1px solid #294085",
-                                                backgroundColor: "#294085",
-                                                color: "#fff",
-                                              }}
-                                            >
-                                              Learn More →
-                                            </motion.div>
-                                          </Link>
-                                        </Card.Body>
-                                      </Col>
-                                    </Row>
-                                  </Link>
-                                </Card>
-                              </motion.div>
-                            </motion.div>
-                          </Col>
-                        ))
-                      ) : (
-                        <Col>
-                          <p>No data found.</p>
-                        </Col>
-                      )}
-                    </Row>
+                                {item.features && (
+                                  <div className="d-lg-block d-none">
+                                    <h6 className="key-faeture">
+                                      Key Features
+                                    </h6>
+                                    <ul style={{ backgroundColor: "#f8f9fa" }}>
+                                      {item.features.map((feature, i) => (
+                                        <li key={i}>{feature}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
 
-         
+                                <Link to={`/extraharvestfromfarm/${item.link}`}>
+                                  <motion.div
+                                    whileHover={{
+                                      x: 5,
+                                      transition: { duration: 0.2 },
+                                    }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="btn  btn-responsive btn-outline align-self-start mt-auto"
+                                    style={{
+                                      borderWidth: "2px",
+                                      borderRadius: "50px",
+                                      fontWeight: "500",
+                                      border: "1px solid #294085",
+                                      backgroundColor: "#294085",
+                                      color: "#fff",
+                                    }}
+                                  >
+                                    Learn More →
+                                  </motion.div>
+                                </Link>
+                              </Card.Body>
+                            </Col>
+                          </Row>
+                        </Link>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
+                </Col>
+              ))
+            ) : (
+              <Col>
+                <p>No data found.</p>
+              </Col>
+            )}
+          </Row>
 
           <Row>
             <Col className="text-center">

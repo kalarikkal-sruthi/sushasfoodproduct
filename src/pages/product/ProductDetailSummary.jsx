@@ -22,45 +22,51 @@ const ProductDetailSummary = ({ product }) => {
     return null;
   });
 
- const handleAddToCart = useCallback(() => {
-  if (!product) return;
+  const handleAddToCart = useCallback(() => {
+    if (!product) return;
 
-  let priceObj = null;
-  let chosenSize = null;
+    let priceObj = null;
+    let chosenSize = null;
 
-  if (product.sizes?.length === 1) {
-    // only one size → baseprices
-    priceObj = product.baseprices?.[0] || { original_price: 0, offer_price: 0 };
-    chosenSize = product.sizes[0]; // the only available size
-  } else if (product.sizes?.length > 1) {
-    // must select a size
-    if (!selectedSize) return; 
-    priceObj = selectedSize.priceObj || { original_price: selectedSize.price, offer_price: 0 };
-    chosenSize = selectedSize; // use the selected size
-  }
+    if (product.sizes?.length === 1) {
+      // only one size → baseprices
+      priceObj = product.baseprices?.[0] || {
+        original_price: 0,
+        offer_price: 0,
+      };
+      chosenSize = product.sizes[0]; // the only available size
+    } else if (product.sizes?.length > 1) {
+      // must select a size
+      if (!selectedSize) return;
+      priceObj = selectedSize.priceObj || {
+        original_price: selectedSize.price,
+        offer_price: 0,
+      };
+      chosenSize = selectedSize; // use the selected size
+    }
 
-  if (!priceObj || !chosenSize) return; // safety check
+    if (!priceObj || !chosenSize) return; // safety check
 
-  dispatch(
-    addToCart({
-      id: product.id,
-      product_name: product.product_name,
-      originalPrice: priceObj.original_price,
-      offerPrice: priceObj.offer_price,
-      selectPrice:
-        priceObj.offer_price && priceObj.offer_price > 0
-          ? priceObj.offer_price
-          : priceObj.original_price,
-      image: product.image,
-      size: chosenSize.size, 
-      sizeId: chosenSize.id, 
-      quantity: 1,
-    })
-  );
+    dispatch(
+      addToCart({
+        id: product.id,
+        product_name: product.product_name,
+        originalPrice: priceObj.original_price,
+        offerPrice: priceObj.offer_price,
+        selectPrice:
+          priceObj.offer_price && priceObj.offer_price > 0
+            ? priceObj.offer_price
+            : priceObj.original_price,
+        image: product.image,
+        size: chosenSize.size,
+        sizeId: chosenSize.id,
+        quantity: 1,
+      })
+    );
 
-  setShow(true);
-  setTimeout(() => setShow(false), 2000);
-}, [dispatch, product, selectedSize]);
+    setShow(true);
+    setTimeout(() => setShow(false), 2000);
+  }, [dispatch, product, selectedSize]);
 
   return (
     <section aria-label="Product Details" itemScope>

@@ -181,7 +181,7 @@ export default function MostHarvestcrops() {
                     transition: { duration: 0.2 },
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-outline mt-3 mt-lg-5 btn-responsive"
+                  className="btn btn-outline mt-3 mt-lg-5 "
                   style={{
                     borderRadius: "50px",
                     fontWeight: "500",

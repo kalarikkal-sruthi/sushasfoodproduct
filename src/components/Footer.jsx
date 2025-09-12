@@ -5,7 +5,7 @@ import mail from "../assets/header/mail.png";
 import phone from "../assets/header/mobile.png";
 import location from "../assets/header/location_on.png";
 import logonew from "../assets/header/logowhite.jpeg";
-import www from "../assets/header/www.png"
+import www from "../assets/header/www.png";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Youtube, Instagram, Facebook } from "react-bootstrap-icons";

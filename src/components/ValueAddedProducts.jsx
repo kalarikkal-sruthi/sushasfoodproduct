@@ -44,7 +44,10 @@ const ValueAddedProducts = () => {
   return (
     <main>
       <div className="padding-y mt-5 mt-lg-5">
-        <section aria-labelledby="value-added-products-title" className="mb-3 mb-lg-5">
+        <section
+          aria-labelledby="value-added-products-title"
+          className="mb-3 mb-lg-5"
+        >
           <header>
             <Row>
               <Col>
@@ -146,7 +149,7 @@ const ValueAddedProducts = () => {
                     transition: { duration: 0.2 },
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-outline btn-responsive"
+                  className="btn btn-outline "
                   style={{
                     borderWidth: "2px",
                     borderRadius: "50px",

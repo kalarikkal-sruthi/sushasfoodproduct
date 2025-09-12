@@ -8,24 +8,21 @@ import { Helmet } from "react-helmet-async";
 const EmptyCartCart = () => {
   return (
     <main>
-          <Helmet>
-            <title>My Cart | Susha's Food Products</title>
-            <meta
-              name="description"
-              content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
-            />
-            <link rel="canonical" href="https://myfezto.com/cart" />
-            <link rel="preload" href="https://myfezto.com/cart" as="document" />
-          </Helmet>
-    
-          
-          <Container className="mt-5">
-   
-    
+      <Helmet>
+        <title>My Cart | Susha's Food Products</title>
+        <meta
+          name="description"
+          content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
+        />
+        <link rel="canonical" href="https://myfezto.com/cart" />
+        <link rel="preload" href="https://myfezto.com/cart" as="document" />
+      </Helmet>
+
+      <Container className="mt-5">
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={7}>
             <Card className="shadow-sm border-0 text-center p-4">
-              {/* Simple inline SVG icon (no extra libs needed) */}
+             
               <div className="mx-auto mb-3" style={{ width: 72, height: 72 }}>
                 <svg
                   viewBox="0 0 24 24"
@@ -46,13 +43,13 @@ const EmptyCartCart = () => {
 
               <h3 className="fw-bold mb-2">Missing Cart items?</h3>
               <p className="text-muted mb-4">
-             Sign in to view your saved items.
+                Sign in to view your saved items.
               </p>
 
               <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                 <>
                   <div>
-                    {/* <h1 className="account-head text-start">As a Guest</h1> */}
+                   
                     <Link to="/login">
                       <motion.button
                         whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -71,7 +68,6 @@ const EmptyCartCart = () => {
                       </motion.button>
                     </Link>
                   </div>
-                
                 </>
               </div>
 

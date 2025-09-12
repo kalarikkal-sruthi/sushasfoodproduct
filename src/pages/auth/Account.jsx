@@ -27,153 +27,160 @@ function Account() {
   useEffect(() => {
     console.log("Cart items changed:", cartItems);
   }, [cartItems]);
-return (
-  <main className="res-header-top">
-    <Helmet>
-      <title>My Cart | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
-      <meta
-        name="description"
-        content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
-      />
-     <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
-      <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
-       <meta
+  return (
+    <main className="res-header-top">
+      <Helmet>
+        <title>My Cart | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <meta
+          name="description"
+          content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
+        />
+        <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
+        <link
+          rel="preload"
+          href="https://www.sushasfoodproduct.com/cart"
+          as="document"
+        />
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-    </Helmet>
+      </Helmet>
 
-     <div className="padding-top d-lg-block d-none"></div>
+      <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
       <Container className="mt-3 mt-lg-5">
-      <div className="calculation-padding">
-        <section aria-labelledby="cart-heading">
-          <Row>
-            {/* LEFT SIDE = CART (take 8 cols) */}
-            <Col md={12}>
-              {token ? (
-                <>
-                  <header className="header-bar">
-                    <Row>
-                      <Col xs={12}>
-                        <h1
-                          id="cart-heading"
-                          className="display-8 fw-bold mb-3"
-                          style={{ color: "#294085" }}
-                        >
-                          My Cart
-                          {cartItems.length === 0 ? null : cartItems.length}
-                        </h1>
-                      </Col>
-                    </Row>
-                  </header>
+        <div className="calculation-padding">
+          <section aria-labelledby="cart-heading">
+            <Row>
+              {/* LEFT SIDE = CART (take 8 cols) */}
+              <Col md={12}>
+                {token ? (
+                  <>
+                    <header className="header-bar">
+                      <Row>
+                        <Col xs={12}>
+                          <h1
+                            id="cart-heading"
+                            className="display-8 fw-bold mb-3"
+                            style={{ color: "#294085" }}
+                          >
+                            My Cart
+                            {cartItems.length === 0 ? null : cartItems.length}
+                          </h1>
+                        </Col>
+                      </Row>
+                    </header>
 
-                  <section aria-live="polite">
-                    {cartItems.length === 0 ? (
-                      <p className="text-muted">Your cart is empty.</p>
-                    ) : (
-                      <>
-                        <Row>
-                          <Col md={12}>
-                            <ul
-                              className="list-group"
-                              aria-labelledby="cart-heading"
-                            >
-                              {/* Headings row */}
-                              <li
-                                className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
-                                role="presentation"
+                    <section aria-live="polite">
+                      {cartItems.length === 0 ? (
+                        <p className="text-muted">Your cart is empty.</p>
+                      ) : (
+                        <>
+                          <Row>
+                            <Col md={12}>
+                              <ul
+                                className="list-group"
+                                aria-labelledby="cart-heading"
                               >
-                                <div style={{ width: "25%" }}>Product</div>
-                                <div style={{ width: "15%" }}>Quantity</div>
-                                <div style={{ width: "15%" }}>Price</div>
-                                <div style={{ width: "15%" }}>Total</div>
-                                <div style={{ width: "15%" }}>Action</div>
-                              </li>
-
-                              {/* Items */}
-                              {cartItems.map((item) => (
+                                {/* Headings row */}
                                 <li
-                                  key={item.id}
-                                  className="p-4 list-group-item d-flex justify-content-between align-items-center"
-                                  role="article"
-                                  aria-label={`Cart item: ${item.product_name}`}
+                                  className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
+                                  role="presentation"
                                 >
-                                  {/* Product info */}
-                                  <div style={{ width: "25%" }}>
-                                    <img
-                                      className="cart-image me-2"
-                                      src={`${productURL}${item.image}`}
-                                      alt={item.product_name}
-                                      style={{ maxWidth: "50px", height: "auto" }}
-                                    />
-                                    <br />
-                                    <span>{item.product_name}</span>
-                                  </div>
-
-                                  {/* Quantity */}
-                                  <div style={{ width: "15%" }}>
-                                    {item.quantity} ({item.size})
-                                  </div>
-
-                                  {/* Price */}
-                                  <div style={{ width: "15%" }}>
-                                    ₹ {item.price}
-                                  </div>
-
-                                  {/* Total */}
-                                  <div style={{ width: "15%" }}>
-                                    ₹ {item.price * item.quantity}
-                                  </div>
-
-                                  {/* Remove button */}
-                                  <div style={{ width: "15%" }}>
-                                    <motion.button
-                                      whileHover={{
-                                        x: 5,
-                                        transition: { duration: 0.2 },
-                                      }}
-                                      whileTap={{ scale: 0.98 }}
-                                      className="btn btn-outline btn-sm"
-                                      style={{
-                                        borderRadius: "50px",
-                                        fontWeight: "500",
-                                        border: "1px solid #d33838",
-                                        backgroundColor: "#d33838",
-                                        color: "#fff",
-                                      }}
-                                      aria-label={`Remove ${item.product_name} from cart`}
-                                      onClick={() =>
-                                        dispatch(removeFromCart(item.id))
-                                      }
-                                    >
-                                      Remove →
-                                    </motion.button>
-                                  </div>
+                                  <div style={{ width: "25%" }}>Product</div>
+                                  <div style={{ width: "15%" }}>Quantity</div>
+                                  <div style={{ width: "15%" }}>Price</div>
+                                  <div style={{ width: "15%" }}>Total</div>
+                                  <div style={{ width: "15%" }}>Action</div>
                                 </li>
-                              ))}
-                            </ul>
-                          </Col>
-                          <Col md={12}>
-                            <div className="p-4 border rounded shadow-sm bg-light">
-                              <div className="d-flex justify-content-around mb-3">
-                                <h4 className="fw-bold">Total Payable</h4>
-                                <h4 className="fw-bold">₹ {grandTotal}</h4>
-                              </div>
-                            </div>
-                          </Col>
-                        </Row>
-                      </>
-                    )}
-                  </section>
-                </>
-              ) : (
-               <EmptyCart />
-              )}
-            </Col>
 
-            {/* RIGHT SIDE = LOGIN/REGISTER/GUEST (take 4 cols) */}
-            {/* <Col md={12}>
+                                {/* Items */}
+                                {cartItems.map((item) => (
+                                  <li
+                                    key={item.id}
+                                    className="p-4 list-group-item d-flex justify-content-between align-items-center"
+                                    role="article"
+                                    aria-label={`Cart item: ${item.product_name}`}
+                                  >
+                                    {/* Product info */}
+                                    <div style={{ width: "25%" }}>
+                                      <img
+                                        className="cart-image me-2"
+                                        src={`${productURL}${item.image}`}
+                                        alt={item.product_name}
+                                        style={{
+                                          maxWidth: "50px",
+                                          height: "auto",
+                                        }}
+                                      />
+                                      <br />
+                                      <span>{item.product_name}</span>
+                                    </div>
+
+                                    {/* Quantity */}
+                                    <div style={{ width: "15%" }}>
+                                      {item.quantity} ({item.size})
+                                    </div>
+
+                                    {/* Price */}
+                                    <div style={{ width: "15%" }}>
+                                      ₹ {item.price}
+                                    </div>
+
+                                    {/* Total */}
+                                    <div style={{ width: "15%" }}>
+                                      ₹ {item.price * item.quantity}
+                                    </div>
+
+                                    {/* Remove button */}
+                                    <div style={{ width: "15%" }}>
+                                      <motion.button
+                                        whileHover={{
+                                          x: 5,
+                                          transition: { duration: 0.2 },
+                                        }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="btn btn-outline btn-sm"
+                                        style={{
+                                          borderRadius: "50px",
+                                          fontWeight: "500",
+                                          border: "1px solid #d33838",
+                                          backgroundColor: "#d33838",
+                                          color: "#fff",
+                                        }}
+                                        aria-label={`Remove ${item.product_name} from cart`}
+                                        onClick={() =>
+                                          dispatch(removeFromCart(item.id))
+                                        }
+                                      >
+                                        Remove →
+                                      </motion.button>
+                                    </div>
+                                  </li>
+                                ))}
+                              </ul>
+                            </Col>
+                            <Col md={12}>
+                              <div className="p-4 border rounded shadow-sm bg-light">
+                                <div className="d-flex justify-content-around mb-3">
+                                  <h4 className="fw-bold">Total Payable</h4>
+                                  <h4 className="fw-bold">₹ {grandTotal}</h4>
+                                </div>
+                              </div>
+                            </Col>
+                          </Row>
+                        </>
+                      )}
+                    </section>
+                  </>
+                ) : (
+                  <EmptyCart />
+                )}
+              </Col>
+
+              {/* RIGHT SIDE = LOGIN/REGISTER/GUEST (take 4 cols) */}
+              {/* <Col md={12}>
             <h4 className="mb-3 mt-5">Easily track your Orders, manage your Wishlist, and enjoy personalized Recommendations.</h4>
               <div className="d-flex flex-row gap-4 justify-content-start">
                 <div>
@@ -240,13 +247,12 @@ return (
                 </div>
               </div>
             </Col> */}
-          </Row>
-        </section>
-      </div>
-    </Container>
-  </main>
-);
-
+            </Row>
+          </section>
+        </div>
+      </Container>
+    </main>
+  );
 }
 
 export default Account;

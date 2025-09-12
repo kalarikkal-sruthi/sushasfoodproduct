@@ -27,16 +27,15 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const newItem = action.payload;
 
-      // Find by product id + size id
       const existingItem = state.items.find(
         (item) => item.id === newItem.id && item.sizeId === newItem.sizeId
       );
 
       if (existingItem) {
-        // same product + same size → increase quantity
+       
         existingItem.quantity += 1;
       } else {
-        // new product or different size → add separately
+      
         state.items.push({ ...newItem, quantity: 1 });
       }
 
@@ -52,7 +51,7 @@ const cartSlice = createSlice({
       state.items = [];
       localStorage.removeItem("cartItems");
     },
-    // sid:changes on 21 aug 2025 - increment quantity
+    
     incrementQuantity: (state, action) => {
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
@@ -61,7 +60,7 @@ const cartSlice = createSlice({
       }
     },
 
-    // sid:changes on 21 aug 2025 - decrement quantity
+  
     decrementQuantity: (state, action) => {
       const item = state.items.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {

@@ -1,5 +1,3 @@
-
-
 import "../../styles/AuthPage.css";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/authService";
@@ -69,13 +67,13 @@ const RegisterPage = () => {
       .unwrap()
       .then(() => navigate("/myaccount"))
       // .catch((error) => console.error("Registration failed", error));
-       .catch((error) => {
-    if (error.response) {
-      console.error("❌ Registration failed:", error.response.data); // 🟢 sid log
-    } else {
-      console.error("❌ Registration failed:", error);
-    }
-  });
+      .catch((error) => {
+        if (error.response) {
+          console.error("❌ Registration failed:", error.response.data); // 🟢 sid log
+        } else {
+          console.error("❌ Registration failed:", error);
+        }
+      });
   };
 
   return (
@@ -83,18 +81,18 @@ const RegisterPage = () => {
       {/* SEO Meta Tags */}
       <Helmet>
         <title>Register | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
-        
+
         <meta
           name="description"
           content="Sign up for a free account to access your personalized dashboard, track orders, save favorites, and enjoy a faster checkout experience."
         />
- <meta
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
       </Helmet>
-    <div className="padding-top"></div>
-         <div className="padding-top d-lg-block d-none"></div>
+      <div className="padding-top"></div>
+      <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
       <Container className="mt-3 mt-lg-5">
         <div className="calculation-padding">
@@ -134,7 +132,9 @@ const RegisterPage = () => {
                   {/* Name */}
                   <Row>
                     <Col xs={12}>
-                      <label htmlFor="name" className="form-label">Full Name</label>
+                      <label htmlFor="name" className="form-label">
+                        Full Name
+                      </label>
                       <input
                         id="name"
                         name="name"
@@ -144,14 +144,18 @@ const RegisterPage = () => {
                         required
                         autoComplete="name"
                       />
-                      {errors.name && <p className="text-danger">{errors.name}</p>}
+                      {errors.name && (
+                        <p className="text-danger">{errors.name}</p>
+                      )}
                     </Col>
                   </Row>
 
                   {/* Email + Mobile */}
                   <Row>
                     <Col xs={6}>
-                      <label htmlFor="email" className="form-label">Email Address</label>
+                      <label htmlFor="email" className="form-label">
+                        Email Address
+                      </label>
                       <input
                         id="email"
                         name="email"
@@ -161,10 +165,14 @@ const RegisterPage = () => {
                         required
                         autoComplete="email"
                       />
-                      {errors.email && <p className="text-danger">{errors.email}</p>}
+                      {errors.email && (
+                        <p className="text-danger">{errors.email}</p>
+                      )}
                     </Col>
                     <Col xs={6}>
-                      <label htmlFor="mobile" className="form-label">Mobile Number</label>
+                      <label htmlFor="mobile" className="form-label">
+                        Mobile Number
+                      </label>
                       <input
                         id="mobile"
                         name="mobile"
@@ -174,14 +182,18 @@ const RegisterPage = () => {
                         required
                         autoComplete="tel"
                       />
-                      {errors.mobile && <p className="text-danger">{errors.mobile}</p>}
+                      {errors.mobile && (
+                        <p className="text-danger">{errors.mobile}</p>
+                      )}
                     </Col>
                   </Row>
 
                   {/* Password + Gender */}
                   <Row>
                     <Col xs={6}>
-                      <label htmlFor="password" className="form-label">Password</label>
+                      <label htmlFor="password" className="form-label">
+                        Password
+                      </label>
                       <input
                         id="password"
                         name="password"
@@ -191,10 +203,14 @@ const RegisterPage = () => {
                         required
                         autoComplete="new-password"
                       />
-                      {errors.password && <p className="text-danger">{errors.password}</p>}
+                      {errors.password && (
+                        <p className="text-danger">{errors.password}</p>
+                      )}
                     </Col>
                     <Col xs={6}>
-                      <label htmlFor="gender" className="form-label">Gender</label>
+                      <label htmlFor="gender" className="form-label">
+                        Gender
+                      </label>
                       <select
                         id="gender"
                         name="gender"
@@ -210,7 +226,9 @@ const RegisterPage = () => {
                         <option value="Male">Male</option>
                         <option value="Other">Other</option>
                       </select>
-                      {errors.gender && <p className="text-danger">{errors.gender}</p>}
+                      {errors.gender && (
+                        <p className="text-danger">{errors.gender}</p>
+                      )}
                     </Col>
                   </Row>
 
@@ -244,4 +262,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-

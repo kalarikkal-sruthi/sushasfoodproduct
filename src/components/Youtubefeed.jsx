@@ -1,4 +1,4 @@
-import { Row, Col,Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
@@ -12,9 +12,8 @@ import { Link } from "react-router-dom";
 const Youtubefeed = ({ data }) => {
   if (!data || data.length === 0) return null;
   console.log(data);
-  
- 
- const itemVariants = {
+
+  const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
@@ -22,7 +21,7 @@ const Youtubefeed = ({ data }) => {
       transition: { duration: 0.6, ease: "easeOut" },
     },
   };
-    const containerVariants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -32,95 +31,94 @@ const Youtubefeed = ({ data }) => {
 
   return (
     <main aria-labelledby="youtube-feed-heading">
-    
-      <div  className="padding-y mt-5">
-      <section  aria-label="YouTube Video Gallery">
-        <header className="header-bar">
-          <Row className="mb-3">
-            <Col>
-               <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={containerVariants}
-              >
-                 <header>
-                                  <motion.h1
-                                    id="our-story-heading"
-                                    className="heading-res fw-bold mb-3"
-                                    style={{ color: "#294085" }}
-                                    variants={itemVariants}
-                                  >
-                                      Check Our Youtube Feed
-                                  </motion.h1>
-                                </header>
-            
-              </motion.div>
-               
-            </Col>
-          </Row>
-        </header>
+      <div className="padding-y mt-5">
+        <section aria-label="YouTube Video Gallery">
+          <header className="header-bar">
+            <Row className="mb-3">
+              <Col>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  variants={containerVariants}
+                >
+                  <header>
+                    <motion.h1
+                      id="our-story-heading"
+                      className="heading-res fw-bold mb-3"
+                      style={{ color: "#294085" }}
+                      variants={itemVariants}
+                    >
+                      Check Our Youtube Feed
+                    </motion.h1>
+                  </header>
+                </motion.div>
+              </Col>
+            </Row>
+          </header>
 
-        <section
-          aria-label="YouTube video thumbnails carousel"
-          className="mt-4"
-        >
-          <Swiper
-            pagination={{ type: "fraction" }}
-            spaceBetween={20}
-            slidesPerView={5}
-            navigation={true}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            modules={[Pagination, Navigation, Autoplay]}
-             breakpoints={{
-              320: {
-                slidesPerView: 3,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 15,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1440: {
-                slidesPerView: 5,
-                spaceBetween: 25,
-              },
-            }}
-            className="mySwiper"
+          <section
+            aria-label="YouTube video thumbnails carousel"
+            className="mt-4"
           >
-            {data.map((item, idx) => (
-              <SwiperSlide key={item.id || idx}>
-                <figure>
-                  <Link
-                   to={item.video}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Watch YouTube video titled "${item.title || `Video ${idx + 1}`}"`}
-                  >
-                    <img
-                      className="youtube-img"
-                      src={`${imgURLVideo}${item.image}`}
-                      alt={item.title || `YouTube video thumbnail ${idx + 1}`}
-                      loading="lazy"
-                      style={{ width: "100%", borderRadius: "8px" }}
-                    />
-                  </Link>
-                  {item.title && (
-                    <figcaption className="mt-2 text-muted">
-                      {item.title}
-                    </figcaption>
-                  )}
-                </figure>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+            <Swiper
+              pagination={{ type: "fraction" }}
+              spaceBetween={20}
+              slidesPerView={5}
+              navigation={true}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              loop={true}
+              modules={[Pagination, Navigation, Autoplay]}
+              breakpoints={{
+                320: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 15,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                1440: {
+                  slidesPerView: 5,
+                  spaceBetween: 25,
+                },
+              }}
+              className="mySwiper"
+            >
+              {data.map((item, idx) => (
+                <SwiperSlide key={item.id || idx}>
+                  <figure>
+                    <Link
+                      to={item.video}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Watch YouTube video titled "${
+                        item.title || `Video ${idx + 1}`
+                      }"`}
+                    >
+                      <img
+                        className="youtube-img"
+                        src={`${imgURLVideo}${item.image}`}
+                        alt={item.title || `YouTube video thumbnail ${idx + 1}`}
+                        loading="lazy"
+                        style={{ width: "100%", borderRadius: "8px" }}
+                      />
+                    </Link>
+                    {item.title && (
+                      <figcaption className="mt-2 text-muted">
+                        {item.title}
+                      </figcaption>
+                    )}
+                  </figure>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </section>
         </section>
-      </section>
       </div>
     </main>
   );

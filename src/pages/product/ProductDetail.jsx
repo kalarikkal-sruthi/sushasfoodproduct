@@ -60,14 +60,19 @@ const ProductDetail = () => {
   };
 
   return (
-      <main aria-labelledby="category-products-heading"  className="res-header-top">
+    <main
+      aria-labelledby="category-products-heading"
+      className="res-header-top"
+    >
       {/* SEO Meta Tags */}
       <Helmet>
         <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-                  />
-        <title>{product.product_name} | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>
+          {product.product_name} | SUSHA'S FOODS | Prakash Farm | Organic Food
+        </title>
         <meta
           name="description"
           content={product.description?.slice(0, 150) || "Product detail page"}
@@ -109,7 +114,7 @@ const ProductDetail = () => {
       </Helmet>
 
       <div className="padding-y mt-3 mt-lg-5">
-         <div className="padding-top d-lg-block d-none"></div>
+        <div className="padding-top d-lg-block d-none"></div>
         <div className="padding-top"></div>
         <article aria-label="Product Details Section">
           <Row className="align-items-start">

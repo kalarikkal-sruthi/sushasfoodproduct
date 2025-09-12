@@ -56,26 +56,29 @@ const CategoryProductList = () => {
   };
 
   return (
-    <main aria-labelledby="category-products-heading" className="res-header-top">
+    <main
+      aria-labelledby="category-products-heading"
+      className="res-header-top"
+    >
       <Helmet>
-                    <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
-                    <meta
-                      name="description"
-                      content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
-                    />
-                    <meta
-                      name="keywords"
-                      content="farm products, organic produce, value added products, fresh produce, healthy food"
-                    />
-                      
-                  <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-                  />
-                </Helmet>
+        <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
       <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
-      <div className="padding-y padding-y mt-3 mt-lg-5">
+      <div className="padding-y  mt-3 mt-lg-5">
         <h1 id="category-products-heading" className="visually-hidden">
           Browse Products by Category
         </h1>
@@ -98,14 +101,14 @@ const CategoryProductList = () => {
                   aria-label={`Browse all products in ${category.name}`}
                   state={{ categoryIndex }}
                 >
-                  <motion.h2
+                  <motion.h1
                     variants={scrollVariants}
                     id={`category-title-${category.id}`}
                     className="fw-bold"
                     style={{ color: "#294085" }}
                   >
                     {category.name || "Untitled Category"}
-                  </motion.h2>
+                  </motion.h1>
                 </Link>
               </motion.div>
             </header>
@@ -118,11 +121,15 @@ const CategoryProductList = () => {
               <Row aria-label={`Products in ${category.name}`}>
                 {category.products?.slice(0, 4).map((product) => {
                   return (
-                    <Col key={product.id} xs={6} md={3} className="mb-2 mb-ld-0"> 
+                    <Col
+                      key={product.id}
+                      xs={6}
+                      md={3}
+                      className="mb-2 mb-ld-0"
+                    >
                       <article
                         style={{
                           borderRadius: "12px",
-                          
                         }}
                       >
                         <Link
@@ -161,7 +168,7 @@ const CategoryProductList = () => {
                 <motion.span
                   whileHover={{ x: 5, transition: { duration: 0.2 } }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-outline btn-responsive"
+                  className="btn btn-outline "
                   style={buttonStyle}
                 >
                   View All →

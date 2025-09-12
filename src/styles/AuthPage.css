@@ -1,6 +1,7 @@
 .auth-container {
   display: flex;
   overflow-x: hidden;
+  width: 50%;
 }
 
 .auth-left,
@@ -11,8 +12,7 @@
   justify-content: center;
 }
 
-.auth-left {
-}
+.auth-left {}
 
 .auth-image {
   width: 60%;
@@ -98,7 +98,8 @@
     max-width: 80%;
   }
 }
-.form-control:focus{
+
+.form-control:focus {
   border: 2px solid #000;
   box-shadow: none;
 }
@@ -111,8 +112,9 @@
   border-radius: 6px;
   background-color: #fff;
   transition: all 0.3s ease;
-  appearance: none; /* Remove default browser arrow */
- 
+  appearance: none;
+  /* Remove default browser arrow */
+
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 12px 8px;

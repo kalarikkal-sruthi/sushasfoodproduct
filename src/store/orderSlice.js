@@ -4,7 +4,7 @@ import {
   createOrderApi,
   getOrdersApi,
   getOrderItemsApi,
-  cancelOrderApi,
+  // cancelOrderApi,
   // returnOrderItemApi
 } from "./orderService";
 
@@ -49,18 +49,6 @@ export const getOrderItems = createAsyncThunk(
       return await getOrderItemsApi(orderId, token);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
-// Cancel order thunk
-export const cancelOrder = createAsyncThunk(
-  "orders/cancelOrder",
-  async ({ orderId, token }, { rejectWithValue }) => {
-    try {
-      return await cancelOrderApi(orderId, token);
-    } catch (err) {
-      return rejectWithValue(err.response?.data || err.message);
     }
   }
 );
@@ -123,32 +111,6 @@ const orderSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(getOrderItems.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-
-    .addCase(cancelOrder.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(cancelOrder.fulfilled, (state, action) => {
-        state.loading = false;
-
-        // Case 1: API returns updated order object
-        if (action.payload?.id) {
-          state.orders = state.orders.map((order) =>
-            order.id === action.payload.id ? action.payload : order
-          );
-        }
-
-        // Case 2: API returns only message (no updated order)
-        else {
-          const cancelledOrderId = action.meta.arg.orderId;
-          state.orders = state.orders.map((order) =>
-            order.id === cancelledOrderId ? { ...order, status: 2 } : order
-          );
-        }
-      })
-      .addCase(cancelOrder.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

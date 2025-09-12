@@ -47,21 +47,21 @@ export default function Mostcultivatedfull() {
   return (
     <main className="res-header-top">
       <Helmet>
-              <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
-              <meta
-                name="description"
-                content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
-              />
-              <meta
-                name="keywords"
-                content="farm products, organic produce, value added products, fresh produce, healthy food"
-              />
-                
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-            />
-          </Helmet>
+        <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
       <div
         className="padding-y mt-3  mt-lg-5 "
         as="section"
