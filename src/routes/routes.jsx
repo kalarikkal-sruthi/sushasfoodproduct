@@ -22,6 +22,7 @@ import Privacypolicy from "../pages/companyinformation/Privacypolicy";
 import Termsconditions from "../pages/companyinformation/Termsconditions";
 import Refundcancellationpolicy from "../pages/companyinformation/Refundcancellationpolicy";
 import Shippingpolicy from "../pages/companyinformation/Shippingpolicy";
+import OrderConfirmation from "../pages/checkout/OrderConfirmation";
 
 const AppRoutes = () => {
   return (
@@ -66,7 +67,7 @@ const AppRoutes = () => {
 
         {/* Checkout */}
         <Route path="/checkoutpage" element={<CheckoutPage />} />
-
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
         {/* Company info */}
         <Route path="/aboutus" element={<Aboutfarm />} />
         <Route path="/privacy-policy" element={<Privacypolicy />} />

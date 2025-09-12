@@ -166,9 +166,7 @@ function CartPage() {
                                   <motion.button
                                     whileTap={{ scale: 0.95 }}
                                     className="btn btn-sm btn-outline-secondary me-2"
-                                    onClick={() =>
-                                      dispatch(decrementQuantity(item.id))
-                                    }
+                                   onClick={() => dispatch(decrementQuantity({ id: item.id, sizeId: item.sizeId }))}
                                     disabled={item.quantity === 1}
                                   >
                                     -
@@ -177,9 +175,7 @@ function CartPage() {
                                   <motion.button
                                     whileTap={{ scale: 0.95 }}
                                     className="btn btn-sm btn-outline-secondary ms-2"
-                                    onClick={() =>
-                                      dispatch(incrementQuantity(item.id))
-                                    }
+                                   onClick={() => dispatch(incrementQuantity({ id: item.id, sizeId: item.sizeId }))}
                                   >
                                     +
                                   </motion.button>
@@ -218,9 +214,7 @@ function CartPage() {
                                     backgroundColor: "#d33838",
                                     color: "#fff",
                                   }}
-                                  onClick={() =>
-                                    dispatch(removeFromCart(item.id))
-                                  }
+                                 onClick={() => dispatch(removeFromCart({ id: item.id, sizeId: item.sizeId }))}
                                 >
                                   Remove →
                                 </motion.button>

@@ -41,16 +41,16 @@ const EmptyCartCart = () => {
                 </svg>
               </div>
 
-              <h3 className="fw-bold mb-2">Missing Cart items?</h3>
+              <h3 className="fw-bold mb-2">Your cart is empty</h3>
               <p className="text-muted mb-4">
-                Sign in to view your saved items.
+               Add items to your cart to complete a purchase.
               </p>
 
               <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                 <>
                   <div>
                    
-                    <Link to="/login">
+                    <Link to="/productsbycategory">
                       <motion.button
                         whileHover={{ x: 5, transition: { duration: 0.2 } }}
                         whileTap={{ scale: 0.98 }}
@@ -64,7 +64,7 @@ const EmptyCartCart = () => {
                         }}
                         aria-label={`Login`}
                       >
-                        Login →
+                         Continue Shopping →
                       </motion.button>
                     </Link>
                   </div>

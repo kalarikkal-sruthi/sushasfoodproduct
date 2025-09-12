@@ -8,6 +8,7 @@ import { createOrderApi } from "../../store/orderService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
 import { getUser } from "../../store/authService";
+import { clearCart } from "../../store/cartSlice";
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
@@ -96,7 +97,13 @@ const CheckoutPage = React.memo(() => {
     try {
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
-        navigate("/myaccount");
+        navigate("/order-confirmation");
+        dispatch(clearCart())
+      setActiveTab(activeTab);
+      
+    // 100ms delay
+        // window.location.reload().
+        // window.location.href = "/myaccount";
         setActiveTab(activeTab);
       } else if (paymentMethod === "RAZORPAY") {
         // TODO: Razorpay integration

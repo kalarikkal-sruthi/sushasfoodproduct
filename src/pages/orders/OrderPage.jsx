@@ -30,8 +30,10 @@ const OrderPage = () => {
   } = useSelector((state) => state.auth || {});
   const ordersState = useSelector((state) => state.order);
   const orders = ordersState?.orders || [];
+  console.log(orders);
+  
 
-  const cartItems = useSelector((state) => state.cart.items);
+  // const cartItems = useSelector((state) => state.cart.items);
 
   const [activeTab, setActiveTab] = useState("address");
 
@@ -237,13 +239,13 @@ const OrderPage = () => {
           <Col xs={12} lg={9}>
             <Suspense fallback={<p>Loading...</p>}>
               {activeTab === "orders" &&
-                orders.map((order) => (
+               
                   <OrderCard
-                    key={order.id}
-                    order={order}
-                    products={cartItems}
+                    
+                   
+                   
                   />
-                ))}
+               }
               {activeTab === "address" &&
                 (addressMode === "list" ? (
                   <Row className="mb-4 g-3">
