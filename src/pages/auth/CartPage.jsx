@@ -1,7 +1,6 @@
-import  { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-
   decrementQuantity,
   incrementQuantity,
   removeFromCart,
@@ -9,7 +8,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { productURL } from "../../utils/api";
@@ -21,7 +20,7 @@ function CartPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-console.log(cartItems);
+  console.log(cartItems);
 
   const token = useSelector((state) => state.auth.token);
   console.log("token:", token);
@@ -43,7 +42,10 @@ console.log(cartItems);
   // Compute total only once using useMemo
   const grandTotal = useMemo(
     () =>
-      cartItems.reduce((total, item) => total + item.selectPrice * item.quantity, 0),
+      cartItems.reduce(
+        (total, item) => total + item.selectPrice * item.quantity,
+        0
+      ),
     [cartItems]
   );
 
@@ -52,7 +54,7 @@ console.log(cartItems);
   }, [cartItems]);
 
   return (
-    <main>
+    <main className="res-header-top">
       <Helmet>
         <title>My Cart | Susha's Food Products</title>
         <meta
@@ -61,11 +63,15 @@ console.log(cartItems);
         />
         <link rel="canonical" href="https://myfezto.com/cart" />
         <link rel="preload" href="https://myfezto.com/cart" as="document" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Helmet>
 
-      <div className="padding-top" />
-      <div className="padding-top" />
-      <Container className="mt-5">
+      <div className="padding-top d-lg-block d-none"></div>
+      <div className="padding-top"></div>
+      <Container className="mt-3 mt-lg-5">
         <div class="calculation-padding">
           <section aria-labelledby="cart-heading">
             <header className="header-bar">
@@ -85,125 +91,122 @@ console.log(cartItems);
             <section aria-live="polite">
               {cartItems.length === 0 ? (
                 <EmptyCartCart />
-            ) : (
+              ) : (
                 <>
                   <Row>
                     <Col md={8}>
                       <ul className="list-group" aria-labelledby="cart-heading">
-                        {/* Headings row */}
+                        {/* Headings row (hidden on mobile, visible on md+) */}
                         <li
-                          className="fs-5 list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
+                          className="fs-5 list-group-item d-none d-md-flex fw-bold bg-light"
                           role="presentation"
                         >
-                          <div style={{ width: "25%" }}>Product</div>
-                          <div style={{ width: "15%" }}>Quantity</div>
-                          <div style={{ width: "15%" }}>Price</div>
-                          <div style={{ width: "15%" }}>Total</div>
-                          <div style={{ width: "15%" }}>Action</div>
+                          <div className="col-3">Product</div>
+                          <div className="col-2">Quantity</div>
+                          <div className="col-2">Price</div>
+                          <div className="col-2">Total</div>
+                          <div className="col-3">Action</div>
                         </li>
 
                         {/* Items */}
                         {cartItems.map((item) => (
                           <li
                             key={item.id}
-                            className="p-4 list-group-item d-flex justify-content-between align-items-center"
+                            className="p-3 list-group-item"
                             role="article"
                             aria-label={`Cart item: ${item.product_name}`}
                           >
-                            {/* Product info */}
-                            <div style={{ width: "25%" }}>
-                              <img
-                                className="cart-image me-2"
-                                src={`${productURL}${item.image}`}
-                                alt={item.product_name}
-                                style={{ maxWidth: "50px", height: "auto" }}
-                              />
-                              <br></br>
-                              <span>{item.product_name}</span>
-                            </div>
-
-                            {/* Quantity */}
-                            {/* <div style={{ width: "15%" }}>
-                              {item.size}
-                              <br></br>
-                              {item.quantity}
-                            </div> */}
-
-                            {/* Sid:changes on 21 aug 2025 - added quantity control buttons and logic */}
-                            <div style={{ width: "15%" }}>
-                              {/* Product Size * Quantity */}
-                              <div>
-                                <small className="text-muted">
-                                  {item.quantity} ({item.size})
-                                </small>
+                            <div className="row align-items-center">
+                              {/* Product info */}
+                              <div className="col-12 col-md-3 d-flex align-items-center mb-2 mb-md-0">
+                                <img
+                                  className="cart-image me-2"
+                                  src={`${productURL}${item.image}`}
+                                  alt={item.product_name}
+                                  style={{ maxWidth: "50px", height: "auto" }}
+                                />
+                                <span>{item.product_name}</span>
                               </div>
 
-                              {/* Quantity Controls */}
-                              <div className="d-flex align-items-center mt-2">
-                                <motion.button
-                                  whileTap={{ scale: 0.95 }}
-                                  className="btn btn-sm btn-outline-secondary me-2"
-                                  onClick={() =>
-                                    dispatch(decrementQuantity(item.id))
-                                  }
-                                  disabled={item.quantity === 1} // prevent going below 1
-                                  aria-label={`Decrease quantity of ${item.product_name}`}
-                                >
-                                  -
-                                </motion.button>
+                              {/* Quantity */}
+                              <div className="col-12 col-md-2 mb-2 mb-md-3">
+                                <p className=" mt-2 d-block d-md-none mb-0">
+                                  Quantity:
+                                </p>
+                                <div>
+                                  <small className="text-muted">
+                                    {item.quantity} ({item.size})
+                                  </small>
+                                </div>
+                                <div className="d-flex align-items-center mt-2">
+                                  <motion.button
+                                    whileTap={{ scale: 0.95 }}
+                                    className="btn btn-sm btn-outline-secondary me-2"
+                                    onClick={() =>
+                                      dispatch(decrementQuantity(item.id))
+                                    }
+                                    disabled={item.quantity === 1}
+                                  >
+                                    -
+                                  </motion.button>
+                                  <span>{item.quantity}</span>
+                                  <motion.button
+                                    whileTap={{ scale: 0.95 }}
+                                    className="btn btn-sm btn-outline-secondary ms-2"
+                                    onClick={() =>
+                                      dispatch(incrementQuantity(item.id))
+                                    }
+                                  >
+                                    +
+                                  </motion.button>
+                                </div>
+                              </div>
 
-                                <span>{item.quantity}</span>
+                              {/* Price */}
+                              <div className="col-6 col-md-2 mb-2 mb-md-0">
+                               <p className=" d-block d-md-none mb-0">
+                                  Price:
+                                </p>
+                                ₹ {item.selectPrice}
+                              </div>
 
+                              {/* Total */}
+                              <div className="col-6 col-md-2 mb-2 mb-md-0">
+                                 <p className=" d-block d-md-none mb-0">
+                                  Total:
+                                </p>
+                                ₹ {item.selectPrice * item.quantity}
+                              </div>
+
+                              {/* Remove button */}
+                              <div className="col-6 col-md-3 text-md-end">
                                 <motion.button
-                                  whileTap={{ scale: 0.95 }}
-                                  className="btn btn-sm btn-outline-secondary ms-2"
+                                  whileHover={{
+                                    x: 5,
+                                    transition: { duration: 0.2 },
+                                  }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="btn btn-sm"
+                                  style={{
+                                    borderRadius: "50px",
+                                    fontWeight: "500",
+                                    border: "1px solid #d33838",
+                                    backgroundColor: "#d33838",
+                                    color: "#fff",
+                                  }}
                                   onClick={() =>
-                                    dispatch(incrementQuantity(item.id))
+                                    dispatch(removeFromCart(item.id))
                                   }
-                                  aria-label={`Increase quantity of ${item.product_name}`}
                                 >
-                                  +
+                                  Remove →
                                 </motion.button>
                               </div>
-                            </div>
-
-                            {/* Price */}
-                            <div style={{ width: "15%" }}>₹ {item.selectPrice}</div>
-
-                            {/* Total */}
-                            <div style={{ width: "15%" }}>
-                              ₹ {item.selectPrice * item.quantity}
-                            </div>
-
-                            {/* Remove button */}
-                            <div style={{ width: "15%" }}>
-                              <motion.button
-                                whileHover={{
-                                  x: 5,
-                                  transition: { duration: 0.2 },
-                                }}
-                                whileTap={{ scale: 0.98 }}
-                                className="btn btn-outline btn-sm"
-                                style={{
-                                  borderRadius: "50px",
-                                  fontWeight: "500",
-                                  border: "1px solid #d33838",
-                                  backgroundColor: "#d33838",
-                                  color: "#fff",
-                                }}
-                                aria-label={`Remove ${item.product_name} from cart`}
-                                onClick={() =>
-                                  dispatch(removeFromCart(item.id))
-                                }
-                              >
-                                Remove →
-                              </motion.button>
                             </div>
                           </li>
                         ))}
                       </ul>
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} className="mt-3 mt-lg-0">
                       <div className=" p-4 border rounded shadow-sm bg-light">
                         <h3 className="mb-4  fw-bold">Price Details</h3>
 

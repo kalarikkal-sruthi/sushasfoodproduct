@@ -61,7 +61,7 @@ const ProductDetailGallery = ({ product }) => {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2 mb-3"
+        className="mySwiper2 mb-0 mb-lg-3"
       >
         {allImages.map((img, index) => (
           <SwiperSlide key={index} style={mainSlideStyle}>
@@ -112,7 +112,7 @@ const ProductDetailGallery = ({ product }) => {
 
       {videoMapping[product?.product_name] && (
 <>
-          <header className="mt-5" aria-labelledby="category-heading">
+          <header className="mt-3 mt-lg-5" aria-labelledby="category-heading">
         <h3
           id="category-heading"
           className="display-12 fw-bold"

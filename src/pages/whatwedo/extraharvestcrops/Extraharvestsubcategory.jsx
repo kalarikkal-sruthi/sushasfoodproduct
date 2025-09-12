@@ -65,7 +65,7 @@ function Extraharvestsubcategory() {
         as="section"
         aria-labelledby="extra harvest crops from our palnt"
       >
-       <div className="padding-top d-lg-block d=none"></div>
+       <div className="padding-top d-lg-block d-none"></div>
         <div className="padding-top"></div>
 
        
