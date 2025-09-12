@@ -26,18 +26,20 @@ export const getOrderItemsApi = async (orderId, token) => {
     console.log("API Response for order items:", response.data);
     return response.data;
   } catch (error) {
-    console.error("API Error fetching order items:", error.response?.data || error.message);
+    console.error(
+      "API Error fetching order items:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
 // Cancel order
+// api/orderApi.js
 export const cancelOrderApi = async (orderId, token) => {
   const response = await api.post(
     `/order/cancel/${orderId}`,
     {},
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
+    { headers: { Authorization: `Bearer ${token}` } }
   );
   return response.data;
 };

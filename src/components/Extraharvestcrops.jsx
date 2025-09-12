@@ -121,7 +121,7 @@ export default function HomeCategories() {
 
           <Row className="g-5">
             {services.map((cat, index) => (
-              <Col lg={6} key={index}>
+              <Col md={6} xs={6} key={index}>
                 <motion.div
                   initial="offscreen"
                   whileInView="onscreen"

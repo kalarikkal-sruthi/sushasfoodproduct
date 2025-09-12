@@ -21,7 +21,7 @@ const Aboutfarm = () => {
   return (
     <main>
       <div className="padding-top"></div>
-      <div className="padding-y mt-5">
+      <div className="padding-y mt-1 mt-lg-5">
         <section aria-labelledby="about-heading" className="about-farm-section">
           <Row className="align-items-center justify-content-center">
             <Col md={7} className="pe-md-5">

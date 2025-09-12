@@ -67,7 +67,7 @@ const authSlice = createSlice({
       })
       // ⬇⬇⬇ SID CHANGE 4: Update address in store
       .addCase(updateAddress.fulfilled, (state, action) => {
-        const updated = action.payload; // already the address object
+        const updated = action.payload; 
         state.addresses = state.addresses.map((addr) =>
           addr.id === updated.id ? updated : addr
         );

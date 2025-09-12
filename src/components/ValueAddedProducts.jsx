@@ -58,7 +58,7 @@ const itemVariants = {
               >
                  <motion.h1
                                     id="value-added-products-title"
-                  className="display-4 fw-bold"
+                  className="display-2  display-lg-4 fw-bold"
                   style={{ color: "#294085" }}
                                   variants={itemVariants}
                                 >
@@ -80,7 +80,7 @@ const itemVariants = {
               ?.slice()
               
               .map((category, index) => (
-                <Col key={category.id || index} md={6}>
+                <Col key={category.id || index} md={6} xs={6}>
                   <article
                     aria-labelledby={`category-${category.id}-title`}
                     className="h-100"

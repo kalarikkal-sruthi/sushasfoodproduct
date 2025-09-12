@@ -71,10 +71,10 @@ export default function MostHarvestcrops() {
             </Row>
           </header>
 
-          <Row className="g-5">
+          <Row className="g-3 g-lg-5">
             {homeData && homeData.length > 0 ? (
               homeData.slice(0, 4).map((item) => (
-                <Col lg={6} key={item.id} as="article">
+                <Col lg={6} xs={6} key={item.id} as="article">
                   <motion.div
                     initial="offscreen"
                     whileInView="onscreen"

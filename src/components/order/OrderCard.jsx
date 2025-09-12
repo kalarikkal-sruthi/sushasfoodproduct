@@ -1,47 +1,52 @@
 import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
 import { getOrderItems } from "../../store/orderSlice";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { cancelOrder } from "../../store/orderSlice";
+
+import { productURL } from "../../utils/api";
 const OrderCard = ({ order = {} }) => {
-  
+  const dispatch = useDispatch();
+  const orderId = order.id;
 
-// console.log(order);
+  console.log(orderId);
 
-  
-
- const dispatch = useDispatch();
-const orderDetails = order.orderdetails;
-const orderId= orderDetails.map(detail => detail.order_id);
-
-// console.log(orderId);
-
-  const orderItems = useSelector(
-    (state) => state.orders?.orderItems?.[orderId] || []
-  );
+  // const orderItems = useSelector(
+  //   (state) => state.orders?.orderItems?.[orderId] || []
+  // );
 
   const token = useSelector((state) => state.auth.token);
+  const { items, loading, error } = useSelector((state) => state.order);
+  console.log(items);
 
-  const handleCancel = (orderId) => {
-    dispatch(cancelOrder({ orderId, token }));
-  };
+
+
+
 
   useEffect(() => {
-   
-    
-    if (orderId) {
-      // console.log("Dispatching getOrderItems for order:", orderId);
-      dispatch(getOrderItems({orderId, token}));
+    if (orderId && token) {
+      dispatch(getOrderItems({ orderId, token }));
     }
-  }, [dispatch, orderId,token]);
+  }, [dispatch, orderId, token]);
 
-  // console.log("Order Items for order", orderId, ":", orderItems);
+  if (loading) return <p>Loading order items...</p>;
+  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+
+const handleCancel = async (orderId) => {
+  if (!window.confirm("Cancel this order?")) return;
+  try {
+    const res = await dispatch(cancelOrder({ orderId, token })).unwrap();
+    alert(res.message || "Order cancelled successfully ✅");
+  } catch (err) {
+    alert(err.message || "Failed to cancel ❌");
+  }
+};
+
 
   return (
     <article className="order-card mb-4">
       <Card>
-       
         <Card.Header as="header" className="order-header">
           <Row className="align-items-center">
             <Col>
@@ -55,17 +60,21 @@ const orderId= orderDetails.map(detail => detail.order_id);
             <Col>
               <small>SHIP TO</small>
               <div>
-              <Dropdown>
-                <Dropdown.Toggle variant="link" className="ship-to-toggle p-0" style={{textDecoration:'none',color:'black'}}>
-                  {order.billing_first_name}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item>{order.address}</Dropdown.Item>
-                  <Dropdown.Item>{order.billing_city}</Dropdown.Item>
-                  <Dropdown.Item>{order.billing_state}</Dropdown.Item>
-                  <Dropdown.Item>{order.billing_post_code}</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="link"
+                    className="ship-to-toggle p-0"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    {order.billing_first_name}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>{order.address}</Dropdown.Item>
+                    <Dropdown.Item>{order.billing_city}</Dropdown.Item>
+                    <Dropdown.Item>{order.billing_state}</Dropdown.Item>
+                    <Dropdown.Item>{order.billing_post_code}</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
             </Col>
             <Col className="text-end">
@@ -92,33 +101,27 @@ const orderId= orderDetails.map(detail => detail.order_id);
           </Row>
 
           <Row>
-          
             <Col md={12}>
-              {orderItems.length > 0 ? (
-                orderItems.map((prod) => (
+              {items.length > 0 ? (
+                items.map((prod) => (
                   <Row
                     key={prod.id || prod.product_id}
                     className="align-items-center mb-3"
                   >
-                    <Col xs={4}>
+                    <Col xs={3}>
                       <img
-                        src={prod.image || "/placeholder.png"}
-                        alt={`${prod.name || prod.product_name} - ${
-                          prod.variant || ""
-                        }`}
-                        loading="lazy"
-                        className="product-image"
+                        src={`${productURL}${prod.product.image}`}
+                        style={{ width: "80%" }}
                       />
                     </Col>
-                    <Col xs={8}>
+                    <Col xs={9}>
                       <div className="product-name">
-                        {prod.name || prod.product_name}
+                        {prod.product.product_name}
                       </div>
                       <small className="text-muted">
-                        {prod.variant || prod.size || ""} - {prod.quantity}{" "}
-                        Piece
+                        Quantity : {prod.quantity}
                       </small>
-                      <div>₹{prod.price || prod.original_price}</div>
+                      <div> Price : ₹{prod.price || prod.original_price}</div>
                       {prod.oldPrice && prod.oldPrice !== prod.price && (
                         <small className="text-muted text-decoration-line-through">
                           ₹{prod.price}
@@ -147,7 +150,15 @@ const orderId= orderDetails.map(detail => detail.order_id);
           {/* Cancel Row */}
           <Row className="align-items-center">
             <Col className="text-end">
-              <Button onClick={() => handleCancel(orderId)} className="btn-orange">Cancel Order</Button>
+           <button
+  className="btn btn-danger btn-sm"
+  onClick={() => handleCancel(order.id)}
+  disabled={loading}
+>
+  {loading ? "Cancelling..." : "Cancel Order"}
+</button>
+
+
             </Col>
           </Row>
         </Card.Body>

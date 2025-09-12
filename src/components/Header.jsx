@@ -16,6 +16,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 export default function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+console.log(token);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -118,9 +119,9 @@ export default function Header() {
                   </Badge>
                 )}
               </Nav.Link>
- <Nav.Link as={Link} to="/productsbycategory">
-                  Shop Now
-                </Nav.Link>
+              <Nav.Link as={Link} to="/productsbycategory">
+                Shop Now
+              </Nav.Link>
               <Navbar.Toggle
                 aria-controls="offcanvasNavbar"
                 style={{ border: "none" }}
@@ -146,7 +147,7 @@ export default function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="ms-auto align-items-start align-items-lg-center">
-                <Nav.Link  className="icon-img d-none d-lg-block">
+                <Nav.Link className="icon-img d-none d-lg-block">
                   <Searchbar />
                 </Nav.Link>
                 <Nav.Link as={Link} to="/">
@@ -156,7 +157,11 @@ export default function Header() {
                   |
                 </Nav.Link>
 
-                <NavDropdown title="Farm Activities" id="farm-dropdown" className="d-none  d-lg-block">
+                <NavDropdown
+                  title="Farm Activities"
+                  id="farm-dropdown"
+                  className="d-none  d-lg-block"
+                >
                   <NavDropdown.Item as={Link} to="/mostharvestfromfarm">
                     Best Yields Plants
                   </NavDropdown.Item>
@@ -201,14 +206,17 @@ export default function Header() {
                 <Nav.Link to="" className="d-none d-lg-block">
                   |
                 </Nav.Link>
-                <NavDropdown title="Product Categories" id="product-dropdown"  className="d-none  d-lg-block">
+                <NavDropdown
+                  title="Product Categories"
+                  id="product-dropdown"
+                  className="d-none  d-lg-block"
+                >
                   {loading && <span>Loading...</span>}
                   {error && <span style={{ color: "red" }}>{error}</span>}
                   {categories?.map((cat) => (
                     <NavDropdown.Item
                       key={cat.id}
                       as={Link}
-                      
                       to={`/productsbycategory/${cat.id}`}
                       state={{
                         categoryName: cat.name,
@@ -219,9 +227,8 @@ export default function Header() {
                   ))}
                 </NavDropdown>
 
-
-                 <div className="d-lg-none  d-block">
-                 <NavDropdown.Item as={Link} to="/mostharvestfromfarm">
+                <div className="d-lg-none  d-block">
+                  <NavDropdown.Item as={Link} to="/mostharvestfromfarm">
                     Best Yields Plants
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/extraharvestfromfarm/Fruits">
@@ -260,10 +267,9 @@ export default function Header() {
                   >
                     Aquatic Plants
                   </NavDropdown.Item>
-                 
-                {categories?.map((cat) => (
-                   <NavDropdown.Item
-                    
+
+                  {categories?.map((cat) => (
+                    <NavDropdown.Item
                       key={cat.id}
                       as={Link}
                       to={`/productsbycategory/${cat.id}`}
@@ -274,7 +280,7 @@ export default function Header() {
                       {cat.name}
                     </NavDropdown.Item>
                   ))}
-             </div>     
+                </div>
                 <Nav.Link to="" className="d-none d-lg-block">
                   |
                 </Nav.Link>
