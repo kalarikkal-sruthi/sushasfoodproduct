@@ -56,7 +56,7 @@ function CartPage() {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>My Cart | Susha's Food Products</title>
+        <title>My Cart | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."

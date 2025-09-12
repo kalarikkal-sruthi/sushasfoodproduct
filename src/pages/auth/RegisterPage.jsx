@@ -79,22 +79,27 @@ const RegisterPage = () => {
   };
 
   return (
-    <main>
+    <main className="res-header-top">
+      {/* SEO Meta Tags */}
       <Helmet>
-        <title>Register | Create Your Account - MySite</title>
+        <title>Register | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        
         <meta
           name="description"
           content="Sign up for a free account to access your personalized dashboard, track orders, save favorites, and enjoy a faster checkout experience."
         />
-        <meta name="robots" content="index, follow" />
+ <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Helmet>
-       <div className="padding-top"></div>
+    <div className="padding-top"></div>
+         <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
-      <div className="padding-top"></div>
-      <Container className="mt-5 ">
+      <Container className="mt-3 mt-lg-5">
         <div className="calculation-padding">
           <section aria-labelledby="register-page-heading">
-            <div className="auth-container w-50 m-auto">
+            <div className="auth-container  m-auto">
               {/* Left Section - Image */}
               {/* <div className="auth-left fade-in-left">
                 <img

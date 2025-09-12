@@ -28,20 +28,24 @@ function Account() {
     console.log("Cart items changed:", cartItems);
   }, [cartItems]);
 return (
-  <main>
+  <main className="res-header-top">
     <Helmet>
-      <title>My Cart | Susha's Food Products</title>
+      <title>My Cart | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
       <meta
         name="description"
         content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
       />
-      <link rel="canonical" href="https://myfezto.com/cart" />
-      <link rel="preload" href="https://myfezto.com/cart" as="document" />
+     <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
+      <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
+       <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
     </Helmet>
 
-    <div className="padding-top" />
-    <div className="padding-top" />
-    <Container className="mt-5">
+     <div className="padding-top d-lg-block d-none"></div>
+      <div className="padding-top"></div>
+      <Container className="mt-3 mt-lg-5">
       <div className="calculation-padding">
         <section aria-labelledby="cart-heading">
           <Row>

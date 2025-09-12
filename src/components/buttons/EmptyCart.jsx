@@ -8,19 +8,10 @@ import { Helmet } from "react-helmet-async";
 const EmptyCart = () => {
   return (
     <main>
-          <Helmet>
-            <title>My Cart | Susha's Food Products</title>
-            <meta
-              name="description"
-              content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
-            />
-            <link rel="canonical" href="https://myfezto.com/cart" />
-            <link rel="preload" href="https://myfezto.com/cart" as="document" />
-          </Helmet>
+         
     
           
-          <Container className="mt-5">
-   
+       
     
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={7}>
@@ -52,7 +43,7 @@ const EmptyCart = () => {
               <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                 <>
                   <div>
-                    <h1 className="account-head text-start">As a Guest</h1>
+                    <h1 className="account-head text-start">Login Your Account</h1>
                     <Link to="/login">
                       <motion.button
                         whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -72,7 +63,7 @@ const EmptyCart = () => {
                     </Link>
                   </div>
                   <div>
-                    <h1 className="account-head text-start">As a Guest</h1>
+                    <h1 className="account-head text-start">Register Your Account</h1>
                     <Link to="/register">
                       <motion.button
                         whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -91,7 +82,7 @@ const EmptyCart = () => {
                       </motion.button>
                     </Link>
                   </div>
-                  <div>
+                  {/* <div>
                     <h1 className="account-head text-start">As a Guest</h1>
                     <Link to="/guest">
                       <motion.button
@@ -110,7 +101,7 @@ const EmptyCart = () => {
                         Continue As Guest →
                       </motion.button>
                     </Link>
-                  </div>
+                  </div> */}
                 </>
               </div>
 
@@ -122,7 +113,6 @@ const EmptyCart = () => {
             </Card>
           </Col>
         </Row>
-      </Container>
     </main>
   );
 };

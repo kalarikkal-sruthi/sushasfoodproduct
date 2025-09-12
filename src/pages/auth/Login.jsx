@@ -59,24 +59,29 @@ const LoginPage = () => {
   };
 
   return (
-    <main>
+    <main className="res-header-top">
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Login | Susha's Food Product</title>
+        <title>Login | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Securely log in t Susha's Food Product to manage orders, view your profile, and enjoy personalized offers."
         />
         <link rel="canonical" href="https://www.sushasfoodproduct.com/login" />
+         <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Helmet>
 
       {/* Page spacing */}
       <div className="padding-top"></div>
+         <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
-      <div className="padding-top"></div>
-      <Container className="mt-5">
+      <Container className="mt-3 mt-lg-5">
+           <div class="calculation-padding" style={{}}>
         <section aria-labelledby="login-title" className="calculation-padding">
-          <div className="auth-container w-50 m-auto">
+          <div className="auth-container   m-auto">
             {/* Left side illustration */}
             {/* <div className="auth-left fade-in-left">
               <img
@@ -95,7 +100,7 @@ const LoginPage = () => {
                     <Col xs={12}>
                       <h1
                         id="login-title"
-                        className="display-6 fw-bold mb-3"
+                        className="display-6 fw-bold mb-1 mb-lg-3"
                         style={{ color: "#294085" }}
                       >
                         Login to Your Account
@@ -197,6 +202,7 @@ const LoginPage = () => {
             </div>
           </div>
         </section>
+        </div>
       </Container>
     </main>
   );
