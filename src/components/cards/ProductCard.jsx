@@ -26,11 +26,12 @@ export default function ProductCard({ product }) {
       />
       <h2
         id={`product-title-${product.id}`}
-        style={{ fontSize: "1.5rem", marginTop: "0.8rem" }}
+        style={{ }}
+        className="product-category-title"
       >
         {product.product_name}
       </h2>
-      <p style={{ fontWeight: "bold", color: "#000" }}>
+      <p className="product-price" style={{ fontWeight: "bold", color: "#000" }}>
         Price: ₹{product.baseprices?.[0]?.original_price ?? "N/A"}
       </p>
 
@@ -40,7 +41,8 @@ export default function ProductCard({ product }) {
           transition: { duration: 0.2 },
         }}
         whileTap={{ scale: 0.98 }}
-        className="btn btn-outline "
+        className="btn btn-outline  btn-responsive
+"
         style={{
           borderRadius: "50px",
           fontWeight: "500",

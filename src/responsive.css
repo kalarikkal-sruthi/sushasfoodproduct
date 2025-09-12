@@ -60,6 +60,25 @@
 .crop-detail-section{
     padding: 20px;
 }
+.card-title{
+    font-size: 16px !important;
+}
+.heading-res{
+    font-size: 24px;
+}
+h2.value-added-product-head{
+    font-size: 20px;
+}
+p.value-added-product-para{
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.product-category-title{
+    font-size: 14px;
+}
+.product-price{
+   font-size: 16px;
+}
 }
 @media (min-width: 576px) and (max-width: 767.98px) {  } 
 @media (min-width: 768px) and (max-width: 991.98px) { } 

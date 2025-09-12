@@ -109,7 +109,7 @@ export default function MostHarvestcrops() {
                             </Col>
 
                             <Col md={6} className="d-flex flex-column">
-                              <Card.Body className="p-2 p-lg-4 d-flex flex-column justify-content-center">
+                              <Card.Body className="p-3 p-lg-4 d-flex flex-column justify-content-center">
                                 <Link
                                   to={`/mostharvestfromfarm/${item.id}`}
                                   style={{
@@ -119,7 +119,7 @@ export default function MostHarvestcrops() {
                                 >
                                   <Card.Title
                                     style={{ color: "#294085" }}
-                                    className="fw-bold fs-lg-2  fs-4 mb-1 mb-lg-3"
+                                    className="fw-bold  mb-1 mb-lg-3"
                                   >
                                     {item.name}
                                   </Card.Title>

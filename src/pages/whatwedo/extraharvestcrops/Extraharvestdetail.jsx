@@ -8,6 +8,7 @@ import { imgURLMostHarvest ,whatinfarmsGalleryURL} from "../../../utils/api";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 // import main from "../../../assets/whatwedofarm/1.jpeg";
 // import main2 from "../../../assets/whatwedofarm/2.jpeg";
+import { Helmet } from "react-helmet-async";
 
 export default function Extraharvestdetail() {
   const dispatch = useDispatch();
@@ -28,11 +29,31 @@ export default function Extraharvestdetail() {
   if (!single) return <p>No data found</p>;
 
   return (
-  <>
-     <div className="padding-top"></div>
-      <div className="padding-top"></div>
+  <main className="res-header-top">
+           <Helmet>
+                   <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+                   <meta
+                     name="description"
+                     content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+                   />
+                   <meta
+                     name="keywords"
+                     content="farm products, organic produce, value added products, fresh produce, healthy food"
+                   />
+                     
+                 <meta
+                   name="viewport"
+                   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                 />
+               </Helmet>
+    <div
+          className="padding-y mt-3  mt-lg-5 "
+        as="section"
+        aria-labelledby="extra harvest crops from our palnt"
+      >
+       <div className="padding-top d-lg-block d=none"></div>
+        <div className="padding-top"></div>
 
-      <div className="padding-y mt-5">
         <section
           aria-labelledby="crop-detail-title"
           className="crop-detail-section"
@@ -71,14 +92,26 @@ export default function Extraharvestdetail() {
                 key={single.id}
                 src={`${imgURLMostHarvest}${single.image}`}
                 alt={single.name}
-                className="img-fluid rounded shadow "
+               className="img-fluid rounded shadow  mb-2 mb-lg-0"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               />
             </Col>
+            <Col md={4} className="mb-3">
+              {single.images?.[0] && (
+                <motion.img
+                  src={`${whatinfarmsGalleryURL}${single.images[0].image}`}
+                  alt={single.name}
+                  className="img-fluid rounded shadow vh-75 "
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                />
+              )}
+            </Col>
           </Row>
-          <Row className="mt-5">
+          <Row className="mt-2 mt-lg-3">
             <Col md={12}>
               <p>{single.description}</p>
               {single.description1 && <p>{single.description1}</p>}
@@ -88,21 +121,10 @@ export default function Extraharvestdetail() {
             </Col>
           </Row>
           <Row className="align-items-center ">
-            <Col md={4} className="mb-3">
-              {single.images?.[0] && (
-                <motion.img
-                  src={`${whatinfarmsGalleryURL}${single.images[0].image}`}
-                  alt={single.name}
-                  className="img-fluid rounded shadow vh-75 mt-5"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-              )}
-            </Col>
+            
           </Row>
 
-          <Row className="mt-5">
+          <Row className="">
             <Col md={12}>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -122,8 +144,8 @@ export default function Extraharvestdetail() {
             </Col>
           </Row>
 
-          <Row className="align-items-center mt-3">
-            <Col md={12} className="mb-3">
+           <Row className="align-items-center mt-3 mt-lg-1">
+            <Col md={12} className="mb-3 mb-lg-1">
               {single.images?.length > 0 && (
                 <motion.img
                   src={`${whatinfarmsGalleryURL}${
@@ -140,7 +162,7 @@ export default function Extraharvestdetail() {
           </Row>
         </section>
       </div>
-    </>
+    </main>
   );
 }
 

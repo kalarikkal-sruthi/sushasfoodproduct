@@ -67,7 +67,7 @@ export default function Mostcultivatedfull() {
         as="section"
         aria-labelledby="crops-heading"
       >
-        <div className="padding-top"></div>
+        <div className="padding-top d-lg-block d=none"></div>
         <div className="padding-top"></div>
 
         <section>

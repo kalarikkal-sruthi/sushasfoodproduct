@@ -45,14 +45,14 @@ const Youtubefeed = ({ data }) => {
                 variants={containerVariants}
               >
                  <header>
-                                  <motion.h2
+                                  <motion.h1
                                     id="our-story-heading"
-                                    className="display-5 fw-bold mb-3"
+                                    className="heading-res fw-bold mb-3"
                                     style={{ color: "#294085" }}
                                     variants={itemVariants}
                                   >
                                       Check Our Youtube Feed
-                                  </motion.h2>
+                                  </motion.h1>
                                 </header>
             
               </motion.div>
@@ -73,6 +73,24 @@ const Youtubefeed = ({ data }) => {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={true}
             modules={[Pagination, Navigation, Autoplay]}
+             breakpoints={{
+              320: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 15,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1440: {
+                slidesPerView: 5,
+                spaceBetween: 25,
+              },
+            }}
             className="mySwiper"
           >
             {data.map((item, idx) => (

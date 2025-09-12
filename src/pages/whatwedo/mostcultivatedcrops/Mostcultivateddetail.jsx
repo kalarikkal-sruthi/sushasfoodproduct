@@ -43,7 +43,7 @@ export default function Mostcultivateddetail() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
       </Helmet>
-      <div className="padding-top "></div>
+      <div className="padding-top  d-lg-block d=none"></div>
       <div className="padding-top"></div>
 
       <div className="padding-y mt-3 mt-lg-5">

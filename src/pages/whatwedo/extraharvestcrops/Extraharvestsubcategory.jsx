@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { fetchExtraHarvestByCategory } from "../../../store/extraHarvestSlice";
 import { imgURLMostHarvest } from "../../../utils/api";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
 
 
 function Extraharvestsubcategory() {
@@ -42,10 +43,33 @@ function Extraharvestsubcategory() {
     },
   };
  return (
-  <main>
-    <div className="padding-top"></div>
-    <div className="padding-top"></div>
-    <div  className="padding-y mt-5">
+   <main className="res-header-top">
+           <Helmet>
+                   <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+                   <meta
+                     name="description"
+                     content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+                   />
+                   <meta
+                     name="keywords"
+                     content="farm products, organic produce, value added products, fresh produce, healthy food"
+                   />
+                     
+                 <meta
+                   name="viewport"
+                   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                 />
+               </Helmet>
+    <div
+          className="padding-y mt-3  mt-lg-5 "
+        as="section"
+        aria-labelledby="extra harvest crops from our palnt"
+      >
+       <div className="padding-top d-lg-block d=none"></div>
+        <div className="padding-top"></div>
+
+       
+         
       <Row className="mb-0">
         <Col>
           <motion.section
@@ -73,9 +97,9 @@ function Extraharvestsubcategory() {
         ]}
       />
 
-      <Row className="g-5 mt-3">
+      <Row className="g-3  g-lg-5 mt-3">
         {categoryData?.map((item) => (
-          <Col md={4} key={item.id}>
+          <Col md={4} xs={6} key={item.id}>
             <motion.div whileHover={{ y: -5 }}>
               <Link
                 to={`/extraharvestfromfarm/detail/${item.id}`}
@@ -110,7 +134,7 @@ function Extraharvestsubcategory() {
                       className="mt-3"
                     >
                       <span
-                        className="btn btn-outline"
+                        className="btn btn-outline btn-responsive" 
                         style={{
                           borderWidth: "2px",
                           borderRadius: "50px",

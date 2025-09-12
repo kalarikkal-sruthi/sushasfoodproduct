@@ -43,8 +43,8 @@ const ValueAddedProducts = () => {
   };
   return (
     <main>
-      <div className="padding-y mt-2 mt-lg-5">
-        <section aria-labelledby="value-added-products-title" className="mb-5">
+      <div className="padding-y mt-5 mt-lg-5">
+        <section aria-labelledby="value-added-products-title" className="mb-3 mb-lg-5">
           <header>
             <Row>
               <Col>
@@ -56,7 +56,7 @@ const ValueAddedProducts = () => {
                 >
                   <motion.h1
                     id="value-added-products-title"
-                    className="display-6  display-lg-4 fw-bold"
+                    className="heading-res fw-bold"
                     style={{ color: "#294085" }}
                     variants={itemVariants}
                   >
@@ -73,7 +73,7 @@ const ValueAddedProducts = () => {
           </header>
 
           {/* Product Categories */}
-          <Row className="g-5 mt-4 justify-content-center">
+          <Row className="g-3 g-lg-5 mt-2 mt-lg-4 justify-content-center">
             {categories
               ?.slice()
 
@@ -135,7 +135,7 @@ const ValueAddedProducts = () => {
 
           {/* View All Button */}
           <Row>
-            <Col className="text-center mt-5">
+            <Col className="text-center mt-3 mt-lg-5">
               <Link
                 to="/productsbycategory"
                 aria-label="View all value added products"
@@ -146,7 +146,7 @@ const ValueAddedProducts = () => {
                     transition: { duration: 0.2 },
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-outline"
+                  className="btn btn-outline btn-responsive"
                   style={{
                     borderWidth: "2px",
                     borderRadius: "50px",

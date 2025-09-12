@@ -57,7 +57,7 @@ const Ourstory = () => {
                 <header>
                   <motion.h1
                     id="our-story-heading"
-                    className="display-6  display-lg-4 fw-bold mb-1 mb-lg-3"
+                    className="heading-res fw-bold mb-1 mb-lg-3"
                     style={{ color: "#294085" }}
                     variants={itemVariants}
                   >
