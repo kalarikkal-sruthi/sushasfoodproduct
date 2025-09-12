@@ -1,4 +1,10 @@
 @media (max-width: 575.98px) { 
+    :root {
+  line-height: 1;
+ 
+  font-size: 12px;
+ 
+}
 .logo-img{
     width: 60px;
     margin: 0px;
@@ -21,13 +27,28 @@
 }
 
 .padding-top{
-    padding-top: 30px;
+    padding-top: 20px;
 }
 .padding-y{
-    padding: 0 30px;
+    padding: 0 25px;
 }
 .key-feature-card img{
     width: 25%;
+}
+
+.certificate-main-div img{
+ max-height: 200px;
+                     
+}
+.swiper-button-prev, .swiper-button-next{
+    width: 20px !important;
+    height: 20px !important;
+}
+.swiper-button-prev:after, .swiper-button-next:after{
+    font-size: 10px !important;
+}
+.key-feature-card{
+    padding: 10px;
 }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {  } 

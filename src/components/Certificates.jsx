@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, A11y} from "swiper/modules";
+import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
 import key1 from "../assets/ourkey/icon1.png";
 import key2 from "../assets/ourkey/icon2.png";
 import key3 from "../assets/ourkey/icon3.png";
@@ -59,7 +59,7 @@ function Certificate({ data }) {
 
   return (
     <main>
-       <div  className="padding-y mt-4">
+      <div className="padding-y mt-4">
         <section aria-labelledby="certificates-heading">
           <motion.section
             initial="offscreen"
@@ -69,7 +69,7 @@ function Certificate({ data }) {
             <motion.h2
               variants={scrollVariants}
               id="certificates-heading"
-              className="fw-bold mb-4"
+              className="fw-bold mb-2 mb-lg-4"
               style={{ color: "#5caf47" }}
             >
               Our Recognized Certificates
@@ -77,7 +77,7 @@ function Certificate({ data }) {
           </motion.section>
 
           <Swiper
-             modules={[Pagination, Navigation, Autoplay, A11y,]}
+            modules={[Pagination, Navigation, Autoplay, A11y]}
             spaceBetween={20}
             slidesPerView={3}
             loop={true}
@@ -86,22 +86,23 @@ function Certificate({ data }) {
             className="mySwiper"
             aria-label="Certificates carousel"
             breakpoints={{
-    320: {   
-      slidesPerView: 1,
-      spaceBetween: 10,
-    },
-    640: {  
-      slidesPerView: 2,
-      spaceBetween: 15,
-    },
-    1024: {  
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    1440: {  
-      slidesPerView: 4,
-      spaceBetween: 25,
-    },}}
+              320: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 15,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1440: {
+                slidesPerView: 4,
+                spaceBetween: 25,
+              },
+            }}
           >
             {data.map((item, index) => {
               const certTitle = item.title || `Certificate ${index + 1}`;
@@ -110,13 +111,7 @@ function Certificate({ data }) {
                   <figure
                     className="certificate-main-div text-center"
                     style={{
-                      width: "100%",
-                      height:"auto",
-                      maxHeight: "400px",
-                      // objectFit:'contain',
-                      // objectFit: "fill",
-                      // margin: "0 auto",
-                      borderRadius: "12px",
+                    
                     }}
                   >
                     <img
@@ -125,14 +120,7 @@ function Certificate({ data }) {
                       alt={`${certTitle} - Organic & Sustainable Farming Certification`}
                       loading="lazy"
                       style={{
-                          maxHeight: "400px",
-                        width: "100%",
-                        height:"auto",
-                      // maxHeight: "400px",
-                      objectFit:'fill',
-                    
-                        // height:"400px",
-                        borderRadius: "12px",
+                     
                       }}
                     />
                     {item.title && (

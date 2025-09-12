@@ -47,7 +47,7 @@ const Ourstory = () => {
       <div className="padding-y ">
         <section aria-labelledby="our-story-heading">
           <Row className="align-items-center justify-content-center">
-            <Col md={12} className="pe-md-5 mb-3 mb-lg-5">
+            <Col md={12} className="pe-md-5 mb-2 mb-lg-5">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -57,7 +57,7 @@ const Ourstory = () => {
                 <header>
                   <motion.h1
                     id="our-story-heading"
-                    className="display-6  display-lg-4 fw-bold mb-3"
+                    className="display-6  display-lg-4 fw-bold mb-1 mb-lg-3"
                     style={{ color: "#294085" }}
                     variants={itemVariants}
                   >
@@ -105,7 +105,7 @@ const Ourstory = () => {
             <motion.h2
               variants={scrollVariants}
               id="benefits-heading"
-              className="fw-bold mb-4"
+              className="display-10 display-lg-8  fw-bold mb-2 mb-lg-4"
               style={{ color: "#5caf47" }}
             >
               Factors Contributing to Our Farming Success
@@ -113,7 +113,7 @@ const Ourstory = () => {
 
             <Row className="">
               {benefits.map((item, index) => (
-                <Col md={3} xs={6} className="mb-4" key={index}>
+                <Col md={3} xs={6} className="mb-2 mb-lg-4" key={index}>
                   <div className="d-flex align-items-baseline">
                     <motion.span
                       className="me-2"
