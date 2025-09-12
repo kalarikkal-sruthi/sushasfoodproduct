@@ -14,14 +14,12 @@
     font-size: 12px;
 }
 .nav-bar{
-  height: 100px;
+  height: 115px;
 }
 .video{
-    margin-top: 100px;
+    margin-top: 115px;
 }
-.navbar-toggler:focus{
-    border: none;
-}
+
 .padding-top{
     padding-top: 30px;
 }
@@ -36,3 +34,8 @@
 @media (min-width: 768px) and (max-width: 991.98px) { } 
 @media (min-width: 992px) and (max-width: 1199.98px) {  }
 @media (min-width: 1200px) {  } 
+
+.navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

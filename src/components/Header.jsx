@@ -16,7 +16,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 export default function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-console.log(token);
+  console.log(token);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -44,7 +44,7 @@ console.log(token);
   return (
     <div>
       <div>
-        <Navbar fixed="top" expand="lg" className="nav-bar padding-sm-2 ">
+        <Navbar fixed="top" expand="lg" className="nav-bar p-2 p-lg-2 ">
           <Navbar.Brand to="#home">
             <Nav.Link as={Link} to="/">
               <img className="logo-img" src={logo} alt="susha's food product" />
@@ -156,7 +156,7 @@ console.log(token);
                 <Nav.Link to="" className="d-none d-lg-block">
                   |
                 </Nav.Link>
-
+   
                 <NavDropdown
                   title="Farm Activities"
                   id="farm-dropdown"
@@ -228,6 +228,7 @@ console.log(token);
                 </NavDropdown>
 
                 <div className="d-lg-none  d-block">
+                  <h5 className="d-block d-lg-none mb-0 mt-3" style={{color:"#294085"}}>Farm Activities</h5>
                   <NavDropdown.Item as={Link} to="/mostharvestfromfarm">
                     Best Yields Plants
                   </NavDropdown.Item>
@@ -267,7 +268,7 @@ console.log(token);
                   >
                     Aquatic Plants
                   </NavDropdown.Item>
-
+<h5 className="d-block d-lg-none mb-0 mt-3" style={{color:"#294085"}}>Our Products</h5>
                   {categories?.map((cat) => (
                     <NavDropdown.Item
                       key={cat.id}
