@@ -71,9 +71,14 @@ const CheckoutPage = React.memo(() => {
 async function openRazorpay(orderData) {
   try {
     const { data } = await axios.post("https://admin.sushasfoodproducts.com/api/create-order", {
-      amount: orderData.total_amount,
+      amount: orderData.amount,
+     
+      
     });
+console.log(data);
 
+   
+    
     const options = {
       key: data.rzp_live_RFNxpVLvSSFqUQ,
       amount: data.amount,
