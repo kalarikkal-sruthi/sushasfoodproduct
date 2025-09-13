@@ -72,7 +72,6 @@ async function openRazorpay(orderData) {
   try {
     const { data } = await axios.post("https://admin.sushasfoodproducts.com/api/create-order", {
       amount: orderData.amount,
-     
       
     });
 console.log(data);
