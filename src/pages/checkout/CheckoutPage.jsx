@@ -8,7 +8,9 @@ import { createOrderApi } from "../../store/orderService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
 import { getUser } from "../../store/authService";
+import axios from "axios";
 import { clearCart } from "../../store/cartSlice";
+
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
@@ -65,6 +67,37 @@ const CheckoutPage = React.memo(() => {
     }
   }, [addresses]);
 
+  
+async function openRazorpay(orderData) {
+  try {
+    const { data } = await axios.post("https://admin.sushasfoodproducts.com/api/create-order", {
+      amount: orderData.total_amount,
+    });
+
+    const options = {
+      key: data.rzp_live_RFNxpVLvSSFqUQ,
+      amount: data.amount,
+      currency: data.currency,
+      order_id: data.order_id,
+      name: "Your Store",
+      description: "Order Payment",
+      handler: async function (response) {
+        await axios.post("https://admin.sushasfoodproducts.com/api/verify-payment", {
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature,
+        });
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (err) {
+    console.error("Error opening Razorpay:", err);
+  }
+}
+
+
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
       setPopupMessage("Please select an address before placing order.");
@@ -79,6 +112,7 @@ const CheckoutPage = React.memo(() => {
     }
 
     const orderData = {
+       amount : subtotal,
       user_id: userId,
       address: selectedAddressId,
       special_instructions: "vvv",
@@ -91,22 +125,21 @@ const CheckoutPage = React.memo(() => {
         product_prize_id: item.priceId || null,
       })),
     };
-
     console.log("Order Data Sent:", orderData);
 
+ 
     try {
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
         navigate("/order-confirmation");
-        dispatch(clearCart())
-      setActiveTab(activeTab);
-      
-    // 100ms delay
+        dispatch(clearCart());
+        setActiveTab(activeTab);
+        // 100ms delay
         // window.location.reload().
         // window.location.href = "/myaccount";
         setActiveTab(activeTab);
       } else if (paymentMethod === "RAZORPAY") {
-        // TODO: Razorpay integration
+       openRazorpay(orderData);
       }
     } catch (err) {
       console.error("Order Error:", err);

@@ -58,3 +58,15 @@ export const returnOrderItemApi = async (orderItemId, reason, token) => {
   );
   return response.data;
 };
+
+
+export async function createRazorpayOrder(amount) {
+  try {
+    const { data } = await api.post("/api/create-order", { amount });
+    console.log("Order Created:", data); 
+    return data;
+  } catch (err) {
+    console.error("Create order failed", err);
+    throw err;
+  }
+}
