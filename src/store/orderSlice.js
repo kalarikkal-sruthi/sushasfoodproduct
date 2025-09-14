@@ -4,9 +4,10 @@ import {
   createOrderApi,
   getOrdersApi,
   getOrderItemsApi,
-  // cancelOrderApi,
+  cancelOrderApi,
   // returnOrderItemApi
 } from "./orderService";
+
 
 // --- Utility: get token from state or localStorage ---
 const getToken = (getState) => {
@@ -53,15 +54,36 @@ export const getOrderItems = createAsyncThunk(
   }
 );
 
+
+
+
+export const cancelOrder = createAsyncThunk(
+  "orders/cancelOrder",
+  async ({ orderId, token }, { rejectWithValue }) => {
+    try {
+      const response = await cancelOrderApi(orderId, token);
+      // return both the API data and the orderId
+      return { orderId, data: response };
+
+      
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to cancel order"
+      );
+    }
+  }
+);
+
+
 // --- Slice ---
 const orderSlice = createSlice({
   name: "orders",
   initialState: {
     orders: [],
-    items: [],
+    items: {},
     loading: {
-      items: false,
       orders: false,
+      items: false,
       cancel: false,
     },
     error: null,
@@ -102,16 +124,41 @@ const orderSlice = createSlice({
       })
 
       // --- Get Order Items ---
-      .addCase(getOrderItems.pending, (state) => {
-        state.loading = true;
+     .addCase(getOrderItems.pending, (state) => {
+  state.loading.items = true;
+  state.error = null;
+})
+.addCase(getOrderItems.fulfilled, (state, action) => {
+  state.loading.items = false;
+  const { orderId, items } = action.payload; 
+  state.items[orderId] = items;  // ✅ store items under the orderId
+})
+.addCase(getOrderItems.rejected, (state, action) => {
+  state.loading.items = false;
+  state.error = action.payload;
+})
+
+  .addCase(cancelOrder.pending, (state) => {
+        state.loading.cancel = true;
         state.error = null;
       })
-      .addCase(getOrderItems.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items = action.payload;
-      })
-      .addCase(getOrderItems.rejected, (state, action) => {
-        state.loading = false;
+     .addCase(cancelOrder.fulfilled, (state, action) => {
+  state.loading.cancel = false;
+
+  const { orderId } = action.payload;
+
+  // ✅ find and mark the cancelled order
+  const orderIndex = state.orders.findIndex((o) => o.id === orderId);
+  if (orderIndex !== -1) {
+    state.orders[orderIndex] = {
+      ...state.orders[orderIndex],
+      status: "cancelled",
+    };
+  }
+})
+
+      .addCase(cancelOrder.rejected, (state, action) => {
+        state.loading.cancel = false;
         state.error = action.payload;
       });
   },

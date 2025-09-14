@@ -24,7 +24,7 @@ export const getOrderItemsApi = async (orderId, token) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     console.log("API Response for order items:", response.data);
-    return response.data;
+    return { orderId, items: response.data };
   } catch (error) {
     console.error(
       "API Error fetching order items:",
@@ -59,11 +59,10 @@ export const returnOrderItemApi = async (orderItemId, reason, token) => {
   return response.data;
 };
 
-
 export async function createRazorpayOrder(amount) {
   try {
     const { data } = await api.post("/api/create-order", { amount });
-    console.log("Order Created:", data); 
+    console.log("Order Created:", data);
     return data;
   } catch (err) {
     console.error("Create order failed", err);

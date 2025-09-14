@@ -17,7 +17,7 @@ const EmptyCartCart = () => {
         <link rel="canonical" href="https://myfezto.com/cart" />
         <link rel="preload" href="https://myfezto.com/cart" as="document" />
       </Helmet>
-
+     
       <Container className="mt-5">
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={7}>

@@ -11,7 +11,6 @@ import { getUser } from "../../store/authService";
 import axios from "axios";
 import { clearCart } from "../../store/cartSlice";
 
-
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,40 +66,52 @@ const CheckoutPage = React.memo(() => {
     }
   }, [addresses]);
 
+  async function openRazorpay(orderData) {
+    try {
+      const { data } = await axios.post(
+        "https://admin.sushasfoodproducts.com/api/create-order",
+        {
+          amount: orderData.amount,
+        }
+      );
+      console.log("data",data);
+
+ const options = {
+  key: data.key,               // Razorpay key from backend
+  amount: data.amount,         // in paise
+  currency: data.currency,     
+  order_id: data.order_id,     // Razorpay order ID from backend
+  name: "Sushas Food Products",
+  description: "Order Payment",
+  handler: async function (response) {
+    // This runs when payment succeeds
+    const verifyRes = await axios.post(
+      "https://admin.sushasfoodproducts.com/api/verify-payment",
+      {
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_signature: response.razorpay_signature,
+      }
+    );
+
+    if (verifyRes.data.success) {
+      console.log("✅ Payment verified");
+      // clear cart, redirect, show success page
+    } else {
+      console.log("❌ Payment verification failed");
+    }
+  },
   
-async function openRazorpay(orderData) {
-  try {
-    const { data } = await axios.post("https://admin.sushasfoodproducts.com/api/create-order", {
-      amount: orderData.amount,
-      
-    });
-console.log(data);
-
-   
-    
-    const options = {
-      key: data.rzp_live_RFNxpVLvSSFqUQ,
-      amount: data.amount,
-      currency: data.currency,
-      order_id: data.order_id,
-      name: "Your Store",
-      description: "Order Payment",
-      handler: async function (response) {
-        await axios.post("https://admin.sushasfoodproducts.com/api/verify-payment", {
-          razorpay_order_id: response.razorpay_order_id,
-          razorpay_payment_id: response.razorpay_payment_id,
-          razorpay_signature: response.razorpay_signature,
-        });
-      },
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-  } catch (err) {
-    console.error("Error opening Razorpay:", err);
+  theme: {
+    color: "#5caf47",
+  },
+};
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      console.error("Error opening Razorpay:", err);
+    }
   }
-}
-
 
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
@@ -116,7 +127,7 @@ console.log(data);
     }
 
     const orderData = {
-       amount : subtotal,
+      amount: subtotal,
       user_id: userId,
       address: selectedAddressId,
       special_instructions: "vvv",
@@ -131,7 +142,6 @@ console.log(data);
     };
     console.log("Order Data Sent:", orderData);
 
- 
     try {
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
@@ -143,7 +153,7 @@ console.log(data);
         // window.location.href = "/myaccount";
         setActiveTab(activeTab);
       } else if (paymentMethod === "RAZORPAY") {
-       openRazorpay(orderData);
+        openRazorpay(orderData);
       }
     } catch (err) {
       console.error("Order Error:", err);

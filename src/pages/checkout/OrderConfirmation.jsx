@@ -50,6 +50,7 @@ function OrderConfirmation() {
         />
       </Helmet>
       <div className="padding-top"></div>
+      <div className="padding-top"></div>
       <div className="padding-top d-lg-block d-none"></div>
 
       <Container className="mt-3 mt-lg-5">
