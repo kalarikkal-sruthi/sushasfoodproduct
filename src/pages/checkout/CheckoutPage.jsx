@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Card, Form, Container, Modal } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import { getAddresses, setDefaultAddress } from "../../store/authService";
+import {
+  getAddresses,
+  setDefaultAddress,
+  getUser,
+} from "../../store/authService";
 import { createOrderApi } from "../../store/orderService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
-import { getUser } from "../../store/authService";
 import axios from "axios";
 import { clearCart } from "../../store/cartSlice";
 
@@ -16,27 +19,16 @@ const CheckoutPage = React.memo(() => {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.auth.token);
-  console.log(token);
-
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
-
   const addresses = useSelector((state) => state.auth.addresses || []);
-  const user = useSelector((state) => state.auth.user);
-  console.log(user);
-
   const userId = useSelector((state) => state.auth.user?.id);
 
   const [addressMode, setAddressMode] = useState("list");
   const [editData, setEditData] = useState(null);
-
   const [selectedAddressId, setSelectedAddressId] = useState(null);
-
   const [paymentMethod, setPaymentMethod] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-
-  const [activeTab, setActiveTab] = useState("orders");
 
   const { subtotal, discount, payable } = useMemo(() => {
     const subtotalCalc = cartItems.reduce((sum, item) => {
@@ -60,56 +52,103 @@ const CheckoutPage = React.memo(() => {
     if (addresses.length > 0) {
       const defaultAddr = addresses.find((addr) => addr.is_default);
       const selectedAddr = defaultAddr ? defaultAddr : addresses[0];
-
       setSelectedAddressId(selectedAddr.id);
-      console.log("Selected User ID:", selectedAddr.user_id);
     }
   }, [addresses]);
 
   async function openRazorpay(orderData) {
     try {
+      if (!token) {
+        setPopupMessage("User not authenticated. Please login again.");
+        setShowPopup(true);
+        return;
+      }
+
+      // 1️⃣ Create order on backend
       const { data } = await axios.post(
         "https://admin.sushasfoodproducts.com/api/create-order",
-        {
-          amount: orderData.amount,
-        }
+        { amount: orderData.amount },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log("data",data);
 
- const options = {
-  key: data.key,               // Razorpay key from backend
-  amount: data.amount,         // in paise
-  currency: data.currency,     
-  order_id: data.order_id,     // Razorpay order ID from backend
-  name: "Sushas Food Products",
-  description: "Order Payment",
-  handler: async function (response) {
-    // This runs when payment succeeds
-    const verifyRes = await axios.post(
-      "https://admin.sushasfoodproducts.com/api/verify-payment",
-      {
-        razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_order_id: response.razorpay_order_id,
-        razorpay_signature: response.razorpay_signature,
-      }
-    );
+      console.log("Razorpay Order Created:", data);
 
-    if (verifyRes.data.success) {
-      console.log("✅ Payment verified");
-      // clear cart, redirect, show success page
-    } else {
-      console.log("❌ Payment verification failed");
-    }
-  },
-  
-  theme: {
-    color: "#5caf47",
-  },
-};
+      // 2️⃣ Razorpay options
+      const options = {
+        key: data.key,
+        amount: data.amount,
+        currency: data.currency,
+        order_id: data.order_id,
+        name: "Sushas Food Products",
+        description: "Order Payment",
+        handler: async function (response) {
+          try {
+            // 3️⃣ Verify payment with backend
+            const verifyRes = await axios.post(
+              "https://admin.sushasfoodproducts.com/api/verify-payment",
+              {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+              },
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+            console.log("verify option ", verifyRes);
+
+            if (verifyRes.data.status === "success") {
+              // ✅ Payment verified
+              const finalOrderData = {
+                ...orderData,
+                payment_method: "RAZORPAY",
+                payment_status: "PAID",
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+              };
+
+              await axios.post(
+                "https://admin.sushasfoodproducts.com/api/store_order_user",
+                finalOrderData,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              );
+
+              dispatch(clearCart());
+              navigate("/order-confirmation");
+            } else {
+              console.log("❌ Payment verification failed:", verifyRes.data);
+              setPopupMessage("Payment verification failed. Please try again.");
+              setShowPopup(true);
+            }
+          } catch (err) {
+            console.error(
+              "Error verifying/storing order:",
+              err.response?.data || err.message
+            );
+            setPopupMessage("Error while storing order. Try again.");
+            setShowPopup(true);
+          }
+        },
+        theme: { color: "#5caf47" },
+      };
+
+      // 7️⃣ Handle payment failure
       const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", function (response) {
+        console.error("Payment Failed:", response.error);
+        setPopupMessage("Payment failed: " + response.error.description);
+        setShowPopup(true);
+      });
+
+      // 8️⃣ Open Razorpay modal
       rzp.open();
     } catch (err) {
-      console.error("Error opening Razorpay:", err);
+      console.error(
+        "Error opening Razorpay:",
+        err.response?.data || err.message
+      );
+      setPopupMessage("Unable to initiate payment. Please try again.");
+      setShowPopup(true);
     }
   }
 
@@ -131,6 +170,7 @@ const CheckoutPage = React.memo(() => {
       user_id: userId,
       address: selectedAddressId,
       special_instructions: "vvv",
+      payment_method: paymentMethod,
       cash_on_delivery: paymentMethod === "COD",
       cart: cartItems.map((item) => ({
         product_id: item.id,
@@ -140,18 +180,12 @@ const CheckoutPage = React.memo(() => {
         product_prize_id: item.priceId || null,
       })),
     };
-    console.log("Order Data Sent:", orderData);
 
     try {
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
-        navigate("/order-confirmation");
         dispatch(clearCart());
-        setActiveTab(activeTab);
-        // 100ms delay
-        // window.location.reload().
-        // window.location.href = "/myaccount";
-        setActiveTab(activeTab);
+        navigate("/order-confirmation");
       } else if (paymentMethod === "RAZORPAY") {
         openRazorpay(orderData);
       }
@@ -160,7 +194,18 @@ const CheckoutPage = React.memo(() => {
       setPopupMessage("Order failed. Please try again.");
       setShowPopup(true);
     }
-  }, [selectedAddressId, paymentMethod, userId, cartItems, user, navigate]);
+  }, [
+    selectedAddressId,
+    paymentMethod,
+    userId,
+    cartItems,
+    subtotal,
+    token,
+    dispatch,
+    navigate,
+  ]);
+
+  // Animation configs
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -176,6 +221,7 @@ const CheckoutPage = React.memo(() => {
       transition: { staggerChildren: 0.2, delayChildren: 0.3 },
     },
   };
+
   return (
     <main className="res-header-top">
       <Helmet>
@@ -185,6 +231,7 @@ const CheckoutPage = React.memo(() => {
           content="Complete your purchase securely and quickly on our checkout page."
         />
       </Helmet>
+
       <div className="padding-top"></div>
       <div className="padding-top d-lg-block d-none"></div>
 
@@ -201,7 +248,6 @@ const CheckoutPage = React.memo(() => {
                     variants={containerVariants}
                   >
                     <motion.h1
-                      id="value-added-products-title"
                       className="heading-res fw-bold"
                       style={{ color: "#294085" }}
                       variants={itemVariants}
@@ -213,6 +259,7 @@ const CheckoutPage = React.memo(() => {
               </Row>
             </header>
           </Row>
+
           {/* Address Section */}
           <Col md={7}>
             <Card>
@@ -344,12 +391,6 @@ const CheckoutPage = React.memo(() => {
             </Card>
 
             <div className="mt-3 text-end">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={containerVariants}
-              ></motion.div>
               <motion.button
                 whileHover={{ x: 5 }}
                 whileTap={{ scale: 0.98 }}
