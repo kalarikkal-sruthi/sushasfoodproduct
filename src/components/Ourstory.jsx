@@ -67,7 +67,7 @@ const Ourstory = () => {
 
                 <article>
                   <p>
-                    Established in 2010, <strong>Susha Organic Farm</strong> is
+                    Established in 2010, <strong>Prakash Organic Farm</strong> is
                     a <strong>sustainable organic farm in Kerala</strong>{" "}
                     located on 11 acres of inherited land. With over 15 years of
                     active farming, our journey has been filled with
@@ -85,11 +85,7 @@ const Ourstory = () => {
                   <p>
                     Sustainability is at our core — we operate a large biogas
                     plant utilizing farm waste, compost organic matter, and
-                    recycle nutrients for our crops. From our harvest, we create{" "}
-                    <strong>value-added products</strong> under the brand
-                    <em> Sushar’s Food</em>, supported by all required
-                    certifications including FSSAI, Udyam Registration, Export,
-                    and Packing licenses.
+                    recycle nutrients for our crops. From our harvest, At <strong> Susha’s Food</strong>, we craft certified value-added products (FSSAI, Udyam, Export & Packaging licenses) and sell them directly through our own outlet, Susha’s Food.
                   </p>
                 </article>
               </motion.div>

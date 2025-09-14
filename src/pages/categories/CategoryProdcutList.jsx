@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategoriesWithProducts } from "../../store/categoryProductSlice";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col,Spinner } from "react-bootstrap";
 import { motion } from "framer-motion";
 import ProductCard from "../../components/cards/ProductCard";
 import { Helmet } from "react-helmet-async";
@@ -22,13 +22,15 @@ const CategoryProductList = () => {
 
   console.log(categories);
 
-  if (loading) {
-    return (
-      <main>
-        <p className="text-center my-5">Loading...</p>
-      </main>
-    );
-  }
+ if (loading) {
+  return (
+    <main className="d-flex justify-content-center align-items-center" style={{ minHeight: "70vh" }}>
+      <Spinner animation="border" role="status" variant="primary" style={{ width: "3rem", height: "3rem" }}>
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </main>
+  );
+}
 
   if (error) {
     return (

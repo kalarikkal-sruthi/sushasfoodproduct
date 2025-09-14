@@ -48,7 +48,7 @@ const WhatWeDo = () => {
                 transition={{ delay: 0.3 }}
                 className="lead text-muted mb-0"
               >
-                At <strong>Susha's Prakash Organic Farm</strong>, we grow
+                At <strong> Prakash Organic Farm</strong>, we grow
                 nutrient-rich organic crops using sustainable farming practices
                 that protect the environment and support local communities. From
                 rice cultivation and seasonal vegetables to value-added farm

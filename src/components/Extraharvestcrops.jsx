@@ -113,7 +113,7 @@ export default function HomeCategories() {
                   className="fw-bold"
                   style={{ color: "#5caf47" }}
                 >
-                  Further Crops from Our Farm
+                  Further Crops from Our Prakash Farm
                 </motion.h2>
               </motion.section>
             </Col>
@@ -183,7 +183,7 @@ export default function HomeCategories() {
                                     </h6>
                                     <ul style={{ backgroundColor: "#f8f9fa" }}>
                                       {item.features.map((feature, i) => (
-                                        <li key={i}>{feature}</li>
+                                        <li style={{color:'black'}} key={i}>{feature}</li>
                                       ))}
                                     </ul>
                                   </div>

@@ -13,7 +13,6 @@ import EmptyCart from "../../components/buttons/EmptyCart";
 function Account() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-
   const token = useSelector((state) => state.auth.token);
   console.log("token:", token);
 
@@ -27,6 +26,7 @@ function Account() {
   useEffect(() => {
     console.log("Cart items changed:", cartItems);
   }, [cartItems]);
+
   return (
     <main className="res-header-top">
       <Helmet>
@@ -53,7 +53,6 @@ function Account() {
         <div className="calculation-padding">
           <section aria-labelledby="cart-heading">
             <Row>
-              {/* LEFT SIDE = CART (take 8 cols) */}
               <Col md={12}>
                 {token ? (
                   <>

@@ -43,6 +43,7 @@ const OrderPage = () => {
   useEffect(() => {
     if (!token) navigate("/login");
   }, [token, navigate]);
+  
   useEffect(() => {
     dispatch(getUser());
     dispatch(getAddresses()).then((res) => {

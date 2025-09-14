@@ -9,7 +9,7 @@ import { cancelOrder } from "../../store/orderSlice";
 import { productURL } from "../../utils/api";
 const OrderCard = () => {
   const dispatch = useDispatch();
-
+const user = useSelector((state) => state.auth.user);
   const orders = useSelector((state) => state.order.orders);
   console.log(orders);
   const token = useSelector((state) => state.auth.token);
@@ -21,8 +21,10 @@ const OrderCard = () => {
   console.log(orderId);
   // Fetch orders once
   useEffect(() => {
-    dispatch(getOrders());
-  }, [dispatch]);
+    if (user?.id) {
+      dispatch(getOrders(user.id));
+    }
+  }, [dispatch, user?.id]);
 
   // Fetch items after orders are loaded
   useEffect(() => {
@@ -31,7 +33,6 @@ const OrderCard = () => {
         dispatch(getOrderItems({ orderId: order.id, token }));
       });
     }
-    // ✅ depend only on orders length, not on items
   }, [orders.length, token, dispatch]);
 
   const handleCancel = (orders) => {
@@ -142,21 +143,23 @@ const OrderCard = () => {
                     className="d-flex flex-column align-items-end justify-content-start gap-2"
                   ></Col>
                 </Row>
-              <Row className="align-items-center">
-  <Col className="text-end">
-   {order.status === "cancelled" ? (
-  <span className="text-danger fw-bold">Order Cancelled</span>
-) : (
-  <button
-    onClick={() => handleCancel(order.id)}
-    disabled={loading.cancel}
-    className="btn btn-danger btn-sm"
-  >
-    {loading.cancel ? "Cancelling..." : "Cancel Order"}
-  </button>
-)}
-  </Col>
-</Row>
+                <Row className="align-items-center">
+                  <Col className="text-end">
+                    {order.status === "cancelled" ? (
+                      <span className="text-danger fw-bold">
+                        Order Cancelled
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => handleCancel(order.id)}
+                        disabled={loading.cancel}
+                        className="btn btn-danger btn-sm"
+                      >
+                        {loading.cancel ? "Cancelling..." : "Cancel Order"}
+                      </button>
+                    )}
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           );

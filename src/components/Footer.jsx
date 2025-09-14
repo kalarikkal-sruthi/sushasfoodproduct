@@ -44,7 +44,8 @@ function Footer() {
                           to="mailto:sushasfoodproducts@gmail.com"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
-                          sushasfoodproducts@gmail.com
+                         
+sushasfoodproducts@gmail.com
                         </Link>
                       </li>
 
@@ -59,7 +60,7 @@ function Footer() {
                           to="tel:+919074624607"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
-                          +91 9074 624 607
+                          +918129313515
                         </Link>
                       </li>
 
@@ -209,7 +210,7 @@ function Footer() {
             </section>
             <div className="padding-top"></div>
             <div className="bottom-footer">
-              <p>© Susha's Foods 2025 Made with by BSL Solutions</p>
+              <p>© <Link to="https://sushasfoodproducts.com/">Susha's Foods</Link> 2025 Made with by BSL Solutions</p>
             </div>
           </Container>
         </div>

@@ -14,29 +14,23 @@ const EmptyCart = () => {
         <Col xs={12} md={10} lg={7}>
           <Card className="shadow-sm border-0 text-center p-4">
             <div className="mx-auto mb-3" style={{ width: 72, height: 72 }}>
-              <svg
-                viewBox="0 0 24 24"
-                width="72"
-                height="72"
-                aria-hidden="true"
-              >
-                <circle
-                  cx="12"
-                  cy="7"
-                  r="4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M4 21v-2a6 6 0 0 1 12 0v2"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+<svg
+ 
+   viewBox="0 0 24 24"
+  width="72"   // bigger size
+  height="72"  // bigger size
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+  <polyline points="10 17 15 12 10 7" />
+  <line x1="15" y1="12" x2="3" y2="12" />
+</svg>
+
+
             </div>
 
             <h3 className="fw-bold mb-2">

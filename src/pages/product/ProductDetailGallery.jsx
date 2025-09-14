@@ -7,21 +7,25 @@ import "swiper/css/thumbs";
 import { useLocation } from "react-router-dom";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { productURL } from "../../utils/api";
-import video1 from "../../assets/productdetail/friedcoconutvideo.mp4";
-import video2 from "../../assets/productdetail/steelcompressedoil3.mp4";
-import video3 from "../../assets/productdetail/woodcompressedoil3.mp4";
-const videoMapping = {
-  "Essential Wood Pressed Coconut Oil(മരച്ചക്കിലാട്ടിയ വെളിച്ചെണ്ണ)": video3,
 
-  "Essential Steel Pressed Coconut oil(സ്റ്റീൽ ചക്കിലാട്ടിയ വെളിച്ചെണ്ണ )":
-    video2,
-  "Fried Coconut Masala(വറുത്ത തേങ്ങ മസാല)": video1,
-};
+
+// import video1 from "../../assets/productdetail/friedcoconutvideo.mp4";
+// import video2 from "../../assets/productdetail/steelcompressedoil3.mp4";
+// import video3 from "../../assets/productdetail/woodcompressedoil3.mp4";
+// const videoMapping = {
+//   "Essential Wood Pressed Coconut Oil(മരച്ചക്കിലാട്ടിയ വെളിച്ചെണ്ണ)": video3,
+
+//   "Essential Steel Pressed Coconut oil(സ്റ്റീൽ ചക്കിലാട്ടിയ വെളിച്ചെണ്ണ )":
+//     video2,
+//   "Fried Coconut Masala(വറുത്ത തേങ്ങ മസാല)": video1,
+// };
 
 const ProductDetailGallery = ({ product }) => {
   const location = useLocation();
   const bgColor = location.state?.bgColor || "#ffffff";
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+
 
   // Main slide style
   const mainSlideStyle = {
@@ -109,7 +113,7 @@ const ProductDetailGallery = ({ product }) => {
         ))}
       </Swiper>
 
-      {videoMapping[product?.product_name] && (
+      {/* {videoMapping[product?.product_name] && (
         <>
           <header className="mt-3 mt-lg-5" aria-labelledby="category-heading">
             <h3
@@ -131,20 +135,24 @@ const ProductDetailGallery = ({ product }) => {
             Your browser does not support the video tag.
           </video>
         </>
-      )}
-      {/* <video
-        className="mt-3"
-        controls
-        autoPlay={false}
-        loop={false}
-        muted
-        style={{ borderRadius: "12px", width: "100%", height: "100%" }}
-      >
-        Source from local asset
-        <source src={samplevideo} type="video/mp4" />
-        
-        Your browser does not support the video tag.
-      </video> */}
+      )} */}
+  {product.video && (
+  <> 
+  <h3 className="mt-2 mb-2">How We Make</h3>
+   <video
+    className="mt-3"
+    controls
+    autoPlay={false}
+    loop={false}
+    muted
+    style={{ borderRadius: "12px", width: "100%", height: "100%" }}
+  >
+    <source src={`${productURL}${product.video}`} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video></>
+
+)}
+
     </section>
   );
 };

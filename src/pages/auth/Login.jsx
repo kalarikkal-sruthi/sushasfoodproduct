@@ -20,12 +20,12 @@ const LoginPage = () => {
   // sid changes on 22 aug 2025: added error state to track validation
   const [errors, setErrors] = useState({});
 
-  // sid changes on 22 aug 2025: input handler for controlled inputs
+
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  // sid changes on 22 aug 2025: validation function
+
   const validate = () => {
     let newErrors = {};
     if (!formValues.email) newErrors.email = "Email is required";
@@ -37,13 +37,13 @@ const LoginPage = () => {
       newErrors.password = "Password must be at least 6 characters";
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // ✅ true = no errors
+    return Object.keys(newErrors).length === 0; 
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // sid changes on 22 aug 2025: added validation check before login
+  
     if (!validate()) return;
 
     dispatch(loginUser(formValues))
