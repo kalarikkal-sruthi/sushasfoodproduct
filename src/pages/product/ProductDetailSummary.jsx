@@ -208,6 +208,10 @@ const ProductDetailSummary = ({ product }) => {
       >
         Add To Cart →
       </motion.span>
+       <div
+      className="product-description mt-2"
+      dangerouslySetInnerHTML={{ __html:product.description_full }}
+    />
     </section>
   );
 };

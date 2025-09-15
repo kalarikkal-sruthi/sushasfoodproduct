@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getOrderItems } from "../../store/orderSlice";
-import { cancelOrder } from "../../store/orderSlice";
+// import { cancelOrder } from "../../store/orderSlice";
 
 import { productURL } from "../../utils/api";
 const OrderCard = () => {
@@ -13,7 +13,7 @@ const user = useSelector((state) => state.auth.user);
   const orders = useSelector((state) => state.order.orders);
   console.log(orders);
   const token = useSelector((state) => state.auth.token);
-  const { items, loading, error } = useSelector((state) => state.order);
+  const { items, error } = useSelector((state) => state.order);
   console.log(items);
 
   const orderId = orders.map((order) => order.id);
@@ -35,9 +35,9 @@ const user = useSelector((state) => state.auth.user);
     }
   }, [orders.length, token, dispatch]);
 
-  const handleCancel = (orders) => {
-    dispatch(cancelOrder({ orderId: orders.id, token }));
-  };
+  // const handleCancel = (orders) => {
+  //   dispatch(cancelOrder({ orderId: orders.id, token }));
+  // };
 
   if (orders.loading) return <p>Loading order items...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
@@ -143,7 +143,7 @@ const user = useSelector((state) => state.auth.user);
                     className="d-flex flex-column align-items-end justify-content-start gap-2"
                   ></Col>
                 </Row>
-                <Row className="align-items-center">
+                {/* <Row className="align-items-center">
                   <Col className="text-end">
                     {order.status === "cancelled" ? (
                       <span className="text-danger fw-bold">
@@ -159,7 +159,7 @@ const user = useSelector((state) => state.auth.user);
                       </button>
                     )}
                   </Col>
-                </Row>
+                </Row> */}
               </Card.Body>
             </Card>
           );
