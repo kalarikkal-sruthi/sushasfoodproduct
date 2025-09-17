@@ -5,19 +5,29 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (crendentials) => {
     const res = await api.post("/login", crendentials);
-    
+
     return {
       token: res.data,
-     
     };
   }
 );
 
 export const registerUser = createAsyncThunk(
   "auth/register",
-  async (formData) => {
-    const res = await api.post("/customer.store", formData);
-    return res.data;
+  async (formData, { rejectWithValue }) => {
+    try {
+      const res = await api.post("/customer.store", formData);
+      return res.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const backendErrors = error.response.data.errors;
+        console.log("Backend field errors:", backendErrors);
+
+        return rejectWithValue(backendErrors);
+      }
+
+      return rejectWithValue({ general: "Something went wrong" });
+    }
   }
 );
 
@@ -48,7 +58,7 @@ export const getUser = createAsyncThunk(
       },
     });
     console.log("response", response.data);
-    return response.data; 
+    return response.data;
   }
 );
 
@@ -66,10 +76,9 @@ export const getAddresses = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-
     return response.data.data.map((addr) => ({
       ...addr,
-     
+
       is_default: Boolean(addr.deafult),
     }));
   }
@@ -89,10 +98,9 @@ export const createAddress = createAsyncThunk(
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return response.data; 
+    return response.data;
   }
 );
-
 
 export const setDefaultAddress = createAsyncThunk(
   "auth/setDefaultAddress",

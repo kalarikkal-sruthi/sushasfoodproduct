@@ -9,6 +9,13 @@ export const fetchProductById = createAsyncThunk(
   }
 );
 
+export const submitReview =   createAsyncThunk(
+    "product/submitReview "
+
+
+)
+
+
 const productSlice = createSlice({
   name: "product",
   initialState: {

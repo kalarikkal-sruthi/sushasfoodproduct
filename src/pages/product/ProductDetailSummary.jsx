@@ -4,12 +4,13 @@ import { addToCart } from "../../store/cartSlice";
 import { productURL } from "../../utils/api";
 import { motion } from "framer-motion";
 import { Toast, ToastContainer } from "react-bootstrap";
+import Review from "../../components/order/Review";
 
 const ProductDetailSummary = ({ product }) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-  // initialize selectedSize with size + priceObj if available
+
   const [selectedSize, setSelectedSize] = useState(() => {
     if (product.sizes?.length > 0 && product.prices?.length > 0) {
       return {
@@ -34,7 +35,7 @@ const ProductDetailSummary = ({ product }) => {
         original_price: 0,
         offer_price: 0,
       };
-      chosenSize = product.sizes[0]; // the only available size
+      chosenSize = product.sizes[0]; 
     } else if (product.sizes?.length > 1) {
       // must select a size
       if (!selectedSize) return;
@@ -42,10 +43,10 @@ const ProductDetailSummary = ({ product }) => {
         original_price: selectedSize.price,
         offer_price: 0,
       };
-      chosenSize = selectedSize; // use the selected size
+      chosenSize = selectedSize; 
     }
 
-    if (!priceObj || !chosenSize) return; // safety check
+    if (!priceObj || !chosenSize) return; 
 
     dispatch(
       addToCart({
@@ -90,8 +91,6 @@ const ProductDetailSummary = ({ product }) => {
           {product.description}
         </p>
       )}
-
-      {/* Base Price (for single-size products) */}
       {product.baseprices?.[0] && (
         <div
           className="my-4"
@@ -109,14 +108,12 @@ const ProductDetailSummary = ({ product }) => {
           </span>
         </div>
       )}
-
-      {/* Sizes */}
       {product.sizes?.length > 0 && (
         <div className="my-4" aria-label="Available Sizes">
           <strong>Available Sizes:</strong>
           <div className="d-flex gap-3 mt-3 flex-wrap">
             {product.sizes.map((size, index) => {
-              const priceObj = product.prices[index]; // full price object
+              const priceObj = product.prices[index]; 
 
               return (
                 <div
@@ -172,8 +169,6 @@ const ProductDetailSummary = ({ product }) => {
           </div>
         </div>
       )}
-
-      {/* Toast Notification */}
       <ToastContainer
         className="p-3 position-fixed top-50 start-50 translate-middle"
         style={{ zIndex: 9999 }}
@@ -190,8 +185,6 @@ const ProductDetailSummary = ({ product }) => {
           </Toast.Body>
         </Toast>
       </ToastContainer>
-
-      {/* Add to Cart Button */}
       <motion.span
         whileHover={{ x: 5, transition: { duration: 0.2 } }}
         whileTap={{ scale: 0.98 }}
@@ -208,10 +201,11 @@ const ProductDetailSummary = ({ product }) => {
       >
         Add To Cart →
       </motion.span>
-       <div
-      className="product-description mt-2"
-      dangerouslySetInnerHTML={{ __html:product.description_full }}
-    />
+      <div
+        className="product-description mt-2"
+        dangerouslySetInnerHTML={{ __html: product.description_full }}
+      />
+      <Review product={product} />
     </section>
   );
 };

@@ -42,10 +42,21 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.error.message;
       })
+        .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(registerUser.fulfilled, (state, action) => {
         const token = action.payload.token || action.payload;
         state.token = token;
+        state.user = action.payload;
         localStorage.setItem("access", token);
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload; 
+        console.log(state.error);
+        
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.user = action.payload;

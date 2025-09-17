@@ -27,8 +27,9 @@ const RegisterPage = () => {
 
     if (!data.mobile) {
       newErrors.mobile = "Mobile number is required.";
-    } else if (!/^\d{10,15}$/.test(data.mobile)) {
-      newErrors.mobile = "Enter a valid mobile number (10–15 digits).";
+    } else if (!/^(\+91)?\d{10}$/.test(data.mobile)) {
+      newErrors.mobile =
+        "Enter a valid mobile number (10 digits, with or without +91).";
     }
 
     if (!data.password) {
@@ -42,39 +43,48 @@ const RegisterPage = () => {
     return newErrors;
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const { name, email, mobile, password, gender } = e.target;
+ const handleRegister = (e) => {
+  e.preventDefault();
+  const { name, email, mobile, password, gender } = e.target;
 
-    const data = {
-      name: name.value.trim(),
-      email: email.value.trim(),
-      mobile: mobile.value.trim(),
-      password: password.value.trim(),
-      gender: gender.value.trim(),
-    };
-
-    // 🆕 sid changes → run validation before dispatch
-    const validationErrors = validate(data);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    setErrors({}); // clear errors if valid
-
-    dispatch(registerUser(data))
-      .unwrap()
-      .then(() => navigate("/myaccount"))
-      // .catch((error) => console.error("Registration failed", error));
-      .catch((error) => {
-        if (error.response) {
-          console.error("❌ Registration failed:", error.response.data); // 🟢 sid log
-        } else {
-          console.error("❌ Registration failed:", error);
-        }
-      });
+  const data = {
+    name: name.value.trim(),
+    email: email.value.trim(),
+    mobile: mobile.value.trim(),
+    password: password.value.trim(),
+    gender: gender.value.trim(),
   };
+
+  // Run frontend validation
+  const validationErrors = validate(data);
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
+
+  setErrors({}); // clear frontend errors if valid
+
+  dispatch(registerUser(data))
+    .unwrap()
+    .then(() => navigate("/myaccount"))
+    .catch((error) => {
+      // 🆕 handle backend validation errors
+      if (error && typeof error === "object") {
+        console.error("❌ Backend validation errors:", error);
+
+        // flatten backend errors { email: ["msg"], mobile: ["msg"] } → { email: "msg", mobile: "msg" }
+        const backendErrors = {};
+        Object.keys(error).forEach((field) => {
+          backendErrors[field] = error[field][0];
+        });
+
+        setErrors(backendErrors); // show backend errors in UI
+      } else {
+        console.error("❌ Registration failed:", error);
+      }
+    });
+};
+
 
   return (
     <main className="res-header-top">
