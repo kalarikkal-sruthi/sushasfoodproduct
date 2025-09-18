@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { submitReview, resetReviewState } from "../../store/ProductSlice";
 import { motion } from "framer-motion";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Review = ({ product }) => {
   const dispatch = useDispatch();
   console.log(product);
+  const token = useSelector((state) => state.auth.token);
+  console.log("token:", token);
 
   const user = useSelector((state) => state.auth.user);
   const {
@@ -65,73 +68,82 @@ const Review = ({ product }) => {
       <Row>
         <Col md={6}>
           {/* Review Form */}
-          <form onSubmit={handleSubmit} className="p-3 border rounded mb-4">
-            <h4>Write a Review</h4>
+           {token ? (
+        <form onSubmit={handleSubmit} className="p-3 border rounded mb-4">
+          <h4>Write a Review</h4>
 
-            <div className="mb-2">
-              <label className="form-label">Your Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="form-control"
-                required
-              />
-            </div>
+          <div className="mb-2">
+            <label className="form-label">Your Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
 
-            <div className="mb-2">
-              <label className="form-label">Review</label>
-              <textarea
-                name="review"
-                value={formData.review}
-                onChange={handleChange}
-                className="form-control"
-                required
-              />
-            </div>
+          <div className="mb-2">
+            <label className="form-label">Review</label>
+            <textarea
+              name="review"
+              value={formData.review}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
 
-            <div className="mb-2">
-              <label className="form-label">Rating (0–5)</label>
-              <input
-                type="number"
-                name="start_ratings"
-                step="0.5"
-                min="0"
-                max="5"
-                value={formData.start_ratings}
-                onChange={handleChange}
-                className="form-control"
-                required
-              />
-            </div>
-            <motion.button
-              whileHover={{ x: 5, transition: { duration: 0.2 } }}
-              whileTap={{ scale: 0.98 }}
-              className="btn btn-outline"
-              style={{
-                borderRadius: "50px",
-                fontWeight: "500",
-                border: "1px solid #294085",
-                backgroundColor: "#294085",
-                color: "#fff",
-              }}
-              aria-label="Submit"
-              disabled={reviewLoading}
-            >
-              submit →
-            </motion.button>
+          <div className="mb-2">
+            <label className="form-label">Rating (0–5)</label>
+            <input
+              type="number"
+              name="start_ratings"
+              step="0.5"
+              min="0"
+              max="5"
+              value={formData.start_ratings}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
 
-            {reviewError && <p className="text-danger mt-2">{reviewError}</p>}
-            {reviewSuccess && (
-              <p className="text-success mt-2">
-                ✅ Review submitted successfully!
-              </p>
-            )}
-          </form>
+          <motion.button
+            whileHover={{ x: 5, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-outline"
+            style={{
+              borderRadius: "50px",
+              fontWeight: "500",
+              border: "1px solid #294085",
+              backgroundColor: "#294085",
+              color: "#fff",
+            }}
+            aria-label="Submit"
+            disabled={reviewLoading}
+          >
+            Submit →
+          </motion.button>
+
+          {reviewError && <p className="text-danger mt-2">{reviewError}</p>}
+          {reviewSuccess && (
+            <p className="text-success mt-2">
+              ✅ Review submitted successfully!
+            </p>
+          )}
+        </form>
+      ) : (
+        <div className="p-3 border rounded mb-4 text-center">
+     <Link to="/login" style={{textDecoration :"none"}}>     <h5 style={{ color: "#294085" }}>Please login to write a review.</h5></Link>
+        </div>
+      )}
         </Col>
       </Row>
       <Row>
+        <Col>
+        
         {/* Reviews List */}
         <div className="p-3 border rounded">
           <h4>Customer Reviews</h4>
@@ -158,6 +170,7 @@ const Review = ({ product }) => {
             )
           )}
         </div>
+        </Col>
       </Row>
     </div>
   );
