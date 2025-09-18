@@ -31,7 +31,6 @@ const OrderPage = () => {
   const ordersState = useSelector((state) => state.order);
   const orders = ordersState?.orders || [];
   console.log(orders);
-  
 
   // const cartItems = useSelector((state) => state.cart.items);
 
@@ -43,7 +42,7 @@ const OrderPage = () => {
   useEffect(() => {
     if (!token) navigate("/login");
   }, [token, navigate]);
-  
+
   useEffect(() => {
     dispatch(getUser());
     dispatch(getAddresses()).then((res) => {
@@ -239,14 +238,7 @@ const OrderPage = () => {
           {/* Content */}
           <Col xs={12} lg={9}>
             <Suspense fallback={<p>Loading...</p>}>
-              {activeTab === "orders" &&
-               
-                  <OrderCard
-                    
-                   
-                   
-                  />
-               }
+              {activeTab === "orders" && <OrderCard />}
               {activeTab === "address" &&
                 (addressMode === "list" ? (
                   <Row className="mb-4 g-3">

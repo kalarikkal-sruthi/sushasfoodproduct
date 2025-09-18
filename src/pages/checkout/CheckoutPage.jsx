@@ -190,9 +190,14 @@ const CheckoutPage = React.memo(() => {
         openRazorpay(orderData);
       }
     } catch (err) {
-      console.error("Order Error:", err);
-      setPopupMessage("Order failed. Please try again.");
-      setShowPopup(true);
+    console.error("Order Error:", err);
+
+  // Extract error message safely
+  const errorMessage =
+    err.response?.data?.message || err.response?.data || err.message || "Something went wrong!";
+
+  setPopupMessage(`Order failed: ${errorMessage}`);
+  setShowPopup(true);
     }
   }, [
     selectedAddressId,

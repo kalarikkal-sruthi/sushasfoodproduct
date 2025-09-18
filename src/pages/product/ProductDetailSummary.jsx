@@ -4,7 +4,7 @@ import { addToCart } from "../../store/cartSlice";
 import { productURL } from "../../utils/api";
 import { motion } from "framer-motion";
 import { Toast, ToastContainer } from "react-bootstrap";
-import Review from "../../components/order/Review";
+
 
 const ProductDetailSummary = ({ product }) => {
   const [show, setShow] = useState(false);
@@ -205,7 +205,7 @@ const ProductDetailSummary = ({ product }) => {
         className="product-description mt-2"
         dangerouslySetInnerHTML={{ __html: product.description_full }}
       />
-      <Review product={product} />
+    
     </section>
   );
 };

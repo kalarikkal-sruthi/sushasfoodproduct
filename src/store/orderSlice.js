@@ -1,4 +1,3 @@
-// src/features/orders/orderSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createOrderApi,
@@ -9,12 +8,11 @@ import {
 } from "./orderService";
 
 
-// --- Utility: get token from state or localStorage ---
+
 const getToken = (getState) => {
   return getState().auth.token || localStorage.getItem("access");
 };
 
-// --- Create Order ---
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
   async (orderData, { getState, rejectWithValue }) => {
@@ -54,9 +52,6 @@ export const getOrderItems = createAsyncThunk(
   }
 );
 
-
-
-
 export const cancelOrder = createAsyncThunk(
   "orders/cancelOrder",
   async ({ orderId, token }, { rejectWithValue }) => {
@@ -81,6 +76,7 @@ const orderSlice = createSlice({
   initialState: {
     orders: [],
     items: {},
+    
     loading: {
       orders: false,
       items: false,

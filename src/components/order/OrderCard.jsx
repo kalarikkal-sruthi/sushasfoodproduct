@@ -9,7 +9,7 @@ import { getOrderItems } from "../../store/orderSlice";
 import { productURL } from "../../utils/api";
 const OrderCard = () => {
   const dispatch = useDispatch();
-const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const orders = useSelector((state) => state.order.orders);
   console.log(orders);
   const token = useSelector((state) => state.auth.token);

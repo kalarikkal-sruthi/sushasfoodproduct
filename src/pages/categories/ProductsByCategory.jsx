@@ -4,7 +4,7 @@ import { api, productURL } from "../../utils/api";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import {Spinner} from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 const ProductByCategory = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -65,15 +65,23 @@ const ProductByCategory = () => {
     transition: { duration: 0.3, ease: "easeOut" },
   };
 
- if (loading) {
-  return (
-    <main className="d-flex justify-content-center align-items-center" style={{ minHeight: "70vh" }}>
-      <Spinner animation="border" role="status" variant="primary" style={{ width: "3rem", height: "3rem" }}>
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    </main>
-  );
-}
+  if (loading) {
+    return (
+      <main
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: "70vh" }}
+      >
+        <Spinner
+          animation="border"
+          role="status"
+          variant="primary"
+          style={{ width: "3rem", height: "3rem" }}
+        >
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </main>
+    );
+  }
   return (
     <main className="res-header-top">
       <Helmet>

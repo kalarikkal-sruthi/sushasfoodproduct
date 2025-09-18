@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Spinner, Alert, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { fetchProductById } from "../../store/ProductSlice";
+import Review from "../../components/order/Review";
 
 // Lazy load gallery for faster initial render
 const ProductDetailGallery = React.lazy(() => import("./ProductDetailGallery"));
@@ -133,6 +134,9 @@ const ProductDetail = () => {
                 <ProductDetailSummary product={product} />
               </Suspense>
             </Col>
+          </Row>
+          <Row>
+              <Review product={product} />
           </Row>
         </article>
       </div>

@@ -119,6 +119,8 @@ export const setDefaultAddress = createAsyncThunk(
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    console.log(response);
+    
     return { id: addressId };
   }
 );
