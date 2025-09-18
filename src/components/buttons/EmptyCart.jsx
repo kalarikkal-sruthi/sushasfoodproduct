@@ -8,29 +8,35 @@ import { Helmet } from "react-helmet-async";
 const EmptyCart = () => {
   return (
     <main>
+      <Helmet>
+        <title>Sushas Foods | Prakash Farm | Organic Food</title>
+        <meta
+          name="description"
+          content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
+        />
+        <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
+        <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
+      </Helmet>
       <div className="padding-top"></div>
 
       <Row className="justify-content-center">
         <Col xs={12} md={10} lg={7}>
           <Card className="shadow-sm border-0 text-center p-4">
             <div className="mx-auto mb-3" style={{ width: 72, height: 72 }}>
-<svg
- 
-   viewBox="0 0 24 24"
-  width="72"   // bigger size
-  height="72"  // bigger size
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
->
-  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-  <polyline points="10 17 15 12 10 7" />
-  <line x1="15" y1="12" x2="3" y2="12" />
-</svg>
-
-
+              <svg
+                viewBox="0 0 24 24"
+                width="72" // bigger size
+                height="72" // bigger size
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
+              </svg>
             </div>
 
             <h3 className="fw-bold mb-2">

@@ -19,7 +19,6 @@ export const fetchMostHarvestFull = createAsyncThunk(
   }
 );
 
-
 export const fetchMostHarvestViewAll = createAsyncThunk(
   "mostHarvest/fetchViewAll",
   async (_, { rejectWithValue }) => {
@@ -54,7 +53,7 @@ export const fetchMostHarvestDetail = createAsyncThunk(
 const mostHarvestSlice = createSlice({
   name: "mostHarvest",
   initialState: {
-    homeData: [], 
+    homeData: [],
     allData: [],
     detailData: null,
     loading: false,
@@ -63,21 +62,20 @@ const mostHarvestSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-     
+
       .addCase(fetchMostHarvestFull.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchMostHarvestFull.fulfilled, (state, action) => {
         state.loading = false;
-        state.homeData = action.payload; 
+        state.homeData = action.payload;
       })
       .addCase(fetchMostHarvestFull.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      
       .addCase(fetchMostHarvestViewAll.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -91,7 +89,6 @@ const mostHarvestSlice = createSlice({
         state.error = action.payload;
       })
 
-     
       .addCase(fetchMostHarvestDetail.pending, (state) => {
         state.loading = true;
         state.error = null;

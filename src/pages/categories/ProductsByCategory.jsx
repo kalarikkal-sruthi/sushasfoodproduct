@@ -85,7 +85,7 @@ const ProductByCategory = () => {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <title>Sushas's Foods| Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."

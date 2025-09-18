@@ -164,10 +164,22 @@ const OrderPage = () => {
   return (
     <main>
       <Helmet>
-        <title>My Orders & Addresses - {user?.name || "User"}</title>
+        <title>My Orders & Addresses - {user?.name || "User"} | Susha's Food | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="View and manage your orders and delivery addresses. Update your account and track your purchases."
+        />
+          <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+         <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
       </Helmet>
       <Container>

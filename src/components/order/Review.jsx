@@ -132,36 +132,32 @@ const Review = ({ product }) => {
         </Col>
       </Row>
       <Row>
-        
-          {/* Reviews List */}
-          <div className="p-3 border rounded">
-            <h4>Customer Reviews</h4>
+        {/* Reviews List */}
+        <div className="p-3 border rounded">
+          <h4>Customer Reviews</h4>
 
-            {reviewFetchLoading && <p>Loading reviews...</p>}
-            {reviewFetchError && (
-              <p className="text-danger">{reviewFetchError}</p>
-            )}
+          {reviewFetchLoading && <p>Loading reviews...</p>}
+          {reviewFetchError && (
+            <p className="text-danger">{reviewFetchError}</p>
+          )}
 
-            {reviews && reviews.length > 0 ? (
-               
-              <ul className="list-group">
-                 <Col md={4}>
+          {reviews && reviews.length > 0 ? (
+            <ul className="list-group">
+              <Col md={4}>
                 {reviews.map((r, idx) => (
                   <li key={idx} className="list-group-item">
                     <strong>{r.name}</strong> ⭐ {r.start_ratings}
                     <p className="mb-0">{r.review}</p>
                   </li>
                 ))}
-                </Col>
-              </ul>
-           
-            ) : (
-              !reviewFetchLoading && (
-                <p>No reviews yet. Be the first to review!</p>
-              )
-            )}
-          </div>
-       
+              </Col>
+            </ul>
+          ) : (
+            !reviewFetchLoading && (
+              <p>No reviews yet. Be the first to review!</p>
+            )
+          )}
+        </div>
       </Row>
     </div>
   );

@@ -14,7 +14,7 @@ export const submitReview = createAsyncThunk(
   async (reviewData, { rejectWithValue }) => {
     try {
       const response = await api.post("/reviews", reviewData);
-      return response.data; 
+      return response.data;
     } catch (error) {
       console.error("❌ Review submit error:", error);
       if (error.response && error.response.data) {
@@ -31,7 +31,7 @@ export const reviewProductById = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await api.get(`/product-reviews`, {
-        params: { product_id: productId }, 
+        params: { product_id: productId },
       });
       return response.data;
     } catch (error) {
@@ -45,13 +45,13 @@ export const reviewProductById = createAsyncThunk(
 const productSlice = createSlice({
   name: "product",
   initialState: {
-    data: null, 
+    data: null,
     loading: false,
-    error: null, 
+    error: null,
     reviewLoading: false,
     reviewError: null,
     reviewSuccess: false,
-    reviews: []
+    reviews: [],
   },
   reducers: {
     resetReviewState: (state) => {
@@ -89,26 +89,25 @@ const productSlice = createSlice({
           state.data.reviews.push(action.payload);
         }
       })
-    .addCase(submitReview.rejected, (state, action) => {
-      state.reviewLoading = false;
-      if (action.payload && action.payload.errors) {
-        const firstErrorField = Object.keys(action.payload.errors)[0];
-        state.reviewError = action.payload.errors[firstErrorField][0];
-      } else {
-        state.reviewError = action.payload || action.error.message;
-      }
+      .addCase(submitReview.rejected, (state, action) => {
+        state.reviewLoading = false;
+        if (action.payload && action.payload.errors) {
+          const firstErrorField = Object.keys(action.payload.errors)[0];
+          state.reviewError = action.payload.errors[firstErrorField][0];
+        } else {
+          state.reviewError = action.payload || action.error.message;
+        }
 
-      state.reviewSuccess = false;
-    })
-    .addCase(reviewProductById.pending, (state) => {
+        state.reviewSuccess = false;
+      })
+      .addCase(reviewProductById.pending, (state) => {
         state.reviewLoading = true;
         state.reviewError = null;
       })
       .addCase(reviewProductById.fulfilled, (state, action) => {
         console.log("✅ Reviews fetched:", action.payload);
         state.reviewLoading = false;
-        state.reviews = action.payload; 
-        
+        state.reviews = action.payload;
       })
       .addCase(reviewProductById.rejected, (state, action) => {
         state.reviewLoading = false;

@@ -32,64 +32,58 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-       
         existingItem.quantity += 1;
       } else {
-      
         state.items.push({ ...newItem, quantity: 1 });
       }
 
       saveCartToStorage(state.items);
     },
 
-   
-
     clearCart: (state) => {
       state.items = [];
       localStorage.removeItem("cartItems");
     },
-    
-  incrementQuantity: (state, action) => {
-  const { id, sizeId } = action.payload;
-  const item = state.items.find(
-    (item) => item.id === id && item.sizeId === sizeId
-  );
-  if (item) {
-    item.quantity += 1;
-    saveCartToStorage(state.items);
-  }
-},
 
-decrementQuantity: (state, action) => {
-  const { id, sizeId } = action.payload;
-  const item = state.items.find(
-    (item) => item.id === id && item.sizeId === sizeId
-  );
-  if (item && item.quantity > 1) {
-    item.quantity -= 1;
-    saveCartToStorage(state.items);
-  }
-},
+    incrementQuantity: (state, action) => {
+      const { id, sizeId } = action.payload;
+      const item = state.items.find(
+        (item) => item.id === id && item.sizeId === sizeId
+      );
+      if (item) {
+        item.quantity += 1;
+        saveCartToStorage(state.items);
+      }
+    },
 
-removeFromCart: (state, action) => {
-  const { id, sizeId } = action.payload;
-  state.items = state.items.filter(
-    (item) => !(item.id === id && item.sizeId === sizeId)
-  );
-  saveCartToStorage(state.items);
-},
-  
- 
+    decrementQuantity: (state, action) => {
+      const { id, sizeId } = action.payload;
+      const item = state.items.find(
+        (item) => item.id === id && item.sizeId === sizeId
+      );
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+        saveCartToStorage(state.items);
+      }
+    },
+
+    removeFromCart: (state, action) => {
+      const { id, sizeId } = action.payload;
+      state.items = state.items.filter(
+        (item) => !(item.id === id && item.sizeId === sizeId)
+      );
+      saveCartToStorage(state.items);
+    },
   },
 });
 
 export const {
   addToCart,
-  
+
   clearCart,
   incrementQuantity,
   decrementQuantity,
-  removeFromCart
+  removeFromCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

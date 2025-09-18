@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../utils/api";
 
-
 export const fetchHomeData = createAsyncThunk(
   "home/fetchData",
   async (_, { rejectWithValue }) => {
@@ -17,8 +16,8 @@ export const fetchHomeData = createAsyncThunk(
 const homeDataSlice = createSlice({
   name: "homeData",
   initialState: {
-    data: null, 
-    loading: false, 
+    data: null,
+    loading: false,
     error: null,
   },
   reducers: {},

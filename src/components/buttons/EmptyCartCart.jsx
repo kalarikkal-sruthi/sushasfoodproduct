@@ -9,13 +9,13 @@ const EmptyCartCart = () => {
   return (
     <main>
       <Helmet>
-        <title>My Cart | Susha's Food Products</title>
+           <title>Empty Cart | Sushas Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
         />
-        <link rel="canonical" href="https://myfezto.com/cart" />
-        <link rel="preload" href="https://myfezto.com/cart" as="document" />
+        <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
+        <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
       </Helmet>
      
       <Container className="mt-5">

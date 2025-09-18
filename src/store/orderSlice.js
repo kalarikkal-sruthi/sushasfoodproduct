@@ -7,8 +7,6 @@ import {
   // returnOrderItemApi
 } from "./orderService";
 
-
-
 const getToken = (getState) => {
   return getState().auth.token || localStorage.getItem("access");
 };
@@ -59,8 +57,6 @@ export const cancelOrder = createAsyncThunk(
       const response = await cancelOrderApi(orderId, token);
       // return both the API data and the orderId
       return { orderId, data: response };
-
-      
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to cancel order"
@@ -69,14 +65,13 @@ export const cancelOrder = createAsyncThunk(
   }
 );
 
-
 // --- Slice ---
 const orderSlice = createSlice({
   name: "orders",
   initialState: {
     orders: [],
     items: {},
-    
+
     loading: {
       orders: false,
       items: false,
@@ -120,38 +115,38 @@ const orderSlice = createSlice({
       })
 
       // --- Get Order Items ---
-     .addCase(getOrderItems.pending, (state) => {
-  state.loading.items = true;
-  state.error = null;
-})
-.addCase(getOrderItems.fulfilled, (state, action) => {
-  state.loading.items = false;
-  const { orderId, items } = action.payload; 
-  state.items[orderId] = items;  // ✅ store items under the orderId
-})
-.addCase(getOrderItems.rejected, (state, action) => {
-  state.loading.items = false;
-  state.error = action.payload;
-})
+      .addCase(getOrderItems.pending, (state) => {
+        state.loading.items = true;
+        state.error = null;
+      })
+      .addCase(getOrderItems.fulfilled, (state, action) => {
+        state.loading.items = false;
+        const { orderId, items } = action.payload;
+        state.items[orderId] = items; // ✅ store items under the orderId
+      })
+      .addCase(getOrderItems.rejected, (state, action) => {
+        state.loading.items = false;
+        state.error = action.payload;
+      })
 
-  .addCase(cancelOrder.pending, (state) => {
+      .addCase(cancelOrder.pending, (state) => {
         state.loading.cancel = true;
         state.error = null;
       })
-     .addCase(cancelOrder.fulfilled, (state, action) => {
-  state.loading.cancel = false;
+      .addCase(cancelOrder.fulfilled, (state, action) => {
+        state.loading.cancel = false;
 
-  const { orderId } = action.payload;
+        const { orderId } = action.payload;
 
-  // ✅ find and mark the cancelled order
-  const orderIndex = state.orders.findIndex((o) => o.id === orderId);
-  if (orderIndex !== -1) {
-    state.orders[orderIndex] = {
-      ...state.orders[orderIndex],
-      status: "cancelled",
-    };
-  }
-})
+        // ✅ find and mark the cancelled order
+        const orderIndex = state.orders.findIndex((o) => o.id === orderId);
+        if (orderIndex !== -1) {
+          state.orders[orderIndex] = {
+            ...state.orders[orderIndex],
+            status: "cancelled",
+          };
+        }
+      })
 
       .addCase(cancelOrder.rejected, (state, action) => {
         state.loading.cancel = false;

@@ -89,7 +89,7 @@ const RegisterPage = () => {
     <main className="res-header-top">
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Register | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <title>Register | Sushas's Foods| Prakash Farm | Organic Food</title>
 
         <meta
           name="description"

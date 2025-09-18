@@ -34,7 +34,7 @@ const authSlice = createSlice({
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log("action.payload:", action.payload);
-        const token = action.payload.token || action.payload; 
+        const token = action.payload.token || action.payload;
         state.token = token;
         state.user = action.payload.user || null;
         localStorage.setItem("access", token);
@@ -42,7 +42,7 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.error.message;
       })
-        .addCase(registerUser.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -54,9 +54,8 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; 
+        state.error = action.payload;
         console.log(state.error);
-        
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -65,18 +64,18 @@ const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        console.log("getUser payload:", action.payload); 
+        console.log("getUser payload:", action.payload);
         state.user = action.payload.user || action.payload;
       })
       .addCase(getAddresses.fulfilled, (state, action) => {
-        console.log("getAddresses payload:", action.payload); 
+        console.log("getAddresses payload:", action.payload);
         state.addresses = action.payload;
       })
-      
+
       .addCase(createAddress.fulfilled, (state, action) => {
         state.addresses.push(action.payload);
       })
-    
+
       .addCase(updateAddress.fulfilled, (state, action) => {
         const updated = action.payload;
         state.addresses = state.addresses.map((addr) =>
@@ -90,12 +89,10 @@ const authSlice = createSlice({
         );
       })
 
-   
-
       .addCase(setDefaultAddress.fulfilled, (state, action) => {
         const updatedAddress = action.payload;
 
-        console.log("Default address set:", updatedAddress); 
+        console.log("Default address set:", updatedAddress);
 
         state.addresses = state.addresses.map((addr) => ({
           ...addr,

@@ -70,13 +70,13 @@ function CartPage() {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>My Cart | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <title>My Cart | Susha's Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
         />
-        <link rel="canonical" href="https://myfezto.com/cart" />
-        <link rel="preload" href="https://myfezto.com/cart" as="document" />
+        <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
+        <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"

@@ -31,7 +31,7 @@ const Profile = () => {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>My Account | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <title>My Account | Susha's Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Manage your profile, view order history, and edit your account details."

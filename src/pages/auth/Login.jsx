@@ -62,7 +62,7 @@ const LoginPage = () => {
     <main className="res-header-top">
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Login | SUSHA'S FOODS | Prakash Farm | Organic Food</title>
+        <title>Login | Susha's Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Securely log in t Susha's Food Product to manage orders, view your profile, and enjoy personalized offers."

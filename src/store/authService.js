@@ -120,7 +120,7 @@ export const setDefaultAddress = createAsyncThunk(
       }
     );
     console.log(response);
-    
+
     return { id: addressId };
   }
 );

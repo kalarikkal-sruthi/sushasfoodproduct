@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <div>
       <Helmet>
-        <title>Susah's Prakash Farm | Organic Food</title>
+        <title>Susha's Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
@@ -53,13 +53,13 @@ export default function Home() {
           name="keywords"
           content="farm products, organic produce, value added products, fresh produce, healthy food"
         />
-          
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-      />
-    </Helmet>
-    
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
+
       <Bannerslider data={homeVideoInGallary} />
       <Aboutfarm />
       <Ourstory />
@@ -68,15 +68,10 @@ export default function Home() {
 
       <Mostharvestcrops />
 
-     
-
       <ValueAddedProducts data={products} />
-       <Extraharvestcrops />
+      <Extraharvestcrops />
 
-
-
-<Youtubefeed data={videoYoutube} />
-       
+      <Youtubefeed data={videoYoutube} />
 
       {/* <Instagramfeed data={videoInstagram} /> */}
       {/* 

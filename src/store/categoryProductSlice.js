@@ -15,7 +15,7 @@ const categoryProductSlice = createSlice({
     data: [],
     loading: false,
     error: null,
-    searchQuery: "", 
+    searchQuery: "",
   },
   reducers: {
     setSearchQuery: (state, action) => {
@@ -38,7 +38,6 @@ const categoryProductSlice = createSlice({
       });
   },
 });
-
 
 export const { setSearchQuery } = categoryProductSlice.actions;
 

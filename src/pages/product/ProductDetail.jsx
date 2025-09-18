@@ -67,20 +67,19 @@ const ProductDetail = () => {
     >
       {/* SEO Meta Tags */}
       <Helmet>
+         <title> {product.product_name} Susha's Food | Prakash Farm | Organic Food</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <title>
-          {product.product_name} | SUSHA'S FOODS | Prakash Farm | Organic Food
-        </title>
+      
         <meta
           name="description"
           content={product.description?.slice(0, 150) || "Product detail page"}
         />
         <link
           rel="canonical"
-          href={`https://myfezto.com/product/${product.id}`}
+          href={`https://sushasfoodproducts.com/product/${product.id}`}
         />
 
         {/* Open Graph for social sharing */}
@@ -93,7 +92,7 @@ const ProductDetail = () => {
         <meta property="og:image" content={product.image_url} />
         <meta
           property="og:url"
-          content={`https://myfezto.com/product/${product.id}`}
+          content={`https://sushasfoodproducts.com/product/${product.id}`}
         />
 
         {/* Twitter Card */}
