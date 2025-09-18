@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Form, Card, Row, Col } from "react-bootstrap";
+import { Form, Card, Row, Col, Modal, Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import {
   createAddress,
@@ -17,6 +17,8 @@ const AddressForm = React.memo(
       { id: 2, name: "Tamil Nadu" },
       { id: 3, name: "Karnataka" },
     ];
+    const [popupMessage, setPopupMessage] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
 
     const countries = [{ id: 1, name: "India" }];
 
@@ -33,7 +35,6 @@ const AddressForm = React.memo(
       id: null,
     });
 
-   
     useEffect(() => {
       if (initialData && initialData.id) {
         setForm({
@@ -53,15 +54,14 @@ const AddressForm = React.memo(
       }
     }, [initialData]);
 
-   
     const handleChange = useCallback((e) => {
       const { name, value } = e.target;
       setForm((prev) => ({ ...prev, [name]: value }));
     }, []);
 
-    
     const handleSubmit = async (e) => {
       e.preventDefault();
+
       try {
         const payload = {
           first_name: form.first_name,
@@ -76,14 +76,22 @@ const AddressForm = React.memo(
         };
 
         if (mode === "add") {
-          await dispatch(createAddress(payload));
+          await dispatch(createAddress(payload)).unwrap();
         } else if (mode === "edit" && form.id) {
-          await dispatch(updateAddress({ ...payload, id: form.id }));
+          await dispatch(updateAddress({ ...payload, id: form.id })).unwrap();
         }
-        await dispatch(getAddresses());
-        onCancel();
+
+        await dispatch(getAddresses()).unwrap();
+        onCancel(); // close modal or reset form
       } catch (err) {
         console.error("Error saving address:", err);
+
+        const errorMessage =
+          // err?.errors?.address?.[0] || err?.message || "Something went wrong!";
+          "The User Is Unauthenticated"
+
+        setPopupMessage(errorMessage);
+        setShowPopup(true);
       }
     };
 
@@ -267,6 +275,14 @@ const AddressForm = React.memo(
             </div>
           </Form>
         </Card>
+        {/* Popup Modal */}
+         <Modal show={showPopup} onHide={() => setShowPopup(false)}>
+                <Modal.Header closeButton />
+                <Modal.Body>
+                  <h5 style={{ color: "#294085" }}>{popupMessage}</h5>
+                </Modal.Body>
+              </Modal>
+      
       </>
     );
   }
