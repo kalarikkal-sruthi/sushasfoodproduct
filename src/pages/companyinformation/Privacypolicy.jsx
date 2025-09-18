@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Col, Row, Container } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
 function Privacypolicy() {
   return (
     <div>
