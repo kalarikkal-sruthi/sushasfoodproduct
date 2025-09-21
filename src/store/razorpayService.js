@@ -16,7 +16,6 @@ export const openRazorpay = async (
       return;
     }
 
-    // 1️⃣ Create order on backend
     const { data } = await axios.post(
       "https://admin.sushasfoodproducts.com/api/create-order",
       { amount: orderData.amount },
@@ -25,7 +24,6 @@ export const openRazorpay = async (
 
     console.log("Razorpay Order Created:", data);
 
-    // 2️⃣ Razorpay options
     const options = {
       key: data.key,
       amount: data.amount,
@@ -35,7 +33,6 @@ export const openRazorpay = async (
       description: "Order Payment",
       handler: async function (response) {
         try {
-          // 3️⃣ Verify payment with backend
           const verifyRes = await axios.post(
             "https://admin.sushasfoodproducts.com/api/verify-payment",
             {
@@ -47,7 +44,6 @@ export const openRazorpay = async (
           );
 
           if (verifyRes.data.status === "success") {
-            // ✅ Payment verified
             const finalOrderData = {
               ...orderData,
               payment_method: "RAZORPAY",
@@ -67,7 +63,7 @@ export const openRazorpay = async (
             dispatch(clearCart());
             navigate("/order-confirmation");
           } else {
-            console.log("❌ Payment verification failed:", verifyRes.data);
+            console.log("Payment verification failed:", verifyRes.data);
             setPopupMessage("Payment verification failed. Please try again.");
             setShowPopup(true);
           }
@@ -83,7 +79,6 @@ export const openRazorpay = async (
       theme: { color: "#5caf47" },
     };
 
-    // 7️⃣ Handle payment failure
     const rzp = new window.Razorpay(options);
     rzp.on("payment.failed", function (response) {
       console.error("Payment Failed:", response.error);
@@ -91,7 +86,6 @@ export const openRazorpay = async (
       setShowPopup(true);
     });
 
-    // 8️⃣ Open Razorpay modal
     rzp.open();
   } catch (err) {
     console.error("Error opening Razorpay:", err.response?.data || err.message);

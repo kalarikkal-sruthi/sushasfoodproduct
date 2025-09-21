@@ -32,7 +32,7 @@ const OrderPage = () => {
   const orders = ordersState?.orders || [];
   console.log(orders);
 
-  // const cartItems = useSelector((state) => state.cart.items);
+
 
   const [activeTab, setActiveTab] = useState("address");
 
@@ -247,7 +247,7 @@ const OrderPage = () => {
             </Button>
           </Col>
 
-          {/* Content */}
+         
           <Col xs={12} lg={9}>
             <Suspense fallback={<p>Loading...</p>}>
               {activeTab === "orders" && <OrderCard />}

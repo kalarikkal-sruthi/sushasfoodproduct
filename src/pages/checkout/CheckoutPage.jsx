@@ -154,7 +154,7 @@ const CheckoutPage = React.memo(() => {
     navigate,
   ]);
 
-  // Animation configs
+ 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -222,7 +222,7 @@ const CheckoutPage = React.memo(() => {
             </header>
           </Row>
 
-          {/* Address Section */}
+        
           <Col md={7}>
             <Card>
               <Card.Header className="fs-5">
@@ -327,7 +327,7 @@ const CheckoutPage = React.memo(() => {
               </Card.Body>
             </Card>
 
-            {/* Payment Method */}
+           
             <Card className="mt-3">
               <Card.Header className="fs-5">
                 <strong>Payment Method</strong>
@@ -372,7 +372,7 @@ const CheckoutPage = React.memo(() => {
             </div>
           </Col>
 
-          {/* Price Details */}
+        
           <Col md={5}>
             <Card>
               <Card.Header className="fs-5">
@@ -409,7 +409,7 @@ const CheckoutPage = React.memo(() => {
         </Row>
       </Container>
 
-      {/* Popup */}
+    
       <Modal show={showPopup} onHide={() => setShowPopup(false)}>
         <Modal.Header closeButton />
         <Modal.Body>

@@ -8,9 +8,10 @@ export const isTokenExpired = (token) => {
 
     if (!decoded.exp) return true;
 
-    const currentTime = Date.now() / 1000; // in seconds
+    const currentTime = Date.now() / 1000;
     return decoded.exp < currentTime;
   } catch (err) {
-    return true; // invalid token
+    console.log(err);
+    return true;
   }
 };

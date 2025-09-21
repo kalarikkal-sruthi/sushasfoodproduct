@@ -1,9 +1,6 @@
-// src/store/extraHarvestSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../utils/api";
-// import api from "../api";
 
-// 1️⃣ Fetch Extra Harvest - Home
 export const fetchExtraHarvestHome = createAsyncThunk(
   "extraHarvest/fetchHome",
   async (_, { rejectWithValue }) => {
@@ -16,7 +13,6 @@ export const fetchExtraHarvestHome = createAsyncThunk(
   }
 );
 
-// 2️⃣ Fetch Extra Harvest - View All
 export const fetchExtraHarvestAll = createAsyncThunk(
   "extraHarvest/fetchAll",
   async (_, { rejectWithValue }) => {
@@ -29,7 +25,6 @@ export const fetchExtraHarvestAll = createAsyncThunk(
   }
 );
 
-// 3️⃣ Fetch Extra Harvest - By Category
 export const fetchExtraHarvestByCategory = createAsyncThunk(
   "extraHarvest/fetchByCategory",
   async (category, { rejectWithValue }) => {
@@ -42,7 +37,6 @@ export const fetchExtraHarvestByCategory = createAsyncThunk(
   }
 );
 
-// 4️⃣ Fetch Extra Harvest - Single Details
 export const fetchExtraHarvestSingle = createAsyncThunk(
   "extraHarvest/fetchSingle",
   async (id, { rejectWithValue }) => {
@@ -68,7 +62,7 @@ const extraHarvestSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Home
+
       .addCase(fetchExtraHarvestHome.pending, (state) => {
         state.loading = true;
       })
@@ -81,7 +75,6 @@ const extraHarvestSlice = createSlice({
         state.error = action.payload;
       })
 
-      // All
       .addCase(fetchExtraHarvestAll.pending, (state) => {
         state.loading = true;
       })
@@ -94,7 +87,6 @@ const extraHarvestSlice = createSlice({
         state.error = action.payload;
       })
 
-      // By Category
       .addCase(fetchExtraHarvestByCategory.pending, (state) => {
         state.loading = true;
       })
@@ -107,7 +99,6 @@ const extraHarvestSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Single
       .addCase(fetchExtraHarvestSingle.pending, (state) => {
         state.loading = true;
       })

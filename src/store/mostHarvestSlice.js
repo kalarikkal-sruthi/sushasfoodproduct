@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { api } from "../utils/api"; // ✅ make sure api is exported correctly
+import { api } from "../utils/api";
 
-// 1️⃣ Fetch most harvested crops for home page
 export const fetchMostHarvestFull = createAsyncThunk(
   "mostHarvest/fetchHome",
   async (_, { rejectWithValue }) => {
@@ -34,7 +33,6 @@ export const fetchMostHarvestViewAll = createAsyncThunk(
   }
 );
 
-// 3️⃣ Fetch detail by ID
 export const fetchMostHarvestDetail = createAsyncThunk(
   "mostHarvest/fetchDetail",
   async (id, { rejectWithValue }) => {

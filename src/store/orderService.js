@@ -1,8 +1,5 @@
-// import api from "../api"; // your axios instance
-
 import { api } from "../utils/api";
 
-// Create order
 export const createOrderApi = async (orderData, token) => {
   const response = await api.post("/store_order_user", orderData, {
     headers: { Authorization: `Bearer ${token}` },
@@ -10,7 +7,6 @@ export const createOrderApi = async (orderData, token) => {
   return response.data;
 };
 
-// Get all orders for a user
 export const getOrdersApi = async (userId, token) => {
   const response = await api.get(`/orders/${userId}`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -33,8 +29,7 @@ export const getOrderItemsApi = async (orderId, token) => {
     throw error;
   }
 };
-// Cancel order
-// api/orderApi.js
+
 export const cancelOrderApi = async (orderId, token) => {
   const response = await api.post(
     `/order/cancel/${orderId}`,
@@ -44,7 +39,6 @@ export const cancelOrderApi = async (orderId, token) => {
   return response.data;
 };
 
-// Return an order item
 export const returnOrderItemApi = async (orderItemId, reason, token) => {
   const response = await api.post(
     `/order/item/return`,

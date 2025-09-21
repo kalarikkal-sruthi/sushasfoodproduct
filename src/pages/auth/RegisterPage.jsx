@@ -11,7 +11,6 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // 🆕 sid changes → track form errors
   const [errors, setErrors] = useState({});
 
   const validate = (data) => {
@@ -55,39 +54,35 @@ const RegisterPage = () => {
       gender: gender.value.trim(),
     };
 
-    // Run frontend validation
     const validationErrors = validate(data);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    setErrors({}); // clear frontend errors if valid
+    setErrors({});
 
     dispatch(registerUser(data))
       .unwrap()
       .then(() => navigate("/myaccount"))
       .catch((error) => {
-        // 🆕 handle backend validation errors
         if (error && typeof error === "object") {
-          console.error("❌ Backend validation errors:", error);
+          console.error("Backend validation errors:", error);
 
-          // flatten backend errors { email: ["msg"], mobile: ["msg"] } → { email: "msg", mobile: "msg" }
           const backendErrors = {};
           Object.keys(error).forEach((field) => {
             backendErrors[field] = error[field][0];
           });
 
-          setErrors(backendErrors); // show backend errors in UI
+          setErrors(backendErrors);
         } else {
-          console.error("❌ Registration failed:", error);
+          console.error("Registration failed:", error);
         }
       });
   };
 
   return (
     <main className="res-header-top">
-      {/* SEO Meta Tags */}
       <Helmet>
         <title>Register | Sushas's Foods| Prakash Farm | Organic Food</title>
 
@@ -107,17 +102,6 @@ const RegisterPage = () => {
         <div className="calculation-padding">
           <section aria-labelledby="register-page-heading">
             <div className="auth-container  m-auto">
-              {/* Left Section - Image */}
-              {/* <div className="auth-left fade-in-left">
-                <img
-                  src="/images/auth/reg.png"
-                  alt="User registering on MySite for personalized account access"
-                  className="auth-image"
-                  loading="lazy"
-                />
-              </div> */}
-
-              {/* Right Section - Form */}
               <div className="auth-right fade-in-right">
                 <form
                   onSubmit={handleRegister}
@@ -138,7 +122,6 @@ const RegisterPage = () => {
                     </Row>
                   </header>
 
-                  {/* Name */}
                   <Row>
                     <Col xs={12}>
                       <label htmlFor="name" className="form-label">
@@ -159,7 +142,6 @@ const RegisterPage = () => {
                     </Col>
                   </Row>
 
-                  {/* Email + Mobile */}
                   <Row>
                     <Col xs={6}>
                       <label htmlFor="email" className="form-label">
@@ -197,7 +179,6 @@ const RegisterPage = () => {
                     </Col>
                   </Row>
 
-                  {/* Password + Gender */}
                   <Row>
                     <Col xs={6}>
                       <label htmlFor="password" className="form-label">
@@ -241,7 +222,6 @@ const RegisterPage = () => {
                     </Col>
                   </Row>
 
-                  {/* Submit */}
                   <div className="mt-4">
                     <motion.button
                       whileHover={{ x: 5, transition: { duration: 0.2 } }}

@@ -156,13 +156,7 @@ export default function Mostcultivatedfull() {
                                   {item.description?.slice(0, 200)}...
                                 </Card.Text>
 
-                                {/* <h6 className="key-faeture">Key Features</h6>
-
-                              <div className="keyfeature-description"
-                                dangerouslySetInnerHTML={{
-                                  __html: item.description5,
-                                }}
-                              ></div> */}
+                                
 
                                 <Link to={`/mostharvestfromfarm/${item.id}`}>
                                   <motion.div

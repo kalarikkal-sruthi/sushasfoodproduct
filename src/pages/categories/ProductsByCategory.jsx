@@ -160,7 +160,7 @@ const ProductByCategory = () => {
                                 borderRadius: "12px 0 0 12px",
                                 width: "100%",
                                 height: "100%",
-                                // padding:"30px",
+                               
                                 objectFit: "cover",
                               }}
                               loading="lazy"

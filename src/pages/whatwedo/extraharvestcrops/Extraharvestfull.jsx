@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import fruits from "../../../assets/extra harvest/fruits.webp";
-// import spices from "../../../assets/otherfarmcrops/spices.png";
+
 import tubers from "../../../assets/extra harvest/tubers and spices.webp";
 import veg from "../../../assets/extra harvest/vegetables.webp";
 import animal from "../../../assets/extra harvest/animal.webp";
@@ -27,18 +27,7 @@ function Extraharvestfull() {
         "Sustainably farmed without chemicals",
       ],
     },
-    // {
-    //   title: "Spices",
-    //   image: spices,
-    //   description:
-    //     "We cultivate traditional spices organically with natural methods.",
-    //   link: "Spices",
-    //   features: [
-    //     "Authentic aroma and flavor",
-    //     "Naturally dried and hand-processed",
-    //     "Free from chemical additives",
-    //   ],
-    // },
+   
     {
       title: "Fruits",
       image: fruits,

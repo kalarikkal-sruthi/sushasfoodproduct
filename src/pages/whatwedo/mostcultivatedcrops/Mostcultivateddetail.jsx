@@ -65,7 +65,7 @@ export default function Mostcultivateddetail() {
                 {detailData.name}
               </motion.h1>
 
-              {/* Main description */}
+              
             </Col>
             <Breadcrumbs
               className="mb-lg-2 mb-0"

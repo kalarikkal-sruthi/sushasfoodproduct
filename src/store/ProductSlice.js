@@ -16,7 +16,7 @@ export const submitReview = createAsyncThunk(
       const response = await api.post("/reviews", reviewData);
       return response.data;
     } catch (error) {
-      console.error("❌ Review submit error:", error);
+      console.error("Review submit error:", error);
       if (error.response && error.response.data) {
         return rejectWithValue(
           error.response.data.message || error.response.data
@@ -67,7 +67,7 @@ const productSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchProductById.fulfilled, (state, action) => {
-        console.log("✅ Product loaded");
+        console.log("Product loaded");
         state.loading = false;
         state.data = action.payload;
       })
@@ -82,7 +82,7 @@ const productSlice = createSlice({
         state.reviewSuccess = false;
       })
       .addCase(submitReview.fulfilled, (state, action) => {
-        console.log("✅ Review submitted:", action.payload);
+        console.log("Review submitted:", action.payload);
         state.reviewLoading = false;
         state.reviewSuccess = true;
         if (state.data && state.data.reviews) {
@@ -105,7 +105,7 @@ const productSlice = createSlice({
         state.reviewError = null;
       })
       .addCase(reviewProductById.fulfilled, (state, action) => {
-        console.log("✅ Reviews fetched:", action.payload);
+        console.log("Reviews fetched:", action.payload);
         state.reviewLoading = false;
         state.reviews = action.payload;
       })

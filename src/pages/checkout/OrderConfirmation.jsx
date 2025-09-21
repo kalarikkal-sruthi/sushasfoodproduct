@@ -78,7 +78,7 @@ function OrderConfirmation() {
                     height="72"
                     aria-hidden="true"
                   >
-                    {/* Box outline */}
+                 
                     <rect
                       x="3"
                       y="3"
@@ -91,7 +91,7 @@ function OrderConfirmation() {
                       strokeWidth="1.5"
                     />
 
-                    {/* Checkmark */}
+                   
                     <path
                       d="M7 12l3 3 7-7"
                       fill="none"
@@ -118,13 +118,7 @@ function OrderConfirmation() {
                   </motion.h1>
                 </motion.div>
 
-                {/* <p className="text-muted mb-4">Sign in to view your saved items.</p> */}
-                {/* <p>
-                  Your order ID: <strong>{orders.order_no}</strong>
-                </p>
-                <p>
-                  Total Amount: <strong>₹{orders.total_amount}</strong>
-                </p> */}
+                
                 <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                   <>
                     <div>

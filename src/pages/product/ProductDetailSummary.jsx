@@ -30,14 +30,14 @@ const ProductDetailSummary = ({ product }) => {
     let chosenSize = null;
 
     if (product.sizes?.length === 1) {
-      // only one size → baseprices
+    
       priceObj = product.baseprices?.[0] || {
         original_price: 0,
         offer_price: 0,
       };
       chosenSize = product.sizes[0]; 
     } else if (product.sizes?.length > 1) {
-      // must select a size
+     
       if (!selectedSize) return;
       priceObj = selectedSize.priceObj || {
         original_price: selectedSize.price,

@@ -6,8 +6,7 @@ import { Col, Row, Container } from "react-bootstrap";
 import { fetchExtraHarvestSingle } from "../../../store/extraHarvestSlice";
 import { imgURLMostHarvest, whatinfarmsGalleryURL } from "../../../utils/api";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-// import main from "../../../assets/whatwedofarm/1.jpeg";
-// import main2 from "../../../assets/whatwedofarm/2.jpeg";
+
 import { Helmet } from "react-helmet-async";
 
 export default function Extraharvestdetail() {
@@ -70,7 +69,7 @@ export default function Extraharvestdetail() {
                 {single.name}
               </motion.h1>
 
-              {/* Main description */}
+             
             </Col>
             <Breadcrumbs
               items={[

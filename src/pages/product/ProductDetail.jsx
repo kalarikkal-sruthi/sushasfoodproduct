@@ -10,16 +10,16 @@ import { Helmet } from "react-helmet-async";
 import { fetchProductById } from "../../store/ProductSlice";
 import Review from "../../components/order/Review";
 
-// Lazy load gallery
+
 const ProductDetailGallery = React.lazy(() => import("./ProductDetailGallery"));
 const ProductDetailSummary = React.lazy(() => import("./ProductDetailSummary"));
 
 const ProductDetail = () => {
-  const { slug } = useParams(); // 👈 now only slug param
+  const { slug } = useParams(); 
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
 
-  // Extract product ID from slug (last part after "-")
+  
   const productId = slug?.split("-").pop();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const ProductDetail = () => {
 
   const product = data.product;
 
-  // Structured data for SEO
+  
   const structuredData = {
     "@context": "https://schema.org/",
     "@type": "Product",
@@ -70,7 +70,7 @@ const ProductDetail = () => {
 
   return (
     <main aria-labelledby="category-products-heading" className="res-header-top">
-      {/* SEO Meta Tags */}
+    
       <Helmet>
         <title>{product.product_name} | Susha's Food</title>
         <meta

@@ -27,27 +27,27 @@ import OrderConfirmation from "../pages/checkout/OrderConfirmation";
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Wrap all routes inside MainLayouts */}
+    
       <Route element={<MainLayouts />}>
-        {/* Home */}
+      
         <Route path="/" element={<Home />} />
 
-        {/* Products */}
+       
         <Route path="/productsbycategory" element={<CategoryProductList />} />
         <Route
           path="/productsbycategory/:id"
           element={<ProductsByCategory />}
         />
-        {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
+       
 <Route path="/product/:slug" element={<ProductDetail />} />
-        {/* Cart / Auth */}
+       
         <Route path="/cart" element={<CartPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/account" element={<Account />} />
 
-        {/* Extra harvest crops */}
+      
         <Route path="/extraharvestfromfarm" element={<Extraharvestfull />} />
         <Route
           path="/extraharvestfromfarm/:category"
@@ -58,17 +58,17 @@ const AppRoutes = () => {
           element={<Extraharvestdetail />}
         />
 
-        {/* Most cultivated crops */}
+        
         <Route path="/mostharvestfromfarm" element={<Mostcultivatedfull />} />
         <Route
           path="/mostharvestfromfarm/:id"
           element={<Mostcultivateddetail />}
         />
 
-        {/* Checkout */}
+       
         <Route path="/checkoutpage" element={<CheckoutPage />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
-        {/* Company info */}
+       
         <Route path="/aboutus" element={<Aboutfarm />} />
         <Route path="/privacy-policy" element={<Privacypolicy />} />
         <Route path="/terms-and-conditions" element={<Termsconditions />} />
