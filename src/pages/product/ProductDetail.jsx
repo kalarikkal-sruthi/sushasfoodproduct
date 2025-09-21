@@ -124,7 +124,8 @@ const ProductDetail = () => {
             </Col>
           </Row>
           <Row>
-            <Review product={product} />
+            <Col md={5}> <Review product={product} /></Col>
+           
           </Row>
         </article>
       </div>

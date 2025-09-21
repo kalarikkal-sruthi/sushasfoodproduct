@@ -172,10 +172,18 @@ const ProductByCategory = () => {
                               <Card.Title
                                 id={`product-${product.id}-title`}
                                 style={{ color: "#294085" }}
-                                className="fw-bold fs-3 mb-3"
+                                className="fw-bold fs-3 mb-1"
                                 as="h2"
                               >
                                 {product.product_name}
+                              </Card.Title>
+                               <Card.Title
+                                id={`product-${product.id}-title`}
+                                style={{ color: "#294085" }}
+                                className="fw-bold fs-4 mb-3"
+                                as="h2"
+                              >
+                                {product.product_name_mal}
                               </Card.Title>
 
                               <Card.Text className=" text-muted">

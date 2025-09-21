@@ -16,7 +16,17 @@ const ProductDetailGallery = ({ product }) => {
   const bgColor = location.state?.bgColor || "#ffffff";
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-
+const getYouTubeEmbedURL = (url) => {
+  if (!url) return "";
+  if (url.includes("youtube.com")) {
+    const videoId = new URL(url).searchParams.get("v");
+    return `https://www.youtube.com/embed/${videoId}`;
+  } else if (url.includes("youtu.be")) {
+    const videoId = url.split("/").pop();
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+  return url; // fallback
+};
 
 
   const mainSlideStyle = {
@@ -105,10 +115,20 @@ const ProductDetailGallery = ({ product }) => {
       </Swiper>
 
       
-  {product.video && (
-  <> 
-  <h3 className="mt-2 mb-2">How We Make</h3>
-   <video
+
+  
+
+ {product.video_link ? (
+  <div className="ratio ratio-16x9 mt-3">
+    <iframe
+      src={getYouTubeEmbedURL(product.video_link)}
+      title="YouTube video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  </div>
+) : (
+  <video
     className="mt-3"
     controls
     autoPlay={false}
@@ -118,9 +138,10 @@ const ProductDetailGallery = ({ product }) => {
   >
     <source src={`${productURL}${product.video}`} type="video/mp4" />
     Your browser does not support the video tag.
-  </video></>
-
+  </video>
 )}
+
+
 
     </section>
   );
