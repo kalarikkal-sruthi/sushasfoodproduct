@@ -110,18 +110,14 @@ function Certificate({ data }) {
                 <SwiperSlide key={item.id || index}>
                   <figure
                     className="certificate-main-div text-center"
-                    style={{
-                    
-                    }}
+                    style={{}}
                   >
                     <img
                       className="rounded"
                       src={`${imgURLCertificate}${item.image}`}
                       alt={`${certTitle} - Organic & Sustainable Farming Certification`}
                       loading="lazy"
-                      style={{
-                     
-                      }}
+                      style={{}}
                     />
                     {item.title && (
                       <figcaption className="mt-2 text-muted small">

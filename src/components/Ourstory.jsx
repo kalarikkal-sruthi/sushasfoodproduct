@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Container, Row, Col } from "react-bootstrap";
 
 const Ourstory = () => {
-  // Animation settings
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -67,8 +67,8 @@ const Ourstory = () => {
 
                 <article>
                   <p>
-                    Established in 2010, <strong>Prakash Organic Farm</strong> is
-                    a <strong>sustainable organic farm in Kerala</strong>{" "}
+                    Established in 2010, <strong>Prakash Organic Farm</strong>{" "}
+                    is a <strong>sustainable organic farm in Kerala</strong>{" "}
                     located on 11 acres of inherited land. With over 15 years of
                     active farming, our journey has been filled with
                     recognition, challenges, and growth.
@@ -85,7 +85,11 @@ const Ourstory = () => {
                   <p>
                     Sustainability is at our core — we operate a large biogas
                     plant utilizing farm waste, compost organic matter, and
-                    recycle nutrients for our crops. From our harvest, At <strong> Susha’s Food</strong>, we craft certified value-added products (FSSAI, Udyam, Export & Packaging licenses) and sell them directly through our own outlet, Susha’s Food.
+                    recycle nutrients for our crops. From our harvest, At{" "}
+                    <strong> Susha’s Food</strong>, we craft certified
+                    value-added products (FSSAI, Udyam, Export & Packaging
+                    licenses) and sell them directly through our own outlet,
+                    Susha’s Food.
                   </p>
                 </article>
               </motion.div>

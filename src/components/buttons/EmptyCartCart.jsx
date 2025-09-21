@@ -1,5 +1,3 @@
-// EmptyCart.jsx
-import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -9,20 +7,23 @@ const EmptyCartCart = () => {
   return (
     <main>
       <Helmet>
-           <title>Empty Cart | Sushas Foods | Prakash Farm | Organic Food</title>
+        <title>Empty Cart | Sushas Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
         />
         <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
-        <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
+        <link
+          rel="preload"
+          href="https://www.sushasfoodproduct.com/cart"
+          as="document"
+        />
       </Helmet>
-     
+
       <Container className="mt-5">
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={7}>
             <Card className="shadow-sm border-0 text-center p-4">
-             
               <div className="mx-auto mb-3" style={{ width: 72, height: 72 }}>
                 <svg
                   viewBox="0 0 24 24"
@@ -43,13 +44,12 @@ const EmptyCartCart = () => {
 
               <h3 className="fw-bold mb-2">Your cart is empty</h3>
               <p className="text-muted mb-4">
-               Add items to your cart to complete a purchase.
+                Add items to your cart to complete a purchase.
               </p>
 
               <div className="d-flex mt-3 mb-3 gap-2 justify-content-around flex-wrap">
                 <>
                   <div>
-                   
                     <Link to="/productsbycategory">
                       <motion.button
                         whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -64,7 +64,7 @@ const EmptyCartCart = () => {
                         }}
                         aria-label={`Login`}
                       >
-                         Continue Shopping →
+                        Continue Shopping →
                       </motion.button>
                     </Link>
                   </div>

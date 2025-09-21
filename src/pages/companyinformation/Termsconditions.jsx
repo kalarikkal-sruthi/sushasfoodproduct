@@ -5,22 +5,25 @@ import { Helmet } from "react-helmet-async";
 function Termsconditions() {
   return (
     <div>
-        <Helmet>
-              <title> Terms And Conditions | Susha's Foods | Prakash Farm | Organic Food </title>
-              <meta
-                name="description"
-                content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
-              />
-              <meta
-                name="keywords"
-                content="farm products, organic produce, value added products, fresh produce, healthy food"
-              />
-      
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-              />
-            </Helmet>
+      <Helmet>
+        <title>
+        
+          Terms And Conditions | Susha's Foods | Prakash Farm | Organic Food
+        </title>
+        <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
       <div className="padding-top"></div>
       <div className="padding-top"></div>
 

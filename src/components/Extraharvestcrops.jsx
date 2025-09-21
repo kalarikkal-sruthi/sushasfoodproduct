@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import {  Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import tubers from "../assets/extra harvest/tubers and spices.webp";
 import veg from "../assets/extra harvest/vegetables.webp";
 import animal from "../assets/extra harvest/animal.webp";
 import herbs from "../assets/extra harvest/herbs.webp";
 
-// Static categories
 const services = [
   {
     title: "Tubers and Spices",
@@ -20,18 +19,6 @@ const services = [
       "Sustainably farmed without chemicals",
     ],
   },
-  // {
-  //   title: "Spices",
-  //   image: spices,
-  //   description:
-  //     "We cultivate traditional spices organically with natural methods.",
-  //   link: "Spices",
-  //   features: [
-  //     "Authentic aroma and flavor",
-  //     "Naturally dried and hand-processed",
-  //     "Free from chemical additives",
-  //   ],
-  // },
 
   {
     title: "Herbs",
@@ -183,7 +170,9 @@ export default function HomeCategories() {
                                     </h6>
                                     <ul style={{ backgroundColor: "#f8f9fa" }}>
                                       {item.features.map((feature, i) => (
-                                        <li style={{color:'black'}} key={i}>{feature}</li>
+                                        <li style={{ color: "black" }} key={i}>
+                                          {feature}
+                                        </li>
                                       ))}
                                     </ul>
                                   </div>

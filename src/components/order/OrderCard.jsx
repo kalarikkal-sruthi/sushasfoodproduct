@@ -1,32 +1,23 @@
-import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
-import { getOrders } from "../../store/orderSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { Card, Row, Col, Dropdown } from "react-bootstrap";
+import { getOrders, getOrderItems, cancelOrder } from "../../store/orderSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getOrderItems } from "../../store/orderSlice";
-// import { cancelOrder } from "../../store/orderSlice";
-
+import { useNavigate } from "react-router-dom";
 import { productURL } from "../../utils/api";
+
 const OrderCard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = useSelector((state) => state.auth.user);
   const orders = useSelector((state) => state.order.orders);
-  console.log(orders);
   const token = useSelector((state) => state.auth.token);
-  const { items, error } = useSelector((state) => state.order);
-  console.log(items);
-
-  const orderId = orders.map((order) => order.id);
-
-  console.log(orderId);
-  // Fetch orders once
+  const { items, error, loading } = useSelector((state) => state.order);
   useEffect(() => {
     if (user?.id) {
       dispatch(getOrders(user.id));
     }
   }, [dispatch, user?.id]);
-
-  // Fetch items after orders are loaded
   useEffect(() => {
     if (orders.length > 0 && token) {
       orders.forEach((order) => {
@@ -35,9 +26,21 @@ const OrderCard = () => {
     }
   }, [orders.length, token, dispatch]);
 
-  // const handleCancel = (orders) => {
-  //   dispatch(cancelOrder({ orderId: orders.id, token }));
-  // };
+  const handleCancel = (orderId) => {
+    console.log("Cancelling order:", orderId);
+    dispatch(cancelOrder({ orderId, token }));
+  };
+
+  const handleReorder = (orderId) => {
+    const orderItems = items[orderId] || [];
+    if (orderItems.length === 0) {
+      alert("No items found to reorder.");
+      return;
+    }
+
+    console.log("Reordering order:", orderId, orderItems);
+    navigate("/checkoutpage", { state: { reorderItems: orderItems } });
+  };
 
   if (orders.loading) return <p>Loading order items...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
@@ -49,8 +52,8 @@ const OrderCard = () => {
       ) : (
         Object.entries(items).map(([orderId, orderItems]) => {
           const order = orders.find((o) => o.id === Number(orderId));
-
           if (!order) return null;
+
           return (
             <Card key={orderId} className="mb-3">
               {/* Header */}
@@ -92,8 +95,6 @@ const OrderCard = () => {
                   </Col>
                 </Row>
               </Card.Header>
-
-              {/* Body */}
               <Card.Body as="section">
                 <Row className="mb-3">
                   <Col>
@@ -137,19 +138,16 @@ const OrderCard = () => {
                       <p>No items found for this order.</p>
                     )}
                   </Col>
-
-                  <Col
-                    md={4}
-                    className="d-flex flex-column align-items-end justify-content-start gap-2"
-                  ></Col>
                 </Row>
-                {/* <Row className="align-items-center">
-                  <Col className="text-end">
-                    {order.status === "cancelled" ? (
-                      <span className="text-danger fw-bold">
+
+                <Row className="align-items-center">
+                  <Col className="text-end d-flex gap-2 justify-content-end">
+                    {order.status === "Cancelled" ? (
+                      <button className="btn btn-secondary btn-sm" disabled>
                         Order Cancelled
-                      </span>
-                    ) : (
+                      </button>
+                    ) : order.delivery_status === "Pending" ||
+                      order.delivery_status === "Accepted" ? (
                       <button
                         onClick={() => handleCancel(order.id)}
                         disabled={loading.cancel}
@@ -157,9 +155,22 @@ const OrderCard = () => {
                       >
                         {loading.cancel ? "Cancelling..." : "Cancel Order"}
                       </button>
+                    ) : (
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        disabled
+                      >
+                        {order.delivery_status} (Not Cancellable)
+                      </button>
                     )}
+                    <button
+                      onClick={() => handleReorder(order.id)}
+                      className="btn btn-success btn-sm"
+                    >
+                      Reorder
+                    </button>
                   </Col>
-                </Row> */}
+                </Row>
               </Card.Body>
             </Card>
           );

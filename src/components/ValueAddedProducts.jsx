@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card } from "react-bootstrap";
+import {  Row, Col, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -75,7 +75,7 @@ const ValueAddedProducts = () => {
             </Row>
           </header>
 
-          {/* Product Categories */}
+  
           <Row className="g-3 g-lg-5 mt-2 mt-lg-4 justify-content-center">
             {categories
               ?.slice()
@@ -117,17 +117,7 @@ const ValueAddedProducts = () => {
                           <p className="value-added-product-para">
                             No Preservatives
                           </p>
-                          {/* {category.tagline && (
-                          <p>
-                            <em>{category.tagline}</em>
-                          </p>
-                        )}
-                        {category.terms && <p>{category.terms}</p>}
-                        <ul className="value-addedd-product-list">
-                          <li>Virgin Coconut Oil</li>
-                          <li>Cold Pressed Groundnut Oil</li>
-                          <li>Organic Jaggery Powder</li>
-                        </ul> */}
+                         
                         </Card.Body>
                       </Card>
                     </Link>
@@ -136,7 +126,7 @@ const ValueAddedProducts = () => {
               ))}
           </Row>
 
-          {/* View All Button */}
+       
           <Row>
             <Col className="text-center mt-3 mt-lg-5">
               <Link

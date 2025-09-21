@@ -105,10 +105,28 @@ const orderSlice = createSlice({
         state.loading.fetch = true;
         state.error = null;
       })
+      // .addCase(getOrders.fulfilled, (state, action) => {
+      //   state.loading.fetch = false;
+      //   state.orders = action.payload;
+      // })
       .addCase(getOrders.fulfilled, (state, action) => {
-        state.loading.fetch = false;
-        state.orders = action.payload;
-      })
+  state.loading.fetch = false;
+
+  // Normalize status from backend
+  state.orders = action.payload.map(order => {
+    let normalizedStatus = order.status;
+
+    if (!normalizedStatus) {
+      normalizedStatus = "Placed"; // 👈 default if null
+    }
+
+    return {
+      ...order,
+      status: normalizedStatus, // keep "Cancelled" as-is
+    };
+  });
+})
+
       .addCase(getOrders.rejected, (state, action) => {
         state.loading.fetch = false;
         state.error = action.payload || action.error?.message;
@@ -133,20 +151,35 @@ const orderSlice = createSlice({
         state.loading.cancel = true;
         state.error = null;
       })
+      // .addCase(cancelOrder.fulfilled, (state, action) => {
+      //   state.loading.cancel = false;
+
+      //   const { orderId } = action.payload;
+
+      //   // ✅ find and mark the cancelled order
+      //   const orderIndex = state.orders.findIndex((o) => o.id === orderId);
+      //   if (orderIndex !== -1) {
+      //     state.orders[orderIndex] = {
+      //       ...state.orders[orderIndex],
+      //       status: "Cancelled",
+      //     };
+      //   }
+      // })
       .addCase(cancelOrder.fulfilled, (state, action) => {
-        state.loading.cancel = false;
+  state.loading.cancel = false;
 
-        const { orderId } = action.payload;
+  const { orderId } = action.payload;
 
-        // ✅ find and mark the cancelled order
-        const orderIndex = state.orders.findIndex((o) => o.id === orderId);
-        if (orderIndex !== -1) {
-          state.orders[orderIndex] = {
-            ...state.orders[orderIndex],
-            status: "cancelled",
-          };
-        }
-      })
+  // ✅ find and mark the cancelled order
+  const orderIndex = state.orders.findIndex((o) => o.id === orderId);
+  if (orderIndex !== -1) {
+    state.orders[orderIndex] = {
+      ...state.orders[orderIndex],
+      status: "Cancelled", // 👈 match backend exactly
+    };
+  }
+})
+
 
       .addCase(cancelOrder.rejected, (state, action) => {
         state.loading.cancel = false;

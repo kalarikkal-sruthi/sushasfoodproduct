@@ -34,25 +34,15 @@ function Footer() {
                       <img src={logonew} alt="" />
                     </div>
                     <ul>
-                      {/* <li>
-                      <img src={mail} alt="" />
-                      sushasfoodproducts@gmail.com
-                    </li> */}
                       <li>
                         <img src={mail} alt="" />
                         <Link
                           to="mailto:sushasfoodproducts@gmail.com"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
-                         
-sushasfoodproducts@gmail.com
+                          sushasfoodproducts@gmail.com
                         </Link>
                       </li>
-
-                      {/* <li>
-                      <img src={phone} alt="" />
-                      9074 624 607
-                    </li> */}
 
                       <li>
                         <img src={phone} alt="" />
@@ -64,10 +54,6 @@ sushasfoodproducts@gmail.com
                         </Link>
                       </li>
 
-                      {/* <li>
-                      <img src={phone} alt="" />
-                      sushasfoodproducts.com
-                    </li> */}
                       <li>
                         <img src={www} alt="" />
                         <Link
@@ -79,13 +65,11 @@ sushasfoodproducts@gmail.com
                           sushasfoodproducts.com
                         </Link>
                       </li>
-                      {/* <h4>Follow Us</h4> */}
                     </ul>
                   </Col>
                   <Col xs={6} md={3} className="footer-div">
                     <h4>Usefull Links</h4>
                     <ul>
-                      {/* <Link   style={{ textDecoration: "none" }} to=""><li>About Us</li></Link> */}
                       <Link
                         to="/privacy-policy"
                         style={{ textDecoration: "none" }}
@@ -120,15 +104,6 @@ sushasfoodproducts@gmail.com
                       <li>Online Selling</li>
                     </ul>
                   </Col>
-                  {/* <Col xs={6} md={3} className="footer-div">
-                  <h4>Cateogories</h4>
-                  <ul>
-                    <li>Shopping Cart</li>
-                    <li>Return Policy</li>
-                    <li>About Us</li>
-                    <li>Follow Us</li>
-                  </ul>
-                </Col> */}
 
                   <Col xs={6} md={3} className="footer-div">
                     <h4>Product Categories</h4>
@@ -138,7 +113,7 @@ sushasfoodproducts@gmail.com
                           <Link
                             style={{ textDecoration: "none", color: "inherit" }}
                             key={cat.id}
-                            as={Link} // 👈 use react-router Link instead of to (avoids full page reload)
+                            as={Link}
                             to={`/productsbycategory/${cat.id}`}
                             state={{
                               categoryName: cat.name,
@@ -210,7 +185,11 @@ sushasfoodproducts@gmail.com
             </section>
             <div className="padding-top"></div>
             <div className="bottom-footer">
-              <p>© <Link to="https://sushasfoodproducts.com/">Susha's Foods</Link> 2025 Made with by BSL Solutions</p>
+              <p>
+                ©{" "}
+                <Link to="https://sushasfoodproducts.com/">Susha's Foods</Link>{" "}
+                2025 Made with by BSL Solutions
+              </p>
             </div>
           </Container>
         </div>

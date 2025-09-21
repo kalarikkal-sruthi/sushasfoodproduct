@@ -190,10 +190,10 @@ const ProductByCategory = () => {
                                 </p>
                               )}
 
-                              <Link
-                                to={`/product/${product.id}`}
-                                state={{ bgColor, fromCategoryId: id }}
-                              >
+                            <Link
+  to={`/product/${product.product_slug}-${product.id}`}
+  state={{ bgColor, fromCategoryId: id }}
+>
                                 <motion.div
                                   whileHover={{
                                     x: 5,

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Container, Row, Col } from "react-bootstrap";
+import {  Row, Col } from "react-bootstrap";
 
 const WhatWeDo = () => {
   const itemVariants = {
@@ -48,10 +48,10 @@ const WhatWeDo = () => {
                 transition={{ delay: 0.3 }}
                 className="lead text-muted mb-0"
               >
-                At <strong> Prakash Organic Farm</strong>, we grow
-                nutrient-rich organic crops using sustainable farming practices
-                that protect the environment and support local communities. From
-                rice cultivation and seasonal vegetables to value-added farm
+                At <strong> Prakash Organic Farm</strong>, we grow nutrient-rich
+                organic crops using sustainable farming practices that protect
+                the environment and support local communities. From rice
+                cultivation and seasonal vegetables to value-added farm
                 products, our mission is to deliver healthy food while caring
                 for the land.
               </p>

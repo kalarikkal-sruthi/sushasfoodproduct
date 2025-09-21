@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { productURL } from "../../utils/api";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   return (
@@ -39,13 +40,9 @@ export default function ProductCard({ product }) {
       </p>
 
       <motion.span
-        whileHover={{
-          x: 5,
-          transition: { duration: 0.2 },
-        }}
+        whileHover={{ x: 5, transition: { duration: 0.2 } }}
         whileTap={{ scale: 0.98 }}
-        className="btn btn-outline  btn-responsive
-"
+        className="btn btn-outline btn-responsive"
         style={{
           borderRadius: "50px",
           fontWeight: "500",
@@ -55,7 +52,12 @@ export default function ProductCard({ product }) {
         }}
         aria-label="Add to cart"
       >
-        Shop Now →
+        <Link
+          to={`/product/${product.product_slug}-${product.id}`}
+          style={{ color: "inherit", textDecoration: "none" }}
+        >
+          Shop Now →
+        </Link>
       </motion.span>
     </article>
   );

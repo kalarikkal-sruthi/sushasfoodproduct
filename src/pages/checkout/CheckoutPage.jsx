@@ -11,18 +11,18 @@ import {
 import { createOrderApi } from "../../store/orderService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
-import axios from "axios";
+
 import { clearCart } from "../../store/cartSlice";
+import { calculateShippingApi } from "../../store/shippingServices";
+import { openRazorpay } from "../../store/razorpayService";
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const token = useSelector((state) => state.auth.token);
   const cartItems = useSelector((state) => state.cart.items);
   const addresses = useSelector((state) => state.auth.addresses || []);
   const userId = useSelector((state) => state.auth.user?.id);
-
   const [addressMode, setAddressMode] = useState("list");
   const [editData, setEditData] = useState(null);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
@@ -30,18 +30,22 @@ const CheckoutPage = React.memo(() => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
 
-  const { subtotal, discount, payable } = useMemo(() => {
+  const [shippingCharge, setShippingCharge] = useState(0);
+
+  const { subtotal, payable } = useMemo(() => {
     const subtotalCalc = cartItems.reduce((sum, item) => {
       const price = parseFloat(item.selectPrice || 0);
       return sum + price * item.quantity;
     }, 0);
 
+    const shipping = Number(shippingCharge) || 0; 
+
     return {
       subtotal: subtotalCalc,
       discount: 0,
-      payable: subtotalCalc,
+      payable: subtotalCalc + shipping, 
     };
-  }, [cartItems]);
+  }, [cartItems, shippingCharge]);
 
   useEffect(() => {
     dispatch(getAddresses());
@@ -56,101 +60,36 @@ const CheckoutPage = React.memo(() => {
     }
   }, [addresses]);
 
-  async function openRazorpay(orderData) {
-    try {
-      if (!token) {
-        setPopupMessage("User not authenticated. Please login again.");
-        setShowPopup(true);
-        return;
+  console.log(selectedAddressId);
+  console.log(cartItems);
+
+  useEffect(() => {
+    if (!selectedAddressId || cartItems.length === 0) return;
+
+    const fetchShipping = async () => {
+      try {
+        const payload = {
+          address_id: selectedAddressId,
+          items: cartItems.map((item) => ({
+            product_size_id: item.sizeId,
+            qty: item.quantity,
+          })),
+        };
+
+        const shippingRes = await calculateShippingApi(token, payload);
+        console.log("Shipping Response:", shippingRes);
+
+        const shippingCharged = shippingRes.shipping_charge || 0;
+        setShippingCharge(shippingCharged);
+      } catch (err) {
+        console.error("Shipping calculation failed:", err);
+        setShippingCharge(0);
       }
+    };
 
-      // 1️⃣ Create order on backend
-      const { data } = await axios.post(
-        "https://admin.sushasfoodproducts.com/api/create-order",
-        { amount: orderData.amount },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      console.log("Razorpay Order Created:", data);
-
-      // 2️⃣ Razorpay options
-      const options = {
-        key: data.key,
-        amount: data.amount,
-        currency: data.currency,
-        order_id: data.order_id,
-        name: "Sushas Food Products",
-        description: "Order Payment",
-        handler: async function (response) {
-          try {
-            // 3️⃣ Verify payment with backend
-            const verifyRes = await axios.post(
-              "https://admin.sushasfoodproducts.com/api/verify-payment",
-              {
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature,
-              },
-              { headers: { Authorization: `Bearer ${token}` } }
-            );
-            console.log("verify option ", verifyRes);
-
-            if (verifyRes.data.status === "success") {
-              // ✅ Payment verified
-              const finalOrderData = {
-                ...orderData,
-                payment_method: "RAZORPAY",
-                payment_status: "PAID",
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-              };
-
-              await axios.post(
-                "https://admin.sushasfoodproducts.com/api/store_order_user",
-                finalOrderData,
-                {
-                  headers: { Authorization: `Bearer ${token}` },
-                }
-              );
-
-              dispatch(clearCart());
-              navigate("/order-confirmation");
-            } else {
-              console.log("❌ Payment verification failed:", verifyRes.data);
-              setPopupMessage("Payment verification failed. Please try again.");
-              setShowPopup(true);
-            }
-          } catch (err) {
-            console.error(
-              "Error verifying/storing order:",
-              err.response?.data || err.message
-            );
-            setPopupMessage("Error while storing order. Try again.");
-            setShowPopup(true);
-          }
-        },
-        theme: { color: "#5caf47" },
-      };
-
-      // 7️⃣ Handle payment failure
-      const rzp = new window.Razorpay(options);
-      rzp.on("payment.failed", function (response) {
-        console.error("Payment Failed:", response.error);
-        setPopupMessage("Payment failed: " + response.error.description);
-        setShowPopup(true);
-      });
-
-      // 8️⃣ Open Razorpay modal
-      rzp.open();
-    } catch (err) {
-      console.error(
-        "Error opening Razorpay:",
-        err.response?.data || err.message
-      );
-      setPopupMessage("Unable to initiate payment. Please try again.");
-      setShowPopup(true);
-    }
-  }
+    fetchShipping();
+  }, [token, selectedAddressId, cartItems]);
+  console.log(shippingCharge);
 
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
@@ -166,12 +105,13 @@ const CheckoutPage = React.memo(() => {
     }
 
     const orderData = {
-      amount: subtotal,
+      amount: payable,
+      shipping_charge: shippingCharge,
       user_id: userId,
       address: selectedAddressId,
-      special_instructions: "vvv",
       payment_method: paymentMethod,
       cash_on_delivery: paymentMethod === "COD",
+
       cart: cartItems.map((item) => ({
         product_id: item.id,
         quantity: item.quantity,
@@ -180,6 +120,7 @@ const CheckoutPage = React.memo(() => {
         product_prize_id: item.priceId || null,
       })),
     };
+    console.log(orderData);
 
     try {
       if (paymentMethod === "COD") {
@@ -187,7 +128,14 @@ const CheckoutPage = React.memo(() => {
         dispatch(clearCart());
         navigate("/order-confirmation");
       } else if (paymentMethod === "RAZORPAY") {
-        openRazorpay(orderData);
+        openRazorpay(
+          orderData,
+          token,
+          dispatch,
+          navigate,
+          setPopupMessage,
+          setShowPopup
+        );
       }
     } catch (err) {
       console.error("Order Error:", err);
@@ -200,6 +148,7 @@ const CheckoutPage = React.memo(() => {
     userId,
     cartItems,
     subtotal,
+    shippingCharge,
     token,
     dispatch,
     navigate,
@@ -225,24 +174,24 @@ const CheckoutPage = React.memo(() => {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>Checkout |  Susha's Food | Prakash Farm | Organic Food </title>
-         <meta
+        <title>Checkout | Susha's Food | Prakash Farm | Organic Food </title>
+        <meta
           name="description"
           content="Complete your purchase securely and quickly on our checkout page."
         />
-          <meta
-                name="description"
-                content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
-              />
-              <meta
-                name="keywords"
-                content="farm products, organic produce, value added products, fresh produce, healthy food"
-              />
-      
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-              />
+        <meta
+          name="description"
+          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
+        />
+        <meta
+          name="keywords"
+          content="farm products, organic produce, value added products, fresh produce, healthy food"
+        />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Helmet>
 
       <div className="padding-top"></div>
@@ -432,11 +381,18 @@ const CheckoutPage = React.memo(() => {
               <Card.Body>
                 <Row>
                   <Col>Subtotal</Col>
-                  <Col className="text-end">₹ {subtotal.toFixed(2)}</Col>
+                  <Col className="fs-5 text-end">
+                    <strong> ₹ {subtotal.toFixed(2)}</strong>
+                  </Col>
                 </Row>
+
                 <Row>
                   <Col>Shipping Charge</Col>
-                  <Col className="text-end">₹ {discount.toFixed(2)}</Col>
+                  <Col className="fs-5 text-end">
+                    <strong>
+                      ₹ {(Number(shippingCharge) || 0).toFixed(2)}
+                    </strong>
+                  </Col>
                 </Row>
                 <hr />
                 <Row>

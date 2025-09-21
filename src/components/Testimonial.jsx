@@ -1,4 +1,4 @@
-import React from "react";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { imgURLTestimonial } from "../utils/api";
-import { Container } from "react-bootstrap";
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 

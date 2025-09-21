@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Form, Card, Row, Col, Modal, Button } from "react-bootstrap";
+import { Form, Card, Row, Col, Modal } from "react-bootstrap";
 import { motion } from "framer-motion";
 import {
   createAddress,
@@ -14,8 +14,31 @@ const AddressForm = React.memo(
 
     const states = [
       { id: 1, name: "Kerala" },
-      { id: 2, name: "Tamil Nadu" },
-      { id: 3, name: "Karnataka" },
+      { id: 2, name: "Karnadaka" },
+      { id: 3, name: "Andhra Pradesh" },
+      { id: 4, name: "Arunachal Pradesh" },
+      { id: 5, name: "Assam" },
+      { id: 6, name: "Bihar" },
+      { id: 7, name: "Chhattisgarh" },
+      { id: 8, name: "Goa" },
+      { id: 9, name: "Gujarat" },
+      { id: 10, name: "Haryana" },
+      { id: 11, name: "Himachal Pradesh" },
+      { id: 12, name: "Jharkhand" },
+      { id: 13, name: "Madhya Pradesh" },
+      { id: 14, name: "Maharashtra" },
+      { id: 15, name: "Manipur" },
+      { id: 16, name: "Meghalaya" },
+      { id: 17, name: "Mizoram" },
+      { id: 18, name: "Nagaland" },
+      { id: 19, name: "Odisha" },
+      { id: 20, name: "Punjab" },
+      { id: 21, name: "Rajasthan" },
+      { id: 22, name: "Sikkim" },
+
+      { id: 23, name: "Tamil Nadu" },
+      { id: 24, name: "Telangana" },
+      { id: 25, name: "Tripura" },
     ];
     const [popupMessage, setPopupMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
@@ -82,14 +105,12 @@ const AddressForm = React.memo(
         }
 
         await dispatch(getAddresses()).unwrap();
-        onCancel(); // close modal or reset form
+        onCancel();
       } catch (err) {
         console.error("Error saving address:", err);
 
         const errorMessage =
-          // err?.errors?.address?.[0] || err?.message || "Something went wrong!";
-          "The User Is Unauthenticated"
-
+          "The User Is Unauthenticated";
         setPopupMessage(errorMessage);
         setShowPopup(true);
       }
@@ -275,14 +296,12 @@ const AddressForm = React.memo(
             </div>
           </Form>
         </Card>
-        {/* Popup Modal */}
-         <Modal show={showPopup} onHide={() => setShowPopup(false)}>
-                <Modal.Header closeButton />
-                <Modal.Body>
-                  <h5 style={{ color: "#294085" }}>{popupMessage}</h5>
-                </Modal.Body>
-              </Modal>
-      
+        <Modal show={showPopup} onHide={() => setShowPopup(false)}>
+          <Modal.Header closeButton />
+          <Modal.Body>
+            <h5 style={{ color: "#294085" }}>{popupMessage}</h5>
+          </Modal.Body>
+        </Modal>
       </>
     );
   }

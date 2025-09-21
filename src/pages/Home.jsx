@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
-
 import Instagramfeed from "../components/Instagramfeed";
 import Youtubefeed from "../components/Youtubefeed";
 import Testimonial from "../components/Testimonial";
 import Certificates from "../components/Certificates";
-
 import Bannerslider from "../components/Bannerslider";
 import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomeData } from "../store/homeDataSlice";
 import Aboutfarm from "../components/Aboutfarm";
 import WhatWeDo from "../components/WhatWeDo";
-
 import ValueAddedProducts from "../components/ValueAddedProducts";
 import Ourstory from "../components/Ourstory";
 import Mostharvestcrops from "../components/Mostharvestcrops";
@@ -20,11 +17,9 @@ import Extraharvestcrops from "../components/Extraharvestcrops";
 export default function Home() {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.homeData);
-
   useEffect(() => {
     dispatch(fetchHomeData());
   }, [dispatch]);
-
   console.log(data);
   const homeVideoInGallary = data?.homeVideoInGallary || [];
   // const whatInFarms = data?.whatInFarms || [];
@@ -33,7 +28,6 @@ export default function Home() {
   const certificates = data?.certificates || [];
   // const videoInstagram = data?.videoInstagram || [];
   const videoYoutube = data?.videoYoutube || [];
-
   // const aboutusImage = data?.aboutusImage || [];
   // const categories = data?.categories || [];
   // const categories = data?.categories || [];

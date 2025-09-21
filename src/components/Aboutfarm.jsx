@@ -38,7 +38,7 @@ const Aboutfarm = () => {
                     variants={itemVariants}
                     style={{ color: "#294085" }}
                   >
-                    About  Susha’s Food & Prakash Farm 
+                    About Susha’s Food & Prakash Farm
                   </motion.h1>
                   <p className="lead text-muted">
                     A sustainable <strong>organic farm in Kerala</strong>,
@@ -49,9 +49,10 @@ const Aboutfarm = () => {
 
                 <article>
                   <p>
-                    Meet <strong>P T Sushama</strong>, the founder of  Susha’s Food & Prakash Farm. Inspired by my husband Prakash, who
-                    has been a role model in agriculture, our farm is dedicated
-                    to the mutual flourishing of people and nature.
+                    Meet <strong>P T Sushama</strong>, the founder of Susha’s
+                    Food & Prakash Farm. Inspired by my husband Prakash, who has
+                    been a role model in agriculture, our farm is dedicated to
+                    the mutual flourishing of people and nature.
                   </p>
 
                   <p>
@@ -67,14 +68,13 @@ const Aboutfarm = () => {
                     We have received many recognitions for our contribution to
                     sustainable agriculture. From our harvest, we create{" "}
                     <strong>value-added products</strong> which are sold in our
-                    farm outlet named <strong>Susha's Foods</strong> ensuring freshness and quality straight from
-                    the source.
+                    farm outlet named <strong>Susha's Foods</strong> ensuring
+                    freshness and quality straight from the source.
                   </p>
                 </article>
               </motion.div>
             </Col>
 
-          
             <Col md={5}>
               <motion.figure
                 style={{ textAlign: "center" }}

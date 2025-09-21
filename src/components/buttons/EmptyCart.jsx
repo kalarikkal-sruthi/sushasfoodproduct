@@ -1,6 +1,4 @@
-// EmptyCart.jsx
-import React from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import {  Row, Col, Card} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
@@ -15,7 +13,11 @@ const EmptyCart = () => {
           content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
         />
         <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
-        <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
+        <link
+          rel="preload"
+          href="https://www.sushasfoodproduct.com/cart"
+          as="document"
+        />
       </Helmet>
       <div className="padding-top"></div>
 
@@ -25,8 +27,8 @@ const EmptyCart = () => {
             <div className="mx-auto mb-3" style={{ width: 72, height: 72 }}>
               <svg
                 viewBox="0 0 24 24"
-                width="72" // bigger size
-                height="72" // bigger size
+                width="72" 
+                height="72" 
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"

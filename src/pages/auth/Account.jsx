@@ -16,7 +16,7 @@ function Account() {
   const token = useSelector((state) => state.auth.token);
   console.log("token:", token);
 
-  // Compute total only once using useMemo
+ 
   const grandTotal = useMemo(
     () =>
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
@@ -82,7 +82,7 @@ function Account() {
                                 className="list-group"
                                 aria-labelledby="cart-heading"
                               >
-                                {/* Headings row */}
+                              
                                 <li
                                   className="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light"
                                   role="presentation"
@@ -94,7 +94,7 @@ function Account() {
                                   <div style={{ width: "15%" }}>Action</div>
                                 </li>
 
-                                {/* Items */}
+                              
                                 {cartItems.map((item) => (
                                   <li
                                     key={item.id}
@@ -102,7 +102,7 @@ function Account() {
                                     role="article"
                                     aria-label={`Cart item: ${item.product_name}`}
                                   >
-                                    {/* Product info */}
+                                
                                     <div style={{ width: "25%" }}>
                                       <img
                                         className="cart-image me-2"
@@ -117,22 +117,22 @@ function Account() {
                                       <span>{item.product_name}</span>
                                     </div>
 
-                                    {/* Quantity */}
+                                   
                                     <div style={{ width: "15%" }}>
                                       {item.quantity} ({item.size})
                                     </div>
 
-                                    {/* Price */}
+                                  
                                     <div style={{ width: "15%" }}>
                                       ₹ {item.price}
                                     </div>
 
-                                    {/* Total */}
+                                  
                                     <div style={{ width: "15%" }}>
                                       ₹ {item.price * item.quantity}
                                     </div>
 
-                                    {/* Remove button */}
+                                   
                                     <div style={{ width: "15%" }}>
                                       <motion.button
                                         whileHover={{
@@ -178,74 +178,7 @@ function Account() {
                 )}
               </Col>
 
-              {/* RIGHT SIDE = LOGIN/REGISTER/GUEST (take 4 cols) */}
-              {/* <Col md={12}>
-            <h4 className="mb-3 mt-5">Easily track your Orders, manage your Wishlist, and enjoy personalized Recommendations.</h4>
-              <div className="d-flex flex-row gap-4 justify-content-start">
-                <div>
-                  <h1 className="account-head text-start">Have An Account</h1>
-                  <Link to="/login">
-                    <motion.button
-                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                      whileTap={{ scale: 0.98 }}
-                      className="btn btn-outline btn-sm"
-                      style={{
-                        borderRadius: "50px",
-                        fontWeight: "500",
-                        border: "1px solid #294085",
-                        backgroundColor: "#294085",
-                        color: "#fff",
-                      }}
-                      aria-label={`Login`}
-                    >
-                      Login →
-                    </motion.button>
-                  </Link>
-                </div>
-
-                <div>
-                  <h1 className="account-head text-start">New to Susha's Food</h1>
-                  <Link to="/register">
-                    <motion.button
-                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                      whileTap={{ scale: 0.98 }}
-                      className="btn btn-outline btn-sm"
-                      style={{
-                        borderRadius: "50px",
-                        fontWeight: "500",
-                        border: "1px solid #294085",
-                        backgroundColor: "#294085",
-                        color: "#fff",
-                      }}
-                      aria-label={`Register`}
-                    >
-                      Sign Up →
-                    </motion.button>
-                  </Link>
-                </div>
-
-                <div>
-                  <h1 className="account-head text-start">As a Guest</h1>
-                  <Link to="/guest">
-                    <motion.button
-                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                      whileTap={{ scale: 0.98 }}
-                      className="btn btn-outline btn-sm"
-                      style={{
-                        borderRadius: "50px",
-                        fontWeight: "500",
-                        border: "1px solid #294085",
-                        backgroundColor: "#294085",
-                        color: "#fff",
-                      }}
-                      aria-label={`Continue As Guest`}
-                    >
-                      Continue As Guest →
-                    </motion.button>
-                  </Link>
-                </div>
-              </div>
-            </Col> */}
+     
             </Row>
           </section>
         </div>

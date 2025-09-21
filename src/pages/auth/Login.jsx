@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-// sid changes on 22 aug 2025: import useState for local form handling
+
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -14,17 +14,15 @@ const LoginPage = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/myaccount";
 
-  // sid changes on 22 aug 2025: added local state for form inputs
+
   const [formValues, setFormValues] = useState({ email: "", password: "" });
 
-  // sid changes on 22 aug 2025: added error state to track validation
-  const [errors, setErrors] = useState({});
 
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
-
 
   const validate = () => {
     let newErrors = {};
@@ -37,13 +35,12 @@ const LoginPage = () => {
       newErrors.password = "Password must be at least 6 characters";
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; 
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-  
     if (!validate()) return;
 
     dispatch(loginUser(formValues))
@@ -60,7 +57,7 @@ const LoginPage = () => {
 
   return (
     <main className="res-header-top">
-      {/* SEO Meta Tags */}
+     
       <Helmet>
         <title>Login | Susha's Foods | Prakash Farm | Organic Food</title>
         <meta
@@ -74,7 +71,7 @@ const LoginPage = () => {
         />
       </Helmet>
 
-      {/* Page spacing */}
+     
       <div className="padding-top"></div>
       <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
@@ -85,17 +82,9 @@ const LoginPage = () => {
             className="calculation-padding"
           >
             <div className="auth-container   m-auto">
-              {/* Left side illustration */}
-              {/* <div className="auth-left fade-in-left">
-              <img
-                src="/images/auth/login.jpg"
-                alt="Illustration of secure login process"
-                className="auth-image"
-                loading="lazy"
-              />
-            </div> */}
+             
 
-              {/* Right side form */}
+           
               <div className="auth-right fade-in-right">
                 <form onSubmit={handleLogin} className="auth-form" noValidate>
                   <header className="header-bar fade-in-right">
@@ -112,7 +101,7 @@ const LoginPage = () => {
                     </Row>
                   </header>
 
-                  {/* Email Field */}
+                 
                   <Row>
                     <Col xs={12} md={12}>
                       <label htmlFor="email" className="form-label">
@@ -125,21 +114,21 @@ const LoginPage = () => {
                         placeholder="Email Address"
                         className={`form-control ${
                           errors.email ? "is-invalid" : ""
-                        }`} // sid changes on 22 aug 2025: added bootstrap validation class
+                        }`}
                         value={formValues.email}
                         onChange={handleChange}
                         required
                         autoComplete="email"
                         aria-required="true"
                       />
-                      {/* sid changes on 22 aug 2025: show email error */}
+                   
                       {errors.email && (
                         <div className="invalid-feedback">{errors.email}</div>
                       )}
                     </Col>
                   </Row>
 
-                  {/* Password Field */}
+                
                   <Row>
                     <Col xs={12} md={12}>
                       <label htmlFor="password" className="form-label">
@@ -152,14 +141,14 @@ const LoginPage = () => {
                         placeholder="Password"
                         className={`form-control ${
                           errors.password ? "is-invalid" : ""
-                        }`} // sid changes on 22 aug 2025: added bootstrap validation class
+                        }`} 
                         value={formValues.password}
                         onChange={handleChange}
                         required
                         autoComplete="current-password"
                         aria-required="true"
                       />
-                      {/* sid changes on 22 aug 2025: show password error */}
+            
                       {errors.password && (
                         <div className="invalid-feedback">
                           {errors.password}
@@ -168,12 +157,12 @@ const LoginPage = () => {
                     </Col>
                   </Row>
 
-                  {/* General error */}
+           
                   {errors.general && (
                     <p className="text-danger mt-2">{errors.general}</p>
                   )}
 
-                  {/* Login Button */}
+                 
                   <div className="mt-4">
                     <motion.button
                       whileHover={{ x: 5, transition: { duration: 0.2 } }}
@@ -192,7 +181,7 @@ const LoginPage = () => {
                     </motion.button>
                   </div>
 
-                  {/* Register Link */}
+             
                   <p className="register-link-text mt-3 text-center">
                     <button
                       type="button"

@@ -34,12 +34,7 @@ function CartPage() {
     }
   };
 
-  // const handleLogout = () => {
-  //   dispatch(logout());
-  //   dispatch(clearCart());
-  // };
 
-  // Compute total only once using useMemo
   const grandTotal = useMemo(
     () =>
       cartItems.reduce(
@@ -76,7 +71,11 @@ function CartPage() {
           content="Review and manage items in your shopping cart at Susha's Food Products. Secure checkout with high-quality organic products."
         />
         <link rel="canonical" href="https://www.sushasfoodproduct.com/cart" />
-        <link rel="preload" href="https://www.sushasfoodproduct.com/cart" as="document" />
+        <link
+          rel="preload"
+          href="https://www.sushasfoodproduct.com/cart"
+          as="document"
+        />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -120,7 +119,7 @@ function CartPage() {
                   <Row>
                     <Col md={8}>
                       <ul className="list-group" aria-labelledby="cart-heading">
-                        {/* Headings row (hidden on mobile, visible on md+) */}
+                        
                         <li
                           className="fs-5 list-group-item d-none d-md-flex fw-bold bg-light"
                           role="presentation"
@@ -132,7 +131,7 @@ function CartPage() {
                           <div className="col-3">Action</div>
                         </li>
 
-                        {/* Items */}
+                     
                         {cartItems.map((item) => (
                           <li
                             key={item.id}
@@ -141,7 +140,7 @@ function CartPage() {
                             aria-label={`Cart item: ${item.product_name}`}
                           >
                             <div className="row align-items-center">
-                              {/* Product info */}
+                             
                               <div className="col-12 col-md-3 d-flex align-items-center mb-2 mb-md-0">
                                 <img
                                   className="cart-image me-2"
@@ -152,7 +151,7 @@ function CartPage() {
                                 <span>{item.product_name}</span>
                               </div>
 
-                              {/* Quantity */}
+                             
                               <div className="col-12 col-md-2 mb-2 mb-md-3">
                                 <p className=" mt-2 d-block d-md-none mb-0">
                                   Quantity:
@@ -166,7 +165,14 @@ function CartPage() {
                                   <motion.button
                                     whileTap={{ scale: 0.95 }}
                                     className="btn btn-sm btn-outline-secondary me-2"
-                                   onClick={() => dispatch(decrementQuantity({ id: item.id, sizeId: item.sizeId }))}
+                                    onClick={() =>
+                                      dispatch(
+                                        decrementQuantity({
+                                          id: item.id,
+                                          sizeId: item.sizeId,
+                                        })
+                                      )
+                                    }
                                     disabled={item.quantity === 1}
                                   >
                                     -
@@ -175,14 +181,21 @@ function CartPage() {
                                   <motion.button
                                     whileTap={{ scale: 0.95 }}
                                     className="btn btn-sm btn-outline-secondary ms-2"
-                                   onClick={() => dispatch(incrementQuantity({ id: item.id, sizeId: item.sizeId }))}
+                                    onClick={() =>
+                                      dispatch(
+                                        incrementQuantity({
+                                          id: item.id,
+                                          sizeId: item.sizeId,
+                                        })
+                                      )
+                                    }
                                   >
                                     +
                                   </motion.button>
                                 </div>
                               </div>
 
-                              {/* Price */}
+                             
                               <div className="col-6 col-md-2 mb-2 mb-md-0">
                                 <p className=" d-block d-md-none mb-0">
                                   Price:
@@ -190,7 +203,7 @@ function CartPage() {
                                 ₹ {item.selectPrice}
                               </div>
 
-                              {/* Total */}
+                           
                               <div className="col-6 col-md-2 mb-2 mb-md-0">
                                 <p className=" d-block d-md-none mb-0">
                                   Total:
@@ -198,7 +211,7 @@ function CartPage() {
                                 ₹ {item.selectPrice * item.quantity}
                               </div>
 
-                              {/* Remove button */}
+                             
                               <div className="col-6 col-md-3 text-md-end">
                                 <motion.button
                                   whileHover={{
@@ -214,7 +227,14 @@ function CartPage() {
                                     backgroundColor: "#d33838",
                                     color: "#fff",
                                   }}
-                                 onClick={() => dispatch(removeFromCart({ id: item.id, sizeId: item.sizeId }))}
+                                  onClick={() =>
+                                    dispatch(
+                                      removeFromCart({
+                                        id: item.id,
+                                        sizeId: item.sizeId,
+                                      })
+                                    )
+                                  }
                                 >
                                   Remove →
                                 </motion.button>
@@ -233,11 +253,7 @@ function CartPage() {
                           <span>₹ {grandTotal}</span>
                         </div>
 
-                        {/* <div className="d-flex justify-content-between mb-2">
-                          <span className="fw-semibold">Shipping Charge</span>
-                          <span>₹ {}</span>
-                        </div> */}
-
+                     
                         <hr />
 
                         <div className="d-flex justify-content-between mb-3">

@@ -1,24 +1,32 @@
+
+
+
+
 import React, { useEffect, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Spinner, Alert, Container } from "react-bootstrap";
+import { Row, Col, Spinner, Alert } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { fetchProductById } from "../../store/ProductSlice";
 import Review from "../../components/order/Review";
 
-// Lazy load gallery for faster initial render
+// Lazy load gallery
 const ProductDetailGallery = React.lazy(() => import("./ProductDetailGallery"));
 const ProductDetailSummary = React.lazy(() => import("./ProductDetailSummary"));
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams(); // 👈 now only slug param
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
-  console.log(data);
+
+  // Extract product ID from slug (last part after "-")
+  const productId = slug?.split("-").pop();
 
   useEffect(() => {
-    dispatch(fetchProductById(id));
-  }, [dispatch, id]);
+    if (productId) {
+      dispatch(fetchProductById(productId));
+    }
+  }, [dispatch, productId]);
 
   if (loading)
     return (
@@ -53,7 +61,7 @@ const ProductDetail = () => {
     sku: product.sku || product.id,
     offers: {
       "@type": "Offer",
-      url: `https://myfezto.com/product/${product.id}`,
+      url: `https://sushasfoodproducts.com/product/${product.product_slug}-${product.id}`,
       priceCurrency: "INR",
       price: product.selling_price || product.price,
       availability: "https://schema.org/InStock",
@@ -61,28 +69,18 @@ const ProductDetail = () => {
   };
 
   return (
-    <main
-      aria-labelledby="category-products-heading"
-      className="res-header-top"
-    >
+    <main aria-labelledby="category-products-heading" className="res-header-top">
       {/* SEO Meta Tags */}
       <Helmet>
-         <title> {product.product_name} Susha's Food | Prakash Farm | Organic Food</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-      
+        <title>{product.product_name} | Susha's Food</title>
         <meta
           name="description"
           content={product.description?.slice(0, 150) || "Product detail page"}
         />
         <link
           rel="canonical"
-          href={`https://sushasfoodproducts.com/product/${product.id}`}
+          href={`https://sushasfoodproducts.com/product/${product.product_slug}-${product.id}`}
         />
-
-        {/* Open Graph for social sharing */}
         <meta property="og:type" content="product" />
         <meta property="og:title" content={product.product_name} />
         <meta
@@ -92,10 +90,8 @@ const ProductDetail = () => {
         <meta property="og:image" content={product.image_url} />
         <meta
           property="og:url"
-          content={`https://sushasfoodproducts.com/product/${product.id}`}
+          content={`https://sushasfoodproducts.com/product/${product.product_slug}-${product.id}`}
         />
-
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={product.product_name} />
         <meta
@@ -103,39 +99,32 @@ const ProductDetail = () => {
           content={product.description?.slice(0, 150)}
         />
         <meta name="twitter:image" content={product.image_url} />
-
-        {/* Preload main product image */}
         <link rel="preload" as="image" href={product.image_url} />
-
-        {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
-
+     
+       
+     
       <div className="padding-y mt-3 mt-lg-5">
-        <div className="padding-top d-lg-block d-none"></div>
+         <div className="padding-top d-lg-block d-none"></div>
         <div className="padding-top"></div>
         <article aria-label="Product Details Section">
           <Row className="align-items-start">
-            <Col md={5} as="section" aria-label="Product Gallery">
-              <Suspense
-                fallback={<Spinner animation="border" variant="primary" />}
-              >
+            <Col md={5}>
+              <Suspense fallback={<Spinner animation="border" variant="primary" />}>
                 <ProductDetailGallery product={product} />
               </Suspense>
             </Col>
-
-            <Col md={7} as="section" aria-label="Product Summary">
-              <Suspense
-                fallback={<Spinner animation="border" variant="primary" />}
-              >
+            <Col md={7}>
+              <Suspense fallback={<Spinner animation="border" variant="primary" />}>
                 <ProductDetailSummary product={product} />
               </Suspense>
             </Col>
           </Row>
           <Row>
-              <Review product={product} />
+            <Review product={product} />
           </Row>
         </article>
       </div>

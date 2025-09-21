@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { fetchMostHarvestFull } from "../store/mostHarvestSlice";
 import { imgURLMostHarvest } from "../utils/api";
-// import { fetchMostHarvestHome } from "../store/mostHarvestSlice";
-// import { imgURLMostHarvest } from "../utils/api";
+
 
 export default function MostHarvestcrops() {
   const dispatch = useDispatch();
@@ -128,13 +127,6 @@ export default function MostHarvestcrops() {
                                   {item.description?.slice(0, 200)}...
                                 </Card.Text>
 
-                                {/* <h6 className="key-faeture">Key Features</h6>
-
-                              <div className="keyfeature-description"
-                                dangerouslySetInnerHTML={{
-                                  __html: item.description5,
-                                }}
-                              ></div> */}
 
                                 <Link to={`/mostharvestfromfarm/${item.id}`}>
                                   <motion.div
