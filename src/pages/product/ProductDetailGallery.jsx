@@ -118,27 +118,33 @@ const getYouTubeEmbedURL = (url) => {
 
   
 
- {product.video_link ? (
-  <div className="ratio ratio-16x9 mt-3">
-    <iframe
-      src={getYouTubeEmbedURL(product.video_link)}
-      title="YouTube video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    />
-  </div>
-) : (
-  <video
-    className="mt-3"
-    controls
-    autoPlay={false}
-    loop={false}
-    muted
-    style={{ borderRadius: "12px", width: "100%", height: "100%" }}
-  >
-    <source src={`${productURL}${product.video}`} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+ {(product.video_link || product.video) && (
+  <>
+    <h3 className="mt-2 mb-2">How We Make</h3>
+
+    {product.video_link ? (
+      <div className="ratio ratio-16x9 mt-3">
+        <iframe
+          src={getYouTubeEmbedURL(product.video_link)}
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    ) : (
+      <video
+        className="mt-3"
+        controls
+        autoPlay={false}
+        loop={false}
+        muted
+        style={{ borderRadius: "12px", width: "100%", height: "100%" }}
+      >
+        <source src={`${productURL}${product.video}`} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    )}
+  </>
 )}
 
 

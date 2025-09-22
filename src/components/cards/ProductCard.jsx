@@ -28,10 +28,17 @@ export default function ProductCard({ product }) {
       <h2
         id={`product-title-${product.id}`}
         style={{}}
-        className="product-category-title"
+        className="product-category-title mb-1"
       >
         {product.product_name}
       </h2>
+      <h3
+        id={`product-title-${product.id}`}
+        style={{}}
+        className="product-category-title"
+      >
+        {product.product_name_mal}
+      </h3>
       <p
         className="product-price"
         style={{ fontWeight: "bold", color: "#000" }}

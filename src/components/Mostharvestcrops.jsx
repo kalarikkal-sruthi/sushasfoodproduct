@@ -118,9 +118,16 @@ export default function MostHarvestcrops() {
                                 >
                                   <Card.Title
                                     style={{ color: "#294085" }}
-                                    className="fw-bold  mb-1 mb-lg-3"
+                                    className="fw-bold  mb-0 mb-lg-0"
                                   >
                                     {item.name}
+                                  </Card.Title>
+                                   <Card.Title
+                                    style={{ color: "#294085" }}
+                                    className="fw-bold  fs-lg-2  fs-4 mb-1 mb-lg-3"
+                                    
+                                  >
+                                    {item.name_mala}
                                   </Card.Title>
                                 </Link>
                                 <Card.Text className=" text-muted">

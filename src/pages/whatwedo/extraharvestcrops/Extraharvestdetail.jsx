@@ -63,11 +63,21 @@ export default function Extraharvestdetail() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
-                className="display-4 fw-bold"
+                className="display-4 fw-bold mb-0"
                 style={{ color: "#294085" }}
               >
                 {single.name}
               </motion.h1>
+              <motion.h2
+                id="crop-detail-title"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6 }}
+                className="display-5 fw-bold "
+                style={{ color: "#294085" }}
+              >
+             {single.name_mala}
+              </motion.h2>
 
              
             </Col>

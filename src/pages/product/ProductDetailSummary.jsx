@@ -74,11 +74,19 @@ const ProductDetailSummary = ({ product }) => {
       <header className="mb-3" aria-labelledby="category-heading">
         <h2
           id="category-heading"
-          className="display-8 fw-bold"
+          className="display-8 fw-bold mb-1"
           style={{ color: "#294085" }}
         >
           {product.product_name}
         </h2>
+        <h3
+          id="category-heading"
+          className="display-9 fw-bold "
+          style={{ color: "#294085" }}
+        >
+          {product.product_name_mal}
+        </h3>
+        
         <h4 className="mt-2 mb-0">How we make</h4>
       </header>
 

@@ -121,12 +121,17 @@ function Extraharvestsubcategory() {
                     />
                     <Card.Body>
                       <Card.Title
-                        className="fw-bold"
+                        className="fw-bold mb-0"
                         style={{ color: "#294085" }}
                       >
                         {item.name}
                       </Card.Title>
-
+  <Card.Title
+                                    style={{ color: "#294085" }}
+                                    className="fw-bold  mb-1 mb-lg-3"
+                                  >
+                                    {item.name_mala}
+                                  </Card.Title>
                       <motion.div
                         whileHover={{ x: 5 }}
                         whileTap={{ scale: 0.98 }}
