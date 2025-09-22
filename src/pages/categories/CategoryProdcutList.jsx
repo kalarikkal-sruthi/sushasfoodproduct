@@ -92,6 +92,16 @@ const CategoryProductList = () => {
         <h1 id="category-products-heading" className="visually-hidden">
           Browse Products by Category
         </h1>
+        <div className="dispaly-list-categories">
+<ul>{[...categories].map((category, categoryIndex) => (<Link
+                  to={`/productsbycategory/${category.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  aria-label={`Browse all products in ${category.name}`}
+                  state={{ categoryIndex }}
+                ><li>{category.name} | </li>
+                </Link>))}</ul>
+        </div>
+        
 
         {[...categories].map((category, categoryIndex) => (
           <section
@@ -99,6 +109,7 @@ const CategoryProductList = () => {
             aria-labelledby={`category-title-${category.id}`}
             className="mb-3 mb-lg-5"
           >
+
             <header className="mb-2 mb-lg-4">
               <motion.div
                 initial="offscreen"
@@ -117,7 +128,7 @@ const CategoryProductList = () => {
                     className="fw-bold"
                     style={{ color: "#294085" }}
                   >
-                    {category.name || "Untitled Category"}
+                   {category.name || "Untitled Category"}
                   </motion.h1>
                 </Link>
               </motion.div>

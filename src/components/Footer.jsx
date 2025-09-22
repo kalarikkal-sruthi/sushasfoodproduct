@@ -11,7 +11,11 @@ import { Container } from "react-bootstrap";
 import { Youtube, Instagram, Facebook } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategoriesWithProducts } from "../store/categoryProductSlice";
+import WhatsAppWidget from "react-whatsapp-chat-widget";
+import "react-whatsapp-chat-widget/index.css";
 function Footer() {
+  const isMobile = window.innerWidth < 768; // check device width
+  const iconSize = isMobile ? 45 : 60; // smaller on mobile
   const dispatch = useDispatch();
   const { data: categories } = useSelector((state) => state.categoryProducts);
 
@@ -184,6 +188,31 @@ function Footer() {
               </section>
             </section>
             <div className="padding-top"></div>
+            <WhatsAppWidget
+              phoneNo="918129313515"
+              position="right"
+              widgetWidth="300px"
+              widgetWidthMobile="260px"
+              autoOpen={false}
+              messageBox={true}
+              messageBoxTxt="Hi! 👋 How can we help you?"
+              iconSize={iconSize}
+              iconColor="white"
+              iconBgColor="#25D366"
+              headerIcon="https://cdn-icons-png.flaticon.com/512/124/124034.png"
+              headerTitle="Support"
+              headerCaption="Online"
+              bodyBgColor="#fff"
+              chatPersonName="Customer Support"
+              chatMessage={
+                <>
+                  Hello there 👋
+                  <br />
+                  How can we help you?
+                </>
+              }
+            />
+
             <div className="bottom-footer">
               <p>
                 ©{" "}

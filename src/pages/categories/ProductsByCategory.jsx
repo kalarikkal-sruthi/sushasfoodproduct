@@ -103,6 +103,8 @@ const ProductByCategory = () => {
       <div className="padding-top d-lg-block d-none"></div>
       <div className="padding-top"></div>
       <div className="padding-y padding-y mt-3 mt-lg-5">
+
+
         <header className="mb-3 mb-lg-5" aria-labelledby="category-heading">
           <motion.div
             initial="hidden"
@@ -116,7 +118,7 @@ const ProductByCategory = () => {
               style={{ color: "#294085" }}
               variants={itemVariants}
             >
-              {categoryName}
+              {categoryName} 
             </motion.h1>
           </motion.div>
 
