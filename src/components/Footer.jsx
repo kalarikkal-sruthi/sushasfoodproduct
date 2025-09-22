@@ -212,6 +212,9 @@ function Footer() {
                 </>
               }
             />
+            <Link as={Link} to="/productsbycategory" className="shop-now-btn">
+              🛒 Shop Now
+            </Link>
 
             <div className="bottom-footer">
               <p>

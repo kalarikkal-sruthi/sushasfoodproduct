@@ -217,3 +217,17 @@ margin-right: 10px;
 color: #294085;
 font-size: 16px;
 }
+.shop-now-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background-color: #294085;
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
