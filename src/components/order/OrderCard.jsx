@@ -2,12 +2,12 @@ import { Card, Row, Col, Dropdown } from "react-bootstrap";
 import { getOrders, getOrderItems, cancelOrder } from "../../store/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { productURL } from "../../utils/api";
 
 const OrderCard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
   const orders = useSelector((state) => state.order.orders);
@@ -31,16 +31,16 @@ const OrderCard = () => {
     dispatch(cancelOrder({ orderId, token }));
   };
 
-  const handleReorder = (orderId) => {
-    const orderItems = items[orderId] || [];
-    if (orderItems.length === 0) {
-      alert("No items found to reorder.");
-      return;
-    }
+  // const handleReorder = (orderId) => {
+  //   const orderItems = items[orderId] || [];
+  //   if (orderItems.length === 0) {
+  //     alert("No items found to reorder.");
+  //     return;
+  //   }
 
-    console.log("Reordering order:", orderId, orderItems);
-    navigate("/checkoutpage", { state: { reorderItems: orderItems } });
-  };
+  //   console.log("Reordering order:", orderId, orderItems);
+  //   navigate("/checkoutpage", { state: { reorderItems: orderItems } });
+  // };
 
   if (orders.loading) return <p>Loading order items...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
@@ -163,12 +163,12 @@ const OrderCard = () => {
                         {order.delivery_status} (Not Cancellable)
                       </button>
                     )}
-                    <button
+                    {/* <button
                       onClick={() => handleReorder(order.id)}
                       className="btn btn-success btn-sm"
                     >
                       Reorder
-                    </button>
+                    </button> */}
                   </Col>
                 </Row>
               </Card.Body>
