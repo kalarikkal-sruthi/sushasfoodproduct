@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Row, Col, Card, Form, Container, Modal } from "react-bootstrap";
+import { calculateShippingApi } from "../../store/shippingServices";
 import { Helmet } from "react-helmet-async";
 import {
   getAddresses,
@@ -13,12 +14,12 @@ import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
 
 import { clearCart } from "../../store/cartSlice";
-import { calculateShippingApi } from "../../store/shippingServices";
 import { openRazorpay } from "../../store/razorpayService";
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const token = useSelector((state) => state.auth.token);
   const cartItems = useSelector((state) => state.cart.items);
   const addresses = useSelector((state) => state.auth.addresses || []);
@@ -32,20 +33,25 @@ const CheckoutPage = React.memo(() => {
 
   const [shippingCharge, setShippingCharge] = useState(0);
 
+  // 🔄 Reorder detection
+  const reorderItems = location.state?.reorderItems || null;
+  const isReorder = Boolean(reorderItems);
+  const itemsToOrder = isReorder ? reorderItems : cartItems;
+
   const { subtotal, payable } = useMemo(() => {
-    const subtotalCalc = cartItems.reduce((sum, item) => {
+    const subtotalCalc = itemsToOrder.reduce((sum, item) => {
       const price = parseFloat(item.selectPrice || 0);
       return sum + price * item.quantity;
     }, 0);
 
-    const shipping = Number(shippingCharge) || 0; 
+    const shipping = Number(shippingCharge) || 0;
 
     return {
       subtotal: subtotalCalc,
       discount: 0,
-      payable: subtotalCalc + shipping, 
+      payable: subtotalCalc + shipping,
     };
-  }, [cartItems, shippingCharge]);
+  }, [itemsToOrder, shippingCharge]);
 
   useEffect(() => {
     dispatch(getAddresses());
@@ -59,9 +65,6 @@ const CheckoutPage = React.memo(() => {
       setSelectedAddressId(selectedAddr.id);
     }
   }, [addresses]);
-
-  console.log(selectedAddressId);
-  console.log(cartItems);
 
   useEffect(() => {
     if (!selectedAddressId || cartItems.length === 0) return;
@@ -89,7 +92,6 @@ const CheckoutPage = React.memo(() => {
 
     fetchShipping();
   }, [token, selectedAddressId, cartItems]);
-  console.log(shippingCharge);
 
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
@@ -109,33 +111,41 @@ const CheckoutPage = React.memo(() => {
       shipping_charge: shippingCharge,
       user_id: userId,
       address: selectedAddressId,
+      special_instructions: isReorder
+        ? "Reorder attempt"
+        : "New checkout order",
       payment_method: paymentMethod,
       cash_on_delivery: paymentMethod === "COD",
-
-      cart: cartItems.map((item) => ({
-        product_id: item.id,
+      cart: itemsToOrder.map((item) => ({
+        product_id: item.product_id || item.id,
         quantity: item.quantity,
-        price: item.selectPrice,
-        product_size_id: item.sizeId || null,
-        product_prize_id: item.priceId || null,
+        price: item.price || item.selectPrice,
+        product_size_id: item.product_size_id || item.sizeId || null,
+        product_prize_id: item.product_prize_id || item.priceId || null,
       })),
     };
-    console.log(orderData);
 
     try {
+      console.log(`%c📦 Checkout Started`, "color: blue; font-weight: bold;");
+      if (isReorder) {
+        console.log(
+          `%c🔄 Reorder Detected: Using previous order items`,
+          "color: green; font-weight: bold;"
+        );
+        console.table(itemsToOrder);
+      } else {
+        console.log(`🛒 Normal Checkout: Using cart items`);
+        console.table(itemsToOrder);
+      }
+
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
-        dispatch(clearCart());
+        if (!isReorder) {
+          dispatch(clearCart());
+        }
         navigate("/order-confirmation");
       } else if (paymentMethod === "RAZORPAY") {
-        openRazorpay(
-          orderData,
-          token,
-          dispatch,
-          navigate,
-          setPopupMessage,
-          setShowPopup
-        );
+        openRazorpay(orderData);
       }
     } catch (err) {
       console.error("Order Error:", err);
@@ -146,15 +156,16 @@ const CheckoutPage = React.memo(() => {
     selectedAddressId,
     paymentMethod,
     userId,
-    cartItems,
-    subtotal,
+    itemsToOrder,
     shippingCharge,
+    subtotal,
     token,
     dispatch,
     navigate,
+    isReorder,
   ]);
 
- 
+  // Animations
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -174,7 +185,10 @@ const CheckoutPage = React.memo(() => {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>Checkout | Susha's Food | Prakash Farm | Organic Food </title>
+        <title>
+          {isReorder ? "Reorder Checkout" : "Checkout"} | Susha's Food | Prakash
+          Farm | Organic Food{" "}
+        </title>
         <meta
           name="description"
           content="Complete your purchase securely and quickly on our checkout page."
@@ -199,30 +213,24 @@ const CheckoutPage = React.memo(() => {
 
       <Container className="mt-3 mt-lg-5">
         <Row>
-          <Row>
-            <header className="header-bar">
-              <Row>
-                <Col xs={12}>
-                  <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                    variants={containerVariants}
-                  >
-                    <motion.h1
-                      className="heading-res fw-bold"
-                      style={{ color: "#294085" }}
-                      variants={itemVariants}
-                    >
-                      Checkout Your Items
-                    </motion.h1>
-                  </motion.div>
-                </Col>
-              </Row>
-            </header>
-          </Row>
+          <Col xs={12}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={containerVariants}
+            >
+              <motion.h1
+                className="heading-res fw-bold"
+                style={{ color: "#294085" }}
+                variants={itemVariants}
+              >
+                {isReorder ? "Reorder Your Items" : "Checkout Your Items"}
+              </motion.h1>
+            </motion.div>
+          </Col>
 
-        
+          {/* Address */}
           <Col md={7}>
             <Card>
               <Card.Header className="fs-5">
@@ -327,7 +335,7 @@ const CheckoutPage = React.memo(() => {
               </Card.Body>
             </Card>
 
-           
+            {/* Payment */}
             <Card className="mt-3">
               <Card.Header className="fs-5">
                 <strong>Payment Method</strong>
@@ -365,14 +373,15 @@ const CheckoutPage = React.memo(() => {
                   color: "#fff",
                 }}
                 onClick={handlePlaceOrder}
-                disabled={cartItems.length === 0}
+                disabled={itemsToOrder.length === 0}
               >
-                Complete Order →
+                {isReorder ? "Complete Reorder →" : "Complete Order →"}
               </motion.button>
             </div>
           </Col>
 
-        
+          {/* Price Details */}
+
           <Col md={5}>
             <Card>
               <Card.Header className="fs-5">
@@ -409,7 +418,7 @@ const CheckoutPage = React.memo(() => {
         </Row>
       </Container>
 
-    
+      {/* Popup */}
       <Modal show={showPopup} onHide={() => setShowPopup(false)}>
         <Modal.Header closeButton />
         <Modal.Body>

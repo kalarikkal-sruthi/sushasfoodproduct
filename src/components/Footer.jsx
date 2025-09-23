@@ -50,12 +50,25 @@ function Footer() {
 
                       <li>
                         <img src={phone} alt="" />
+                         <Link
+                          to="tel:+919074 624 607"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >+91 9074 624 607</Link>
+                        
+                        
+                        
+                      </li>
+                       <li>
+                        <img src={phone} alt="" />
+                       
                         <Link
-                          to="tel:+919074624607"
+                          to="tel:+918129313515"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
-                          +918129313515
+                          +91 8129 313 515
                         </Link>
+                        
+                        
                       </li>
 
                       <li>
