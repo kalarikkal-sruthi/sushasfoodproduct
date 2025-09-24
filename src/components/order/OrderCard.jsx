@@ -146,8 +146,7 @@ const OrderCard = () => {
                       <button className="btn btn-secondary btn-sm" disabled>
                         Order Cancelled
                       </button>
-                    ) : order.delivery_status === "Pending" ||
-                      order.delivery_status === "Accepted" ? (
+                    ) : order.delivery_status === "Pending"  ? (
                       <button
                         onClick={() => handleCancel(order.id)}
                         disabled={loading.cancel}
