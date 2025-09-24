@@ -112,7 +112,7 @@ const ProductDetailSummary = ({ product }) => {
             itemProp="price"
             content={String(product.baseprices[0].original_price)}
           >
-            <strong>Price : </strong>₹ {product.baseprices[0].original_price}
+            <strong>Price : </strong>₹ {selectedSize.price}
           </span>
         </div>
       )}
