@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Row, Col, Card, Form, Container, Modal } from "react-bootstrap";
 import { calculateShippingApi } from "../../store/shippingServices";
 import { Helmet } from "react-helmet-async";
@@ -12,18 +12,23 @@ import {
 import { createOrderApi } from "../../store/orderService";
 import AddressForm from "../../components/order/AddressForm";
 import { motion } from "framer-motion";
-
+import axios from "axios";
 import { clearCart } from "../../store/cartSlice";
-import { openRazorpay } from "../../store/razorpayService";
 
 const CheckoutPage = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+
   const token = useSelector((state) => state.auth.token);
   const cartItems = useSelector((state) => state.cart.items);
   const addresses = useSelector((state) => state.auth.addresses || []);
   const userId = useSelector((state) => state.auth.user?.id);
+
+  // 🔄 Reorder detection
+  const reorderItems = location.state?.reorderItems || null;
+  const isReorder = Boolean(reorderItems);
+  const itemsToOrder = isReorder ? reorderItems : cartItems;
+
   const [addressMode, setAddressMode] = useState("list");
   const [editData, setEditData] = useState(null);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
@@ -32,24 +37,19 @@ const CheckoutPage = React.memo(() => {
   const [popupMessage, setPopupMessage] = useState("");
 
   const [shippingCharge, setShippingCharge] = useState(0);
-
-  // 🔄 Reorder detection
-  const reorderItems = location.state?.reorderItems || null;
-  const isReorder = Boolean(reorderItems);
-  const itemsToOrder = isReorder ? reorderItems : cartItems;
-
   const { subtotal, payable } = useMemo(() => {
     const subtotalCalc = itemsToOrder.reduce((sum, item) => {
       const price = parseFloat(item.selectPrice || 0);
       return sum + price * item.quantity;
     }, 0);
 
-    const shipping = Number(shippingCharge) || 0;
+    // const shipping = Number(shippingCharge) || 0;
 
     return {
       subtotal: subtotalCalc,
       discount: 0,
-      payable: subtotalCalc + shipping,
+      // payable: subtotalCalc + shipping,
+      payable:subtotalCalc 
     };
   }, [itemsToOrder, shippingCharge]);
 
@@ -78,7 +78,6 @@ const CheckoutPage = React.memo(() => {
             qty: item.quantity,
           })),
         };
-
         const shippingRes = await calculateShippingApi(token, payload);
         console.log("Shipping Response:", shippingRes);
 
@@ -165,6 +164,78 @@ const CheckoutPage = React.memo(() => {
     isReorder,
   ]);
 
+  async function openRazorpay(orderData) {
+    try {
+      const { data } = await axios.post(
+        "https://admin.sushasfoodproducts.com/api/create-order",
+        { amount: orderData.amount },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const options = {
+        key: data.key,
+        amount: data.amount,
+        currency: data.currency,
+        order_id: data.order_id,
+        name: "Sushas Food Products",
+        description: "Order Payment",
+        handler: async function (response) {
+          try {
+            const verifyRes = await axios.post(
+              "https://admin.sushasfoodproducts.com/api/verify-payment",
+              {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+              },
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            if (verifyRes.data.status === "success") {
+              const finalOrderData = {
+                ...orderData,
+                payment_method: "RAZORPAY",
+                payment_status: "PAID",
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+              };
+
+              await axios.post(
+                "https://admin.sushasfoodproducts.com/api/store_order_user",
+                finalOrderData,
+                { headers: { Authorization: `Bearer ${token}` } }
+              );
+
+              if (!isReorder) {
+                dispatch(clearCart());
+              }
+              navigate("/order-confirmation");
+            } else {
+              setPopupMessage("Payment verification failed. Please try again.");
+              setShowPopup(true);
+            }
+          } catch (err) {
+            console.error("Error verifying/storing order:", err);
+            setPopupMessage("Error while storing order. Try again.");
+            setShowPopup(true);
+          }
+        },
+        theme: { color: "#5caf47" },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", function (response) {
+        setPopupMessage("Payment failed: " + response.error.description);
+        setShowPopup(true);
+      });
+      rzp.open();
+    } catch (err) {
+      console.error("Error opening Razorpay:", err);
+      setPopupMessage("Unable to initiate payment. Please try again.");
+      setShowPopup(true);
+    }
+  }
+
   // Animations
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -186,28 +257,17 @@ const CheckoutPage = React.memo(() => {
     <main className="res-header-top">
       <Helmet>
         <title>
-          {isReorder ? "Reorder Checkout" : "Checkout"} | Susha's Food | Prakash
-          Farm | Organic Food{" "}
+          {isReorder ? "Reorder Checkout" : "Checkout"} | Susha's Food
         </title>
         <meta
           name="description"
           content="Complete your purchase securely and quickly on our checkout page."
         />
         <meta
-          name="description"
-          content="Explore our premium range of value-added farm products, crafted with care to deliver freshness, health, and sustainability from our fields to your table."
-        />
-        <meta
           name="keywords"
-          content="farm products, organic produce, value added products, fresh produce, healthy food"
-        />
-
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="farm products, organic produce, fresh produce, healthy food, checkout"
         />
       </Helmet>
-
       <div className="padding-top"></div>
       <div className="padding-top d-lg-block d-none"></div>
 
@@ -381,7 +441,6 @@ const CheckoutPage = React.memo(() => {
           </Col>
 
           {/* Price Details */}
-
           <Col md={5}>
             <Card>
               <Card.Header className="fs-5">
