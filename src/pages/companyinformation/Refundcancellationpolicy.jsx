@@ -74,7 +74,7 @@ function Refundcancellationpolicy() {
                 </li>
                 <li>
                   Customers should notify us by email at
-                  support@sushasfoodproducts.com within{" "}
+                  sushasfoodproducts@gmail.com within{" "}
                   <strong>24 hours</strong> after delivery with the{" "}
                   <strong>order number</strong> and{" "}
                   <strong>photos of the product</strong> for reference.
@@ -132,8 +132,7 @@ function Refundcancellationpolicy() {
                 </li>
                 <li>
                   All cancellation requests should be sent to
-                  sushasfoodproducts@gmail.com or by contacting us at +91 9074
-                  624 607.
+                  sushasfoodproducts@gmail.com or by contacting us at +91 8129 313 515.
                 </li>
               </ul>
             </p>

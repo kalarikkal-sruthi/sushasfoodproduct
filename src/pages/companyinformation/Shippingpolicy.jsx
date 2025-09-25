@@ -78,11 +78,11 @@ function Shippingpolicy() {
                   Normally, orders are delivered within{" "}
                   <strong>5–10 business days.</strong>
                 </li>
-                <li>
+                {/* <li>
                   Once your order is shipped, you will receive a{" "}
                   <strong>tracking number</strong> via email or SMS to monitor
                   your delivery status.
-                </li>
+                </li> */}
                 <li>
                   Shipping charges (if applicable) will be displayed at checkout
                   before completing your order.
@@ -119,12 +119,12 @@ function Shippingpolicy() {
                   </strong>{" "}
                   the re-shipping charges will be borne by the customer.
                 </li>
-                <li>
+                {/* <li>
                   International shipping (if applicable) may be subject to{" "}
                   <strong>customs duties, taxes, or additional charges</strong>{" "}
                   in the destination country, which must be paid by the
                   customer.
-                </li>
+                </li> */}
               </ul>
             </p>
           </Row>
