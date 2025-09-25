@@ -43,13 +43,13 @@ const CheckoutPage = React.memo(() => {
       return sum + price * item.quantity;
     }, 0);
 
-    // const shipping = Number(shippingCharge) || 0;
+    const shipping = Number(shippingCharge) || 0;
 
     return {
       subtotal: subtotalCalc,
       discount: 0,
-      // payable: subtotalCalc + shipping,
-      payable:subtotalCalc 
+      payable: subtotalCalc + shipping,
+      // payable:subtotalCalc 
     };
   }, [itemsToOrder, shippingCharge]);
 
