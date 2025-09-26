@@ -87,19 +87,23 @@ function Certificate({ data }) {
             aria-label="Certificates carousel"
             breakpoints={{
               320: {
-                slidesPerView: 2,
+                slidesPerView: 4,
                 spaceBetween: 10,
               },
               640: {
-                slidesPerView: 2,
+                slidesPerView: 4,
                 spaceBetween: 15,
               },
-              1024: {
-                slidesPerView: 3,
+              992: {
+                slidesPerView: 4,
                 spaceBetween: 20,
               },
-              1440: {
-                slidesPerView: 4,
+              1200: {
+                slidesPerView: 5,
+                spaceBetween: 25,
+              },
+               1400: {
+                slidesPerView: 5,
                 spaceBetween: 25,
               },
             }}

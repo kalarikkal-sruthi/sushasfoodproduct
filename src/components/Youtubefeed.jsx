@@ -70,22 +70,26 @@ const Youtubefeed = ({ data }) => {
               loop={true}
               modules={[Pagination, Navigation, Autoplay]}
               breakpoints={{
-                320: {
-                  slidesPerView: 3,
-                  spaceBetween: 10,
-                },
-                640: {
-                  slidesPerView: 2,
-                  spaceBetween: 15,
-                },
-                1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 20,
-                },
-                1440: {
-                  slidesPerView: 5,
-                  spaceBetween: 25,
-                },
+               320: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 4,
+                spaceBetween: 15,
+              },
+              992: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+              1200: {
+                slidesPerView: 5,
+                spaceBetween: 25,
+              },
+               1400: {
+                slidesPerView: 5,
+                spaceBetween: 25,
+              },
               }}
               className="mySwiper"
             >
