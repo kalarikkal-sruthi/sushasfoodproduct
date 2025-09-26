@@ -401,14 +401,14 @@ const CheckoutPage = React.memo(() => {
                 <strong>Payment Method</strong>
               </Card.Header>
               <Card.Body>
-                <Form.Check
+                {/* <Form.Check
                   type="radio"
                   label="Cash on Delivery"
                   name="payment"
                   value="COD"
                   checked={paymentMethod === "COD"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                />
+                /> */}
                 <Form.Check
                   type="radio"
                   label="Razorpay"
