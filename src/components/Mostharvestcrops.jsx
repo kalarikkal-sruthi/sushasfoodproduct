@@ -80,10 +80,11 @@ export default function MostHarvestcrops() {
                   >
                     <motion.div whileHover={cardHover} className="h-100">
                       <Card
-                        className="h-100 border-0 overflow-hidden"
+                        className="what-we-do-height border-0 overflow-hidden"
                         style={{
                           boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
                           borderRadius: "12px",
+                          
                         }}
                       >
                         <Link
