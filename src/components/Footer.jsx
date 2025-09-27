@@ -100,12 +100,12 @@ function Footer() {
                       >
                         <li>Terms and Conditions</li>
                       </Link>
-                      <Link
+                      {/* <Link
                         to="/refund-cancellation-policy"
                         style={{ textDecoration: "none" }}
                       >
                         <li>Refund/Cancellation Policy</li>
-                      </Link>
+                      </Link> */}
                       <Link
                         to="/shipping-policy"
                         style={{ textDecoration: "none" }}
