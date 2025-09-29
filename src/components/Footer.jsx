@@ -152,28 +152,28 @@ function Footer() {
                       }}
                     >
                       <li>
-                        <a
+                        <Link 
                           to="https://www.youtube.com/@Prakashfarm-r8"
                           target="_blank"
                         >
                           <Youtube size={20} color="red" />
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
+                        <Link 
                           to="https://www.instagram.com/sushasfoodproducts_official/"
                           target="_blank"
                         >
                           <Instagram size={20} color="#C13584" />
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
+                        <Link 
                           to="https://www.facebook.com/sushasfoodproducts/"
                           target="_blank"
                         >
                           <Facebook size={20} color="#4267B2" />
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </Col>
