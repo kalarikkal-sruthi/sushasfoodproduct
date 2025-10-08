@@ -92,7 +92,7 @@ const ValueAddedProducts = () => {
                       aria-label={`View products in ${category.name}`}
                     >
                       <Card
-                        className=" shadow-sm border-0 "
+                        className=" value-added-products shadow-sm border-0 "
                         style={{
                           borderRadius: "12px",
                         }}

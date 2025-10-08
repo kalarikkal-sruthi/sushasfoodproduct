@@ -22,6 +22,9 @@ const Review = ({ product }) => {
   } = useSelector((state) => state.product);
   const reviews = product?.reviews || [];
 
+   const name = user?.name;
+   console.log(name);
+    
   const [formData, setFormData] = useState({
     product_id: product?.id || "",
     user_id: user?.id || "",
@@ -90,7 +93,7 @@ const Review = ({ product }) => {
               </div>
 
               <div className="mb-2">
-                <label className="form-label">Rating (0–5)</label>
+                <label className="form-label">Rating (1–5)</label>
                 <input
                   type="number"
                   name="start_ratings"
@@ -155,8 +158,20 @@ const Review = ({ product }) => {
                 <Col md={4}>
                   {reviews.map((r, idx) => (
                     <li key={idx} className="list-group-item">
-                      <strong>{r.name}</strong> ⭐ {r.start_ratings}
-                      <p className="mb-0">{r.review}</p>
+                      <strong>{r.name}</strong>
+                      <div>
+                        {[...Array(5)].map((_, i) => (
+                          <span
+                            key={i}
+                            style={{
+                              color: i < r.start_ratings ? "#f5c518" : "#ccc",
+                            }}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                      <p className="mb-0 mt-1">{r.review}</p>
                     </li>
                   ))}
                 </Col>

@@ -118,12 +118,13 @@ export default function HomeCategories() {
                   >
                     <motion.div whileHover={cardHover} className="h-100">
                       <Card
-                        className="h-100 border-0 overflow-hidden"
+                        className="what-we-do-extra-height border-0 overflow-hidden"
                         style={{
                           boxShadow: "0 4px 8px rgba(0,0,0,0.12)",
                           borderRadius: "12px",
                         }}
                       >
+                      
                         <Link
                           to={`/mostharvestfromfarm/${item.id}`}
                           style={{ textDecoration: "none" }}
@@ -160,10 +161,11 @@ export default function HomeCategories() {
                                   </Card.Title>
                                 </Link>
                                 <Card.Text className=" text-muted">
-                                  {item.description?.slice(0, 200)}...
+                                   {item.description?.slice(0, 200)}...
+                                
                                 </Card.Text>
 
-                                {item.features && (
+                                {/* {item.features && (
                                   <div className="d-lg-block d-none">
                                     <h6 className="key-faeture">
                                       Key Features
@@ -176,7 +178,7 @@ export default function HomeCategories() {
                                       ))}
                                     </ul>
                                   </div>
-                                )}
+                                )} */}
 
                                 <Link to={`/extraharvestfromfarm/${item.link}`}>
                                   <motion.div

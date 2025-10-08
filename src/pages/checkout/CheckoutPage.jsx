@@ -257,7 +257,7 @@ const CheckoutPage = React.memo(() => {
     <main className="res-header-top">
       <Helmet>
         <title>
-          {isReorder ? "Reorder Checkout" : "Checkout"} | Susha's Food
+          {isReorder ? "Reorder Checkout" : "Checkout"} | Susha's Foods | Prakash Farm | Organic Food
         </title>
         <meta
           name="description"
@@ -267,6 +267,10 @@ const CheckoutPage = React.memo(() => {
           name="keywords"
           content="farm products, organic produce, fresh produce, healthy food, checkout"
         />
+           <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+              />
       </Helmet>
       <div className="padding-top"></div>
       <div className="padding-top d-lg-block d-none"></div>
@@ -297,18 +301,20 @@ const CheckoutPage = React.memo(() => {
                 <strong>Delivery Address</strong>
               </Card.Header>
               <Card.Body className="address-scroll">
+               <h5> <strong> Use Same Shipping Address</strong></h5>
                 {addressMode === "list" ? (
                   <>
                     {addresses.map((addr) => (
-                      <Card
-                        key={addr.id}
-                        className={`p-2 mb-2 ${
-                          selectedAddressId === addr.id
-                            ? "border-success"
-                            : "border-light"
-                        }`}
-                        style={{ cursor: "pointer", borderWidth: "2px" }}
-                      >
+                    <Card
+  key={addr.id}
+  className="p-2 mb-2"
+  style={{
+    cursor: "pointer",
+    borderWidth: "2px",
+    borderStyle: "solid",
+    borderColor: selectedAddressId === addr.id ? "#294085" : "#ddd",
+  }}
+>
                         <Row className="align-items-center">
                           <Col xs={9}>
                             <Form.Check
@@ -379,7 +385,7 @@ const CheckoutPage = React.memo(() => {
                       }}
                       onClick={() => setAddressMode("add")}
                     >
-                      + Add New Address
+                       <h6 className="mb-0"> <strong>+ Use Different Shipping Address</strong></h6>
                     </motion.button>
                   </>
                 ) : (
@@ -411,7 +417,7 @@ const CheckoutPage = React.memo(() => {
                 /> */}
                 <Form.Check
                   type="radio"
-                  label="Razorpay"
+                  label="RAZORPAY"
                   name="payment"
                   value="RAZORPAY"
                   checked={paymentMethod === "RAZORPAY"}

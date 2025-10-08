@@ -66,7 +66,7 @@ const getYouTubeEmbedURL = (url) => {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2 mb-0 mb-lg-3"
+        className="mySwiper2 mb-2 mb-lg-2"
       >
         {allImages.map((img, index) => (
           <SwiperSlide key={index} style={mainSlideStyle}>
@@ -75,12 +75,8 @@ const getYouTubeEmbedURL = (url) => {
               alt={`${product.product_name || "Product"} - ${index + 1}`}
               loading="lazy"
               decoding="async"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain", 
-               
-              }}
+            
+             
               onError={(e) => (e.target.src = "/collections/2.png")}
             />
           </SwiperSlide>
@@ -98,19 +94,14 @@ const getYouTubeEmbedURL = (url) => {
         aria-label="Product Thumbnails"
       >
         {allImages.map((img, index) => (
-          <SwiperSlide key={index} style={thumbSlideStyle}>
-            <img
-              src={`${productURL}${img.image}`}
-              alt={`Thumbnail ${index + 1}`}
-              style={{
-                maxHeight: "100%",
-                maxWidth: "100%",
-                objectFit: "contain",
-               
-              }}
-              onError={(e) => (e.target.src = "/collections/2.png")}
-            />
-          </SwiperSlide>
+          <SwiperSlide key={index} className="thumb-slide" style={thumbSlideStyle}>
+  <img
+    src={`${productURL}${img.image}`}
+    alt={`Thumbnail ${index + 1}`}
+    onError={(e) => (e.target.src = "/collections/2.png")}
+  />
+</SwiperSlide>
+        
         ))}
       </Swiper>
 

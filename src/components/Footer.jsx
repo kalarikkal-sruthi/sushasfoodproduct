@@ -226,7 +226,7 @@ function Footer() {
               }
             />
             <Link as={Link} to="/productsbycategory" className="shop-now-btn">
-              🛒 Shop Now
+                 <i className="bi bi-cart fs-4"></i>  Shop Now
             </Link>
 
             <div className="bottom-footer">

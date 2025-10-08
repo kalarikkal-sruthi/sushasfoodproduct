@@ -87,10 +87,12 @@ const ProductDetailSummary = ({ product }) => {
           {product.product_name_mal}
         </h3>
         
-        <h4 className="mt-2 mb-0">How we make</h4>
+      
       </header>
 
       {product.description && (
+        <>
+          <h4 className="mt-2 mb-0">How we make</h4>
         <p
           className="product-description"
           style={{ fontSize: "1.1rem", color: "#555" }}
@@ -98,6 +100,7 @@ const ProductDetailSummary = ({ product }) => {
         >
           {product.description}
         </p>
+        </>
       )}
       {product.baseprices?.[0] && (
         <div

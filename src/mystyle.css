@@ -231,3 +231,60 @@ font-size: 16px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
   z-index: 9999;
 }
+
+
+.mySwiper2 .swiper-slide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+}
+.mySwiper2 img {
+  width: 100% !important;
+  height: auto !important;
+  /* object-fit: contain !important; */
+}
+
+
+.mySwiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff; 
+}
+
+.mySwiper .swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.mySwiper .swiper-slide:hover img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+
+.mySwiper .swiper-slide-thumb-active {
+  /* border: 2px solid #000; */
+  border-radius: 8px;
+}
+
+/* 
+.form-check .form-check-input {
+    font-size: 14px;
+    background: black;
+  
+}
+
+.form-check-input:checked{
+
+}
+.form-check-input[type=radio]{
+  border-radius: 0;
+} */
