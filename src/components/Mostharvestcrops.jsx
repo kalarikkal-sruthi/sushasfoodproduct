@@ -132,7 +132,7 @@ export default function MostHarvestcrops() {
                                   </Card.Title>
                                 </Link>
                                 <Card.Text className=" text-muted">
-                                  {item.description?.slice(0, 100)}...
+                                  {item.description?.slice(0, 200)}...
                                 </Card.Text>
 
 
