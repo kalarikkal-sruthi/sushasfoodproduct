@@ -34,7 +34,6 @@ function CartPage() {
     }
   };
 
-
   const grandTotal = useMemo(
     () =>
       cartItems.reduce(
@@ -118,20 +117,21 @@ function CartPage() {
                 <>
                   <Row>
                     <Col md={8}>
-                      <ul className="list-group" aria-labelledby="cart-heading">
-                        
+                      <ul
+                        className="list-group border"
+                        aria-labelledby="cart-heading"
+                      >
                         <li
                           className="fs-5 list-group-item d-none d-md-flex fw-bold bg-light"
                           role="presentation"
                         >
-                          <div className="col-3">Product</div>
+                          <div className="col-4">Product</div>
                           <div className="col-2">Quantity</div>
                           <div className="col-2">Price</div>
                           <div className="col-2">Total</div>
-                          <div className="col-3">Action</div>
+                          <div className="col-2">Action</div>
                         </li>
 
-                     
                         {cartItems.map((item) => (
                           <li
                             key={item.id}
@@ -140,19 +140,17 @@ function CartPage() {
                             aria-label={`Cart item: ${item.product_name}`}
                           >
                             <div className="row align-items-center">
-                             
-                              <div className="col-12 col-md-3 d-flex align-items-center mb-2 mb-md-0">
+                              <div className="col-7 col-md-4 d-flex align-items-center mb-2 mb-md-0">
                                 <img
                                   className="cart-image me-2"
                                   src={`${productURL}${item.image}`}
                                   alt={item.product_name}
-                                  style={{ maxWidth: "50px", height: "auto" }}
+                                  style={{ maxWidth: "100px", height: "auto" }}
                                 />
                                 <span>{item.product_name}</span>
                               </div>
 
-                             
-                              <div className="col-12 col-md-2 mb-2 mb-md-3">
+                              <div className="col-5 col-md-2 mb-2 mb-md-3 ">
                                 <p className=" mt-2 d-block d-md-none mb-0">
                                   Quantity:
                                 </p>
@@ -195,37 +193,35 @@ function CartPage() {
                                 </div>
                               </div>
 
-                             
-                              <div className="col-6 col-md-2 mb-2 mb-md-0">
+                              <hr className="d-flex mt-1 d-sm-none" />
+                              <div className="col-7 col-md-2 mb-2 mb-md-0">
                                 <p className=" d-block d-md-none mb-0">
                                   Price:
                                 </p>
                                 ₹ {item.selectPrice}
                               </div>
 
-                           
-                              <div className="col-6 col-md-2 mb-2 mb-md-0">
+                              <div className="col-5 col-md-2 mb-2 mb-md-0 ">
                                 <p className=" d-block d-md-none mb-0">
                                   Total:
                                 </p>
                                 ₹ {item.selectPrice * item.quantity}
                               </div>
 
-                             
-                              <div className="col-6 col-md-3 text-md-end">
+                              <div className="col-6 col-md-2 p-0">
                                 <motion.button
                                   whileHover={{
                                     x: 5,
                                     transition: { duration: 0.2 },
                                   }}
                                   whileTap={{ scale: 0.98 }}
-                                  className="btn btn-sm"
+                                  className="btn btn-sm p-0"
                                   style={{
                                     borderRadius: "50px",
                                     fontWeight: "500",
-                                    border: "1px solid #d33838",
-                                    backgroundColor: "#d33838",
-                                    color: "#fff",
+                                    // border: "1px solid #d33838",
+                                    // backgroundColor: "#d33838",
+                                    color: "#d33838",
                                   }}
                                   onClick={() =>
                                     dispatch(
@@ -253,7 +249,6 @@ function CartPage() {
                           <span>₹ {grandTotal}</span>
                         </div>
 
-                     
                         <hr />
 
                         <div className="d-flex justify-content-between mb-3">
@@ -280,30 +275,28 @@ function CartPage() {
                           </motion.button>
                         </div>
                         <div>
-                          <Link
+                          {/* <Link
                             to="/login"
                             state={{ from: location }}
                             aria-label="Proceed to checkout"
-                          >
-                            <motion.button
-                              whileHover={{
-                                x: 5,
-                                transition: { duration: 0.2 },
-                              }}
-                              whileTap={{ scale: 0.98 }}
-                              className="btn btn-outline btn-sm"
-                              style={{
-                                borderRadius: "50px",
-                                fontWeight: "500",
-                                border: "1px solid #294085",
-                                backgroundColor: "#fff",
-                                color: "#294085",
-                              }}
-                              aria-label={`Proceed to checkout cart`}
-                            >
-                              Go Back To Previous Page →
-                            </motion.button>
-                          </Link>
+                          > */}
+                               <motion.button
+      whileHover={{ x: 5, transition: { duration: 0.2 } }}
+      whileTap={{ scale: 0.98 }}
+      className="btn btn-outline btn-sm"
+      style={{
+        borderRadius: "50px",
+        fontWeight: "500",
+        border: "1px solid #294085",
+        backgroundColor: "#fff",
+        color: "#294085",
+      }}
+      onClick={() => navigate(-1)} 
+      aria-label="Go back to previous page"
+    >
+      Go Back To Previous Page →
+    </motion.button>
+                          {/* </Link> */}
                         </div>
                       </div>
                     </Col>

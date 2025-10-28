@@ -23,22 +23,18 @@ const CheckoutPage = React.memo(() => {
   const cartItems = useSelector((state) => state.cart.items);
   const addresses = useSelector((state) => state.auth.addresses || []);
   const userId = useSelector((state) => state.auth.user?.id);
-
-  // 🔄 Reorder detection
-  const reorderItems = location.state?.reorderItems || null;
-  const isReorder = Boolean(reorderItems);
-  const itemsToOrder = isReorder ? reorderItems : cartItems;
-
+  const [paymentMethod, setPaymentMethod] = useState("RAZORPAY");
   const [addressMode, setAddressMode] = useState("list");
   const [editData, setEditData] = useState(null);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState("");
+
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-
   const [shippingCharge, setShippingCharge] = useState(0);
+
+  // 🧮 Subtotal and Payable Calculation
   const { subtotal, payable } = useMemo(() => {
-    const subtotalCalc = itemsToOrder.reduce((sum, item) => {
+    const subtotalCalc = cartItems.reduce((sum, item) => {
       const price = parseFloat(item.selectPrice || 0);
       return sum + price * item.quantity;
     }, 0);
@@ -49,15 +45,16 @@ const CheckoutPage = React.memo(() => {
       subtotal: subtotalCalc,
       discount: 0,
       payable: subtotalCalc + shipping,
-      // payable:subtotalCalc 
     };
-  }, [itemsToOrder, shippingCharge]);
+  }, [cartItems, shippingCharge]);
 
+  // 🔄 Load addresses and user info
   useEffect(() => {
     dispatch(getAddresses());
     dispatch(getUser());
   }, [dispatch]);
 
+  // ✅ Auto-select default address
   useEffect(() => {
     if (addresses.length > 0) {
       const defaultAddr = addresses.find((addr) => addr.is_default);
@@ -66,6 +63,7 @@ const CheckoutPage = React.memo(() => {
     }
   }, [addresses]);
 
+  // 🚚 Fetch shipping charge when address or cart changes
   useEffect(() => {
     if (!selectedAddressId || cartItems.length === 0) return;
 
@@ -79,8 +77,6 @@ const CheckoutPage = React.memo(() => {
           })),
         };
         const shippingRes = await calculateShippingApi(token, payload);
-        console.log("Shipping Response:", shippingRes);
-
         const shippingCharged = shippingRes.shipping_charge || 0;
         setShippingCharge(shippingCharged);
       } catch (err) {
@@ -92,15 +88,10 @@ const CheckoutPage = React.memo(() => {
     fetchShipping();
   }, [token, selectedAddressId, cartItems]);
 
+  // 🧾 Place Order
   const handlePlaceOrder = useCallback(async () => {
     if (!selectedAddressId) {
       setPopupMessage("Please select an address before placing order.");
-      setShowPopup(true);
-      return;
-    }
-
-    if (!paymentMethod) {
-      setPopupMessage("Please select a payment method before placing order.");
       setShowPopup(true);
       return;
     }
@@ -110,12 +101,10 @@ const CheckoutPage = React.memo(() => {
       shipping_charge: shippingCharge,
       user_id: userId,
       address: selectedAddressId,
-      special_instructions: isReorder
-        ? "Reorder attempt"
-        : "New checkout order",
+      special_instructions: "New checkout order",
       payment_method: paymentMethod,
       cash_on_delivery: paymentMethod === "COD",
-      cart: itemsToOrder.map((item) => ({
+      cart: cartItems.map((item) => ({
         product_id: item.product_id || item.id,
         quantity: item.quantity,
         price: item.price || item.selectPrice,
@@ -125,23 +114,9 @@ const CheckoutPage = React.memo(() => {
     };
 
     try {
-      console.log(`%c📦 Checkout Started`, "color: blue; font-weight: bold;");
-      if (isReorder) {
-        console.log(
-          `%c🔄 Reorder Detected: Using previous order items`,
-          "color: green; font-weight: bold;"
-        );
-        console.table(itemsToOrder);
-      } else {
-        console.log(`🛒 Normal Checkout: Using cart items`);
-        console.table(itemsToOrder);
-      }
-
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
-        if (!isReorder) {
-          dispatch(clearCart());
-        }
+        dispatch(clearCart());
         navigate("/order-confirmation");
       } else if (paymentMethod === "RAZORPAY") {
         openRazorpay(orderData);
@@ -155,15 +130,14 @@ const CheckoutPage = React.memo(() => {
     selectedAddressId,
     paymentMethod,
     userId,
-    itemsToOrder,
+    cartItems,
     shippingCharge,
-    subtotal,
     token,
     dispatch,
     navigate,
-    isReorder,
   ]);
 
+  // 💳 Razorpay Integration
   async function openRazorpay(orderData) {
     try {
       const { data } = await axios.post(
@@ -206,9 +180,7 @@ const CheckoutPage = React.memo(() => {
                 { headers: { Authorization: `Bearer ${token}` } }
               );
 
-              if (!isReorder) {
-                dispatch(clearCart());
-              }
+              dispatch(clearCart());
               navigate("/order-confirmation");
             } else {
               setPopupMessage("Payment verification failed. Please try again.");
@@ -236,7 +208,7 @@ const CheckoutPage = React.memo(() => {
     }
   }
 
-  // Animations
+  // 🎞 Animation Variants
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -256,9 +228,7 @@ const CheckoutPage = React.memo(() => {
   return (
     <main className="res-header-top">
       <Helmet>
-        <title>
-          {isReorder ? "Reorder Checkout" : "Checkout"} | Susha's Foods | Prakash Farm | Organic Food
-        </title>
+        <title>Checkout | Susha's Foods | Prakash Farm | Organic Food</title>
         <meta
           name="description"
           content="Complete your purchase securely and quickly on our checkout page."
@@ -267,11 +237,8 @@ const CheckoutPage = React.memo(() => {
           name="keywords"
           content="farm products, organic produce, fresh produce, healthy food, checkout"
         />
-           <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-              />
       </Helmet>
+
       <div className="padding-top"></div>
       <div className="padding-top d-lg-block d-none"></div>
 
@@ -289,103 +256,101 @@ const CheckoutPage = React.memo(() => {
                 style={{ color: "#294085" }}
                 variants={itemVariants}
               >
-                {isReorder ? "Reorder Your Items" : "Checkout Your Items"}
+                Checkout Your Items
               </motion.h1>
             </motion.div>
           </Col>
 
-          {/* Address */}
+          {/* Address Section */}
           <Col md={7}>
             <Card>
-              <Card.Header className="fs-5">
-                <strong>Delivery Address</strong>
+              <Card.Header className="fs-3">
+                <strong>Delivery</strong>
               </Card.Header>
+
               <Card.Body className="address-scroll">
-               <h5> <strong> Use Same Shipping Address</strong></h5>
                 {addressMode === "list" ? (
                   <>
                     {addresses.map((addr) => (
-                    <Card
-  key={addr.id}
-  className="p-2 mb-2"
-  style={{
-    cursor: "pointer",
-    borderWidth: "2px",
-    borderStyle: "solid",
-    borderColor: selectedAddressId === addr.id ? "#294085" : "#ddd",
-  }}
->
-                        <Row className="align-items-center">
-                          <Col xs={9}>
-                            <Form.Check
-                              type="radio"
-                              name="address"
-                              checked={selectedAddressId === addr.id}
-                              onChange={() => {
-                                setSelectedAddressId(addr.id);
-                                dispatch(setDefaultAddress(addr.id));
-                              }}
-                              label={
-                                <>
-                                  <strong>
-                                    {addr.first_name} {addr.last_name}
-                                  </strong>
-                                  {addr.is_default && (
-                                    <span
-                                      style={{
-                                        color: "green",
-                                        marginLeft: "6px",
-                                        fontSize: "0.85rem",
-                                      }}
-                                    >
-                                      (Default)
-                                    </span>
-                                  )}
-                                  <div className="text-muted small">
-                                    {addr.address}
-                                  </div>
-                                </>
-                              }
-                            />
-                          </Col>
-                          <Col xs={3} className="text-end">
-                            <motion.button
-                              whileHover={{ x: 5 }}
-                              whileTap={{ scale: 0.98 }}
-                              className="btn btn-outline btn-sm mt-2"
-                              style={{
-                                borderRadius: "6px",
-                                fontWeight: "500",
-                                border: "1px solid #294085",
-                                backgroundColor: "#294085",
-                                color: "#fff",
-                              }}
-                              onClick={() => {
-                                setEditData(addr);
-                                setAddressMode("edit");
-                              }}
-                            >
-                              Edit →
-                            </motion.button>
-                          </Col>
-                        </Row>
-                      </Card>
+                      <Row className="align-items-center mb-2" key={addr.id}>
+                        <Col xs={12}>
+                          <Form.Check
+                            type="radio"
+                            name="address"
+                            checked={selectedAddressId === addr.id}
+                            onChange={() => {
+                              setSelectedAddressId(addr.id);
+                              dispatch(setDefaultAddress(addr.id));
+                            }}
+                            id={`address-${addr.id}`}
+                            className="custom-radio"
+                            label={
+                              <label
+                                htmlFor={`address-${addr.id}`}
+                                className="cursor-pointer w-full"
+                                style={{ display: "block" }}
+                              >
+                                <strong>
+                                  {addr.first_name} {addr.last_name}
+                                </strong>
+                                {addr.is_default && (
+                                  <span
+                                    style={{
+                                      color: "green",
+                                      marginLeft: "6px",
+                                      fontSize: "0.85rem",
+                                    }}
+                                  >
+                                    (Default)
+                                  </span>
+                                )}
+                                <div className="text-muted small">
+                                  {addr.address}
+                                </div>
+                              </label>
+                            }
+                          />
+                        </Col>
+                        <Col xs={12} className="text-start">
+                          <motion.button
+                            whileHover={{ x: 5 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="btn btn-outline btn-sm"
+                            style={{
+                              borderRadius: "6px",
+                              fontWeight: "500",
+                              color: "#294085",
+                              paddingLeft: "20px",
+                            }}
+                            onClick={() => {
+                              setEditData(addr);
+                              setAddressMode("edit");
+                            }}
+                          >
+                            Edit →
+                          </motion.button>
+                        </Col>
+                      </Row>
                     ))}
 
                     <motion.button
                       whileHover={{ x: 5 }}
                       whileTap={{ scale: 0.98 }}
-                      className="btn btn-outline btn-sm mt-2"
+                      className="btn btn-outline btn-sm mt-2 p-2"
                       style={{
                         borderRadius: "6px",
                         fontWeight: "500",
-                        border: "1px solid #294085",
-                        backgroundColor: "#294085",
+                        border: "1px solid #000",
+                        backgroundColor: "#000",
                         color: "#fff",
                       }}
                       onClick={() => setAddressMode("add")}
                     >
-                       <h6 className="mb-0"> <strong>+ Use Different Shipping Address</strong></h6>
+                      <h6 className="mb-0">
+                        {addresses && addresses.length > 0
+                          ? "Add New Shipping Address"
+                          : "Add Shipping Address"}
+                      </h6>
                     </motion.button>
                   </>
                 ) : (
@@ -402,22 +367,42 @@ const CheckoutPage = React.memo(() => {
             </Card>
 
             {/* Payment */}
-            <Card className="mt-3">
+            {/* <Card className="mt-3">
               <Card.Header className="fs-5">
                 <strong>Payment Method</strong>
               </Card.Header>
               <Card.Body>
-                {/* <Form.Check
+                <Form.Check
                   type="radio"
                   label="Cash on Delivery"
                   name="payment"
                   value="COD"
                   checked={paymentMethod === "COD"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                /> */}
+                  className="mb-3"
+                />
                 <Form.Check
                   type="radio"
-                  label="RAZORPAY"
+                  label="Razorpay Secure (UPI, Cards, Wallets)"
+                  name="payment"
+                  value="RAZORPAY"
+                  checked={paymentMethod === "RAZORPAY"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+              </Card.Body>
+            </Card> */}
+            <Card className="mt-3">
+              <Card.Header className="fs-5">
+                <strong>Payment Method</strong>
+                <h6>All transactions are secure and encrypted.</h6>
+              </Card.Header>
+              <Card.Body>
+                <Form.Check
+                  type="radio"
+                  className="custom-radio"
+                  label={
+                    <>Razorpay Secure (UPI, Cards, Int'l Cards, Wallets)</>
+                  }
                   name="payment"
                   value="RAZORPAY"
                   checked={paymentMethod === "RAZORPAY"}
@@ -426,6 +411,7 @@ const CheckoutPage = React.memo(() => {
               </Card.Body>
             </Card>
 
+            {/* Order Button */}
             <div className="mt-3 text-end">
               <motion.button
                 whileHover={{ x: 5 }}
@@ -439,9 +425,9 @@ const CheckoutPage = React.memo(() => {
                   color: "#fff",
                 }}
                 onClick={handlePlaceOrder}
-                disabled={itemsToOrder.length === 0}
+                disabled={cartItems.length === 0}
               >
-                {isReorder ? "Complete Reorder →" : "Complete Order →"}
+                Complete Order →
               </motion.button>
             </div>
           </Col>
@@ -456,7 +442,7 @@ const CheckoutPage = React.memo(() => {
                 <Row>
                   <Col>Subtotal</Col>
                   <Col className="fs-5 text-end">
-                    <strong> ₹ {subtotal.toFixed(2)}</strong>
+                    <strong>₹ {subtotal.toFixed(2)}</strong>
                   </Col>
                 </Row>
 
@@ -468,6 +454,7 @@ const CheckoutPage = React.memo(() => {
                     </strong>
                   </Col>
                 </Row>
+
                 <hr />
                 <Row>
                   <Col className="fs-5">
@@ -484,11 +471,89 @@ const CheckoutPage = React.memo(() => {
       </Container>
 
       {/* Popup */}
-      <Modal show={showPopup} onHide={() => setShowPopup(false)}>
-        <Modal.Header closeButton />
-        <Modal.Body>
-          <h5 style={{ color: "#294085" }}>{popupMessage}</h5>
+      <Modal
+        show={showPopup}
+        onHide={() => setShowPopup(false)}
+        centered
+        backdrop="static"
+        keyboard={false}
+        dialogClassName="modern-modal"
+      >
+        <Modal.Header
+          closeButton
+          style={{
+            borderBottom: "none",
+            paddingBottom: "0",
+          }}
+        ></Modal.Header>
+
+        <Modal.Body
+          style={{
+            textAlign: "center",
+            padding: "30px 20px",
+          }}
+        >
+          <div
+            style={{
+              background: "linear-gradient(135deg, #294085 0%, #3c64d4 100%)",
+              color: "#fff",
+              borderRadius: "50%",
+              width: "60px",
+              height: "60px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 20px",
+              fontSize: "26px",
+              fontWeight: "bold",
+            }}
+          >
+            <i className="bi bi-info-circle"></i>
+          </div>
+
+          <h5
+            style={{
+              color: "#294085",
+              fontWeight: "600",
+              marginBottom: "10px",
+            }}
+          >
+            {popupMessage || "Operation Successful"}
+          </h5>
+
+          {/* <p style={{ color: "#555", fontSize: "14px", marginBottom: "0" }}>
+      Thank you for your action. You can now continue with your process.
+    </p> */}
         </Modal.Body>
+
+        {/* <Modal.Footer
+    style={{
+      borderTop: "none",
+      justifyContent: "center",
+      paddingBottom: "25px",
+    }}
+  >
+    <button
+      className="btn"
+      style={{
+        backgroundColor: "#294085",
+        color: "#fff",
+        borderRadius: "50px",
+        padding: "8px 25px",
+        border: "none",
+        transition: "all 0.3s ease",
+      }}
+      onMouseOver={(e) =>
+        (e.currentTarget.style.backgroundColor = "#1e3066")
+      }
+      onMouseOut={(e) =>
+        (e.currentTarget.style.backgroundColor = "#294085")
+      }
+      onClick={() => setShowPopup(false)}
+    >
+      Close
+    </button>
+  </Modal.Footer> */}
       </Modal>
     </main>
   );

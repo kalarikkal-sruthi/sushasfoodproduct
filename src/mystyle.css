@@ -288,3 +288,93 @@ font-size: 16px;
 .form-check-input[type=radio]{
   border-radius: 0;
 } */
+
+
+/* Container styling */
+.custom-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Hide default radio button */
+.custom-radio input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  /* border: 2px solid #000; */
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+ 
+}
+
+/* When checked, add gold dot inside */
+.custom-radio input[type="radio"]:checked {
+  border-color: #000;
+  box-shadow: none;   background-color: #000;
+}
+.custom-radio input[type="radio"]:focus{
+  box-shadow: none;
+} 
+.custom-radio input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* Hover effect */
+.custom-radio input[type="radio"]:hover {
+  /* border-color: #000; */
+}
+
+/* Label styling */
+.address-label {
+  display: inline-block;
+  font-size: 0.95rem;
+}
+
+.default-tag {
+  color: green;
+  margin-left: 6px;
+  font-size: 0.85rem;
+}
+
+
+.razorpay-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 15px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.razorpay-box:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  border-color: #0d47a1;
+}
+
+.razorpay-box strong {
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+.razorpay-box img {
+  height: 24px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.razorpay-box p {
+  font-size: 13px;
+  color: #555;
+  margin-top: 8px;
+}
