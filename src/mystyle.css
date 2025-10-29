@@ -292,9 +292,9 @@ font-size: 16px;
 
 /* Container styling */
 .custom-radio {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: flex !important;
+  align-items: start !important;
+  gap: 10px !important;
   cursor: pointer;
 }
 
@@ -302,8 +302,8 @@ font-size: 16px;
 .custom-radio input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   /* border: 2px solid #000; */
   border-radius: 50%;
   position: relative;
@@ -323,10 +323,10 @@ font-size: 16px;
 .custom-radio input[type="radio"]:checked::before {
   content: "";
   position: absolute;
-  top: 3px;
+  /* top: 3px;
   left: 3px;
   width: 8px;
-  height: 8px;
+  height: 8px; */
   background-color: #fff;
   border-radius: 50%;
 }
@@ -349,32 +349,49 @@ font-size: 16px;
 }
 
 
-.razorpay-box {
-  border: 1px solid #ddd;
-  border-radius: 10px;
+
+.my-account-radio/* Container styling */
+ {
+  display: flex ;
+  align-items: center;
+  gap: 0px;
+  cursor: pointer;
+}
+
+/* Hide default radio button */
+.my-account-radio input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+ 
+}
+
+/* When checked, add gold dot inside */
+.my-account-radio input[type="radio"]:checked {
+  border-color: #000;
+  box-shadow: none;   background-color: #000;
+}
+.my-account-radio input[type="radio"]:focus{
+  box-shadow: none;
+} 
+.my-account-radio input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  /* top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px; */
   background-color: #fff;
-  padding: 15px;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  border-radius: 50%;
 }
 
-.razorpay-box:hover {
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  border-color: #0d47a1;
-}
-
-.razorpay-box strong {
-  color: #0d47a1;
-  font-weight: 600;
-}
-
-.razorpay-box img {
-  height: 24px;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-.razorpay-box p {
-  font-size: 13px;
-  color: #555;
-  margin-top: 8px;
+/* Hover effect */
+.my-account-radio input[type="radio"]:hover {
+  /* border-color: #000; */
 }

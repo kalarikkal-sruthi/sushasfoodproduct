@@ -151,6 +151,7 @@ const OrderCard = () => {
                         onClick={() => handleCancel(order.id)}
                         disabled={loading.cancel}
                         className="btn btn-danger btn-sm"
+                        
                       >
                         {loading.cancel ? "Cancelling..." : "Cancel Order"}
                       </button>

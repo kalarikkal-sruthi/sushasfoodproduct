@@ -73,18 +73,24 @@ const OrderPage = () => {
               : address.name}
           </h6>
 
-          <div>
+          <div className="my-account-radio">
             <input
               type="radio"
               name="defaultAddress"
+              
               checked={Boolean(address.is_default)}
+            
               onChange={() => {
                 console.log("Setting default address:", address);
                 dispatch(setDefaultAddress(address.id));
               }}
               aria-label="set default address"
             />
-            <small className="text-muted">Default</small>
+            <small  style={{
+                                      color: "green",
+                                      marginLeft: "6px",
+                                      fontSize: "0.85rem",
+                                    }} >Default</small>
           </div>
         </div>
 
@@ -102,13 +108,13 @@ const OrderPage = () => {
           <motion.button
             whileHover={{ x: 5, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.98 }}
-            className="btn btn-outline btn-sm mt-2"
+            className="btn btn-outline btn-sm mt-2 p-0"
             style={{
               borderRadius: "6px",
               fontWeight: "500",
-              border: "1px solid #294085",
-              backgroundColor: "#294085",
-              color: "#fff",
+              // border: "1px solid #294085",
+              // backgroundColor: "#294085",
+              color: "#29408",
             }}
             aria-label="edit address"
             onClick={() => {
@@ -122,13 +128,13 @@ const OrderPage = () => {
           <motion.button
             whileHover={{ x: 5, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.98 }}
-            className="btn btn-outline btn-sm mt-2"
+            className="btn btn-outline btn-sm mt-2 p-0"
             style={{
               borderRadius: "6px",
               fontWeight: "500",
-              border: "1px solid #d33838",
-              backgroundColor: "#d33838",
-              color: "#fff",
+              // border: "1px solid #d33838",
+              // backgroundColor: "#d33838",
+              color: "#d33838",
             }}
             aria-label="delete address"
             onClick={() => {
@@ -191,13 +197,13 @@ const OrderPage = () => {
             <motion.button
               whileHover={{ x: 5, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98 }}
-              className="btn btn-outline btn-sm"
+              className="btn btn-outline btn-sm p-0"
               style={{
                 borderRadius: "6px",
                 fontWeight: "500",
-                border: "1px solid #d33838",
-                backgroundColor: "#d33838",
-                color: "#fff",
+                // border: "1px solid #d33838",
+                // backgroundColor: "#d33838",
+                color: "#d33838",
               }}
               aria-label="logout"
               onClick={handleLogout}

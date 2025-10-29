@@ -32,6 +32,8 @@ const CheckoutPage = React.memo(() => {
   const [popupMessage, setPopupMessage] = useState("");
   const [shippingCharge, setShippingCharge] = useState(0);
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   // 🧮 Subtotal and Payable Calculation
   const { subtotal, payable } = useMemo(() => {
     const subtotalCalc = cartItems.reduce((sum, item) => {
@@ -112,7 +114,7 @@ const CheckoutPage = React.memo(() => {
         product_prize_id: item.product_prize_id || item.priceId || null,
       })),
     };
-
+    setIsButtonDisabled(true);
     try {
       if (paymentMethod === "COD") {
         await createOrderApi(orderData, token);
@@ -125,6 +127,7 @@ const CheckoutPage = React.memo(() => {
       console.error("Order Error:", err);
       setPopupMessage("Order failed. Please try again.");
       setShowPopup(true);
+      setIsButtonDisabled(false);
     }
   }, [
     selectedAddressId,
@@ -320,7 +323,7 @@ const CheckoutPage = React.memo(() => {
                               borderRadius: "6px",
                               fontWeight: "500",
                               color: "#294085",
-                              paddingLeft: "20px",
+                              paddingLeft: "25px",
                             }}
                             onClick={() => {
                               setEditData(addr);
@@ -425,7 +428,7 @@ const CheckoutPage = React.memo(() => {
                   color: "#fff",
                 }}
                 onClick={handlePlaceOrder}
-                disabled={cartItems.length === 0}
+                disabled={isButtonDisabled || cartItems.length === 0}
               >
                 Complete Order →
               </motion.button>

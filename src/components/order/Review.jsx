@@ -4,6 +4,7 @@ import { submitReview, resetReviewState } from "../../store/ProductSlice";
 import { motion } from "framer-motion";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Review = ({ product }) => {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ const Review = ({ product }) => {
   } = useSelector((state) => state.product);
   const reviews = product?.reviews || [];
 
-   const name = user?.name;
-   console.log(name);
-    
+  const name = user?.name;
+  console.log(name);
+
   const [formData, setFormData] = useState({
     product_id: product?.id || "",
     user_id: user?.id || "",
@@ -91,8 +92,37 @@ const Review = ({ product }) => {
                   required
                 />
               </div>
-
               <div className="mb-2">
+  <label className="form-label d-block">Rating</label>
+  <div className="d-flex align-items-center">
+    {[...Array(5)].map((_, index) => {
+      const ratingValue = index + 1;
+      return (
+        <i
+          key={index}
+          className={`bi ${
+            ratingValue <= formData.start_ratings ? "bi-star-fill" : "bi-star"
+          }`}
+          style={{
+            color: ratingValue <= formData.start_ratings ? "#ffc107" : "#ccc",
+            fontSize: "1rem",
+            cursor: "pointer",
+            marginRight: "5px",
+          }}
+          onClick={() =>
+            setFormData((prev) => ({ ...prev, start_ratings: ratingValue }))
+          }
+        ></i>
+      );
+    })}
+    <span className="ms-2 small text-muted">
+      {formData.start_ratings || 0}
+    </span>
+  </div>
+</div>
+
+
+              {/* <div className="mb-2">
                 <label className="form-label">Rating (1–5)</label>
                 <input
                   type="number"
@@ -105,7 +135,7 @@ const Review = ({ product }) => {
                   className="form-control"
                   required
                 />
-              </div>
+              </div> */}
 
               <motion.button
                 whileHover={{ x: 5, transition: { duration: 0.2 } }}
